@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, Animated, Dimensions } from 'react-native';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import { withNavigation } from 'react-navigation';
-import { FontAwesome } from '@expo/vector-icons';
 import SmithingTree from './Components/Smithing';
+
+var screen = Dimensions.get('window').width;
 
 const HomeScreen = ({ navigation }) => {
 
@@ -15,9 +16,10 @@ const HomeScreen = ({ navigation }) => {
     const [AllActivePerks, setAllActivePerks] = useState(0);
     const [RequiredLevel, setRequiredLevel] = useState(0);
 
+
     const [Perks, setPerks] = useState([
         { name: "Alchemy", key: '1', image: '../images/HealthBG.jpg', tree: <SmithingTree /> },
-        { name: "Illusion", key: '2', image: '../images/HealthBG.jpg' },
+        { name: "Illusion", key: '2', image: '../images/HealthBG.jpg', tree: <SmithingTree /> },
         { name: "Conjuration", key: '3', image: '../images/HealthBG.jpg' },
         { name: "Destruction", key: '4', image: '../images/HealthBG.jpg' },
         { name: "Restoration", key: '5', image: '../images/HealthBG.jpg' },
@@ -36,7 +38,9 @@ const HomeScreen = ({ navigation }) => {
         { name: "Speech", key: '18', image: '../images/HealthBG.jpg' },
     ])
 
+
     return (
+
         <>
 
             <ImageBackground
@@ -45,11 +49,11 @@ const HomeScreen = ({ navigation }) => {
                 source={require('../images/background.jpg')}
             >
                 <FlatList
-                    contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+                    contentContainerStyle={{ justifyContent: 'center', }}
                     horizontal
                     numColumns={1}
-                    decelerationRate={6}
-                    snapToInterval={width + 118}
+                    decelerationRate={0}
+                    snapToInterval={screen}
                     snapToAlignment='start'
                     data={Perks}
                     renderItem={({ item }) => (
@@ -66,7 +70,6 @@ const HomeScreen = ({ navigation }) => {
                                 left: 0,
                                 top: 0,
                                 right: 0,
-                                width: "90%",
 
                             }}>
                                 {item.tree}
@@ -74,7 +77,6 @@ const HomeScreen = ({ navigation }) => {
                             </View>
 
                         </>
-
                     )
                     }
 
@@ -112,7 +114,6 @@ const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
 
-
     },
 
     bottomText: {
@@ -126,13 +127,15 @@ const styles = StyleSheet.create({
 
     },
     item: {
+
         color: 'white',
         fontSize: 28,
-        padding: 150,
+        paddingTop: 200,
+        paddingLeft: 0,
+        width: screen,
         bottom: 150,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 22
+        marginTop: 22,
+        textAlign: 'center',
 
     },
 
