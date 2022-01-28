@@ -1,18 +1,23 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Svg, { Circle, Line } from 'react-native-svg';
-import { View } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import Modal from "react-native-modal";
 
 const SmithingTree = () => {
     const [button1Color, setButton1Color] = useState('blue');
     const [button2Color, setButton2Color] = useState('blue');
     const [button3Color, setButton3Color] = useState('blue');
 
+    const [isModalVisible, setIsModalVisible] = React.useState(false);
+    const [isMenuVisible, setIsMenuVisible] = React.useState(false);
+
     const [count, setCount] = useState(0);
 
     const circleRadius = '8';
     const circleStrokeWidth = '4';
-    const lineStrokeWidth = '5'
+    const lineStrokeWidth = '5';
 
     const incrementCount = () => {
         setCount(count + 1);
@@ -54,18 +59,78 @@ const SmithingTree = () => {
         <View>
             <Svg height="900" width="500">
                 <Circle
-                    cx="200"
+                    cx="100"
                     cy="700"
                     r={circleRadius}
                     stroke={button1Color}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
                     onPress={() => {
                         checkIfPressed1(button1Color == 'blue' ? 'red' : 'blue');
                         incrementCount();
                     }}
                 />
+                {/* MODAL POPUP */}
+                <Modal
+                    animationType='slide'
+                    transparent
+                    backdropColor='black'
+                    onBackdropPress={() => {
+                        setIsModalVisible(false)
+                    }}
+                    
+                    visible={isModalVisible}
+                    >
+                        <View style={{backgroundColor:"firebrick", 
+                            margin: 5, 
+                            alignSelf:'auto',
+                            
+                            justifyContent: 'center',
+                            padding:30, 
+                            borderRadius: 8, 
+                            borderWidth:2
+                            }}>
+                            <Text>Skill: blah blah</Text>
+                            <Text>Skill: more skill blah</Text>
+                            {/* +/- BUTTONS*/}
+                            <View style={{flexDirection:'row'}}>
+                            <View>
+                            <TouchableOpacity 
+                                style={{
+                                    alignSelf:'flex-end',
+                                    padding:10
+                                }}
+                                onPress={() => {
+                                    setCount(count + 1);
+                                }}
+                            >
+                                <AntDesign name="plus" size={24} color="black" />
 
+                            </TouchableOpacity>
+                            </View>
+
+                            <Text style={{padding:10}}>{count}</Text>
+                            <View>
+                            <TouchableOpacity 
+                                style={{
+                                    alignSelf:'flex-start',
+                                    padding:10
+                                }}
+                                onPress={() => {
+                                    setCount(count - 1);
+                                }}
+                            >
+                                <AntDesign name="minus" size={24} color="black" />
+
+                            </TouchableOpacity>
+                            </View>
+                            </View>
+                        </View>
+
+                </Modal>
 
                 <Circle
                     cx="80"
@@ -78,6 +143,8 @@ const SmithingTree = () => {
                         checkIfPressed2(button2Color == 'blue' ? 'red' : 'blue');
                     }}
                 />
+                
+
                 <Line
                     x1="150"
                     y1="300"
@@ -97,6 +164,9 @@ const SmithingTree = () => {
                     stroke={button3Color}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
+                    onLongPress={() => {
+                      setIsMenuVisible(true)  
+                    }}
                     onPress={() => {
                         checkIfPressed3(button3Color == 'blue' ? 'red' : 'blue');
                     }}
