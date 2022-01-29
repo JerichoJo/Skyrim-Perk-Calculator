@@ -18,7 +18,7 @@ const HomeScreen = ({ navigation }) => {
     const [RequiredLevel, setRequiredLevel] = useState(0);
 
     const [Perks, setPerks] = useState([
-        { name: "Alchemy", key: '1', image: '../images/HealthBG.jpg', },
+        { name: "Alchemy", key: '1', image: '../images/HealthBG.jpg', tree: <SmithingTree /> },
         { name: "Illusion", key: '2', image: '../images/HealthBG.jpg', },
         { name: "Conjuration", key: '3', image: '../images/HealthBG.jpg' },
         { name: "Destruction", key: '4', image: '../images/HealthBG.jpg' },
