@@ -4,12 +4,12 @@ import { FlatList } from 'react-native-gesture-handler';
 import { withNavigation } from 'react-navigation';
 import SmithingTree from './Components/Smithing';
 
-var screen = Dimensions.get('window').width;
+import Svg, { Circle, Line } from 'react-native-svg';
+
+var width = Dimensions.get('window').width;
+var height = Dimensions.get('window').height;
 
 const HomeScreen = ({ navigation }) => {
-
-    const width = Dimensions.get('window').width * .8;
-    const height = Dimensions.get('window').height * 0.7;
 
     const [ActivePerks, setActivePerks] = useState(0);
     const [RequiredSkill, setRequiredSkill] = useState(0);
@@ -39,21 +39,21 @@ const HomeScreen = ({ navigation }) => {
     ])
 
 
+
     return (
 
         <>
 
             <ImageBackground
-
                 style={styles.Container}
                 source={require('../images/background.jpg')}
             >
                 <FlatList
-                    contentContainerStyle={{ justifyContent: 'center', }}
+                    contentContainerStyle={{ justifyContent: 'center' }}
                     horizontal
                     numColumns={1}
                     decelerationRate={0}
-                    snapToInterval={screen}
+                    snapToInterval={width}
                     snapToAlignment='start'
                     data={Perks}
                     renderItem={({ item }) => (
@@ -62,17 +62,17 @@ const HomeScreen = ({ navigation }) => {
                             <Text style={styles.item}> {item.name}</Text>
 
                             <View style={{
-                                flex: 1,
+
                                 position: 'absolute',
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                bottom: 0,
-                                left: 0,
-                                top: 0,
-                                right: 0,
+                                width: width,
+                                height: height,
 
                             }}>
+
                                 {item.tree}
+
 
                             </View>
 
@@ -103,13 +103,9 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     Container: {
         flex: 1,
-        width: "100%",
-        height: "100%",
-        justifyContent: 'center',
+        width: width,
+        height: height,
         backgroundColor: '#000000',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-
     },
     HomeScreenText: {
         color: 'white',
@@ -118,10 +114,10 @@ const styles = StyleSheet.create({
 
     bottomText: {
         position: 'absolute',
-        top: 500,
+
         left: 0,
         right: 0,
-        bottom: 0,
+        bottom: 20,
         justifyContent: 'center',
         alignItems: 'center',
 
@@ -130,14 +126,17 @@ const styles = StyleSheet.create({
 
         color: 'white',
         fontSize: 28,
-        paddingTop: 200,
+        paddingTop: 150,
         paddingLeft: 0,
-        width: screen,
+        width: width,
         bottom: 150,
         marginTop: 22,
         textAlign: 'center',
 
     },
+    tree: {
+
+    }
 
 });
 
