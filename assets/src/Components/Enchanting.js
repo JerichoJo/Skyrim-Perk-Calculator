@@ -86,17 +86,7 @@ const EnchantingTree = () => {
             setFireEnchanter(button5ColorProp); // Change the pressed button color back and forth
         }
     };
-    const checkIfBasicEnchanterPressed = (button6ColorProp) => {
-        if (basicEnchanter == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setDwarvenSmithing(button6ColorProp);
-            setBasicEnchanter(button6ColorProp);
-        } else if (soulSiphon == 'red') {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setDwarvenSmithing(button6ColorProp); // Change the pressed button color back and forth
-        }
-    };
+
     const checkIfSoulSiphonPressed = (button7ColorProp) => {
         if (dwarvenSmithing == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
@@ -403,7 +393,7 @@ const EnchantingTree = () => {
                         );
                     }}
                 />
-                
+
                 {/* MODAL POPUP */}
                 <Modal
                     animationType="slide"

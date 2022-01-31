@@ -20,14 +20,14 @@ const HomeScreen = ({ navigation }) => {
     const [Perks, setPerks] = useState([
         { name: "Alchemy", key: '1', image: '../images/HealthBG.jpg', tree: <tree.SmithingTree /> },
         { name: "Illusion", key: '2', image: '../images/HealthBG.jpg', },
-        { name: "Conjuration", key: '3', image: '../images/HealthBG.jpg', tree: <ConjurationTree /> },
+        { name: "Conjuration", key: '3', image: '../images/HealthBG.jpg', tree: <tree.ConjurationTree /> },
         { name: "Destruction", key: '4', image: '../images/HealthBG.jpg' },
         { name: "Restoration", key: '5', image: '../images/HealthBG.jpg' },
         { name: "Alteration", key: '6', image: '../images/HealthBG.jpg' },
 
         { name: "Enchanting", key: '7', image: '../images/HealthBG.jpg' },
         { name: "Smithing", key: '8', image: '../images/HealthBG.jpg' },
-        { name: "Heavy Armor", key: '9', image: '../images/HealthBG.jpg'},
+        { name: "Heavy Armor", key: '9', image: '../images/HealthBG.jpg' },
         { name: "Enchanting", key: '7', image: '../images/HealthBG.jpg' },
         { name: "Smithing", key: '8', image: '../images/HealthBG.jpg', tree: <tree.SmithingTree /> },
         { name: "Heavy Armor", key: '9', image: '../images/HealthBG.jpg' },
@@ -36,14 +36,14 @@ const HomeScreen = ({ navigation }) => {
         { name: "One-Handed", key: '12', image: '../images/HealthBG.jpg' },
         { name: "Archery", key: '13', image: '../images/HealthBG.jpg' },
         { name: "Light Armor", key: '14', image: '../images/HealthBG.jpg' },
-        { name: "Sneak", key: '15', image: '../images/HealthBG.jpg'},
+        { name: "Sneak", key: '15', image: '../images/HealthBG.jpg', tree: <tree.SneakTree /> },
         { name: "Lockpicking", key: '16', image: '../images/HealthBG.jpg' },
         { name: "Pickpocket", key: '17', image: '../images/HealthBG.jpg' },
         { name: "Speech", key: '18', image: '../images/HealthBG.jpg' }
     ])
 
     return (
-        
+
         <>
 
             <ImageBackground
