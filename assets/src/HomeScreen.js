@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Dimensions } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { withNavigation } from 'react-navigation';
-import SmithingTree from './Components/Smithing';
-import HeavyArmor from './Components/HeavyArmor';
-import ConjurationTree from './Components/Conjuration';
+import tree from './Components/index';
 import Svg, { Circle, Line } from 'react-native-svg';
 import EnchantingTree from './Components/Enchanting';
 import SneakTree from './Components/Sneak';
-
 
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
@@ -21,21 +18,25 @@ const HomeScreen = ({ navigation }) => {
     const [RequiredLevel, setRequiredLevel] = useState(0);
 
     const [Perks, setPerks] = useState([
-        { name: "Alchemy", key: '1', image: '../images/HealthBG.jpg', tree: <SmithingTree /> },
+        { name: "Alchemy", key: '1', image: '../images/HealthBG.jpg', tree: <tree.SmithingTree /> },
         { name: "Illusion", key: '2', image: '../images/HealthBG.jpg', },
         { name: "Conjuration", key: '3', image: '../images/HealthBG.jpg', tree: <ConjurationTree /> },
         { name: "Destruction", key: '4', image: '../images/HealthBG.jpg' },
         { name: "Restoration", key: '5', image: '../images/HealthBG.jpg' },
         { name: "Alteration", key: '6', image: '../images/HealthBG.jpg' },
-        { name: "Enchanting", key: '7', image: '../images/HealthBG.jpg', tree: <EnchantingTree/> },
-        { name: "Smithing", key: '8', image: '../images/HealthBG.jpg', tree: <SmithingTree /> },
-        { name: "Heavy Armor", key: '9', image: '../images/HealthBG.jpg', tree: <HeavyArmor /> },
+
+        { name: "Enchanting", key: '7', image: '../images/HealthBG.jpg' },
+        { name: "Smithing", key: '8', image: '../images/HealthBG.jpg' },
+        { name: "Heavy Armor", key: '9', image: '../images/HealthBG.jpg'},
+        { name: "Enchanting", key: '7', image: '../images/HealthBG.jpg' },
+        { name: "Smithing", key: '8', image: '../images/HealthBG.jpg', tree: <tree.SmithingTree /> },
+        { name: "Heavy Armor", key: '9', image: '../images/HealthBG.jpg' },
         { name: "Block", key: '10', image: '../images/HealthBG.jpg' },
         { name: "Two-Handed", key: '11', image: '../images/HealthBG.jpg' },
         { name: "One-Handed", key: '12', image: '../images/HealthBG.jpg' },
         { name: "Archery", key: '13', image: '../images/HealthBG.jpg' },
         { name: "Light Armor", key: '14', image: '../images/HealthBG.jpg' },
-        { name: "Sneak", key: '15', image: '../images/HealthBG.jpg', tree: <SneakTree/> },
+        { name: "Sneak", key: '15', image: '../images/HealthBG.jpg'},
         { name: "Lockpicking", key: '16', image: '../images/HealthBG.jpg' },
         { name: "Pickpocket", key: '17', image: '../images/HealthBG.jpg' },
         { name: "Speech", key: '18', image: '../images/HealthBG.jpg' }
