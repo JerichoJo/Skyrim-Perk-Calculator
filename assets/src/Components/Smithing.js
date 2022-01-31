@@ -8,19 +8,33 @@ import Modal from 'react-native-modal';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
+const useSetState = (initialState = {}) => {
+    const [state, regularSetState] = useState(initialState);
+
+    const setState = (newState) => {
+        regularSetState((prevState) => ({
+            ...prevState,
+            ...newState,
+        }));
+    };
+
+    return [state, setState];
+};
+
 const SmithingTree = () => {
-    const [hold, sethold] = useState('blue');
-    const [basicSmithing, setBasicSmithing] = useState('blue');
-    const [arcaneSmith, setArcaneSmith] = useState('blue');
-    const [elvinSmithing, setElvinSmithing] = useState('blue');
-    const [advancedSmithing, setAdvancedSmithing] = useState('blue');
-    const [glassSmithing, setGlassSmithing] = useState('blue');
-    const [dwarvenSmithing, setDwarvenSmithing] = useState('blue');
-    const [orcishSmithing, setOrcishSmithing] = useState('blue');
-    const [ebonySmithing, setEbonySmithing] = useState('blue');
-    const [daedricSmithing, setDaedricSmithing] = useState('blue');
-    const [dragonSmithing, setDragonSmithing] = useState('blue');
-    const [middleLine, setMiddleLine] = useState('blue');
+    const [state, setState] = useSetState({
+        basicSmithing: 'blue',
+        arcaneSmith: 'blue',
+        elvinSmithing: 'blue',
+        advancedSmithing: 'blue',
+        glassSmithing: 'blue',
+        dwarvenSmithing: 'blue',
+        orcishSmithing: 'blue',
+        ebonySmithing: 'blue',
+        daedricSmithing: 'blue',
+        dragonSmithing: 'blue',
+        middleLine: 'blue',
+    });
 
     const [isModalVisible, setIsModalVisible] = React.useState(false);
     const [isMenuVisible, setIsMenuVisible] = React.useState(false);
@@ -33,125 +47,127 @@ const SmithingTree = () => {
 
     const checkIfBasicSmithPressed = (buttonColorProp) => {
         if (
-            elvinSmithing == 'red' ||
-            arcaneSmith == 'red' ||
-            dwarvenSmithing == 'red'
+            state.elvinSmithing == 'red' ||
+            state.arcaneSmith == 'red' ||
+            state.dwarvenSmithing == 'red'
         ) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setBasicSmithing(buttonColorProp); // Change button color back and forth
+            setState({ basicSmithing: buttonColorProp }); // Change button color back and forth
+            //setBasicSmithing(buttonColorProp);
         }
     };
     const checkIfArcaneSmithPressed = (button2ColorProp) => {
-        if (basicSmithing == 'blue') {
+        if (state.basicSmithing == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
-            setBasicSmithing(button2ColorProp);
-            setArcaneSmith(button2ColorProp);
+            setState({ basicSmithing: button2ColorProp });
+            setState({ arcaneSmith: button2ColorProp });
         } else {
-            setArcaneSmith(button2ColorProp); // Change the pressed button color back and forth
+            setState({ arcaneSmith: button2ColorProp }); // Change the pressed button color back and forth
         }
     };
 
     const checkIfElvinSmithPressed = (button3ColorProp) => {
-        if (basicSmithing == 'blue') {
+        if (state.basicSmithing == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
-            setBasicSmithing(button3ColorProp);
-            setElvinSmithing(button3ColorProp);
-        } else if (advancedSmithing == 'red') {
+            setState({ basicSmithing: button3ColorProp });
+            setState({ elvinSmithing: button3ColorProp });
+        } else if (state.advancedSmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setElvinSmithing(button3ColorProp); // Change button color back and forth
+            setState({ elvinSmithing: button3ColorProp }); // Change button color back and forth
         }
     };
     const checkIfAdvanceSmithingPressed = (button4ColorProp) => {
-        if (elvinSmithing == 'blue') {
+        if (state.elvinSmithing == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
-            setAdvancedSmithing(button4ColorProp);
-            setElvinSmithing(button4ColorProp);
-            setBasicSmithing(button4ColorProp);
-        } else if (glassSmithing == 'red') {
+            setState({ basicSmithing: button4ColorProp });
+            setState({ advancedSmithing: button4ColorProp });
+            setState({ elvinSmithing: button4ColorProp });
+        } else if (state.glassSmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setAdvancedSmithing(button4ColorProp); // Change the pressed button color back and forth
+            setState({ advancedSmithing: button4ColorProp }); // Change the pressed button color back and forth
         }
     };
     const checkIfGlassSmithingPressed = (button5ColorProp) => {
-        if (advancedSmithing == 'blue') {
+        if (state.advancedSmithing == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
-            setGlassSmithing(button5ColorProp);
-            setAdvancedSmithing(button5ColorProp);
-            setElvinSmithing(button5ColorProp);
-            setBasicSmithing(button5ColorProp);
+            setState({ glassSmithing: button5ColorProp });
+            setState({ advancedSmithing: button5ColorProp });
+            setState({ elvinSmithing: button5ColorProp });
+            setState({ glassSmithing: button5ColorProp });
+            setState({ basicSmithing: button5ColorProp });
         } else {
-            setGlassSmithing(button5ColorProp); // Change the pressed button color back and forth
+            setState({ glassSmithing: button5ColorProp }); // Change the pressed button color back and forth
         }
     };
     const checkIfDwarvenSmithingPressed = (button6ColorProp) => {
-        if (basicSmithing == 'blue') {
+        if (state.basicSmithing == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
-            setDwarvenSmithing(button6ColorProp);
-            setBasicSmithing(button6ColorProp);
-        } else if (orcishSmithing == 'red') {
+            setState({ dwarvenSmithing: button6ColorProp });
+            setState({ basicSmithing: button6ColorProp });
+        } else if (state.orcishSmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setDwarvenSmithing(button6ColorProp); // Change the pressed button color back and forth
+            setState({ dwarvenSmithing: button6ColorProp }); // Change the pressed button color back and forth
         }
     };
     const checkIfOrcishSmithingPressed = (button7ColorProp) => {
-        if (dwarvenSmithing == 'blue') {
+        if (state.dwarvenSmithing == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
-            setOrcishSmithing(button7ColorProp);
-            setDwarvenSmithing(button7ColorProp);
-            setBasicSmithing(button7ColorProp);
-        } else if (ebonySmithing == 'red') {
+            setState({ orcishSmithing: button7ColorProp });
+            setState({ dwarvenSmithing: button7ColorProp });
+            setState({ basicSmithing: button7ColorProp });
+        } else if (state.ebonySmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setOrcishSmithing(button7ColorProp); // Change the pressed button color back and forth
+            setState({ orcishSmithing: button7ColorProp }); // Change the pressed button color back and forth
         }
     };
     const checkIfEbonySmithingPressed = (button8ColorProp) => {
-        if (orcishSmithing == 'blue') {
+        if (state.orcishSmithing == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
-            setEbonySmithing(button8ColorProp);
-            setOrcishSmithing(button8ColorProp);
-            setDwarvenSmithing(button8ColorProp);
-            setBasicSmithing(button8ColorProp);
-        } else if (daedricSmithing == 'red') {
+            setState({ ebonySmithing: button8ColorProp });
+            setState({ orcishSmithing: button8ColorProp });
+            setState({ dwarvenSmithing: button8ColorProp });
+            setState({ basicSmithing: button8ColorProp });
+        } else if (state.daedricSmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setEbonySmithing(button8ColorProp); // Change the pressed button color back and forth
+            setState({ ebonySmithing: button8ColorProp }); // Change the pressed button color back and forth
         }
     };
     const checkIfDaedricSmithingPressed = (button9ColorProp) => {
-        if (ebonySmithing == 'blue') {
+        if (state.ebonySmithing == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
-            setDaedricSmithing(button9ColorProp);
-            setEbonySmithing(button9ColorProp);
-            setOrcishSmithing(button9ColorProp);
-            setDwarvenSmithing(button9ColorProp);
-            setBasicSmithing(button9ColorProp);
-        } else if (dragonSmithing == 'red') {
+            setState({ daedricSmithing: button9ColorProp });
+            setState({ ebonySmithing: button9ColorProp });
+            setState({ orcishSmithing: button9ColorProp });
+            setState({ dwarvenSmithing: button9ColorProp });
+            setState({ basicSmithing: button9ColorProp });
+        } else if (state.dragonSmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setDaedricSmithing(button9ColorProp); // Change the pressed button color back and forth
+            setState({ daedricSmithing: button9ColorProp }); // Change the pressed button color back and forth
         }
     };
     const checkIfDragonSmithingPressed = (button10ColorProp) => {
-        if (daedricSmithing == 'blue') {
-            setDragonSmithing(button10ColorProp);
-            setDaedricSmithing(button10ColorProp);
-            setEbonySmithing(button10ColorProp);
-            setOrcishSmithing(button10ColorProp);
-            setDwarvenSmithing(button10ColorProp);
-            setBasicSmithing(button10ColorProp);
+        if (state.daedricSmithing == 'blue') {
+            setState({ dragonSmithing: button10ColorProp });
+            setState({ daedricSmithing: button10ColorProp });
+            setState({ ebonySmithing: button10ColorProp });
+            setState({ orcishSmithing: button10ColorProp });
+            setState({ dwarvenSmithing: button10ColorProp });
+            setState({ basicSmithing: button10ColorProp });
         } else {
-            setDragonSmithing(button10ColorProp);
+            setState({ dragonSmithing: button10ColorProp });
         }
 
     };
-    const checkFinalMiddleLine = (buttonColor11Prop) => {
-        if (glassSmithing == 'red' && dragonSmithing == 'red') {
-            setMiddleLine(buttonColor11Prop);
+    const checkFinalMiddleLine = (button11ColorProp) => {
+        if (state.glassSmithing == 'red' && state.dragonSmithing == 'red') {
+            setState({ middleLine: button11ColorProp });
         }
     };
 
@@ -162,14 +178,16 @@ const SmithingTree = () => {
                     cx="35%"
                     cy="80%"
                     r={circleRadius}
-                    stroke={basicSmithing}
+                    stroke={state.basicSmithing}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        checkIfBasicSmithPressed(basicSmithing == 'blue' ? 'red' : 'blue');
+                        checkIfBasicSmithPressed(
+                            state.basicSmithing == 'blue' ? 'red' : 'blue'
+                        );
                     }}
                 />
 
@@ -178,32 +196,38 @@ const SmithingTree = () => {
                     y1="79.2%"
                     x2="40%"
                     y2="60%"
-                    stroke={arcaneSmith}
+                    stroke={state.arcaneSmith}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
-                        checkIfArcaneSmithPressed(arcaneSmith == 'blue' ? 'red' : 'blue');
+                        checkIfArcaneSmithPressed(
+                            state.arcaneSmith == 'blue' ? 'red' : 'blue'
+                        );
                     }}
                 />
                 <Circle
                     cx="40%"
                     cy="60%"
                     r={circleRadius}
-                    stroke={arcaneSmith}
+                    stroke={state.arcaneSmith}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onPress={() => {
-                        checkIfArcaneSmithPressed(arcaneSmith == 'blue' ? 'red' : 'blue');
+                        checkIfArcaneSmithPressed(
+                            state.arcaneSmith == 'blue' ? 'red' : 'blue'
+                        );
                     }}
                 />
                 <Circle
                     cx="8%"
                     cy="55%"
                     r={circleRadius}
-                    stroke={elvinSmithing}
+                    stroke={state.elvinSmithing}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onPress={() => {
-                        checkIfElvinSmithPressed(elvinSmithing == 'blue' ? 'red' : 'blue');
+                        checkIfElvinSmithPressed(
+                            state.elvinSmithing == 'blue' ? 'red' : 'blue'
+                        );
                     }}
                 />
                 <Line
@@ -211,22 +235,24 @@ const SmithingTree = () => {
                     y1="79.3%"
                     x2="8.5%"
                     y2="55.7%"
-                    stroke={elvinSmithing}
+                    stroke={state.elvinSmithing}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
-                        checkIfElvinSmithPressed(elvinSmithing == 'blue' ? 'red' : 'blue');
+                        checkIfElvinSmithPressed(
+                            state.elvinSmithing == 'blue' ? 'red' : 'blue'
+                        );
                     }}
                 />
                 <Circle
                     cx="14%"
                     cy="48%"
                     r={circleRadius}
-                    stroke={advancedSmithing}
+                    stroke={state.advancedSmithing}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onPress={() => {
                         checkIfAdvanceSmithingPressed(
-                            advancedSmithing == 'blue' ? 'red' : 'blue'
+                            state.advancedSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -235,11 +261,11 @@ const SmithingTree = () => {
                     y1="54.4%"
                     x2="13.5%"
                     y2="48.6%"
-                    stroke={advancedSmithing}
+                    stroke={state.advancedSmithing}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
                         checkIfAdvanceSmithingPressed(
-                            advancedSmithing == 'blue' ? 'red' : 'blue'
+                            state.advancedSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -247,12 +273,12 @@ const SmithingTree = () => {
                     cx="34%"
                     cy="39%"
                     r={circleRadius}
-                    stroke={glassSmithing}
+                    stroke={state.glassSmithing}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onPress={() => {
                         checkIfGlassSmithingPressed(
-                            glassSmithing == 'blue' ? 'red' : 'blue'
+                            state.glassSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -261,11 +287,11 @@ const SmithingTree = () => {
                     y1="47.5%"
                     x2="32.8%"
                     y2="39.5%"
-                    stroke={glassSmithing}
+                    stroke={state.glassSmithing}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
                         checkIfGlassSmithingPressed(
-                            glassSmithing == 'blue' ? 'red' : 'blue'
+                            state.glassSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -273,12 +299,12 @@ const SmithingTree = () => {
                     cx="54%"
                     cy="39%"
                     r={circleRadius}
-                    stroke={dragonSmithing}
+                    stroke={state.dragonSmithing}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onPress={() => {
                         checkIfDragonSmithingPressed(
-                            dragonSmithing == 'blue' ? 'red' : 'blue'
+                            state.dragonSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -287,11 +313,11 @@ const SmithingTree = () => {
                     y1="39%"
                     x2="53%"
                     y2="39%"
-                    stroke={glassSmithing}
+                    stroke={state.glassSmithing}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
                         checkIfGlassSmithingPressed(
-                            glassSmithing == 'blue' ? 'red' : 'blue'
+                            state.glassSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -300,11 +326,11 @@ const SmithingTree = () => {
                     y1="39.3%"
                     x2="74%"
                     y2="45%"
-                    stroke={dragonSmithing}
+                    stroke={state.dragonSmithing}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
                         checkIfDragonSmithingPressed(
-                            dragonSmithing == 'blue' ? 'red' : 'blue'
+                            state.dragonSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -312,12 +338,12 @@ const SmithingTree = () => {
                     cx="74%"
                     cy="45%"
                     r={circleRadius}
-                    stroke={daedricSmithing}
+                    stroke={state.daedricSmithing}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onPress={() => {
                         checkIfDaedricSmithingPressed(
-                            daedricSmithing == 'blue' ? 'red' : 'blue'
+                            state.daedricSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -326,11 +352,11 @@ const SmithingTree = () => {
                     y1="45.5%"
                     x2="92%"
                     y2="55%"
-                    stroke={daedricSmithing}
+                    stroke={state.daedricSmithing}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
                         checkIfDaedricSmithingPressed(
-                            daedricSmithing == 'blue' ? 'red' : 'blue'
+                            state.daedricSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -338,12 +364,12 @@ const SmithingTree = () => {
                     cx="92%"
                     cy="55%"
                     r={circleRadius}
-                    stroke={ebonySmithing}
+                    stroke={state.ebonySmithing}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onPress={() => {
                         checkIfEbonySmithingPressed(
-                            ebonySmithing == 'blue' ? 'red' : 'blue'
+                            state.ebonySmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -352,11 +378,11 @@ const SmithingTree = () => {
                     y1="55%"
                     x2="80%"
                     y2="55%"
-                    stroke={ebonySmithing}
+                    stroke={state.ebonySmithing}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
                         checkIfEbonySmithingPressed(
-                            ebonySmithing == 'blue' ? 'red' : 'blue'
+                            state.ebonySmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -364,12 +390,12 @@ const SmithingTree = () => {
                     cx="80%"
                     cy="55%"
                     r={circleRadius}
-                    stroke={orcishSmithing}
+                    stroke={state.orcishSmithing}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onPress={() => {
                         checkIfOrcishSmithingPressed(
-                            orcishSmithing == 'blue' ? 'red' : 'blue'
+                            state.orcishSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -378,11 +404,11 @@ const SmithingTree = () => {
                     y1="55.5%"
                     x2="60%"
                     y2="65%"
-                    stroke={orcishSmithing}
+                    stroke={state.orcishSmithing}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
                         checkIfOrcishSmithingPressed(
-                            orcishSmithing == 'blue' ? 'red' : 'blue'
+                            state.orcishSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -390,12 +416,12 @@ const SmithingTree = () => {
                     cx="60%"
                     cy="65%"
                     r={circleRadius}
-                    stroke={dwarvenSmithing}
+                    stroke={state.dwarvenSmithing}
                     strokeWidth={circleStrokeWidth}
                     fill="white"
                     onPress={() => {
                         checkIfDwarvenSmithingPressed(
-                            dwarvenSmithing == 'blue' ? 'red' : 'blue'
+                            state.dwarvenSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
@@ -404,14 +430,15 @@ const SmithingTree = () => {
                     y1="65.4%"
                     x2="36.3%"
                     y2="79.9%"
-                    stroke={dwarvenSmithing}
+                    stroke={state.dwarvenSmithing}
                     strokeWidth={lineStrokeWidth}
                     onPress={() => {
                         checkIfDwarvenSmithingPressed(
-                            dwarvenSmithing == 'blue' ? 'red' : 'blue'
+                            state.dwarvenSmithing == 'blue' ? 'red' : 'blue'
                         );
                     }}
                 />
+
                 {/* MODAL POPUP */}
                 <Modal
                     animationType="slide"
@@ -471,5 +498,4 @@ const SmithingTree = () => {
 };
 
 export default SmithingTree;
-
 
