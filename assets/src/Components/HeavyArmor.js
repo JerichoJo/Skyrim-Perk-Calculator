@@ -63,9 +63,9 @@ const HeavyArmor = () => {
     };
     const checkIfPressed5 = (button5ColorProp) => {
         if ((button1Color &&
-             button2Color &&
-             button3Color &&
-             button4Color) == 'blue') {
+            button2Color &&
+            button3Color &&
+            button4Color) == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
             setButton1Color(button5ColorProp);
             setButton2Color(button5ColorProp);
@@ -78,10 +78,10 @@ const HeavyArmor = () => {
     };
     const checkIfPressed6 = (button6ColorProp) => {
         if ((button1Color &&
-             button2Color &&
-             button3Color &&
-             button4Color &&
-             button5Color) == 'blue') {
+            button2Color &&
+            button3Color &&
+            button4Color &&
+            button5Color) == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
             setButton1Color(button6ColorProp);
             setButton2Color(button6ColorProp);
@@ -95,11 +95,11 @@ const HeavyArmor = () => {
     };
     const checkIfPressed7 = (button7ColorProp) => {
         if ((button1Color &&
-             button2Color &&
-             button3Color &&
-             button4Color &&
-             button5Color &&
-             button6Color) == 'blue') {
+            button2Color &&
+            button3Color &&
+            button4Color &&
+            button5Color &&
+            button6Color) == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
             setButton1Color(button7ColorProp);
             setButton2Color(button7ColorProp);
@@ -114,13 +114,13 @@ const HeavyArmor = () => {
     };
     const checkIfPressed8 = (button8ColorProp) => {
         if ((button1Color &&
-             button2Color &&
-             button3Color &&
-             button4Color &&
-             button5Color &&
-             button6Color &&
-             button7Color &&
-             button8Color) == 'blue') {
+            button2Color &&
+            button3Color &&
+            button4Color &&
+            button5Color &&
+            button6Color &&
+            button7Color &&
+            button8Color) == 'blue') {
             // Change the colors of the buttons below it if they have not been pressed
             setButton1Color(button8ColorProp);
             setButton2Color(button8ColorProp);
@@ -135,7 +135,7 @@ const HeavyArmor = () => {
         }
     };
 
-    
+
 
     return (
         <View>
