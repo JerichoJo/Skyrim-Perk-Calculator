@@ -21,7 +21,7 @@ const useSetState = (initialState = {}) => {
     return [state, setState];
 };
 
-const SmithingTree = ({ increment, decrement }) => {
+const SmithingTree = ({ increment, decrement, levelRequired }) => {
     const [state, setState] = useSetState({
         basicSmithing: 'blue',
         arcaneSmith: 'blue',
@@ -54,7 +54,9 @@ const SmithingTree = ({ increment, decrement }) => {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ basicSmithing: buttonColorProp }); // Change button color back and forth
-            //setBasicSmithing(buttonColorProp);
+            state.basicSmithing == 'blue'
+                ? (increment(), levelRequired(13))
+                : (decrement(), levelRequired(0));
         }
     };
     const checkIfArcaneSmithPressed = (button2ColorProp) => {
@@ -62,8 +64,14 @@ const SmithingTree = ({ increment, decrement }) => {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ basicSmithing: button2ColorProp });
             setState({ arcaneSmith: button2ColorProp });
+            state.arcaneSmith == 'blue'
+                ? (increment(), levelRequired(19))
+                : (decrement(), levelRequired(13));
         } else {
             setState({ arcaneSmith: button2ColorProp }); // Change the pressed button color back and forth
+            state.arcaneSmith == 'blue'
+                ? (increment(), levelRequired(19))
+                : (decrement(), levelRequired(13));
         }
     };
 
@@ -163,7 +171,6 @@ const SmithingTree = ({ increment, decrement }) => {
         } else {
             setState({ dragonSmithing: button10ColorProp });
         }
-
     };
     const checkFinalMiddleLine = (button11ColorProp) => {
         if (state.glassSmithing == 'red' && state.dragonSmithing == 'red') {
@@ -173,7 +180,6 @@ const SmithingTree = ({ increment, decrement }) => {
 
     return (
         <View>
-
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
                 <Circle
                     cx="35%"
@@ -188,7 +194,7 @@ const SmithingTree = ({ increment, decrement }) => {
                     onPress={() => {
                         checkIfBasicSmithPressed(
                             state.basicSmithing == 'blue' ? 'red' : 'blue'
-                        ); { state.basicSmithing == 'blue' ? increment() : decrement() }
+                        );
                     }}
                 />
 
@@ -215,7 +221,7 @@ const SmithingTree = ({ increment, decrement }) => {
                     onPress={() => {
                         checkIfArcaneSmithPressed(
                             state.arcaneSmith == 'blue' ? 'red' : 'blue'
-                        ); increment();
+                        );
                     }}
                 />
                 <Circle
@@ -439,7 +445,6 @@ const SmithingTree = ({ increment, decrement }) => {
                         );
                     }}
                 />
-
 
                 {/* MODAL POPUP */}
                 <Modal
