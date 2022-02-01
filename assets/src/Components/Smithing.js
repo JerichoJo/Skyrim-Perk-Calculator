@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Svg, { Circle, Line } from 'react-native-svg';
-import { View, Dimensions, TouchableOpacity, Text } from 'react-native';
+import { View, Dimensions, TouchableOpacity, Text, Button } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 
@@ -21,7 +21,7 @@ const useSetState = (initialState = {}) => {
     return [state, setState];
 };
 
-const SmithingTree = () => {
+const SmithingTree = ({ increment, decrement }) => {
     const [state, setState] = useSetState({
         basicSmithing: 'blue',
         arcaneSmith: 'blue',
@@ -173,6 +173,7 @@ const SmithingTree = () => {
 
     return (
         <View>
+
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
                 <Circle
                     cx="35%"
@@ -187,7 +188,7 @@ const SmithingTree = () => {
                     onPress={() => {
                         checkIfBasicSmithPressed(
                             state.basicSmithing == 'blue' ? 'red' : 'blue'
-                        );
+                        ); { state.basicSmithing == 'blue' ? increment() : decrement() }
                     }}
                 />
 
@@ -214,7 +215,7 @@ const SmithingTree = () => {
                     onPress={() => {
                         checkIfArcaneSmithPressed(
                             state.arcaneSmith == 'blue' ? 'red' : 'blue'
-                        );
+                        ); increment();
                     }}
                 />
                 <Circle
@@ -439,6 +440,7 @@ const SmithingTree = () => {
                     }}
                 />
 
+
                 {/* MODAL POPUP */}
                 <Modal
                     animationType="slide"
@@ -498,4 +500,3 @@ const SmithingTree = () => {
 };
 
 export default SmithingTree;
-
