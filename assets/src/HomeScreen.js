@@ -32,11 +32,18 @@ const HomeScreen = ({ navigation }) => {
         SetRequiredLevel(level);
     };
 
-    const [Perks, setPerks] = useState([
+    const Perks = [
         {
             name: 'Alchemy',
             key: '1',
             image: './images/HealthBG.jpg',
+            tree: (
+                <tree.SmithingTree
+                    IncrementCurrentTree={IncrementCounter}
+                    DecrementCurrentTree={DecrementCounter}
+                    UpdateCurrentLevel={TrackLevel}
+                />
+            ),
         },
         {
             name: 'Illusion',
@@ -65,7 +72,7 @@ const HomeScreen = ({ navigation }) => {
         { name: 'Lockpicking', key: '16', image: './images/HealthBG.jpg' },
         { name: 'Pickpocket', key: '17', image: './images/HealthBG.jpg' },
         { name: 'Speech', key: '18', image: './images/HealthBG.jpg' },
-    ]);
+    ];
 
     return (
         <>
@@ -92,11 +99,7 @@ const HomeScreen = ({ navigation }) => {
                                     width: width,
                                     height: height,
                                 }}>
-                                <tree.SmithingTree
-                                    IncrementCurrentTree={IncrementCounter}
-                                    DecrementCurrentTree={DecrementCounter}
-                                    UpdateCurrentLevel={TrackLevel}
-                                />
+                                {item.tree}
                             </View>
                         </>
                     )}
@@ -150,7 +153,6 @@ const styles = StyleSheet.create({
         marginTop: 22,
         textAlign: 'center',
     },
-    tree: {},
 });
 
 export default withNavigation(HomeScreen);
