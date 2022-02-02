@@ -14,21 +14,30 @@ var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
 const HomeScreen = ({ navigation }) => {
-    const [ActivePerks, setActivePerks] = useState(0);
-    const [RequiredSkill, setRequiredSkill] = useState(0);
-    const [AllActivePerks, setAllActivePerks] = useState(0);
-    const [RequiredLevel, setRequiredLevel] = useState(0);
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredSkill, SetRequiredSkill] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
 
-    const incrementCounter = () => setActivePerks(ActivePerks + 1);
-    const decrementCounter = () => {
+    const IncrementCounter = (numActivePerks = 0) => {
+        SetActivePerks(ActivePerks + numActivePerks);
+    };
+    const DecrementCounter = (numActivePerks = 0) => {
         if (ActivePerks === 0) {
             return;
         }
-        setActivePerks(ActivePerks - 1);
+        SetActivePerks(ActivePerks - numActivePerks);
     };
-    const adjustLevel = (level) => setRequiredLevel(level);
+    const TrackLevel = (level) => {
+        SetRequiredLevel(level);
+    };
+
     const [Perks, setPerks] = useState([
-        { name: 'Alchemy', key: '1', image: './images/HealthBG.jpg' },
+        {
+            name: 'Alchemy',
+            key: '1',
+            image: './images/HealthBG.jpg',
+        },
         {
             name: 'Illusion',
             key: '2',
@@ -83,13 +92,11 @@ const HomeScreen = ({ navigation }) => {
                                     width: width,
                                     height: height,
                                 }}>
-                                {
-                                    <tree.SmithingTree
-                                        increment={incrementCounter}
-                                        decrement={decrementCounter}
-                                        levelRequired={adjustLevel}
-                                    />
-                                }
+                                <tree.SmithingTree
+                                    IncrementCurrentTree={IncrementCounter}
+                                    DecrementCurrentTree={DecrementCounter}
+                                    UpdateCurrentLevel={TrackLevel}
+                                />
                             </View>
                         </>
                     )}
