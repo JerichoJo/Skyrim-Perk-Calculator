@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
     View,
     Text,
@@ -14,36 +14,16 @@ var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
 const HomeScreen = ({ navigation }) => {
-    const [ActivePerks, SetActivePerks] = useState(0);
+
     const [RequiredSkill, SetRequiredSkill] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-
-    const IncrementCounter = (numActivePerks = 0) => {
-        SetActivePerks(ActivePerks + numActivePerks);
-    };
-    const DecrementCounter = (numActivePerks = 0) => {
-        if (ActivePerks === 0) {
-            return;
-        }
-        SetActivePerks(ActivePerks - numActivePerks);
-    };
-    const TrackLevel = (level) => {
-        SetRequiredLevel(level);
-    };
 
     const Perks = [
         {
             name: 'Alchemy',
             key: '1',
             image: './images/HealthBG.jpg',
-            tree: (
-                <tree.SmithingTree
-                    IncrementCurrentTree={IncrementCounter}
-                    DecrementCurrentTree={DecrementCounter}
-                    UpdateCurrentLevel={TrackLevel}
-                />
-            ),
+            tree: <tree.SmithingTree />,
         },
         {
             name: 'Illusion',
@@ -51,7 +31,11 @@ const HomeScreen = ({ navigation }) => {
             image: './images/HealthBG.jpg',
             tree: <tree.IllusionTree />,
         },
-        { name: 'Conjuration', key: '3', image: './images/HealthBG.jpg' },
+        {
+            name: 'Conjuration',
+            key: '3',
+            image: './images/HealthBG.jpg',
+        },
         { name: 'Destruction', key: '4', image: './images/HealthBG.jpg' },
         { name: 'Restoration', key: '5', image: './images/HealthBG.jpg' },
         { name: 'Alteration', key: '6', image: './images/HealthBG.jpg' },
@@ -104,20 +88,7 @@ const HomeScreen = ({ navigation }) => {
                         </>
                     )}
                 />
-                <View style={styles.bottomText}>
-                    <Text style={styles.HomeScreenText}>
-                        Active Perks: {ActivePerks}{' '}
-                    </Text>
-                    <Text style={styles.HomeScreenText}>
-                        Required Skill: {RequiredSkill}{' '}
-                    </Text>
-                    <Text style={styles.HomeScreenText}>
-                        All Active Perks: {AllActivePerks}
-                    </Text>
-                    <Text style={styles.HomeScreenText}>
-                        Required level: {RequiredLevel}{' '}
-                    </Text>
-                </View>
+                <View style={styles.bottomText}></View>
             </ImageBackground>
         </>
     );
