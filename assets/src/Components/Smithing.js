@@ -26,7 +26,7 @@ const SmithingTree = ({
     DecrementCurrentTree,
     IncrementAll,
     DecrementAll,
-    UpdateCurrentLevel,
+    UpdateCurrentLevel
 }) => {
     const [state, setState] = useSetState({
         basicSmithing: 'blue',
@@ -51,23 +51,25 @@ const SmithingTree = ({
     const circleStrokeWidth = '10';
     const lineStrokeWidth = '6';
 
-    if (state.dragonSmithing == 'red') {
-        UpdateCurrentLevel(100);
-    } else if (state.daedricSmithing == 'red') {
-        UpdateCurrentLevel(90);
-    } else if (state.ebonySmithing == 'red') {
-        UpdateCurrentLevel(80);
-    } else if (state.glassSmithing == 'red') {
-        UpdateCurrentLevel(70);
-    } else if (state.arcaneSmithing == 'red') {
-        UpdateCurrentLevel(60);
-    } else if (state.advancedSmithing == 'red') {
-        UpdateCurrentLevel(50);
-    } else if (state.elvinSmithing == 'red') {
-        UpdateCurrentLevel(30);
-    } else if (state.basicSmithing == 'red') {
-        UpdateCurrentLevel(0);
-    }
+    useEffect(() => {
+        if (state.dragonSmithing == 'red') {
+            UpdateCurrentLevel(100);
+        } else if (state.daedricSmithing == 'red') {
+            UpdateCurrentLevel(90);
+        } else if (state.ebonySmithing == 'red') {
+            UpdateCurrentLevel(80);
+        } else if (state.glassSmithing == 'red') {
+            UpdateCurrentLevel(70);
+        } else if (state.arcaneSmithing == 'red') {
+            UpdateCurrentLevel(60);
+        } else if (state.advancedSmithing == 'red') {
+            UpdateCurrentLevel(50);
+        } else if (state.elvinSmithing == 'red') {
+            UpdateCurrentLevel(30);
+        } else if (state.basicSmithing == 'red') {
+            UpdateCurrentLevel(0);
+        }
+    }, [state])
 
     const CheckIfBasicSmithPressed = (buttonColorProp) => {
         if (
@@ -131,8 +133,8 @@ const SmithingTree = ({
         } else {
             setState({ advancedSmithing: button4ColorProp }); // Change the pressed button color back and forth
             state.advancedSmithing == 'blue'
-                ? (IncrementCurrentTree(1), UpdateCurrentLevel(50))
-                : (DecrementCurrentTree(1), UpdateCurrentLevel(30));
+                ? (IncrementCurrentTree(1))
+                : (DecrementCurrentTree(1));
         }
     };
     const CheckIfGlassSmithingPressed = (button5ColorProp) => {
@@ -152,10 +154,8 @@ const SmithingTree = ({
             // Change the colors of the buttons below it if they have not been pressed
             setState({ dwarvenSmithing: button6ColorProp });
             setState({ basicSmithing: button6ColorProp });
+            IncrementCurrentTree(2)
 
-            state.advancedSmithing == 'blue'
-                ? (IncrementCurrentTree(2), UpdateCurrentLevel(30))
-                : UpdateCurrentLevel(0);
         } else if (state.orcishSmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
