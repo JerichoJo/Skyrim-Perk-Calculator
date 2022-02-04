@@ -1,129 +1,332 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    ImageBackground,
-    Dimensions,
-} from 'react-native';
+import React, { Component } from 'react'
+import { Text, View, Image, Dimensions, ImageBackground } from 'react-native'
+import Swiper from 'react-native-swiper'
+import SmithingTree from './Components/Smithing';
+import HeavyArmor from './Components/HeavyArmor';
 import { FlatList } from 'react-native-gesture-handler';
-import { withNavigation } from 'react-navigation';
-import tree from './Components/index';
+const { width } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 
-var width = Dimensions.get('window').width;
-var height = Dimensions.get('window').height;
+const styles = {
+    container: {
+        flex: 1
+    },
 
-const HomeScreen = ({ navigation }) => {
+    wrapper: {
+        backgroundColor: 'transparent'
+    },
 
-    const [RequiredSkill, SetRequiredSkill] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useState(0);
+    slide: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: 'transparent'
+    },
 
-    const Perks = [
-        {
-            name: 'Alchemy',
-            key: '1',
-            image: './images/HealthBG.jpg',
-            tree: <tree.SmithingTree />,
-        },
-        {
-            name: 'Illusion',
-            key: '2',
-            image: './images/HealthBG.jpg',
-            tree: <tree.IllusionTree />,
-        },
-        {
-            name: 'Conjuration',
-            key: '3',
-            image: './images/HealthBG.jpg',
-        },
-        { name: 'Destruction', key: '4', image: './images/HealthBG.jpg' },
-        { name: 'Restoration', key: '5', image: './images/HealthBG.jpg' },
-        { name: 'Alteration', key: '6', image: './images/HealthBG.jpg' },
-        { name: 'Enchanting', key: '7', image: './images/HealthBG.jpg' },
-        {
-            name: 'Smithing',
-            key: '8',
-            image: './images/HealthBG.jpg',
-            tree: <tree.SmithingTree />,
-        },
-        { name: 'Heavy Armor', key: '9', image: './images/HealthBG.jpg' },
-        { name: 'Block', key: '10', image: './images/HealthBG.jpg' },
-        { name: 'Two-Handed', key: '11', image: './images/HealthBG.jpg' },
-        { name: 'One-Handed', key: '12', image: './images/HealthBG.jpg' },
-        { name: 'Archery', key: '13', image: './images/HealthBG.jpg' },
-        { name: 'Light Armor', key: '14', image: './images/HealthBG.jpg' },
-        { name: 'Sneak', key: '15', image: './images/HealthBG.jpg' },
-        { name: 'Lockpicking', key: '16', image: './images/HealthBG.jpg' },
-        { name: 'Pickpocket', key: '17', image: './images/HealthBG.jpg' },
-        { name: 'Speech', key: '18', image: './images/HealthBG.jpg' },
-    ];
+    slide1: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent'
+    },
 
-    return (
-        <>
-            <ImageBackground
-                style={styles.Container}
-                source={require('../images/background.jpg')}>
-                <FlatList
-                    contentContainerStyle={{ justifyContent: 'center' }}
-                    horizontal
-                    numColumns={1}
-                    decelerationRate={0}
-                    snapToInterval={width}
-                    snapToAlignment="start"
-                    data={Perks}
-                    renderItem={({ item }) => (
-                        <>
-                            <Text style={styles.item}> {item.name}</Text>
+    slide2: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent'
+    },
 
-                            <View
-                                style={{
-                                    position: 'absolute',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    width: width,
-                                    height: height,
-                                }}>
-                                {item.tree}
-                            </View>
-                        </>
-                    )}
-                />
-                <View style={styles.bottomText}></View>
-            </ImageBackground>
-        </>
-    );
-};
+    slide3: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent'
+    },
 
-const styles = StyleSheet.create({
+    text: {
+        color: '#fff',
+        fontSize: 30,
+        fontWeight: 'bold',
+    },
+
+    title: {
+        width,
+        color: '#fff',
+        fontSize: 40,
+        fontWeight: 'bold',
+        position: 'absolute',
+        bottom: '10%',
+        textAlign: 'center',
+        zIndex: 3,
+    },
+
+    tree: {
+        backgroundColor: '#000000',
+        position: 'absolute',
+        zIndex: 4
+    },
+
     Container: {
         flex: 1,
         width: width,
         height: height,
         backgroundColor: '#000000',
     },
-    HomeScreenText: {
-        color: 'white',
-    },
-
-    bottomText: {
+    image: {
+        width,
+        height: '100%',
+        flex: 1,
         position: 'absolute',
+        zIndex: 1,
+    }
+}
 
-        left: 0,
-        right: 0,
-        bottom: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    item: {
-        color: 'white',
-        fontSize: 28,
-        paddingTop: 150,
-        paddingLeft: 0,
-        width: width,
-        bottom: 150,
-        marginTop: 22,
-        textAlign: 'center',
-    },
-});
+export default class extends Component {
+    render() {
+        return (
+            <View style={styles.container}>
 
-export default withNavigation(HomeScreen);
+                <Swiper
+                    style={styles.wrapper}
+                    height={240}
+                    onMomentumScrollEnd={(e, state, context) =>
+                        console.log('index:', state.index)
+                    }
+                    dot={
+                        <View
+                            style={{
+                                backgroundColor: 'rgba(0,0,0,.2)',
+                                width: 5,
+                                height: 5,
+                                borderRadius: 4,
+                                marginLeft: 3,
+                                marginRight: 3,
+                                marginTop: 3,
+                                marginBottom: 3
+                            }}
+                        />
+                    }
+                    activeDot={
+                        <View
+                            style={{
+                                backgroundColor: '#000',
+                                width: 8,
+                                height: 8,
+                                borderRadius: 4,
+                                marginLeft: 3,
+                                marginRight: 3,
+                                marginTop: 3,
+                                marginBottom: 3
+                            }}
+                        />
+                    }
+                    paginationStyle={{
+                        bottom: -23,
+                        left: null,
+                        right: 10
+                    }}
+                    loop
+                >
+                    <View
+                        style={styles.slide}
+                    >
+                        <View>
+                            <Image
+                                resizeMode="stretch"
+                                style={styles.image}
+                                source={require('../images/background/BG_Illusion.png')}
+                            />
+                            <Text style={styles.title}>Illusion</Text>
+                            <SmithingTree style={styles.tree} />
+                        </View>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Conjuration.png')}
+                        />
+                        <Text style={styles.title}>Conjuration</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Destruction.png')}
+                        />
+                        <Text style={styles.title}>Destruction</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Restoration.png')}
+                        />
+                        <Text style={styles.title}>Restoration</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Alteration.png')}
+                        />
+                        <Text style={styles.title}>Alteration</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Enchanting.png')}
+                        />
+                        <Text style={styles.title}>Enchanting</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Smithing.png')}
+                        />
+                        <Text style={styles.title}>Smithing</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Heavy_Armor.png')}
+                        />
+                        <Text style={styles.title}>Heavy Armor</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Block.png')}
+                        />
+                        <Text style={styles.title}>Block</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Two_Handed.png')}
+                        />
+                        <Text style={styles.title}>Two-Handed</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_One_Handed.png')}
+                        />
+                        <Text style={styles.title}>One-Handed</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Archery.png')}
+                        />
+                        <Text style={styles.title}>Archery</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Light_Armor.png')}
+                        />
+                        <Text style={styles.title}>Light Armor</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Sneak.png')}
+                        />
+                        <Text style={styles.title}>Sneak</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Lockpicking.png')}
+                        />
+                        <Text style={styles.title}>Lockpicking</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Pickpocket.png')}
+                        />
+                        <Text style={styles.title}>Pickpocket</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Speech.png')}
+                        />
+                        <Text style={styles.title}>Speech</Text>
+                    </View>
+                    <View
+                        style={styles.slide}
+                    >
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Alchemy.png')}
+                        />
+                        <Text style={styles.title}>Alchemy</Text>
+                    </View>
+                </Swiper>
+            </View>
+        )
+    }
+}

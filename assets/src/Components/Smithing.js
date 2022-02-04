@@ -245,7 +245,7 @@ const SmithingTree = ({
     };
 
     return (
-        <View>
+        <View style={{ zIndex: 2 }}>
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
                 <Circle
                     cx="35%"
