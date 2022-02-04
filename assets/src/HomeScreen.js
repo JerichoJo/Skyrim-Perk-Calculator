@@ -1,7 +1,10 @@
-import React, { Component } from 'react'
-import { Text, View, Image, Dimensions } from 'react-native'
+import React, { Component } from 'react';
+import { Text, View, Image, Dimensions, StyleSheet } from 'react-native';
 import Swiper from 'react-native-swiper';
-import tree from './Components/index';
+import SmithingTree from './Components/Smithing';
+import HeavyArmor from './Components/HeavyArmor';
+import {MaterialCommunityIcons } from '@expo/vector-icons';
+
 const { width } = Dimensions.get('window')
 const { height } = Dimensions.get('window')
 
@@ -70,6 +73,11 @@ const styles = {
         height: height,
         backgroundColor: '#000000',
     },
+    Icon: {
+        position: "absolute",
+        zIndex: 5
+    },
+
     image: {
         width,
         height: '100%',
@@ -125,15 +133,18 @@ export default class extends Component {
                     <View
                         style={styles.slide}
                     >
-
-                        <Image
-                            resizeMode="stretch"
-                            style={styles.image}
-                            source={require('../images/background/BG_Illusion.png')}
-                        />
-                        <Text style={styles.title}>Illusion</Text>
-                        <tree.SmithingTree style={styles.tree} />
-
+                        
+                            <Image
+                                resizeMode="stretch"
+                                style={styles.image}
+                                source={require('../images/background/BG_Illusion.png')}
+                            />
+                            
+                            <Text style={styles.title}>Illusion</Text>
+                            
+                            <SmithingTree />
+                            
+                        
                     </View>
                     <View
                         style={styles.slide}
@@ -144,6 +155,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Conjuration.png')}
                         />
                         <Text style={styles.title}>Conjuration</Text>
+                        <MaterialCommunityIcons name="star-four-points-outline" size={60} color="black" style={styles.Icon} />
                     </View>
                     <View
                         style={styles.slide}

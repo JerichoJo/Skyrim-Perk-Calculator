@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react';
-import Svg, { Circle, Line } from 'react-native-svg';
+import Svg, { G, Path, Circle, Line } from 'react-native-svg';
 import {
     View,
     Dimensions,
@@ -11,6 +11,9 @@ import {
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
+import {MaterialCommunityIcons } from '@expo/vector-icons';
+
+
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -34,17 +37,28 @@ const SmithingTree = ({
     UpdateCurrentLevel,
 }) => {
     const [state, setState] = useSetState({
-        basicSmithing: 'blue',
-        arcaneSmithing: 'blue',
-        elvinSmithing: 'blue',
-        advancedSmithing: 'blue',
-        glassSmithing: 'blue',
-        dwarvenSmithing: 'blue',
-        orcishSmithing: 'blue',
-        ebonySmithing: 'blue',
-        daedricSmithing: 'blue',
-        dragonSmithing: 'blue',
-        middleLine: 'blue',
+        basicSmithing: "transparent",
+        arcaneSmithing: 'transparent',
+        arcaneSmithingLine: 'black',
+        elvinSmithing: 'transparent',
+        elvinSmithingLine: 'black',
+        advancedSmithing: 'transparent',
+        advancedSmithingLine: 'black',
+        glassSmithing: 'transparent',
+        glassSmithingLine: 'black',
+        dwarvenSmithing: 'transparent',
+        dwarvenSmithingLine: 'black',
+        orcishSmithing: 'transparent',
+        orcishSmithingLine: 'black',
+        ebonySmithing: 'transparent',
+        ebonySmithingLine: 'black',
+        daedricSmithing: 'transparent',
+        daedricSmithingLine: 'black',
+        dragonSmithing: 'transparent',
+        dragonSmithingLine: 'black',
+        dragonSmithingLineLight: 'black',
+        middleLine: 'transparent',
+        middleLineLine: 'black',
     });
 
     const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -71,24 +85,24 @@ const SmithingTree = ({
 
     const circleRadius = '12';
     const circleStrokeWidth = '10';
-    const lineStrokeWidth = '6';
+    const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.dragonSmithing == 'red') {
+        if (state.dragonSmithing == 'black') {
             TrackLevel(100);
-        } else if (state.daedricSmithing == 'red') {
+        } else if (state.daedricSmithing == 'black') {
             TrackLevel(90);
-        } else if (state.ebonySmithing == 'red') {
+        } else if (state.ebonySmithing == 'black') {
             TrackLevel(80);
-        } else if (state.glassSmithing == 'red') {
+        } else if (state.glassSmithing == 'black') {
             TrackLevel(70);
-        } else if (state.arcaneSmithing == 'red') {
+        } else if (state.arcaneSmithing == 'black') {
             TrackLevel(60);
-        } else if (state.advancedSmithing == 'red') {
+        } else if (state.advancedSmithing == 'black') {
             TrackLevel(50);
-        } else if (state.elvinSmithing == 'red') {
+        } else if (state.elvinSmithing == 'black') {
             TrackLevel(30);
-        } else if (state.basicSmithing == 'red') {
+        } else if (state.basicSmithing == 'black' ) {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);
@@ -97,427 +111,612 @@ const SmithingTree = ({
         CheckLevel();
     }, [CheckLevel]);
 
-    const CheckIfBasicSmithPressed = (buttonColorProp) => {
+    const CheckIfBasicSmithPressed = (buttonColor) => {
         if (
-            state.elvinSmithing == 'red' ||
-            state.arcaneSmithing == 'red' ||
-            state.dwarvenSmithing == 'red'
+            state.elvinSmithing == 'black' ||
+            state.arcaneSmithing == 'black' ||
+            state.dwarvenSmithing == 'black'
         ) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ basicSmithing: buttonColorProp }); // Change button color back and forth
+            setState({ basicSmithing: buttonColor }); // Change button color back and forth
 
-            state.basicSmithing == 'blue'
+            state.basicSmithing == 'transparent'
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
 
-    const CheckIfArcaneSmithPressed = (button2ColorProp) => {
-        if (state.basicSmithing == 'blue') {
+    const CheckIfArcaneSmithPressed = (buttonColor, lineColor) => {
+        if (state.basicSmithing == 'transparent') {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: button2ColorProp });
-            setState({ arcaneSmithing: button2ColorProp });
+            setState({ basicSmithing: buttonColor });
+            setState({ arcaneSmithing: buttonColor });
+            setState({ basicSmithingLine: lineColor });
+            setState({ arcaneSmithingLine: lineColor });
             IncrementCounter(2);
         } else {
-            setState({ arcaneSmithing: button2ColorProp }); // Change the pressed button color back and forth
-            state.arcaneSmithing == 'blue'
+            setState({ arcaneSmithing: buttonColor }); // Change the pressed button color back and forth
+            state.arcaneSmithing == 'transparent'
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
+            setState({ arcaneSmithingLine: lineColor }); // Change the pressed button color back and forth
+            state.arcaneSmithingLine == 'black'
         }
     };
 
-    const CheckIfElvinSmithPressed = (button3ColorProp) => {
-        if (state.basicSmithing == 'blue') {
+    const CheckIfElvinSmithPressed = (buttonColor, lineColor) => {
+        if (state.basicSmithing == 'transparent') {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: button3ColorProp });
-            setState({ elvinSmithing: button3ColorProp });
+            setState({ basicSmithing: buttonColor });
+            setState({ basicSmithingLine: lineColor });
+            setState({ elvinSmithing: buttonColor });
+            setState({ elvinSmithingLine: lineColor });
 
             IncrementCounter(2);
-        } else if (state.advancedSmithing == 'red') {
+        } else if (state.advancedSmithing == 'black') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ elvinSmithing: button3ColorProp }); // Change button color back and forth
-            state.elvinSmithing == 'blue'
+            setState({ elvinSmithing: buttonColor }); // Change button color back and forth
+            state.elvinSmithing == 'transparent'
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
+            setState({ elvinSmithingLine: lineColor });
+            state.elvinSmithingLine == 'black'
         }
     };
-    const CheckIfAdvanceSmithingPressed = (button4ColorProp) => {
-        if (state.elvinSmithing == 'blue') {
+    const CheckIfAdvanceSmithingPressed = (buttonColor, lineColor) => {
+        if (state.elvinSmithing == 'transparent') {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: button4ColorProp });
-            setState({ advancedSmithing: button4ColorProp });
-            setState({ elvinSmithing: button4ColorProp });
-            if (state.basicSmithing == 'red') {
+            setState({ basicSmithing: buttonColor });
+            setState({ advancedSmithing: buttonColor });
+            setState({ elvinSmithing: buttonColor });
+            setState({ basicSmithingLine: lineColor });
+            setState({ advancedSmithingLine: lineColor });
+            setState({ elvinSmithingLine: lineColor });
+            if (state.basicSmithing == 'black') {
                 IncrementCounter(2);
             } else {
                 IncrementCounter(3);
             }
-        } else if (state.glassSmithing == 'red') {
+        } else if (state.glassSmithing == 'black') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ advancedSmithing: button4ColorProp }); // Change the pressed button color back and forth
-            state.advancedSmithing == 'blue'
+            setState({ advancedSmithing: buttonColor }); // Change the pressed button color back and forth
+            state.advancedSmithing == 'transparent'
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
+            setState({ advancedSmithingLine: lineColor }); // Change the pressed button color back and forth
+            state.advancedSmithing == 'black'
         }
     };
-    const CheckIfGlassSmithingPressed = (button5ColorProp) => {
-        if (state.advancedSmithing == 'blue') {
+    const CheckIfGlassSmithingPressed = (buttonColor, lineColor) => {
+        if (state.advancedSmithing == 'transparent') {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ glassSmithing: button5ColorProp });
-            setState({ advancedSmithing: button5ColorProp });
-            setState({ elvinSmithing: button5ColorProp });
-            setState({ glassSmithing: button5ColorProp });
-            setState({ basicSmithing: button5ColorProp });
+            setState({ glassSmithing: buttonColor });
+            setState({ advancedSmithing: buttonColor });
+            setState({ elvinSmithing: buttonColor });
+            setState({ basicSmithing: buttonColor });
+            setState({ glassSmithingLine: lineColor });
+            setState({ advancedSmithingLine: lineColor });
+            setState({ elvinSmithingLine: lineColor });
+            setState({ basicSmithingLine: lineColor });
+            if (state.basicSmithing == 'black') {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
         } else {
-            setState({ glassSmithing: button5ColorProp }); // Change the pressed button color back and forth
+            setState({ glassSmithing: buttonColor }); // Change the pressed button color back and forth
+            state.glassSmithing == 'transparent'
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            setState({ glassSmithingLine: lineColor }); // Change the pressed button color back and forth
+            state.glassSmithing == 'black'
         }
     };
-    const CheckIfDwarvenSmithingPressed = (button6ColorProp) => {
-        if (state.basicSmithing == 'blue') {
+    const CheckIfDwarvenSmithingPressed = (buttonColor, lineColor) => {
+        if (state.basicSmithing == 'transparent') {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ dwarvenSmithing: button6ColorProp });
-            setState({ basicSmithing: button6ColorProp });
+            setState({ dwarvenSmithing: buttonColor });
+            setState({ basicSmithing: buttonColor });
+            setState({ dwarvenSmithingLine: lineColor });
+            setState({ basicSmithingLine: lineColor });
             IncrementCounter(2);
-        } else if (state.orcishSmithing == 'red') {
+        } else if (state.orcishSmithing == 'black') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ dwarvenSmithing: button6ColorProp }); // Change the pressed button color back and forth
+            setState({ dwarvenSmithing: buttonColor }); // Change the pressed button color back and forth
+            setState({ dwarvenSmithingLine: lineColor });
         }
     };
-    const CheckIfOrcishSmithingPressed = (button7ColorProp) => {
-        if (state.dwarvenSmithing == 'blue') {
+    const CheckIfOrcishSmithingPressed = (buttonColor, lineColor) => {
+        if (state.dwarvenSmithing == 'transparent') {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ orcishSmithing: button7ColorProp });
-            setState({ dwarvenSmithing: button7ColorProp });
-            setState({ basicSmithing: button7ColorProp });
-        } else if (state.ebonySmithing == 'red') {
+            setState({ orcishSmithing: buttonColor });
+            setState({ dwarvenSmithing: buttonColor });
+            setState({ basicSmithing: buttonColor });
+            setState({ orcishSmithingLine: lineColor });
+            setState({ dwarvenSmithingLine: lineColor });
+            setState({ basicSmithingLine: lineColor });
+        } else if (state.ebonySmithing == 'black') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ orcishSmithing: button7ColorProp }); // Change the pressed button color back and forth
+            setState({ orcishSmithing: buttonColor }); // Change the pressed button color back and forth
+            setState({ orcishSmithingLine: lineColor });
         }
     };
-    const CheckIfEbonySmithingPressed = (button8ColorProp) => {
-        if (state.orcishSmithing == 'blue') {
+    const CheckIfEbonySmithingPressed = (buttonColor, lineColor) => {
+        if (state.orcishSmithing == 'transparent') {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ ebonySmithing: button8ColorProp });
-            setState({ orcishSmithing: button8ColorProp });
-            setState({ dwarvenSmithing: button8ColorProp });
-            setState({ basicSmithing: button8ColorProp });
-        } else if (state.daedricSmithing == 'red') {
+            setState({ ebonySmithing: buttonColor });
+            setState({ orcishSmithing: buttonColor });
+            setState({ dwarvenSmithing: buttonColor });
+            setState({ basicSmithing: buttonColor });
+            setState({ ebonySmithingLine: lineColor });
+            setState({ orcishSmithingLine: lineColor });
+            setState({ dwarvenSmithingLine: lineColor });
+            setState({ basicSmithingLine: lineColor });
+        } else if (state.daedricSmithing == 'black') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ ebonySmithing: button8ColorProp }); // Change the pressed button color back and forth
+            setState({ ebonySmithing: buttonColor }); // Change the pressed button color back and forth
+            setState({ ebonySmithingLine: lineColor });
         }
     };
-    const CheckIfDaedricSmithingPressed = (button9ColorProp) => {
-        if (state.ebonySmithing == 'blue') {
+    const CheckIfDaedricSmithingPressed = (buttonColor, lineColor) => {
+        if (state.ebonySmithing == 'transparent') {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ daedricSmithing: button9ColorProp });
-            setState({ ebonySmithing: button9ColorProp });
-            setState({ orcishSmithing: button9ColorProp });
-            setState({ dwarvenSmithing: button9ColorProp });
-            setState({ basicSmithing: button9ColorProp });
-        } else if (state.dragonSmithing == 'red') {
+            setState({ daedricSmithing: buttonColor });
+            setState({ ebonySmithing: buttonColor });
+            setState({ orcishSmithing: buttonColor });
+            setState({ dwarvenSmithing: buttonColor });
+            setState({ basicSmithing: buttonColor });
+            setState({ daedricSmithingLine: lineColor });
+            setState({ ebonySmithingLine: lineColor });
+            setState({ orcishSmithingLine: lineColor });
+            setState({ dwarvenSmithingLine: lineColor });
+            setState({ basicSmithingLine: lineColor });
+        } else if (state.dragonSmithing == 'black') {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ daedricSmithing: button9ColorProp }); // Change the pressed button color back and forth
+            setState({ daedricSmithing: buttonColor }); // Change the pressed button color back and forth
+            setState({ daedricSmithingLine: lineColor });
         }
     };
-    const CheckIfDragonSmithingPressed = (button10ColorProp) => {
-        if (state.daedricSmithing == 'blue') {
-            setState({ dragonSmithing: button10ColorProp });
-            setState({ daedricSmithing: button10ColorProp });
-            setState({ ebonySmithing: button10ColorProp });
-            setState({ orcishSmithing: button10ColorProp });
-            setState({ dwarvenSmithing: button10ColorProp });
-            setState({ basicSmithing: button10ColorProp });
+    const CheckIfDragonSmithingPressed = (buttonColor, lineColor) => {
+        if (state.daedricSmithing == 'transparent') {
+            setState({ dragonSmithing: buttonColor });
+            setState({ daedricSmithing: buttonColor });
+            setState({ ebonySmithing: buttonColor });
+            setState({ orcishSmithing: buttonColor });
+            setState({ dwarvenSmithing: buttonColor });
+            setState({ basicSmithing: buttonColor });
+            setState({ dragonSmithingLine: lineColor });
+            setState({ daedricSmithingLine: lineColor });
+            setState({ ebonySmithingLine: lineColor });
+            setState({ orcishSmithingLine: lineColor });
+            setState({ dwarvenSmithingLine: lineColor });
+            setState({ basicSmithingLine: lineColor });
         } else {
-            setState({ dragonSmithing: button10ColorProp });
+            setState({ dragonSmithing: buttonColor });
+            setState({ dragonSmithingLine: lineColor });
         }
     };
-    const CheckFinalMiddleLine = (button11ColorProp) => {
-        if (state.glassSmithing == 'red' && state.dragonSmithing == 'red') {
-            setState({ middleLine: button11ColorProp });
+    const CheckFinalMiddleLine = (buttonColor) => {
+        if (state.glassSmithing == 'black' && state.dragonSmithing == 'black') {
+            setState({ middleLine: buttonColor });
         }
     };
-
+    const IconButton = ({ onPress, onLongPress, icon }) => (
+        <TouchableOpacity onPress={onPress} onLongPress={onLongPress} style={styles.Icon}>
+          {icon}
+        </TouchableOpacity>
+      ); 
     return (
         <View style={{ zIndex: 2 }}>
             <View style={styles.bottomText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-                <Text style={styles.HomeScreenText}>Required Skill: { } </Text>
                 <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
-                <Text style={styles.HomeScreenText}>
-                    Required level: {RequiredLevel}{' '}
-                </Text>
+
             </View>
-            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
-                <Circle
-                    cx="35%"
-                    cy="80%"
-                    r={circleRadius}
-                    stroke={state.basicSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
+            <View title='Basic Smithing' style= {{
+                        position: 'absolute',
+                        top: "77%",
+                        left: "28%",
+                        zIndex: 8
+            }}>
+                <IconButton 
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfBasicSmithPressed(
-                            state.basicSmithing == 'blue' ? 'red' : 'blue'
+                            state.basicSmithing == "transparent" ? "black" : "transparent"
                         );
                     }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
                 />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfBasicSmithPressed(
+                            state.basicSmithing == "transparent" ? "black" : "transparent"
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.basicSmithing} />}
+                />
+            </View>
+            <View title='Arcane Smithing' style= {{
+                        position: 'absolute',
+                        top: "56%",
+                        left: "33%",
+                        zIndex: 8
+            }}>
+                <IconButton 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfArcaneSmithPressed(
+                            state.arcaneSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.arcaneSmithingLine == 'black' ? 'red' : 'black'
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
+                />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfArcaneSmithPressed(
+                            state.arcaneSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.arcaneSmithingLine == 'black' ? 'red' : 'black'
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.arcaneSmithing} />}
+                />
+            </View>     
+            <View title='Elven Smithing' style= {{
+                        position: 'absolute',
+                        top: "52%",
+                        left: "1%",
+                        zIndex: 8
+            }}>
+                <IconButton 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfElvinSmithPressed(
+                            state.elvinSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.elvinSmithingLine == 'black' ? 'red' : 'black'
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
+                />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfElvinSmithPressed(
+                            state.elvinSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.elvinSmithingLine == 'black' ? 'red' : 'black'
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.elvinSmithing} />}
+                />
+            </View>
+            <View title='Advanced Smithing' style= {{
+                        position: 'absolute',
+                        top: "45%",
+                        left: "7%",
+                        zIndex: 8
+            }}>
+                <IconButton 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfAdvanceSmithingPressed(
+                            state.advancedSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.advancedSmithingLine == 'black' ? 'red' : 'black'
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
+                />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfAdvanceSmithingPressed(
+                            state.advancedSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.advancedSmithingLine == 'black' ? 'red' : 'black'
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.advancedSmithing} />}
+                />
+            </View>
+            <View title='Glass Smithing' style= {{
+                        position: 'absolute',
+                        top: "36%",
+                        left: "27%",
+                        zIndex: 8
+            }}>
+                <IconButton 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfGlassSmithingPressed(
+                            state.glassSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.glassSmithingLine == 'black' ? 'red' : 'black'
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
+                />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfGlassSmithingPressed(
+                            state.glassSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.glassSmithingLine == 'black' ? 'red' : 'black'
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.glassSmithing} />}
+                />
+            </View>
+            <View title='Dragon Smithing' style= {{
+                        position: 'absolute',
+                        top: "36%",
+                        left: "47%",
+                        zIndex: 8
+            }}>
+                <IconButton 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfDragonSmithingPressed(
+                            state.dragonSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.dragonSmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
+                />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfDragonSmithingPressed(
+                            state.dragonSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.dragonSmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.dragonSmithing} />}
+                />
+            </View>
+            <View title='Daedric Smithing' style= {{
+                        position: 'absolute',
+                        top: "41%",
+                        left: "67%",
+                        zIndex: 8
+            }}>
+                <IconButton 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfDaedricSmithingPressed(
+                            state.daedricSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.daedricSmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
+                />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfDaedricSmithingPressed(
+                            state.daedricSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.daedricSmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.daedricSmithing} />}
+                />
+            </View> 
+            <View title='Ebony Smithing' style= {{
+                        position: 'absolute',
+                        top: "52%",
+                        left: "85%",
+                        zIndex: 8
+            }}>
+                <IconButton 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfEbonySmithingPressed(
+                            state.ebonySmithing == 'transparent' ? 'black' : 'transparent',
+                            state.ebonySmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
+                />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfEbonySmithingPressed(
+                            state.ebonySmithing == 'transparent' ? 'black' : 'transparent',
+                            state.ebonySmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.ebonySmithing} />}
+                />
+            </View>  
+            <View title='Orcish Smithing' style= {{
+                        position: 'absolute',
+                        top: "52%",
+                        left: "71%",
+                        zIndex: 8
+            }}>
+                <IconButton 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfOrcishSmithingPressed(
+                            state.orcishSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.orcishSmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
+                />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfOrcishSmithingPressed(
+                            state.orcishSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.orcishSmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.orcishSmithing} />}
+                />
+            </View>    
+            <View title='Orcish Smithing' style= {{
+                        position: 'absolute',
+                        top: "62%",
+                        left: "52%",
+                        zIndex: 8
+            }}>
+                <IconButton 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfDwarvenSmithingPressed(
+                            state.dwarvenSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.dwarvenSmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
+                />
+                <IconButton                       
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfDwarvenSmithingPressed(
+                            state.dwarvenSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.dwarvenSmithingLine == 'black' ? 'red' : 'black',
+                        );
+                    }}
+                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.dwarvenSmithing} />}
+                />
+            </View>                                                                                                         
+            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
-                <Line
+                <Line 
                     x1="35.3%"
                     y1="79.2%"
                     x2="40%"
                     y2="60%"
-                    stroke={state.arcaneSmithing}
+                    stroke={state.arcaneSmithingLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfArcaneSmithPressed(
-                            state.arcaneSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
                 />
-                <Circle
-                    cx="40%"
-                    cy="60%"
-                    r={circleRadius}
-                    stroke={state.arcaneSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
-                    onPress={() => {
-                        CheckIfArcaneSmithPressed(
-                            state.arcaneSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                <Circle
-                    cx="8%"
-                    cy="55%"
-                    r={circleRadius}
-                    stroke={state.elvinSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
-                    onPress={() => {
-                        CheckIfElvinSmithPressed(
-                            state.elvinSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
+
                 <Line
                     x1="34.2%"
                     y1="79.3%"
                     x2="8.5%"
                     y2="55.7%"
-                    stroke={state.elvinSmithing}
+                    stroke={state.elvinSmithingLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfElvinSmithPressed(
-                            state.elvinSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                <Circle
-                    cx="14%"
-                    cy="48%"
-                    r={circleRadius}
-                    stroke={state.advancedSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
-                    onPress={() => {
-                        CheckIfAdvanceSmithingPressed(
-                            state.advancedSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+
                 />
                 <Line
                     x1="8.3%"
                     y1="54.4%"
                     x2="13.5%"
                     y2="48.6%"
-                    stroke={state.advancedSmithing}
+                    stroke={state.advancedSmithingLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfAdvanceSmithingPressed(
-                            state.advancedSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                <Circle
-                    cx="34%"
-                    cy="39%"
-                    r={circleRadius}
-                    stroke={state.glassSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
-                    onPress={() => {
-                        CheckIfGlassSmithingPressed(
-                            state.glassSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+
                 />
                 <Line
                     x1="15%"
                     y1="47.5%"
                     x2="32.8%"
                     y2="39.5%"
-                    stroke={state.glassSmithing}
+                    stroke={state.glassSmithingLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfGlassSmithingPressed(
-                            state.glassSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                <Circle
-                    cx="54%"
-                    cy="39%"
-                    r={circleRadius}
-                    stroke={state.dragonSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
-                    onPress={() => {
-                        CheckIfDragonSmithingPressed(
-                            state.dragonSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+
                 />
                 <Line
                     x1="35.3%"
                     y1="39%"
                     x2="53%"
                     y2="39%"
-                    stroke={state.glassSmithing}
+                    stroke={state.dragonSmithingLineLight}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfGlassSmithingPressed(
-                            state.glassSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+
                 />
                 <Line
                     x1="55.5%"
                     y1="39.3%"
                     x2="74%"
                     y2="45%"
-                    stroke={state.dragonSmithing}
+                    stroke={state.dragonSmithingLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfDragonSmithingPressed(
-                            state.dragonSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                <Circle
-                    cx="74%"
-                    cy="45%"
-                    r={circleRadius}
-                    stroke={state.daedricSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
-                    onPress={() => {
-                        CheckIfDaedricSmithingPressed(
-                            state.daedricSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+
                 />
                 <Line
                     x1="75%"
                     y1="45.5%"
                     x2="92%"
                     y2="55%"
-                    stroke={state.daedricSmithing}
+                    stroke={state.daedricSmithingLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfDaedricSmithingPressed(
-                            state.daedricSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                <Circle
-                    cx="92%"
-                    cy="55%"
-                    r={circleRadius}
-                    stroke={state.ebonySmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
-                    onPress={() => {
-                        CheckIfEbonySmithingPressed(
-                            state.ebonySmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+
                 />
                 <Line
                     x1="91%"
                     y1="55%"
                     x2="80%"
                     y2="55%"
-                    stroke={state.ebonySmithing}
+                    stroke={state.ebonySmithingLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfEbonySmithingPressed(
-                            state.ebonySmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                <Circle
-                    cx="80%"
-                    cy="55%"
-                    r={circleRadius}
-                    stroke={state.orcishSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
-                    onPress={() => {
-                        CheckIfOrcishSmithingPressed(
-                            state.orcishSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+
                 />
                 <Line
                     x1="79%"
                     y1="55.5%"
                     x2="60%"
                     y2="65%"
-                    stroke={state.orcishSmithing}
+                    stroke={state.orcishSmithingLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfOrcishSmithingPressed(
-                            state.orcishSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                <Circle
-                    cx="60%"
-                    cy="65%"
-                    r={circleRadius}
-                    stroke={state.dwarvenSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="white"
-                    onPress={() => {
-                        CheckIfDwarvenSmithingPressed(
-                            state.dwarvenSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
                 />
                 <Line
                     x1="59.2%"
                     y1="65.4%"
                     x2="36.3%"
                     y2="79.9%"
-                    stroke={state.dwarvenSmithing}
+                    stroke={state.dwarvenSmithingLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        CheckIfDwarvenSmithingPressed(
-                            state.dwarvenSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
                 />
 
                 {/* MODAL POPUP */}
@@ -591,6 +790,9 @@ const styles = StyleSheet.create({
         bottom: "80%",
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    Icon: {
+        position: 'absolute',
     },
 });
 
