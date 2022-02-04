@@ -1,7 +1,14 @@
 import * as React from 'react';
 import { useState, useCallback, useEffect } from 'react';
 import Svg, { Circle, Line } from 'react-native-svg';
-import { View, Dimensions, TouchableOpacity, Text, Button } from 'react-native';
+import {
+    View,
+    Dimensions,
+    TouchableOpacity,
+    Text,
+    Button,
+    StyleSheet,
+} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 
@@ -22,11 +29,9 @@ const useSetState = (initialState = {}) => {
 };
 
 const SmithingTree = ({
-    IncrementCurrentTree,
-    DecrementCurrentTree,
     IncrementAll,
     DecrementAll,
-    UpdateCurrentLevel
+    UpdateCurrentLevel,
 }) => {
     const [state, setState] = useSetState({
         basicSmithing: 'blue',
@@ -47,29 +52,50 @@ const SmithingTree = ({
 
     const [count, setCount] = useState(0);
 
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+
+    const IncrementCounter = (numActivePerks = 0) => {
+        SetActivePerks(ActivePerks + numActivePerks);
+    };
+    const DecrementCounter = (numActivePerks = 0) => {
+        if (ActivePerks === 0) {
+            return;
+        }
+        SetActivePerks(ActivePerks - numActivePerks);
+    };
+
+    const TrackLevel = useCallback((level) => {
+        SetRequiredLevel(level);
+    }, []);
+
     const circleRadius = '12';
     const circleStrokeWidth = '10';
     const lineStrokeWidth = '6';
 
-    useEffect(() => {
+    const CheckLevel = useCallback(() => {
         if (state.dragonSmithing == 'red') {
-            UpdateCurrentLevel(100);
+            TrackLevel(100);
         } else if (state.daedricSmithing == 'red') {
-            UpdateCurrentLevel(90);
+            TrackLevel(90);
         } else if (state.ebonySmithing == 'red') {
-            UpdateCurrentLevel(80);
+            TrackLevel(80);
         } else if (state.glassSmithing == 'red') {
-            UpdateCurrentLevel(70);
+            TrackLevel(70);
         } else if (state.arcaneSmithing == 'red') {
-            UpdateCurrentLevel(60);
+            TrackLevel(60);
         } else if (state.advancedSmithing == 'red') {
-            UpdateCurrentLevel(50);
+            TrackLevel(50);
         } else if (state.elvinSmithing == 'red') {
-            UpdateCurrentLevel(30);
+            TrackLevel(30);
         } else if (state.basicSmithing == 'red') {
-            UpdateCurrentLevel(0);
+            TrackLevel(0);
         }
-    }, [state])
+    }, [TrackLevel, state]);
+
+    useEffect(() => {
+        CheckLevel();
+    }, [CheckLevel]);
 
     const CheckIfBasicSmithPressed = (buttonColorProp) => {
         if (
@@ -82,8 +108,8 @@ const SmithingTree = ({
             setState({ basicSmithing: buttonColorProp }); // Change button color back and forth
 
             state.basicSmithing == 'blue'
-                ? IncrementCurrentTree(1)
-                : DecrementCurrentTree(1);
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
 
@@ -92,12 +118,12 @@ const SmithingTree = ({
             // Change the colors of the buttons below it if they have not been pressed
             setState({ basicSmithing: button2ColorProp });
             setState({ arcaneSmithing: button2ColorProp });
-            IncrementCurrentTree(2);
+            IncrementCounter(2);
         } else {
             setState({ arcaneSmithing: button2ColorProp }); // Change the pressed button color back and forth
             state.arcaneSmithing == 'blue'
-                ? IncrementCurrentTree(1)
-                : DecrementCurrentTree(1);
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
 
@@ -107,14 +133,14 @@ const SmithingTree = ({
             setState({ basicSmithing: button3ColorProp });
             setState({ elvinSmithing: button3ColorProp });
 
-            IncrementCurrentTree(2);
+            IncrementCounter(2);
         } else if (state.advancedSmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ elvinSmithing: button3ColorProp }); // Change button color back and forth
             state.elvinSmithing == 'blue'
-                ? IncrementCurrentTree(1)
-                : DecrementCurrentTree(1);
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
     const CheckIfAdvanceSmithingPressed = (button4ColorProp) => {
@@ -124,17 +150,17 @@ const SmithingTree = ({
             setState({ advancedSmithing: button4ColorProp });
             setState({ elvinSmithing: button4ColorProp });
             if (state.basicSmithing == 'red') {
-                IncrementCurrentTree(2);
+                IncrementCounter(2);
             } else {
-                IncrementCurrentTree(3);
+                IncrementCounter(3);
             }
         } else if (state.glassSmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ advancedSmithing: button4ColorProp }); // Change the pressed button color back and forth
             state.advancedSmithing == 'blue'
-                ? (IncrementCurrentTree(1))
-                : (DecrementCurrentTree(1));
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
     const CheckIfGlassSmithingPressed = (button5ColorProp) => {
@@ -154,8 +180,7 @@ const SmithingTree = ({
             // Change the colors of the buttons below it if they have not been pressed
             setState({ dwarvenSmithing: button6ColorProp });
             setState({ basicSmithing: button6ColorProp });
-            IncrementCurrentTree(2)
-
+            IncrementCounter(2);
         } else if (state.orcishSmithing == 'red') {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -220,7 +245,7 @@ const SmithingTree = ({
     };
 
     return (
-        <View>
+        <View style={{ zIndex: 2 }}>
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
                 <Circle
                     cx="35%"
@@ -487,6 +512,14 @@ const SmithingTree = ({
                     }}
                 />
 
+
+
+
+
+
+
+
+
                 {/* MODAL POPUP */}
                 <Modal
                     animationType="slide"
@@ -541,8 +574,31 @@ const SmithingTree = ({
                     </View>
                 </Modal>
             </Svg>
+            <View style={styles.bottomText}>
+                <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
+                <Text style={styles.HomeScreenText}>Required Skill: { } </Text>
+                <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+                <Text style={styles.HomeScreenText}>
+                    Required level: {RequiredLevel}{' '}
+                </Text>
+            </View>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    HomeScreenText: {
+        color: 'white',
+    },
+    bottomText: {
+        position: 'absolute',
+
+        left: 0,
+        right: 0,
+        bottom: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
 
 export default SmithingTree;
