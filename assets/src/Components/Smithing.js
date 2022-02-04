@@ -308,11 +308,6 @@ const SmithingTree = ({
             setState({ middleLine: buttonColor });
         }
     };
-    const IconButton = ({ onPress, onLongPress, icon }) => (
-        <TouchableOpacity onPress={onPress} onLongPress={onLongPress} style={styles.Icon}>
-          {icon}
-        </TouchableOpacity>
-      ); 
     return (
         <View style={{ zIndex: 2 }}>
             <View style={styles.bottomText}>
@@ -326,7 +321,7 @@ const SmithingTree = ({
                         left: "28%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -334,10 +329,10 @@ const SmithingTree = ({
                         CheckIfBasicSmithPressed(
                             state.basicSmithing == "transparent" ? "black" : "transparent"
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                       
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -345,9 +340,9 @@ const SmithingTree = ({
                         CheckIfBasicSmithPressed(
                             state.basicSmithing == "transparent" ? "black" : "transparent"
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.basicSmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.basicSmithing} />
+                </TouchableOpacity>
             </View>
             <View title='Arcane Smithing' style= {{
                         position: 'absolute',
@@ -355,30 +350,30 @@ const SmithingTree = ({
                         left: "33%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfArcaneSmithPressed(
                             state.arcaneSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.arcaneSmithingLine == 'black' ? 'red' : 'black'
+                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                      
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfArcaneSmithPressed(
                             state.arcaneSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.arcaneSmithingLine == 'black' ? 'red' : 'black'
+                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.arcaneSmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.arcaneSmithing} />
+                </TouchableOpacity>
             </View>     
             <View title='Elven Smithing' style= {{
                         position: 'absolute',
@@ -386,30 +381,30 @@ const SmithingTree = ({
                         left: "1%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfElvinSmithPressed(
                             state.elvinSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.elvinSmithingLine == 'black' ? 'red' : 'black'
+                            state.elvinSmithingLine == 'black' ? 'gold' : 'black'
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                      
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfElvinSmithPressed(
                             state.elvinSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.elvinSmithingLine == 'black' ? 'red' : 'black'
+                            state.elvinSmithingLine == 'black' ? 'gold' : 'black'
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.elvinSmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.elvinSmithing} />
+                </TouchableOpacity>
             </View>
             <View title='Advanced Smithing' style= {{
                         position: 'absolute',
@@ -417,30 +412,30 @@ const SmithingTree = ({
                         left: "7%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfAdvanceSmithingPressed(
                             state.advancedSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.advancedSmithingLine == 'black' ? 'red' : 'black'
+                            state.advancedSmithingLine == 'black' ? 'gold' : 'black'
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                      
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfAdvanceSmithingPressed(
                             state.advancedSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.advancedSmithingLine == 'black' ? 'red' : 'black'
+                            state.advancedSmithingLine == 'black' ? 'gold' : 'black'
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.advancedSmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.advancedSmithing} />
+                </TouchableOpacity>
             </View>
             <View title='Glass Smithing' style= {{
                         position: 'absolute',
@@ -448,30 +443,30 @@ const SmithingTree = ({
                         left: "27%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfGlassSmithingPressed(
                             state.glassSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.glassSmithingLine == 'black' ? 'red' : 'black'
+                            state.glassSmithingLine == 'black' ? 'gold' : 'black'
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                      
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfGlassSmithingPressed(
                             state.glassSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.glassSmithingLine == 'black' ? 'red' : 'black'
+                            state.glassSmithingLine == 'black' ? 'gold' : 'black'
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.glassSmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.glassSmithing} />
+                </TouchableOpacity>
             </View>
             <View title='Dragon Smithing' style= {{
                         position: 'absolute',
@@ -479,30 +474,30 @@ const SmithingTree = ({
                         left: "47%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfDragonSmithingPressed(
                             state.dragonSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.dragonSmithingLine == 'black' ? 'red' : 'black',
+                            state.dragonSmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                      
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfDragonSmithingPressed(
                             state.dragonSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.dragonSmithingLine == 'black' ? 'red' : 'black',
+                            state.dragonSmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.dragonSmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.dragonSmithing} />
+                </TouchableOpacity>
             </View>
             <View title='Daedric Smithing' style= {{
                         position: 'absolute',
@@ -510,30 +505,30 @@ const SmithingTree = ({
                         left: "67%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfDaedricSmithingPressed(
                             state.daedricSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.daedricSmithingLine == 'black' ? 'red' : 'black',
+                            state.daedricSmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                      
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfDaedricSmithingPressed(
                             state.daedricSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.daedricSmithingLine == 'black' ? 'red' : 'black',
+                            state.daedricSmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.daedricSmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.daedricSmithing} />
+                </TouchableOpacity>
             </View> 
             <View title='Ebony Smithing' style= {{
                         position: 'absolute',
@@ -541,30 +536,30 @@ const SmithingTree = ({
                         left: "85%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfEbonySmithingPressed(
                             state.ebonySmithing == 'transparent' ? 'black' : 'transparent',
-                            state.ebonySmithingLine == 'black' ? 'red' : 'black',
+                            state.ebonySmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                      
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfEbonySmithingPressed(
                             state.ebonySmithing == 'transparent' ? 'black' : 'transparent',
-                            state.ebonySmithingLine == 'black' ? 'red' : 'black',
+                            state.ebonySmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.ebonySmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.ebonySmithing} />
+                </TouchableOpacity>
             </View>  
             <View title='Orcish Smithing' style= {{
                         position: 'absolute',
@@ -572,30 +567,30 @@ const SmithingTree = ({
                         left: "71%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfOrcishSmithingPressed(
                             state.orcishSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.orcishSmithingLine == 'black' ? 'red' : 'black',
+                            state.orcishSmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                      
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfOrcishSmithingPressed(
                             state.orcishSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.orcishSmithingLine == 'black' ? 'red' : 'black',
+                            state.orcishSmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.orcishSmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.orcishSmithing} />
+                </TouchableOpacity>
             </View>    
             <View title='Orcish Smithing' style= {{
                         position: 'absolute',
@@ -603,30 +598,30 @@ const SmithingTree = ({
                         left: "52%",
                         zIndex: 8
             }}>
-                <IconButton 
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfDwarvenSmithingPressed(
                             state.dwarvenSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.dwarvenSmithingLine == 'black' ? 'red' : 'black',
+                            state.dwarvenSmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />}
-                />
-                <IconButton                       
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                </TouchableOpacity>
+                <TouchableOpacity style={{position: 'absolute'}}                      
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfDwarvenSmithingPressed(
                             state.dwarvenSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.dwarvenSmithingLine == 'black' ? 'red' : 'black',
+                            state.dwarvenSmithingLine == 'black' ? 'gold' : 'black',
                         );
-                    }}
-                    icon={<MaterialCommunityIcons name="star-four-points" size={60} color= {state.dwarvenSmithing} />}
-                />
+                    }}>
+                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.dwarvenSmithing} />
+                </TouchableOpacity>
             </View>                                                                                                         
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
