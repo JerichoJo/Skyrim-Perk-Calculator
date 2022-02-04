@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, Image, Dimensions, ImageBackground } from 'react-native'
-import Swiper from 'react-native-swiper'
-import SmithingTree from './Components/Smithing';
-import HeavyArmor from './Components/HeavyArmor';
-import { FlatList } from 'react-native-gesture-handler';
+import { Text, View, Image, Dimensions } from 'react-native'
+import Swiper from 'react-native-swiper';
+import tree from './Components/index';
 const { width } = Dimensions.get('window')
 const { height } = Dimensions.get('window')
 
@@ -127,15 +125,15 @@ export default class extends Component {
                     <View
                         style={styles.slide}
                     >
-                        
-                            <Image
-                                resizeMode="stretch"
-                                style={styles.image}
-                                source={require('../images/background/BG_Illusion.png')}
-                            />
-                            <Text style={styles.title}>Illusion</Text>
-                            <SmithingTree style={styles.tree} />
-                        
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Illusion.png')}
+                        />
+                        <Text style={styles.title}>Illusion</Text>
+                        <tree.SmithingTree style={styles.tree} />
+
                     </View>
                     <View
                         style={styles.slide}
