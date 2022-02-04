@@ -130,7 +130,7 @@ export default class extends Component {
                     <View
                         style={styles.slide}
                     >
-                        <View>
+                        
                             <Image
                                 resizeMode="stretch"
                                 style={styles.image}
@@ -138,7 +138,7 @@ export default class extends Component {
                             />
                             <Text style={styles.title}>Illusion</Text>
                             <SmithingTree style={styles.tree} />
-                        </View>
+                        
                     </View>
                     <View
                         style={styles.slide}
