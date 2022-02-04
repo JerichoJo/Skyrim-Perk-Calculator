@@ -246,6 +246,14 @@ const SmithingTree = ({
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View style={styles.bottomText}>
+                <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
+                <Text style={styles.HomeScreenText}>Required Skill: { } </Text>
+                <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+                <Text style={styles.HomeScreenText}>
+                    Required level: {RequiredLevel}{' '}
+                </Text>
+            </View>
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
                 <Circle
                     cx="35%"
@@ -512,14 +520,6 @@ const SmithingTree = ({
                     }}
                 />
 
-
-
-
-
-
-
-
-
                 {/* MODAL POPUP */}
                 <Modal
                     animationType="slide"
@@ -574,14 +574,7 @@ const SmithingTree = ({
                     </View>
                 </Modal>
             </Svg>
-            <View style={styles.bottomText}>
-                <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-                <Text style={styles.HomeScreenText}>Required Skill: { } </Text>
-                <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
-                <Text style={styles.HomeScreenText}>
-                    Required level: {RequiredLevel}{' '}
-                </Text>
-            </View>
+            
         </View>
     );
 };
@@ -592,10 +585,10 @@ const styles = StyleSheet.create({
     },
     bottomText: {
         position: 'absolute',
-
+        top: 0,
         left: 0,
         right: 0,
-        bottom: 20,
+        bottom: "80%",
         justifyContent: 'center',
         alignItems: 'center',
     },

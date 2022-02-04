@@ -1,5 +1,7 @@
 {
   "expo": {
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#000000",
     "name": "Skyrim-Perk-Calculator",
     "slug": "Skyrim-Perk-Calculator",
     "version": "1.0.0",
