@@ -1,0 +1,27 @@
+import React, { Component } from 'react';
+import { AppRegistry, View, Image, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 50,
+  },
+  logo: {
+    width: 85,
+    height: 85,
+  },
+});
+
+class StarIconBlue extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Image
+          style={styles.logo}
+          source={require('../../images/Icons/Blue_Star3.png')}
+        />
+      </View>
+    );
+  }
+}
+
+export default StarIconBlue;

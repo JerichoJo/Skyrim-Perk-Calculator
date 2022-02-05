@@ -12,6 +12,9 @@ import {
 import { AntDesign } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 import {MaterialCommunityIcons } from '@expo/vector-icons';
+import StarIconBlue from './StarIconBlue';
+import StarIconGold from './StarIconGold';
+import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 
 
@@ -38,7 +41,7 @@ const SmithingTree = ({
 }) => {
     const [state, setState] = useSetState({
         basicSmithing: "transparent",
-        arcaneSmithing: 'transparent',
+        arcaneSmithing: false,
         arcaneSmithingLine: 'black',
         elvinSmithing: 'transparent',
         elvinSmithingLine: 'black',
@@ -96,7 +99,7 @@ const SmithingTree = ({
             TrackLevel(80);
         } else if (state.glassSmithing == 'black') {
             TrackLevel(70);
-        } else if (state.arcaneSmithing == 'black') {
+        } else if (state.arcaneSmithing == true) {
             TrackLevel(60);
         } else if (state.advancedSmithing == 'black') {
             TrackLevel(50);
@@ -114,7 +117,7 @@ const SmithingTree = ({
     const CheckIfBasicSmithPressed = (buttonColor) => {
         if (
             state.elvinSmithing == 'black' ||
-            state.arcaneSmithing == 'black' ||
+            state.arcaneSmithing == true ||
             state.dwarvenSmithing == 'black'
         ) {
             // Do nothing....must un-select nodes above it first
@@ -137,7 +140,7 @@ const SmithingTree = ({
             IncrementCounter(2);
         } else {
             setState({ arcaneSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.arcaneSmithing == 'transparent'
+            state.arcaneSmithing == false
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
             setState({ arcaneSmithingLine: lineColor }); // Change the pressed button color back and forth
@@ -313,12 +316,11 @@ const SmithingTree = ({
             <View style={styles.bottomText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
-
             </View>
             <View title='Basic Smithing' style= {{
                         position: 'absolute',
-                        top: "77%",
-                        left: "28%",
+                        top: "69%",
+                        left: "25%",
                         zIndex: 8
             }}>
                 <TouchableOpacity style={{position: 'absolute'}}
@@ -330,7 +332,7 @@ const SmithingTree = ({
                             state.basicSmithing == "transparent" ? "black" : "transparent"
                         );
                     }}>
-                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
+                <StarIconBlue />
                 </TouchableOpacity>
                 <TouchableOpacity style={{position: 'absolute'}}                       
                     onLongPress={() => {
@@ -341,40 +343,48 @@ const SmithingTree = ({
                             state.basicSmithing == "transparent" ? "black" : "transparent"
                         );
                     }}>
-                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.basicSmithing} />
                 </TouchableOpacity>
             </View>
-            <View title='Arcane Smithing' style= {{
+            <View title='Arcane Smithing Blue' style= {{
                         position: 'absolute',
-                        top: "56%",
-                        left: "33%",
-                        zIndex: 8
+                        top: "50%",
+                        left: "30%",
+                        zIndex: 8,
+                        opacity: state.arcaneSmithing,
             }}>
-                <TouchableOpacity style={{position: 'absolute'}}
+                <TouchableOpacity 
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfArcaneSmithPressed(
-                            state.arcaneSmithing == 'transparent' ? 'black' : 'transparent',
+                            state.arcaneSmithing == false ? true : false,
                             state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
-                    <MaterialCommunityIcons name="star-four-points-outline" size={60} color="white" />
-                </TouchableOpacity>
-                <TouchableOpacity style={{position: 'absolute'}}                      
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfArcaneSmithPressed(
-                            state.arcaneSmithing == 'transparent' ? 'black' : 'transparent',
-                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <MaterialCommunityIcons name="star-four-points" size={60} color= {state.arcaneSmithing} />
+                    <StarIconBlue />
                 </TouchableOpacity>
             </View>     
+            <View title='Arcane Smithing Gold' style= {{
+                        position: 'absolute',
+                        top: "50%",
+                        left: "30%",
+                        zIndex: 8,
+                        opacity: !state.arcaneSmithing,
+            }}>
+                <TouchableOpacity 
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfArcaneSmithPressed(
+                            state.arcaneSmithing == false ? true : false,
+                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>  
             <View title='Elven Smithing' style= {{
                         position: 'absolute',
                         top: "52%",
