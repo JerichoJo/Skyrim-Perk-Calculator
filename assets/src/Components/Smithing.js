@@ -376,7 +376,7 @@ const SmithingTree = ({
                         top: "50%",
                         left: "30%",
                         zIndex: 8,
-                        opacity: state.arcaneSmithing,
+                        opacity: !(state.arcaneSmithing),
             }}>
                 <TouchableOpacity 
                     onLongPress={() => {
@@ -396,7 +396,7 @@ const SmithingTree = ({
                         top: "50%",
                         left: "30%",
                         zIndex: 8,
-                        opacity: !(state.arcaneSmithing),
+                        opacity: state.arcaneSmithing,
             }}>
                 <TouchableOpacity 
                     onLongPress={() => {
