@@ -14,7 +14,6 @@ import Modal from 'react-native-modal';
 import {MaterialCommunityIcons } from '@expo/vector-icons';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 
 
@@ -40,8 +39,10 @@ const SmithingTree = ({
     UpdateCurrentLevel,
 }) => {
     const [state, setState] = useSetState({
-        basicSmithing: "transparent",
+        basicSmithing: false,
+        basicSmithingOpacity: true,
         arcaneSmithing: false,
+        arcaneSmithingOpacity:true,
         arcaneSmithingLine: 'black',
         elvinSmithing: 'transparent',
         elvinSmithingLine: 'black',
@@ -105,7 +106,7 @@ const SmithingTree = ({
             TrackLevel(50);
         } else if (state.elvinSmithing == 'black') {
             TrackLevel(30);
-        } else if (state.basicSmithing == 'black' ) {
+        } else if (state.basicSmithing == true ) {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);
@@ -114,37 +115,37 @@ const SmithingTree = ({
         CheckLevel();
     }, [CheckLevel]);
 
-    const CheckIfBasicSmithPressed = (buttonColor) => {
+    const CheckIfBasicSmithPressed = (button) => {
         if (
-            state.elvinSmithing == 'black' ||
+            state.elvinSmithing == true ||
             state.arcaneSmithing == true ||
-            state.dwarvenSmithing == 'black'
+            state.dwarvenSmithing == true
         ) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ basicSmithing: buttonColor }); // Change button color back and forth
-
-            state.basicSmithing == 'transparent'
+            setState({ basicSmithingOpacity: !button });
+            setState({ basicSmithing: button }); // Change button color back and forth
+            state.basicSmithing == true
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
 
-    const CheckIfArcaneSmithPressed = (buttonColor, lineColor) => {
-        if (state.basicSmithing == 'transparent') {
+    const CheckIfArcaneSmithPressed = (button, line) => {
+        if (state.basicSmithing == false) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: buttonColor });
-            setState({ arcaneSmithing: buttonColor });
-            setState({ basicSmithingLine: lineColor });
-            setState({ arcaneSmithingLine: lineColor });
+            setState({ basicSmithing: button });
+            setState({ arcaneSmithing: button });
+            setState({ arcaneSmithingOpacity: !button });
+            setState({ arcaneSmithingLine: line });
             IncrementCounter(2);
         } else {
-            setState({ arcaneSmithing: buttonColor }); // Change the pressed button color back and forth
+            setState({ arcaneSmithing: button }); // Change the pressed button color back and forth
+            setState({ arcaneSmithingLine: line });
+            setState({ arcaneSmithingOpacity: !button });
             state.arcaneSmithing == false
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-            setState({ arcaneSmithingLine: lineColor }); // Change the pressed button color back and forth
-            state.arcaneSmithingLine == 'black'
         }
     };
 
@@ -310,32 +311,7 @@ const SmithingTree = ({
         if (state.glassSmithing == 'black' && state.dragonSmithing == 'black') {
             setState({ middleLine: buttonColor });
         }
-    };
-    const PerkIcon = (Name, LineName, Top, Left, IconName) => {
-        return (
-            <View  style= {{
-                position: 'absolute',
-                top: Top,
-                left: Left,
-                zIndex: 8,
-                opacity: useState(Name),
-             }}>
-        <TouchableOpacity 
-            onLongPress={() => {
-                setIsModalVisible(true);
-            }}
-            onPress={() => {
-                CheckIfArcaneSmithPressed(
-                    useState(Name) == false ? true : false,
-                    useState(LineName) == 'black' ? 'gold' : 'black'
-                );
-            }}>
-                <IconName />
-            </TouchableOpacity>
-        </View>
-        );
-      }
-      
+    };  
 
     return (
         <View style={{ zIndex: 2 }}>
@@ -343,11 +319,13 @@ const SmithingTree = ({
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
             </View>
-            <View title='Basic Smithing' style= {{
+
+            <View title='Basic Smithing Blue' style= {{
                         position: 'absolute',
                         top: "69%",
                         left: "25%",
-                        zIndex: 8
+                        zIndex: 8,
+                        opacity: state.basicSmithingOpacity
             }}>
                 <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
@@ -355,28 +333,37 @@ const SmithingTree = ({
                     }}
                     onPress={() => {
                         CheckIfBasicSmithPressed(
-                            state.basicSmithing == "transparent" ? "black" : "transparent"
+                            state.basicSmithing == false ? true : false,
                         );
                     }}>
                 <StarIconBlue />
                 </TouchableOpacity>
-                <TouchableOpacity style={{position: 'absolute'}}                       
+            </View>
+            <View title='Basic Smithing Gold' style= {{
+                        position: 'absolute',
+                        top: "69%",
+                        left: "25%",
+                        zIndex: 8,
+                        opacity: state.basicSmithing
+            }}>
+                <TouchableOpacity style={{position: 'absolute'}}
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfBasicSmithPressed(
-                            state.basicSmithing == "transparent" ? "black" : "transparent"
+                            state.basicSmithing == false ? true : false,
                         );
                     }}>
+                <StarIconGold />
                 </TouchableOpacity>
-            </View>
+            </View>     
             <View title='Arcane Smithing Blue' style= {{
                         position: 'absolute',
                         top: "50%",
                         left: "30%",
                         zIndex: 8,
-                        opacity: !(state.arcaneSmithing),
+                        opacity: state.arcaneSmithingOpacity
             }}>
                 <TouchableOpacity 
                     onLongPress={() => {
@@ -390,13 +377,13 @@ const SmithingTree = ({
                     }}>
                     <StarIconBlue />
                 </TouchableOpacity>
-            </View>     
+            </View>                          
             <View title='Arcane Smithing Gold' style= {{
                         position: 'absolute',
                         top: "50%",
                         left: "30%",
                         zIndex: 8,
-                        opacity: state.arcaneSmithing,
+                        opacity: state.arcaneSmithing
             }}>
                 <TouchableOpacity 
                     onLongPress={() => {
