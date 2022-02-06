@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { AppRegistry, View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop:50,
-    paddingRight: 50,
   },
   logo: {
     width: 85,

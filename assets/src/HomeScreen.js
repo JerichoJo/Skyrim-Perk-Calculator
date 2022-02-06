@@ -155,7 +155,6 @@ export default class extends Component {
                             source={require('../images/background/BG_Conjuration.png')}
                         />
                         <Text style={styles.title}>Conjuration</Text>
-                        <MaterialCommunityIcons name="star-four-points-outline" size={60} color="black" style={styles.Icon} />
                     </View>
                     <View
                         style={styles.slide}
