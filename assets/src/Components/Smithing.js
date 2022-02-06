@@ -40,9 +40,7 @@ const SmithingTree = ({
 }) => {
     const [state, setState] = useSetState({
         basicSmithing: 0,
-        basicSmithingOpacity: 1,
         arcaneSmithing: 0,
-        arcaneSmithingOpacity:1,
         arcaneSmithingLine: 'black',
         elvinSmithing: 'transparent',
         elvinSmithingLine: 'black',
@@ -123,14 +121,7 @@ const SmithingTree = ({
         ) {
             // Do nothing....must un-select nodes above it first
         } 
-        else {
-            if (button == 1) {
-                setState({ basicSmithingOpacity: 0 });
-            }
-            else {
-                setState({ basicSmithingOpacity: 1 });
-            }
-            
+        else {          
             setState({ basicSmithing: button }); // Change button color back and forth
             state.basicSmithing == 0
                 ? IncrementCounter(1)
@@ -138,21 +129,17 @@ const SmithingTree = ({
         }
     };
 
-    const CheckIfArcaneSmithPressed = (button) => {
-        if (button == 1) {
-            setState({ arcaneSmithingOpacity: 0 });
-            setState({ arcaneSmithingLine: 'gold' });
-        }
-        else {
-            setState({ arcaneSmithingOpacity: 1 });
-            setState({ arcaneSmithingLine: 'black' });
-        }
+    const CheckIfArcaneSmithPressed = (button, line) => {
         if (state.basicSmithing == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ basicSmithing: button });
+            setState({ basicSmithingLine: line });
             setState({ arcaneSmithing: button });
+            setState({ arcaneSmithingLine: line });
             IncrementCounter(2);
         } else {
+            setState({ arcaneSmithingLine: line });
+            state.arcaneSmithingLine == 'black'
             setState({ arcaneSmithing: button }); // Change the pressed button color back and forth
             state.arcaneSmithing == 0
                 ? IncrementCounter(1)
@@ -336,7 +323,7 @@ const SmithingTree = ({
                         top: "69%",
                         left: "25%",
                         zIndex: 8,
-                        opacity: state.basicSmithingOpacity
+
             }}>
                 <TouchableOpacity 
                     onLongPress={() => {
@@ -356,6 +343,7 @@ const SmithingTree = ({
                         left: "25%",
                         zIndex: 8,
                         opacity: state.basicSmithing
+
             }}>
                 <TouchableOpacity 
                     onLongPress={() => {
@@ -372,9 +360,9 @@ const SmithingTree = ({
             <View title='Arcane Smithing Blue' style= {{
                         position: 'absolute',
                         top: "50%",
-                        left: "30%",
+                        left: "29.5%",
                         zIndex: 8,
-                        opacity: state.arcaneSmithingOpacity
+
             }}>
                 <TouchableOpacity 
                     onLongPress={() => {
@@ -383,6 +371,7 @@ const SmithingTree = ({
                     onPress={() => {
                         CheckIfArcaneSmithPressed(
                             state.arcaneSmithing == 0 ? 1 : 0,
+                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconBlue />
@@ -391,9 +380,10 @@ const SmithingTree = ({
             <View title='Arcane Smithing Gold' style= {{
                         position: 'absolute',
                         top: "50%",
-                        left: "30%",
+                        left: "29.5%",
                         zIndex: 8,
                         opacity: state.arcaneSmithing
+
             }}>
                 <TouchableOpacity 
                     onLongPress={() => {
@@ -402,6 +392,7 @@ const SmithingTree = ({
                     onPress={() => {
                         CheckIfArcaneSmithPressed(
                             state.arcaneSmithing == 0 ? 1 : 0,
+                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
