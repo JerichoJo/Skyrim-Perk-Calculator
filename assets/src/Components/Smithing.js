@@ -311,6 +311,32 @@ const SmithingTree = ({
             setState({ middleLine: buttonColor });
         }
     };
+    const PerkIcon = (Name, LineName, Top, Left, IconName) => {
+        return (
+            <View  style= {{
+                position: 'absolute',
+                top: Top,
+                left: Left,
+                zIndex: 8,
+                opacity: useState(Name),
+             }}>
+        <TouchableOpacity 
+            onLongPress={() => {
+                setIsModalVisible(true);
+            }}
+            onPress={() => {
+                CheckIfArcaneSmithPressed(
+                    useState(Name) == false ? true : false,
+                    useState(LineName) == 'black' ? 'gold' : 'black'
+                );
+            }}>
+                <IconName />
+            </TouchableOpacity>
+        </View>
+        );
+      }
+      
+
     return (
         <View style={{ zIndex: 2 }}>
             <View style={styles.bottomText}>
@@ -370,7 +396,7 @@ const SmithingTree = ({
                         top: "50%",
                         left: "30%",
                         zIndex: 8,
-                        opacity: !state.arcaneSmithing,
+                        opacity: !(state.arcaneSmithing),
             }}>
                 <TouchableOpacity 
                     onLongPress={() => {
