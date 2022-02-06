@@ -185,9 +185,9 @@ const ConjurationTree = () => {
                         checkIfArcaneSmithPressed(arcaneSmith == 'blue' ? 'red' : 'blue');
                     }}
                 />
-                
+
                 {/* Conjuration Dual Casting */}
-                
+
                 <Circle
                     cx="30%"
                     cy="60%"
@@ -574,7 +574,7 @@ const ConjurationTree = () => {
                     }}
                 />
 
-                
+
                 {/* MODAL POPUP */}
                 <Modal
                     animationType="slide"

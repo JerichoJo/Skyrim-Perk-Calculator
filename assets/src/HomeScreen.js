@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Dimensions, StyleSheet } from 'react-native';
+import { Text, View, Image, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
-import SmithingTree from './Components/Smithing';
-import HeavyArmor from './Components/HeavyArmor';
-import {MaterialCommunityIcons } from '@expo/vector-icons';
+import tree from './Components/index';
 
 const { width } = Dimensions.get('window')
 const { height } = Dimensions.get('window')
@@ -133,18 +131,18 @@ export default class extends Component {
                     <View
                         style={styles.slide}
                     >
-                        
-                            <Image
-                                resizeMode="stretch"
-                                style={styles.image}
-                                source={require('../images/background/BG_Illusion.png')}
-                            />
-                            
-                            <Text style={styles.title}>Illusion</Text>
-                            
-                            <SmithingTree />
-                            
-                        
+
+                        <Image
+                            resizeMode="stretch"
+                            style={styles.image}
+                            source={require('../images/background/BG_Illusion.png')}
+                        />
+
+                        <Text style={styles.title}>Illusion</Text>
+
+                        <tree.SmithingTree style={styles.tree} />
+
+
                     </View>
                     <View
                         style={styles.slide}

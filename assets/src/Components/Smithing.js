@@ -1,20 +1,18 @@
 import * as React from 'react';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import Svg, { Line } from 'react-native-svg';
 import {
     View,
     Dimensions,
     TouchableOpacity,
     Text,
-    Button,
     StyleSheet,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
-
-
+import { AllActivePerkss } from '../../../App';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -32,11 +30,7 @@ const useSetState = (initialState = {}) => {
     return [state, setState];
 };
 
-const SmithingTree = ({
-    IncrementAll,
-    DecrementAll,
-    UpdateCurrentLevel,
-}) => {
+const SmithingTree = () => {
     const [state, setState] = useSetState({
         basicSmithing: 0,
         arcaneSmithing: 0,
@@ -58,34 +52,31 @@ const SmithingTree = ({
         dragonSmithing: 0,
         dragonSmithingLine: 'black',
         dragonSmithingLineLight: 'black',
-        middleLine: 0,
-        middleLineLine: 'black',
     });
 
     const [isModalVisible, setIsModalVisible] = React.useState(false);
-    const [isMenuVisible, setIsMenuVisible] = React.useState(false);
-
     const [count, setCount] = useState(0);
 
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
+        SetAllActivePerks(AllActivePerks + numActivePerks);
     };
     const DecrementCounter = (numActivePerks = 0) => {
         if (ActivePerks === 0) {
             return;
         }
         SetActivePerks(ActivePerks - numActivePerks);
+        SetAllActivePerks(AllActivePerks - numActivePerks);
     };
 
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
     }, []);
 
-    const circleRadius = '12';
-    const circleStrokeWidth = '10';
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
@@ -103,7 +94,7 @@ const SmithingTree = ({
             TrackLevel(50);
         } else if (state.elvinSmithing == 1) {
             TrackLevel(30);
-        } else if (state.basicSmithing == 1 ) {
+        } else if (state.basicSmithing == 1) {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);
@@ -119,8 +110,8 @@ const SmithingTree = ({
             state.dwarvenSmithing == 1
         ) {
             // Do nothing....must un-select nodes above it first
-        } 
-        else {          
+        }
+        else {
             setState({ basicSmithing: button }); // Change button color back and forth
             state.basicSmithing == 0
                 ? IncrementCounter(1)
@@ -154,6 +145,8 @@ const SmithingTree = ({
             setState({ elvinSmithingLine: lineColor });
 
             IncrementCounter(2);
+        } else if (state.advancedSmithing == 1) {
+            // Do nothing....must un-select nodes above it first
         } else {
             setState({ elvinSmithingLine: lineColor });
             setState({ elvinSmithing: buttonColor }); // Change button color back and forth
@@ -197,17 +190,25 @@ const SmithingTree = ({
             setState({ glassSmithingLine: lineColor });
             setState({ advancedSmithingLine: lineColor });
             setState({ elvinSmithingLine: lineColor });
-            if (state.basicSmithing == 1) {
+            if (state.dragonSmithing == 1) {
+                setState({ dragonSmithingLineLight: lineColor });
+            }
+            if (state.elvinSmithing == 1) {
                 IncrementCounter(2);
-            } else {
+            } else if (state.basicSmithing == 1) {
                 IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
             }
         } else {
-            setState({ glassSmithingLine: lineColor });            
+            setState({ glassSmithingLine: lineColor });
             setState({ glassSmithing: buttonColor }); // Change the pressed button color back and forth
             state.glassSmithing == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
+            if (state.dragonSmithing == 1) {
+                setState({ dragonSmithingLineLight: lineColor });
+            }
 
         }
     };
@@ -221,11 +222,11 @@ const SmithingTree = ({
         } else if (state.orcishSmithing == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ dwarvenSmithingLine: lineColor });            
+            setState({ dwarvenSmithingLine: lineColor });
             setState({ dwarvenSmithing: buttonColor }); // Change the pressed button color back and forth
             state.dwarvenSmithing == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
 
         }
     };
@@ -237,12 +238,19 @@ const SmithingTree = ({
             setState({ basicSmithing: buttonColor });
             setState({ orcishSmithingLine: lineColor });
             setState({ dwarvenSmithingLine: lineColor });
+            if (state.basicSmithing == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
         } else if (state.ebonySmithing == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ orcishSmithingLine: lineColor });
             setState({ orcishSmithing: buttonColor }); // Change the pressed button color back and forth
             state.orcishSmithing == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
 
         }
     };
@@ -256,14 +264,21 @@ const SmithingTree = ({
             setState({ ebonySmithingLine: lineColor });
             setState({ orcishSmithingLine: lineColor });
             setState({ dwarvenSmithingLine: lineColor });
+            if (state.dwarvenSmithing == 1) {
+                IncrementCounter(2);
+            } else if (state.basicSmithing == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
         } else if (state.daedricSmithing == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ ebonySmithingLine: lineColor });
             setState({ ebonySmithing: buttonColor }); // Change the pressed button color back and forth
             state.ebonySmithing == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
     const CheckIfDaedricSmithingPressed = (buttonColor, lineColor) => {
@@ -278,14 +293,23 @@ const SmithingTree = ({
             setState({ ebonySmithingLine: lineColor });
             setState({ orcishSmithingLine: lineColor });
             setState({ dwarvenSmithingLine: lineColor });
+            if (state.orcishSmithing == 1) {
+                IncrementCounter(2);
+            } else if (state.dwarvenSmithing == 1) {
+                IncrementCounter(3);
+            } else if (state.basicSmithing == 1) {
+                IncrementCounter(4);
+            } else {
+                IncrementCounter(5);
+            }
         } else if (state.dragonSmithing == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ daedricSmithingLine: lineColor });            
+            setState({ daedricSmithingLine: lineColor });
             setState({ daedricSmithing: buttonColor }); // Change the pressed button color back and forth
             state.daedricSmithing == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
     const CheckIfDragonSmithingPressed = (buttonColor, lineColor) => {
@@ -301,43 +325,56 @@ const SmithingTree = ({
             setState({ ebonySmithingLine: lineColor });
             setState({ orcishSmithingLine: lineColor });
             setState({ dwarvenSmithingLine: lineColor });
+            if (state.glassSmithing == 1) {
+                setState({ dragonSmithingLineLight: lineColor });
+            }
+            if (state.ebonySmithing == 1) {
+                IncrementCounter(2);
+            } else if (state.orcishSmithing == 1) {
+                IncrementCounter(3);
+            } else if (state.dwarvenSmithing == 1) {
+                IncrementCounter(4);
+            } else if (state.basicSmithing == 1) {
+                IncrementCounter(5);
+            } else {
+                IncrementCounter(6);
+            }
         } else {
             setState({ dragonSmithingLine: lineColor });
             setState({ dragonSmithing: buttonColor });
             state.dragonSmithing == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            if (state.glassSmithing == 1) {
+                setState({ dragonSmithingLineLight: lineColor });
+            }
         }
     };
-    const CheckFinalMiddleLine = (buttonColor) => {
-        if (state.glassSmithing == 1 && state.dragonSmithing == 1) {
-            setState({ middleLine: buttonColor });
-        }
-    };  
+
     return (
         <View style={{ zIndex: 2 }}>
             <View style={styles.bottomText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
             </View>
-            <View title='Basic Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "25%",
-                        top: "75%",
-                        zIndex: 8,
+            <View title='Basic Smithing Blue' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "75%",
+                zIndex: 8,
 
             }}>
                 <StarIconBlue />
-            </View>                          
-            <View title='Basic Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "25%",
-                        top: "75%",
-                        zIndex: 8,
-                        opacity: state.basicSmithing
+            </View>
+            <View title='Basic Smithing Gold' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "75%",
+                zIndex: 8,
+                opacity: state.basicSmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -348,26 +385,26 @@ const SmithingTree = ({
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>     
-            <View title='Arcane Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "30%",
-                        top: "55%",
-                        zIndex: 8,
+            </View>
+            <View title='Arcane Smithing Blue' style={{
+                position: 'absolute',
+                left: "30%",
+                top: "55%",
+                zIndex: 8,
 
             }}>
 
                 <StarIconBlue />
-            </View>                          
-            <View title='Arcane Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "30%",
-                        top: "55%",
-                        zIndex: 8,
-                        opacity: state.arcaneSmithing
+            </View>
+            <View title='Arcane Smithing Gold' style={{
+                position: 'absolute',
+                left: "30%",
+                top: "55%",
+                zIndex: 8,
+                opacity: state.arcaneSmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -379,25 +416,25 @@ const SmithingTree = ({
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>  
-            <View title='Elvin Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "-2%",
-                        top: "50%",
-                        zIndex: 8,
+            </View>
+            <View title='Elvin Smithing Blue' style={{
+                position: 'absolute',
+                left: "-2%",
+                top: "50%",
+                zIndex: 8,
 
             }}>
-                    <StarIconBlue />
-            </View>                          
-            <View title='Elvin Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "-2%",
-                        top: "50%",
-                        zIndex: 8,
-                        opacity: state.elvinSmithing
+                <StarIconBlue />
+            </View>
+            <View title='Elvin Smithing Gold' style={{
+                position: 'absolute',
+                left: "-2%",
+                top: "50%",
+                zIndex: 8,
+                opacity: state.elvinSmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -409,25 +446,25 @@ const SmithingTree = ({
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>  
-            <View title='Advanced Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "4%",
-                        top: "43%",
-                        zIndex: 8,
+            </View>
+            <View title='Advanced Smithing Blue' style={{
+                position: 'absolute',
+                left: "4%",
+                top: "43%",
+                zIndex: 8,
 
             }}>
-                    <StarIconBlue />
-            </View>                          
-            <View title='Advanced Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "4%",
-                        top: "43%",
-                        zIndex: 8,
-                        opacity: state.advancedSmithing
+                <StarIconBlue />
+            </View>
+            <View title='Advanced Smithing Gold' style={{
+                position: 'absolute',
+                left: "4%",
+                top: "43%",
+                zIndex: 8,
+                opacity: state.advancedSmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -439,25 +476,25 @@ const SmithingTree = ({
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>  
-            <View title='Glass Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "24%",
-                        top: "34%",
-                        zIndex: 8,
+            </View>
+            <View title='Glass Smithing Blue' style={{
+                position: 'absolute',
+                left: "24%",
+                top: "34%",
+                zIndex: 8,
 
             }}>
-                    <StarIconBlue />
-            </View>                          
-            <View title='Glass Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "24%",
-                        top: "34%",
-                        zIndex: 8,
-                        opacity: state.glassSmithing
+                <StarIconBlue />
+            </View>
+            <View title='Glass Smithing Gold' style={{
+                position: 'absolute',
+                left: "24%",
+                top: "34%",
+                zIndex: 8,
+                opacity: state.glassSmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -469,55 +506,56 @@ const SmithingTree = ({
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>  
-            <View title='Dragon Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "44%",
-                        top: "34%",
-                        zIndex: 8,
+            </View>
+            <View title='Dragon Smithing Blue' style={{
+                position: 'absolute',
+                left: "44%",
+                top: "34%",
+                zIndex: 8,
 
             }}>
-                    <StarIconBlue />
-            </View>                          
-            <View title='Dragon Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "44%",
-                        top: "34%",
-                        zIndex: 8,
-                        opacity: state.dragonSmithing
+                <StarIconBlue />
+            </View>
+            <View title='Dragon Smithing Gold' style={{
+                position: 'absolute',
+                left: "44%",
+                top: "34%",
+                zIndex: 8,
+                opacity: state.dragonSmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
                         CheckIfDragonSmithingPressed(
                             state.dragonSmithing == 0 ? 1 : 0,
-                            state.dragonSmithingLine == 'black' ? 'gold' : 'black'
+                            state.dragonSmithingLine == 'black' ? 'gold' : 'black',
+                            state.dragonSmithingLineLight == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>  
-            <View title='Daedric Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "64%",
-                        top: "40%",
-                        zIndex: 8,
+            </View>
+            <View title='Daedric Smithing Blue' style={{
+                position: 'absolute',
+                left: "64%",
+                top: "40%",
+                zIndex: 8,
 
             }}>
                 <StarIconBlue />
-            </View>                          
-            <View title='Daedric Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "64%",
-                        top: "40%",
-                        zIndex: 8,
-                        opacity: state.daedricSmithing
+            </View>
+            <View title='Daedric Smithing Gold' style={{
+                position: 'absolute',
+                left: "64%",
+                top: "40%",
+                zIndex: 8,
+                opacity: state.daedricSmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -529,25 +567,25 @@ const SmithingTree = ({
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>  
-            <View title='Ebony Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "82%",
-                        top: "50%",
-                        zIndex: 8,
+            </View>
+            <View title='Ebony Smithing Blue' style={{
+                position: 'absolute',
+                left: "82%",
+                top: "50%",
+                zIndex: 8,
 
             }}>
                 <StarIconBlue />
-            </View>                          
-            <View title='Ebony Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "82%",
-                        top: "50%",
-                        zIndex: 8,
-                        opacity: state.ebonySmithing
+            </View>
+            <View title='Ebony Smithing Gold' style={{
+                position: 'absolute',
+                left: "82%",
+                top: "50%",
+                zIndex: 8,
+                opacity: state.ebonySmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -559,25 +597,25 @@ const SmithingTree = ({
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>  
-            <View title='Orcish Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "70%",
-                        top: "50%",
-                        zIndex: 8,
+            </View>
+            <View title='Orcish Smithing Blue' style={{
+                position: 'absolute',
+                left: "70%",
+                top: "50%",
+                zIndex: 8,
 
             }}>
                 <StarIconBlue />
-            </View>                          
-            <View title='Orcish Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "70%",
-                        top: "50%",
-                        zIndex: 8,
-                        opacity: state.orcishSmithing
+            </View>
+            <View title='Orcish Smithing Gold' style={{
+                position: 'absolute',
+                left: "70%",
+                top: "50%",
+                zIndex: 8,
+                opacity: state.orcishSmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -589,25 +627,25 @@ const SmithingTree = ({
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>    
-            <View title='Dwarven Smithing Blue' style= {{
-                        position: 'absolute',
-                        left: "50%",
-                        top: "60%",
-                        zIndex: 8,
+            </View>
+            <View title='Dwarven Smithing Blue' style={{
+                position: 'absolute',
+                left: "50%",
+                top: "60%",
+                zIndex: 8,
 
             }}>
                 <StarIconBlue />
-            </View>                          
-            <View title='Dwarven Smithing Gold' style= {{
-                        position: 'absolute',
-                        left: "50%",
-                        top: "60%",
-                        zIndex: 8,
-                        opacity: state.dwarvenSmithing
+            </View>
+            <View title='Dwarven Smithing Gold' style={{
+                position: 'absolute',
+                left: "50%",
+                top: "60%",
+                zIndex: 8,
+                opacity: state.dwarvenSmithing
 
             }}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
@@ -619,10 +657,10 @@ const SmithingTree = ({
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>                                                                                                       
+            </View>
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
-                <Line 
+                <Line
                     x1="35.3%"
                     y1="79.2%"
                     x2="40%"
@@ -765,7 +803,7 @@ const SmithingTree = ({
                     </View>
                 </Modal>
             </Svg>
-            
+
         </View>
     );
 };
