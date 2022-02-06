@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { Text, View, Image, Dimensions } from 'react-native'
+import React, { Component } from 'react';
+import { Text, View, Image, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 import tree from './Components/index';
+
 const { width } = Dimensions.get('window')
 const { height } = Dimensions.get('window')
 
@@ -70,6 +71,11 @@ const styles = {
         height: height,
         backgroundColor: '#000000',
     },
+    Icon: {
+        position: "absolute",
+        zIndex: 5
+    },
+
     image: {
         width,
         height: '100%',
@@ -131,8 +137,11 @@ export default class extends Component {
                             style={styles.image}
                             source={require('../images/background/BG_Illusion.png')}
                         />
+
                         <Text style={styles.title}>Illusion</Text>
+
                         <tree.SmithingTree style={styles.tree} />
+
 
                     </View>
                     <View

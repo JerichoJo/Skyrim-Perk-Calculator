@@ -403,7 +403,7 @@ const SneakTree = () => {
                         );
                     }}
                 />
-                
+
                 {/* MODAL POPUP */}
                 <Modal
                     animationType="slide"

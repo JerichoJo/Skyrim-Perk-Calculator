@@ -1,27 +1,44 @@
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { Text, Dimensions } from 'react-native';
+import StackNavigator from './StackNavigator';
+import { useState } from 'react';
 
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from './assets/src/HomeScreen';
 
-const navigator = createStackNavigator(
-  {
-    Home: HomeScreen
 
+const { width } = Dimensions.get('window');
+
+export const AllActivePerkss = React.createContext(0);
+
+export default function App() {
+
+  const [AllActivePerks, SetAllActivePerks] = useState(0);
+
+  return (
+    <AllActivePerkss.Provider value={[AllActivePerks, SetAllActivePerks]}>
+
+      <NavigationContainer>
+
+        <StackNavigator />
+
+        <Text style={styles.otherText} >All Active Perks: {AllActivePerks}</Text>
+
+      </NavigationContainer>
+
+    </AllActivePerkss.Provider>
+
+  );
+}
+
+const styles = {
+  otherText: {
+    width,
+    color: '#fff',
+    fontSize: 15,
+
+    position: 'absolute',
+    bottom: '85%',
+    textAlign: 'center',
+    zIndex: 3,
   },
-  {
-    initialRouteName: 'Home',
-
-    defaultNavigationOptions: {
-      cardStyle: { backgroundColor: 'transparent' },
-      headerShown: false,
-
-    },
-
-    navigationOptions: {
-      headerShown: false,
-
-    }
-  }
-);
-
-export default createAppContainer(navigator);
+};
