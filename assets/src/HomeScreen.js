@@ -89,7 +89,6 @@ export default class extends Component {
     render() {
         return (
             <View style={styles.container}>
-
                 <Swiper
                     style={styles.wrapper}
                     height={240}

@@ -13,6 +13,7 @@ import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../App';
+import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -31,6 +32,7 @@ const useSetState = (initialState = {}) => {
 };
 
 const SmithingTree = () => {
+    const navigation = useNavigation();
     const [state, setState] = useSetState({
         basicSmithing: 0,
         arcaneSmithing: 0,
@@ -54,7 +56,7 @@ const SmithingTree = () => {
         dragonSmithingLineLight: 'black',
     });
 
-    const [isModalVisible, setIsModalVisible] = React.useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [count, setCount] = useState(0);
 
     const [ActivePerks, SetActivePerks] = useState(0);
@@ -375,9 +377,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("Modal")}
                     onPress={() => {
                         CheckIfBasicSmithPressed(
                             state.basicSmithing == 0 ? 1 : 0,
