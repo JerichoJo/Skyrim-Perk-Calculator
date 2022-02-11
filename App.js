@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Text, Dimensions } from 'react-native';
+import { Text, Dimensions, LogBox } from 'react-native';
 import StackNavigator from './StackNavigator';
 import { useState } from 'react';
-
-
+LogBox.ignoreLogs(["Require cycle:"])
 
 const { width } = Dimensions.get('window');
 
