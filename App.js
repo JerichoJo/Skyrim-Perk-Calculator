@@ -16,13 +16,9 @@ export default function App() {
   return (
     <AllActivePerkss.Provider value={[AllActivePerks, SetAllActivePerks]}>
 
-      <NavigationContainer>
+      <StackNavigator />
 
-        <StackNavigator />
-
-        <Text style={styles.otherText} >All Active Perks: {AllActivePerks}</Text>
-
-      </NavigationContainer>
+      <Text style={styles.otherText} >All Active Perks: {AllActivePerks}</Text>
 
     </AllActivePerkss.Provider>
 
