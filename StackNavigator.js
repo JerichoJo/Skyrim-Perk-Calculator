@@ -5,7 +5,7 @@ import HomeScreen from "./assets/src/HomeScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from '@expo/vector-icons';
 import tree from './assets/src/Components/index';
-import Modal from "./assets/src/Components/Modals/Modal";
+import OtherStuff from "./assets/src/Components/Modals/OtherStuff";
 //import { createDrawerNavigator } from "@react-navigation/drawer";
 
 
@@ -15,7 +15,7 @@ const ModalNavScreen = () => (
 
         <Stack.Screen name="Homescreen" component={HomeScreen} options={{ tabBarIcon: () => <AntDesign name="home" size={40} /> }} />
 
-        <Stack.Screen name="Modal" component={Modal} options={{ tabBarIcon: () => <AntDesign name="bars" size={40} /> }} />
+        <Stack.Screen name="Other Stuff" component={OtherStuff} options={{ tabBarIcon: () => <AntDesign name="bars" size={40} /> }} />
 
     </Stack.Navigator>
 );

@@ -377,7 +377,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("Modal")}
+                    onLongPress={() => navigation.navigate("Other Stuff")}
                     onPress={() => {
                         CheckIfBasicSmithPressed(
                             state.basicSmithing == 0 ? 1 : 0,
