@@ -828,8 +828,8 @@ const styles = StyleSheet.create({
         top: '70%',
         left: '5%',
         fontSize: 10,
-        color:'yellow',
-        backgroundColor:'red'
+        color: 'yellow',
+        backgroundColor: 'red'
     },
 });
 
