@@ -11,7 +11,7 @@ import OtherStuff from "./assets/src/Components/Modals/OtherStuff";
 
 const Stack = createBottomTabNavigator();
 const ModalNavScreen = () => (
-    <Stack.Navigator screenOptions={{ headerShown: false }} tabBarOptions={{ activeBackgroundColor: "grey" }} >
+    <Stack.Navigator screenOptions={{ headerShown: false }} >
 
         <Stack.Screen name="Homescreen" component={HomeScreen} options={{ tabBarIcon: () => <AntDesign name="home" size={40} /> }} />
 

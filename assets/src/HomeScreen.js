@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { Text, View, Image, Dimensions } from 'react-native';
+import React, { Component, useRef, useState } from 'react';
+import { Text, View, Image, Dimensions, Button } from 'react-native';
 import Swiper from 'react-native-swiper';
 import tree from './Components/index';
 
 const { width } = Dimensions.get('window')
 const { height } = Dimensions.get('window')
-
 const styles = {
     container: {
         flex: 1
@@ -82,14 +81,30 @@ const styles = {
         flex: 1,
         position: 'absolute',
         zIndex: 1,
+    },
+    button: {
+        width: 80,
+        position: 'absolute',
+        bottom: '5%',
+        left: '10%',
+        zIndex: 8,
+    },
+    Nav: {
+        width: 80,
+        position: 'absolute',
+        bottom: '5%',
+        left: '10%',
+        zIndex: 8,
+        backgroundColor: 'red',
     }
 }
-
+ref = React.createRef();
 export default class extends Component {
     render() {
         return (
             <View style={styles.container}>
                 <Swiper
+                    ref={ref}
                     style={styles.wrapper}
                     height={240}
                     dot={
@@ -136,7 +151,6 @@ export default class extends Component {
                             style={styles.image}
                             source={require('../images/background/BG_Illusion.png')}
                         />
-
                         <Text style={styles.title}>Illusion</Text>
 
                         <tree.SmithingTree style={styles.tree} />
