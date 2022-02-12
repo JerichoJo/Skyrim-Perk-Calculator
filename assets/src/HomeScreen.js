@@ -5,9 +5,6 @@ import tree from './Components/index';
 
 const { width } = Dimensions.get('window')
 const { height } = Dimensions.get('window')
-const swiperRef = () => {
-    
-}
 const styles = {
     container: {
         flex: 1
@@ -91,11 +88,18 @@ const styles = {
         bottom: '5%',
         left: '10%',
         zIndex: 8,
+    },
+    Nav:{
+        width: 80,
+        position: 'absolute',
+        bottom: '5%',
+        left: '10%',
+        zIndex: 8,
+        backgroundColor:'red',
     }
 }
 ref = React.createRef();
 export default class extends Component {
-   
     render() {
         return (
             <View style={styles.container}>
@@ -148,6 +152,7 @@ export default class extends Component {
                         </View>
 
                         <Image
+                            
                             resizeMode="stretch"
                             style={styles.image}
                             source={require('../images/background/BG_Illusion.png')}

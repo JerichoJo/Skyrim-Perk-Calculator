@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useCallback, useEffect, useContext, useRef } from 'react';
+import { useState, useCallback, useEffect, useContext, useRef, Button } from 'react';
 import Svg, { Line } from 'react-native-svg';
 import {
     View,
@@ -816,12 +816,20 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: "80%",
+        bottom: "70%",
         justifyContent: 'center',
         alignItems: 'center',
     },
     Icon: {
         position: 'absolute',
+    },
+    button: {
+        position: 'absolute',
+        top: '70%',
+        left: '5%',
+        fontSize: 10,
+        color:'yellow',
+        backgroundColor:'red'
     },
 });
 

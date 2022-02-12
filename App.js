@@ -32,7 +32,7 @@ const styles = {
     fontSize: 15,
 
     position: 'absolute',
-    bottom: '85%',
+    bottom: '94%',
     textAlign: 'center',
     zIndex: 3,
   },
