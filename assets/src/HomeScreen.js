@@ -1,5 +1,5 @@
 import React, { Component, useRef, useState } from 'react';
-import { Text, View, Image, Dimensions, Button} from 'react-native';
+import { Text, View, Image, Dimensions, Button } from 'react-native';
 import Swiper from 'react-native-swiper';
 import tree from './Components/index';
 
@@ -82,20 +82,20 @@ const styles = {
         position: 'absolute',
         zIndex: 1,
     },
-    button:{
+    button: {
         width: 80,
         position: 'absolute',
         bottom: '5%',
         left: '10%',
         zIndex: 8,
     },
-    Nav:{
+    Nav: {
         width: 80,
         position: 'absolute',
         bottom: '5%',
         left: '10%',
         zIndex: 8,
-        backgroundColor:'red',
+        backgroundColor: 'red',
     }
 }
 ref = React.createRef();
@@ -104,7 +104,7 @@ export default class extends Component {
         return (
             <View style={styles.container}>
                 <Swiper
-                    ref ={ref}
+                    ref={ref}
                     style={styles.wrapper}
                     height={240}
                     dot={
@@ -145,14 +145,8 @@ export default class extends Component {
                     <View
                         style={styles.slide}
                     >
-                        <View style={styles.button}>
-                            <Button title='illusion'  onPress={() => ref.current.scrollBy(2)}>
-                                <Text>Illusion</Text>
-                            </Button>
-                        </View>
 
                         <Image
-                            
                             resizeMode="stretch"
                             style={styles.image}
                             source={require('../images/background/BG_Illusion.png')}

@@ -190,18 +190,14 @@ const OtherStuff = () => {
 }
 const styles = {
     button: {
-        position: 'fixed',
         width: width * 0.45,
         height: height * 0.085,
         marginTop: 5,
         marginLeft: 5,
         color: '#FFF',
         borderRadius: 50,
-        alignSelf: 'left',
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 20,
-        elevation: 3,
         backgroundColor: 'black',
     },
     text: {
