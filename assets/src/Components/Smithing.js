@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useCallback, useEffect, useContext } from 'react';
+import { useState, useCallback, useEffect, useContext, useRef } from 'react';
 import Svg, { Line } from 'react-native-svg';
 import {
     View,
@@ -17,7 +17,6 @@ import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
-
 const useSetState = (initialState = {}) => {
     const [state, regularSetState] = useState(initialState);
 
