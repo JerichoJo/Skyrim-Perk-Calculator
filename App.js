@@ -24,8 +24,8 @@ export default function App() {
     
     <AllActivePerkss.Provider value={[AllActivePerks, SetAllActivePerks]}>
     
-    <DrawerNav/>
-    {/* <NavigationContainer>
+    
+    <NavigationContainer>
       <Drawer.Navigator 
       initialRouteName='HomeScreen'
       screenOptions={{
@@ -37,11 +37,10 @@ export default function App() {
       }}
       >
         <Drawer.Screen name='HomeScreen' component={HomeScreen}/>
-
-        <Drawer.Screen name='Illusion' component={SmithingTree} />
       
       </Drawer.Navigator>
-    </NavigationContainer> */}
+      
+    </NavigationContainer>
 
     {/* creating header 
     <View style={styles.headerProps}>
