@@ -1,24 +1,50 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Text, Dimensions, LogBox } from 'react-native';
-import StackNavigator from './StackNavigator';
+import { Text, Dimensions, LogBox, View } from 'react-native';
 import { useState } from 'react';
 LogBox.ignoreLogs(["Require cycle:"])
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import HomeScreen from "./assets/src/HomeScreen";
+import SmithingTree from './assets/src/Components/Smithing';
 
 const { width } = Dimensions.get('window');
+// creating drawer nav
+const Drawer = createDrawerNavigator(); 
 
 export const AllActivePerkss = React.createContext(0);
 
 export default function App() {
 
   const [AllActivePerks, SetAllActivePerks] = useState(0);
+  
 
   return (
+    
     <AllActivePerkss.Provider value={[AllActivePerks, SetAllActivePerks]}>
 
-      <StackNavigator />
+    <NavigationContainer>
+      <Drawer.Navigator 
+      initialRouteName='HomeScreen'
+      screenOptions={{
+        headerShown: false,
+        drawerStyle: {
+          backgroundColor: 'lightblue',
+          width: 200
+        }
+      }}
+      >
+        <Drawer.Screen name='HomeScreen' component={HomeScreen}/>
 
-      <Text style={styles.otherText} >All Active Perks: {AllActivePerks}</Text>
+        <Drawer.Screen name='Illusion' component={SmithingTree} />
+      
+      </Drawer.Navigator>
+    </NavigationContainer>
+
+    {/* creating header 
+    <View style={styles.headerProps}>
+      <Text style={styles.otherText} >All Active Perks: {AllActivePerks}</Text>  
+    </View>*/}
 
     </AllActivePerkss.Provider>
 
@@ -36,4 +62,14 @@ const styles = {
     textAlign: 'center',
     zIndex: 3,
   },
+  headerProps: {
+    width: '100%',
+    height: '10%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    
+
+    
+  }
+
 };
