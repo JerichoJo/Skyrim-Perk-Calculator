@@ -6,8 +6,7 @@ import { useState } from 'react';
 LogBox.ignoreLogs(["Require cycle:"])
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeScreen from "./assets/src/HomeScreen";
-import SmithingTree from './assets/src/Components/Smithing';
-import DrawerNav from './assets/src/Components/Modals/DrawerNav';
+import DrawerNav, { DrawerContent } from './assets/src/Components/Modals/DrawerNav';
 
 const { width } = Dimensions.get('window');
 // creating drawer nav
@@ -26,7 +25,8 @@ export default function App() {
     
     
     <NavigationContainer>
-      <Drawer.Navigator 
+      <Drawer.Navigator
+      drawerContent={props => <DrawerContent {...props} />} 
       initialRouteName='HomeScreen'
       screenOptions={{
         headerShown: false,
@@ -39,13 +39,12 @@ export default function App() {
         <Drawer.Screen name='HomeScreen' component={HomeScreen}/>
       
       </Drawer.Navigator>
-      
+
     </NavigationContainer>
 
-    {/* creating header 
-    <View style={styles.headerProps}>
-      <Text style={styles.otherText} >All Active Perks: {AllActivePerks}</Text>  
-    </View>*/}
+    
+    <Text style={styles.otherText} >All Active Perks: {AllActivePerks}</Text>  
+    
 
     </AllActivePerkss.Provider>
 
