@@ -6,7 +6,8 @@ import { useState } from 'react';
 LogBox.ignoreLogs(["Require cycle:"])
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import HomeScreen from "./assets/src/HomeScreen";
-import DrawerNav, { DrawerContent } from './assets/src/Components/Modals/DrawerNav';
+import { DrawerContent } from './assets/src/Components/Modals/DrawerNav';
+
 
 const { width } = Dimensions.get('window');
 // creating drawer nav
@@ -29,8 +30,19 @@ export default function App() {
       drawerContent={props => <DrawerContent {...props} />} 
       initialRouteName='HomeScreen'
       screenOptions={{
-        headerShown: false,
-        
+        headerShown: true,
+        headerTransparent: true,
+        headerTintColor:'white',
+        headerTitleAlign:'center',
+        headerTitle:'All Active Perks: ' + AllActivePerks,
+        headerRight: () => {
+          <Text
+            style={{
+              color:'white',
+              zIndex: 8
+            }}
+          >{AllActivePerks}</Text>
+        },
         drawerStyle: {
           borderColor:'white',
           borderWidth: 1,
@@ -42,15 +54,11 @@ export default function App() {
         }
       }}
       >
-        <Drawer.Screen name='HomeScreen' component={HomeScreen}/>
+        <Drawer.Screen name='All Active Perks: ' component={HomeScreen}/>
       
       </Drawer.Navigator>
 
     </NavigationContainer>
-
-    
-    <Text style={styles.otherText} >All Active Perks: {AllActivePerks}</Text>  
-    
 
     </AllActivePerkss.Provider>
 

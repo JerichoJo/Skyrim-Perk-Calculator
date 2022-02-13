@@ -1,7 +1,10 @@
 import React, { Component, useRef, useState } from 'react';
 import { Text, View, Image, Dimensions, Button } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { AntDesign } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import tree from './Components/index';
+import { useNavigation } from '@react-navigation/native';
 
 const { width } = Dimensions.get('window')
 const { height } = Dimensions.get('window')
@@ -96,13 +99,23 @@ const styles = {
         left: '10%',
         zIndex: 8,
         backgroundColor: 'red',
+    },
+    menuButton:{
+        backgroundColor:'transparent',
+        position:'absolute',
+        marginTop: '25%',
+        alignSelf: 'flex-end',
+        zIndex: 8
     }
 }
 ref = React.createRef();
+
 export default class extends Component {
+    
     render() {
         return (
             <View style={styles.container}>
+                
                 <Swiper
                     removeClippedSubviews={false}
                     ref={ref}
