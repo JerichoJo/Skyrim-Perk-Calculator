@@ -30,9 +30,15 @@ export default function App() {
       initialRouteName='HomeScreen'
       screenOptions={{
         headerShown: false,
+        
         drawerStyle: {
-          backgroundColor: 'lightblue',
-          width: 200
+          borderColor:'white',
+          borderWidth: 1,
+          backgroundColor: 'slateblue',
+          width: 225,
+          shadowColor: 'black',
+          borderRadius: 5,
+
         }
       }}
       >
