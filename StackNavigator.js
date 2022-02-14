@@ -1,27 +1,90 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import 'react-native-gesture-handler';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { Text, Dimensions, LogBox, View } from 'react-native';
+import { useState } from 'react';
+LogBox.ignoreLogs(["Require cycle:"]);
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from "./assets/src/HomeScreen";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign } from '@expo/vector-icons';
-import tree from './assets/src/Components/index';
-import OtherStuff from "./assets/src/Components/Modals/OtherStuff";
+import BasicSmithingModal from "./assets/src/Components/Modals/BasicSmithingModal";
+import ArcaneSmithingModal from "./assets/src/Components/Modals/ArcaneSmithingModal";
+import { DrawerContent } from './assets/src/Components/Modals/DrawerNav';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 //import { createDrawerNavigator } from "@react-navigation/drawer";
+// cardOverlayEnabled: true,
+// contentStyle: { backgroundColor: "#40404040" }
 
+const Drawer = createDrawerNavigator();
+const ModalNav = createNativeStackNavigator();
 
-const Stack = createBottomTabNavigator();
-const ModalNavScreen = () => (
-    <Stack.Navigator screenOptions={{ headerShown: false }} >
+const { width } = Dimensions.get('window');
 
-        <Stack.Screen name="Homescreen" component={HomeScreen} options={{ tabBarIcon: () => <AntDesign name="home" size={40} /> }} />
+export const AllActivePerkss = React.createContext(0);
 
-        <Stack.Screen name="Other Stuff" component={OtherStuff} options={{ tabBarIcon: () => <AntDesign name="bars" size={40} /> }} />
+function Modal() {
+    return (
 
-    </Stack.Navigator>
-);
+        <ModalNav.Navigator screenOptions={{ headerShown: false }}  >
+
+            <ModalNav.Screen name="Homescreen" component={HomeScreen} />
+
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+
+                <ModalNav.Screen name="BasicSmithingModal" component={BasicSmithingModal} />
+                <ModalNav.Screen name="ArcaneSmithingModal" component={ArcaneSmithingModal} />
+
+            </ModalNav.Group>
+
+        </ModalNav.Navigator>
+    );
+}
+
+function Drawers() {
+    const [AllActivePerks, SetAllActivePerks] = useState(0);
+    return (
+        <AllActivePerkss.Provider value={[AllActivePerks, SetAllActivePerks]}>
+            <Drawer.Navigator
+                drawerContent={props => <DrawerContent {...props} />}
+                initialRouteName='HomeScreen'
+                screenOptions={{
+                    headerShown: true,
+                    headerTransparent: true,
+                    headerTintColor: 'white',
+                    headerTitleAlign: 'center',
+                    headerTitle: 'All Active Perks: ' + AllActivePerks,
+                    headerRight: () => {
+                        <Text
+                            style={{
+                                color: 'white',
+                                zIndex: 8
+                            }}
+                        >{AllActivePerks}</Text>
+                    },
+                    drawerStyle: {
+                        borderColor: 'white',
+                        borderWidth: 1,
+                        backgroundColor: 'slateblue',
+                        width: 225,
+                        shadowColor: 'black',
+                        borderRadius: 5,
+
+                    }
+                }}
+            >
+
+                <Drawer.Screen name='BasicSmithingModal ' component={Modal} />
+
+            </Drawer.Navigator>
+        </AllActivePerkss.Provider>
+
+    );
+}
 
 export default () => (
+
     <NavigationContainer>
-        <ModalNavScreen />
+        <Drawers />
     </NavigationContainer>
+
 );

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useCallback, useEffect, useContext, useRef, Button } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import Svg, { Line } from 'react-native-svg';
 import {
     View,
@@ -12,11 +12,13 @@ import { AntDesign } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
-import { AllActivePerkss } from '../../../App';
+//import { AllActivePerkss } from '../../../App';
+import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+
 const useSetState = (initialState = {}) => {
     const [state, regularSetState] = useState(initialState);
 
@@ -356,7 +358,7 @@ const SmithingTree = () => {
         <View style={{ zIndex: 2 }}>
             <View style={styles.bottomText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-                <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+                <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
             </View>
             <View title='Basic Smithing Blue' style={{
                 position: 'absolute',
@@ -376,7 +378,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("Other Stuff")}
+                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
                     onPress={() => {
                         CheckIfBasicSmithPressed(
                             state.basicSmithing == 0 ? 1 : 0,
@@ -404,9 +406,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
                     onPress={() => {
                         CheckIfArcaneSmithPressed(
                             state.arcaneSmithing == 0 ? 1 : 0,
@@ -822,14 +822,6 @@ const styles = StyleSheet.create({
     },
     Icon: {
         position: 'absolute',
-    },
-    button: {
-        position: 'absolute',
-        top: '70%',
-        left: '5%',
-        fontSize: 10,
-        color: 'yellow',
-        backgroundColor: 'red'
     },
 });
 
