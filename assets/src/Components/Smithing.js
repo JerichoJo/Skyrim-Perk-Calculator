@@ -774,66 +774,6 @@ const SmithingTree = () => {
                     stroke={state.dwarvenSmithingLine}
                     strokeWidth={lineStrokeWidth}
                 />
-
-                {/*
-                <Modal
-                    animationType="slide"
-                    transparent
-                    backdropColor="black"
-                    onBackdropPress={() => {
-                        setIsModalVisible(false);
-                    }}
-                    visible={isModalVisible}>
-                    <View
-                        style={{
-                            backgroundColor: 'firebrick',
-                            margin: 5,
-                            alignSelf: 'auto',
-
-                            justifyContent: 'center',
-                            padding: 30,
-                            borderRadius: 8,
-                            borderWidth: 2,
-                        }}>
-                        <Text>Skill: blah blah</Text>
-                        <Text>Skill: more skill blah</Text>
-                        
-                        <View style={{ flexDirection: 'row' }}>
-                            <View>
-                                <TouchableOpacity
-                                    style={{
-                                        alignSelf: 'flex-end',
-                                        padding: 10,
-                                    }}
-                                    onPress={() => {
-                                        CheckIfElvinSmithPressed(
-                                            state.elvinSmithing == 0 ? 1 : 1,
-                                            state.elvinSmithingLine == 'black' ? 'gold' : 'gold'
-                                        );
-                                    }}>
-                                    <AntDesign name="plus" size={24} color="black" />
-                                </TouchableOpacity>
-                            </View>
-
-                            <Text style={{ padding: 10 }}>{count}</Text>
-                            <View>
-                                <TouchableOpacity
-                                    style={{
-                                        alignSelf: 'flex-start',
-                                        padding: 10,
-                                    }}
-                                    onPress={() => {
-                                        CheckIfElvinSmithPressed(
-                                            state.elvinSmithing == 1 ? 0 : 0,
-                                            state.elvinSmithingLine == 'gold' ? 'black' : 'black'
-                                        );
-                                    }}>
-                                    <AntDesign name="minus" size={24} color="black" />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </Modal>*/}
             </Svg>
 
         </View>
@@ -860,51 +800,61 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: "25%",
         top: "83%",
+        zIndex: 10,
     },
     ArcaneSmithText: {
         position: 'absolute',
         left: "33%",
         top: "55%",
+        zIndex: 10,
     },
     ElvenSmithText: {
         position: 'absolute',
         left: "13%",
         top: "53%",
+        zIndex: 10,
     },
     AdvancedArmorsText: {
         position: 'absolute',
         left: "20%",
         top: "46%",
+        zIndex: 10,
     },
     GlassSmithText: {
         position: 'absolute',
         left: "24%",
         top: "34%",
+        zIndex: 10,
     },
     DragonArmorText: {
         position: 'absolute',
         left: "44%",
         top: "34%",
+        zIndex: 10,
     },
     DaedricSmithText: {
         position: 'absolute',
         left: "64%",
         top: "40%",
+        zIndex: 10,
     },
     EbonySmithText: {
         position: 'absolute',
         left: "82%",
         top: "50%",
+        zIndex: 10,
     },
     OrcishSmithText: {
         position: 'absolute',
         left: "70%",
         top: "50%",
+        zIndex: 10,
     },
     DwarvenSmithText: {
         position: 'absolute',
         left: "50%",
         top: "60%",
+        zIndex: 10,
     },
 
     PerkText: {

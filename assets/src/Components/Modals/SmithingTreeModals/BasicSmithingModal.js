@@ -1,19 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
-import { View, Text, TouchableOpacity, Pressable, StyleSheet, Modal, Button } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-//import { useNavigation } from '@react-navigation/native';
-
-//import { useCardAnimation } from '@react-navigation/stack';
+import { View, Text, TouchableOpacity, Pressable, StyleSheet } from 'react-native';
 
 const BasicSmithingModal = ({ navigation }) => {
-
-
-    //const navigation = useNavigation();
-    //const { current } = useCardAnimation();
-    const [isModalVisible, setIsModalVisible] = React.useState(false);
-
-    const [count, setCount] = useState(0);
 
     return (
         <View
@@ -32,27 +20,7 @@ const BasicSmithingModal = ({ navigation }) => {
                 <Text style={styles.Title}>Basic Smithing{"\n"}</Text>
 
                 <Text style={styles.Text}>Can create steal armor/weapons at forges and improve them 2x</Text>
-                {/* <View style={{ flexDirection: 'row' }}>
-                    <View>
-                        <TouchableOpacity
-                            style={styles.PlusAndMinus}
-                            onPress={() => {
-                                setCount(count - 1);
-                            }}>
-                            <AntDesign name="minus" size={24} color="white" />
-                        </TouchableOpacity>
-                    </View>
-                    <Text style={styles.Number}>{count}</Text>
-                    <View>
-                        <TouchableOpacity
-                            style={styles.PlusAndMinus}
-                            onPress={() => {
-                                setCount(count + 1);
-                            }}>
-                            <AntDesign name="plus" size={24} color="white" />
-                        </TouchableOpacity>
-                    </View>
-                </View> */}
+
             </View>
 
 
