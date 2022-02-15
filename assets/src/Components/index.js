@@ -14,4 +14,5 @@ const tree = {
     EnchantingTree,
     SneakTree,
 }
+
 export default tree;
