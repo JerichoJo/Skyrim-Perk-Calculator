@@ -6,19 +6,12 @@ import { useState } from 'react';
 LogBox.ignoreLogs(["Require cycle:"]);
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from "./assets/src/HomeScreen";
-import BasicSmithingModal from "./assets/src/Components//Modals/SmithingTreeModals/BasicSmithingModal";
-import ArcaneSmithingModal from "./assets/src/Components/Modals/SmithingTreeModals/ArcaneSmithingModal";
 import { DrawerContent } from './assets/src/Components/Modals/DrawerNav';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-//import { createDrawerNavigator } from "@react-navigation/drawer";
-// cardOverlayEnabled: true,
-// contentStyle: { backgroundColor: "#40404040" }
+import modals from './assets/src/Components/Modals/index';
 
 const Drawer = createDrawerNavigator();
 const ModalNav = createNativeStackNavigator();
-
-const { width } = Dimensions.get('window');
 
 export const AllActivePerkss = React.createContext(0);
 
@@ -31,8 +24,8 @@ function Modal() {
 
             <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
 
-                <ModalNav.Screen name="BasicSmithingModal" component={BasicSmithingModal} />
-                <ModalNav.Screen name="ArcaneSmithingModal" component={ArcaneSmithingModal} />
+                <ModalNav.Screen name="BasicSmithingModal" component={modals.BasicSmithingModal} />
+                <ModalNav.Screen name="ArcaneSmithingModal" component={modals.ArcaneSmithingModal} />
 
             </ModalNav.Group>
 
