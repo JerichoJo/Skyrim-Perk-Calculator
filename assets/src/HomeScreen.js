@@ -56,7 +56,7 @@ const styles = {
         fontSize: 40,
         fontWeight: 'bold',
         position: 'absolute',
-        bottom: '10%',
+        bottom: '4%',
         textAlign: 'center',
         zIndex: 3,
     },
@@ -100,9 +100,9 @@ const styles = {
         zIndex: 8,
         backgroundColor: 'red',
     },
-    menuButton:{
-        backgroundColor:'transparent',
-        position:'absolute',
+    menuButton: {
+        backgroundColor: 'transparent',
+        position: 'absolute',
         marginTop: '25%',
         alignSelf: 'flex-end',
         zIndex: 8
@@ -111,11 +111,11 @@ const styles = {
 ref = React.createRef();
 
 export default class extends Component {
-    
+
     render() {
         return (
             <View style={styles.container}>
-                
+
                 <Swiper
                     removeClippedSubviews={false}
                     ref={ref}
