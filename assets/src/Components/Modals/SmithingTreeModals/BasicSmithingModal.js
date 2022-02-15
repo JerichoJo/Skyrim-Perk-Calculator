@@ -6,14 +6,13 @@ import { AntDesign } from '@expo/vector-icons';
 
 //import { useCardAnimation } from '@react-navigation/stack';
 
-const ArcaneSmithingModal = ({ navigation }) => {
+const BasicSmithingModal = ({ navigation }) => {
 
 
     //const navigation = useNavigation();
     //const { current } = useCardAnimation();
     const [isModalVisible, setIsModalVisible] = React.useState(false);
 
-    const handleModal = () => setIsModalVisible(() => !isModalVisible);
     const [count, setCount] = useState(0);
 
     return (
@@ -32,8 +31,8 @@ const ArcaneSmithingModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Basic Smithing{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
-                <View style={{ flexDirection: 'row' }}>
+                <Text style={styles.Text}>Can create steal armor/weapons at forges and improve them 2x</Text>
+                {/* <View style={{ flexDirection: 'row' }}>
                     <View>
                         <TouchableOpacity
                             style={styles.PlusAndMinus}
@@ -53,17 +52,14 @@ const ArcaneSmithingModal = ({ navigation }) => {
                             <AntDesign name="plus" size={24} color="white" />
                         </TouchableOpacity>
                     </View>
-
-
-
-                </View>
+                </View> */}
             </View>
 
 
         </View>
     );
 }
-export default ArcaneSmithingModal;
+export default BasicSmithingModal;
 
 const styles = StyleSheet.create({
     Container: {
