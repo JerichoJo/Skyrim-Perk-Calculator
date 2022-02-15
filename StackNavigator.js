@@ -6,8 +6,8 @@ import { useState } from 'react';
 LogBox.ignoreLogs(["Require cycle:"]);
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from "./assets/src/HomeScreen";
-import BasicSmithingModal from "./assets/src/Components/Modals/BasicSmithingModal";
-import ArcaneSmithingModal from "./assets/src/Components/Modals/ArcaneSmithingModal";
+import BasicSmithingModal from "./assets/src/Components//Modals/SmithingTreeModals/BasicSmithingModal";
+import ArcaneSmithingModal from "./assets/src/Components/Modals/SmithingTreeModals/ArcaneSmithingModal";
 import { DrawerContent } from './assets/src/Components/Modals/DrawerNav';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 

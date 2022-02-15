@@ -8,11 +8,8 @@ import {
     Text,
     StyleSheet,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
-//import { AllActivePerkss } from '../../../App';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
 
@@ -356,7 +353,7 @@ const SmithingTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
-            <View style={styles.bottomText}>
+            <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
             </View>
@@ -387,6 +384,9 @@ const SmithingTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
+            <View style={styles.BasicSmithText}>
+                <Text style={styles.PerkText}>Basic Smithing</Text>
+            </View>
             <View title='Arcane Smithing Blue' style={{
                 position: 'absolute',
                 left: "30%",
@@ -415,6 +415,9 @@ const SmithingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.ArcaneSmithText}>
+                <Text style={styles.PerkText}>Arcane Blacksmith</Text>
             </View>
             <View title='Elvin Smithing Blue' style={{
                 position: 'absolute',
@@ -446,6 +449,9 @@ const SmithingTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
+            <View style={styles.ElvenSmithText}>
+                <Text style={styles.PerkText}>Elvin Smithing</Text>
+            </View>
             <View title='Advanced Smithing Blue' style={{
                 position: 'absolute',
                 left: "4%",
@@ -476,6 +482,9 @@ const SmithingTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
+            <View style={styles.AdvancedArmorsText}>
+                <Text style={styles.PerkText}>Advanced Armors</Text>
+            </View>
             <View title='Glass Smithing Blue' style={{
                 position: 'absolute',
                 left: "24%",
@@ -505,6 +514,9 @@ const SmithingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.GlassSmithText}>
+                <Text style={styles.PerkText}>Glass Smithing</Text>
             </View>
             <View title='Dragon Smithing Blue' style={{
                 position: 'absolute',
@@ -537,6 +549,9 @@ const SmithingTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
+            <View style={styles.DragonArmorText}>
+                <Text style={styles.PerkText}>Dragon Armor</Text>
+            </View>
             <View title='Daedric Smithing Blue' style={{
                 position: 'absolute',
                 left: "64%",
@@ -566,6 +581,9 @@ const SmithingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.DaedricSmithText}>
+                <Text style={styles.PerkText}>Daedric Smithing</Text>
             </View>
             <View title='Ebony Smithing Blue' style={{
                 position: 'absolute',
@@ -597,6 +615,9 @@ const SmithingTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
+            <View style={styles.EbonySmithText}>
+                <Text style={styles.PerkText}>Ebony Smithing</Text>
+            </View>
             <View title='Orcish Smithing Blue' style={{
                 position: 'absolute',
                 left: "70%",
@@ -627,6 +648,9 @@ const SmithingTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
+            <View style={styles.OrcishSmithText}>
+                <Text style={styles.PerkText}>Orcish Smithing</Text>
+            </View>
             <View title='Dwarven Smithing Blue' style={{
                 position: 'absolute',
                 left: "50%",
@@ -656,6 +680,9 @@ const SmithingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.DwarvenSmithText}>
+                <Text style={styles.PerkText}>Dwarven Smithing</Text>
             </View>
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
@@ -748,7 +775,7 @@ const SmithingTree = () => {
                     strokeWidth={lineStrokeWidth}
                 />
 
-                {/* MODAL POPUP */}
+                {/*
                 <Modal
                     animationType="slide"
                     transparent
@@ -770,7 +797,7 @@ const SmithingTree = () => {
                         }}>
                         <Text>Skill: blah blah</Text>
                         <Text>Skill: more skill blah</Text>
-                        {/* +/- BUTTONS*/}
+                        
                         <View style={{ flexDirection: 'row' }}>
                             <View>
                                 <TouchableOpacity
@@ -779,7 +806,10 @@ const SmithingTree = () => {
                                         padding: 10,
                                     }}
                                     onPress={() => {
-                                        setCount(count + 1);
+                                        CheckIfElvinSmithPressed(
+                                            state.elvinSmithing == 0 ? 1 : 1,
+                                            state.elvinSmithingLine == 'black' ? 'gold' : 'gold'
+                                        );
                                     }}>
                                     <AntDesign name="plus" size={24} color="black" />
                                 </TouchableOpacity>
@@ -793,14 +823,17 @@ const SmithingTree = () => {
                                         padding: 10,
                                     }}
                                     onPress={() => {
-                                        setCount(count - 1);
+                                        CheckIfElvinSmithPressed(
+                                            state.elvinSmithing == 1 ? 0 : 0,
+                                            state.elvinSmithingLine == 'gold' ? 'black' : 'black'
+                                        );
                                     }}>
                                     <AntDesign name="minus" size={24} color="black" />
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
-                </Modal>
+                </Modal>*/}
             </Svg>
 
         </View>
@@ -811,7 +844,7 @@ const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
     },
-    bottomText: {
+    topText: {
         position: 'absolute',
         top: 0,
         left: 0,
@@ -823,6 +856,61 @@ const styles = StyleSheet.create({
     Icon: {
         position: 'absolute',
     },
+    BasicSmithText: {
+        position: 'absolute',
+        left: "25%",
+        top: "83%",
+    },
+    ArcaneSmithText: {
+        position: 'absolute',
+        left: "33%",
+        top: "55%",
+    },
+    ElvenSmithText: {
+        position: 'absolute',
+        left: "13%",
+        top: "53%",
+    },
+    AdvancedArmorsText: {
+        position: 'absolute',
+        left: "20%",
+        top: "46%",
+    },
+    GlassSmithText: {
+        position: 'absolute',
+        left: "24%",
+        top: "34%",
+    },
+    DragonArmorText: {
+        position: 'absolute',
+        left: "44%",
+        top: "34%",
+    },
+    DaedricSmithText: {
+        position: 'absolute',
+        left: "64%",
+        top: "40%",
+    },
+    EbonySmithText: {
+        position: 'absolute',
+        left: "82%",
+        top: "50%",
+    },
+    OrcishSmithText: {
+        position: 'absolute',
+        left: "70%",
+        top: "50%",
+    },
+    DwarvenSmithText: {
+        position: 'absolute',
+        left: "50%",
+        top: "60%",
+    },
+
+    PerkText: {
+        color: 'white',
+        fontSize: 12,
+    }
 });
 
 export default SmithingTree;
