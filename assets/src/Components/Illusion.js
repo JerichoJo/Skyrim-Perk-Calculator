@@ -56,7 +56,8 @@ const IllusionTree = () => {
         quietCasting: 0,
         quietCastingLine: 'black',
         masterOfMind: 0,
-        masterOfMindLine: 'black'
+        masterOfMindLine: 'black',
+        masterOfMindLine2: 'black',
         // animageLineLight: 'black',
     });
 
@@ -97,8 +98,8 @@ const IllusionTree = () => {
             TrackLevel(60);
         } else if (state.adeptIllus == 1) {
             TrackLevel(50);
-        } else if (state.apprenticeIllus == 1) {
-            TrackLevel(30);
+        } else if (state.animage == 1) {
+            TrackLevel(20);
         } else if (state.noviceIllus == 1) {
             TrackLevel(0);
         }
@@ -110,9 +111,10 @@ const IllusionTree = () => {
 
     const CheckIfNoviceIllusPressed = (button) => {
         if (
-            state.apprenticeIllus == 1 ||
             state.illusionDual == 1 ||
-            state.masterIllus == 1
+            state.apprenticeIllus == 1 ||
+            state.hypnoticGaze == 1 ||
+            state.animage == 1
         ) {
             // Do nothing....must un-select nodes above it first
         }
@@ -128,7 +130,6 @@ const IllusionTree = () => {
         if (state.noviceIllus == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceIllus: button });
-            setState({ noviceIllusLine: line });
             setState({ illusionDual: button });
             setState({ illusionDualLine: line });
             IncrementCounter(2);
@@ -145,10 +146,8 @@ const IllusionTree = () => {
         if (state.noviceIllus == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceIllus: buttonColor });
-            setState({ noviceIllusLine: lineColor });
             setState({ apprenticeIllus: buttonColor });
             setState({ apprenticeIllusLine: lineColor });
-
             IncrementCounter(2);
         } else if (state.adeptIllus == 1) {
             // Do nothing....must un-select nodes above it first
@@ -158,17 +157,17 @@ const IllusionTree = () => {
             state.apprenticeIllus == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-
         }
     };
     const CheckIfAdeptIllusPressed = (buttonColor, lineColor) => {
         if (state.apprenticeIllus == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceIllus: buttonColor });
-            setState({ adeptIllus: buttonColor });
             setState({ apprenticeIllus: buttonColor });
-            setState({ adeptIllusLine: lineColor });
             setState({ apprenticeIllusLine: lineColor });
+            setState({ adeptIllus: buttonColor });
+            setState({ adeptIllusLine: lineColor });
+
             if (state.noviceIllus == 1) {
                 IncrementCounter(2);
             } else {
@@ -182,22 +181,19 @@ const IllusionTree = () => {
             state.adeptIllus == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-
         }
     };
     const CheckIfExpertIllusPressed = (buttonColor, lineColor) => {
         if (state.adeptIllus == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ expertIllus: buttonColor });
-            setState({ adeptIllus: buttonColor });
-            setState({ apprenticeIllus: buttonColor });
             setState({ noviceIllus: buttonColor });
-            setState({ expertIllusLine: lineColor });
-            setState({ adeptIllusLine: lineColor });
+            setState({ apprenticeIllus: buttonColor });
+            setState({ adeptIllus: buttonColor });
+            setState({ expertIllus: buttonColor });
             setState({ apprenticeIllusLine: lineColor });
-            if (state.animage == 1) {
-                setState({ animageLineLight: lineColor });
-            }
+            setState({ adeptIllusLine: lineColor });
+            setState({ expertIllusLine: lineColor });
+
             if (state.apprenticeIllus == 1) {
                 IncrementCounter(2);
             } else if (state.noviceIllus == 1) {
@@ -205,27 +201,38 @@ const IllusionTree = () => {
             } else {
                 IncrementCounter(4);
             }
+        }
+        else if (state.masterIllus == 1) {
+            // Do nothing....must un-select nodes above it first
         } else {
             setState({ expertIllusLine: lineColor });
             setState({ expertIllus: buttonColor }); // Change the pressed button color back and forth
             state.expertIllus == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-            if (state.animage == 1) {
-                setState({ animageLineLight: lineColor });
-            }
-
         }
     };
     const CheckIfMasterIllusPressed = (buttonColor, lineColor) => {
-        if (state.noviceIllus == 0) {
+        if (state.expertIllus == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ masterIllus: buttonColor });
             setState({ noviceIllus: buttonColor });
+            setState({ apprenticeIllus: buttonColor });
+            setState({ adeptIllus: buttonColor });
+            setState({ expertIllus: buttonColor });
+            setState({ masterIllus: buttonColor });
+            setState({ apprenticeIllusLine: lineColor });
+            setState({ adeptIllusLine: lineColor });
+            setState({ expertIllusLine: lineColor });
             setState({ masterIllusLine: lineColor });
-            IncrementCounter(2);
-        } else if (state.hypnoticGaze == 1) {
-            // Do nothing....must un-select nodes above it first
+            if (state.adeptIllus == 1) {
+                IncrementCounter(2);
+            } else if (state.apprenticeIllus == 1) {
+                IncrementCounter(3);
+            } else if (state.noviceIllus == 1) {
+                IncrementCounter(4);
+            } else {
+                IncrementCounter(5);
+            }
         } else {
             setState({ masterIllusLine: lineColor });
             setState({ masterIllus: buttonColor }); // Change the pressed button color back and forth
@@ -236,18 +243,13 @@ const IllusionTree = () => {
         }
     };
     const CheckIfHypnoticGazePressed = (buttonColor, lineColor) => {
-        if (state.masterIllus == 0) {
+        if (state.noviceIllus == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ hypnoticGaze: buttonColor });
-            setState({ masterIllus: buttonColor });
             setState({ noviceIllus: buttonColor });
+            setState({ hypnoticGaze: buttonColor });
             setState({ hypnoticGazeLine: lineColor });
-            setState({ masterIllusLine: lineColor });
-            if (state.noviceIllus == 1) {
-                IncrementCounter(2);
-            } else {
-                IncrementCounter(3);
-            }
+            IncrementCounter(2);
+
         } else if (state.aspectOfTerror == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -262,19 +264,15 @@ const IllusionTree = () => {
     const CheckIfAspectOfTerrorPressed = (buttonColor, lineColor) => {
         if (state.hypnoticGaze == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ aspectOfTerror: buttonColor });
-            setState({ hypnoticGaze: buttonColor });
-            setState({ masterIllus: buttonColor });
             setState({ noviceIllus: buttonColor });
-            setState({ aspectOfTerrorLine: lineColor });
+            setState({ hypnoticGaze: buttonColor });
+            setState({ aspectOfTerror: buttonColor });
             setState({ hypnoticGazeLine: lineColor });
-            setState({ masterIllusLine: lineColor });
-            if (state.masterIllus == 1) {
+            setState({ aspectOfTerrorLine: lineColor });
+            if (state.noviceIllus == 1) {
                 IncrementCounter(2);
-            } else if (state.noviceIllus == 1) {
-                IncrementCounter(3);
             } else {
-                IncrementCounter(4);
+                IncrementCounter(3);
             }
         } else if (state.rage == 1) {
             // Do nothing....must un-select nodes above it first
@@ -289,25 +287,21 @@ const IllusionTree = () => {
     const CheckIfRagePressed = (buttonColor, lineColor) => {
         if (state.aspectOfTerror == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ rage: buttonColor });
-            setState({ aspectOfTerror: buttonColor });
-            setState({ hypnoticGaze: buttonColor });
-            setState({ masterIllus: buttonColor });
             setState({ noviceIllus: buttonColor });
-            setState({ rageLine: lineColor });
-            setState({ aspectOfTerrorLine: lineColor });
+            setState({ hypnoticGaze: buttonColor });
+            setState({ aspectOfTerror: buttonColor });
+            setState({ rage: buttonColor });
             setState({ hypnoticGazeLine: lineColor });
-            setState({ masterIllusLine: lineColor });
+            setState({ aspectOfTerrorLine: lineColor });
+            setState({ rageLine: lineColor });
             if (state.hypnoticGaze == 1) {
                 IncrementCounter(2);
-            } else if (state.masterIllus == 1) {
-                IncrementCounter(3);
             } else if (state.noviceIllus == 1) {
-                IncrementCounter(4);
+                IncrementCounter(3);
             } else {
-                IncrementCounter(5);
+                IncrementCounter(4);
             }
-        } else if (state.animage == 1) {
+        } else if (state.masterOfMind == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ rageLine: lineColor });
@@ -318,40 +312,107 @@ const IllusionTree = () => {
         }
     };
     const CheckIfAnimagePressed = (buttonColor, lineColor) => {
-        if (state.rage == 0) {
-            setState({ animage: buttonColor });
-            setState({ rage: buttonColor });
-            setState({ aspectOfTerror: buttonColor });
-            setState({ hypnoticGaze: buttonColor });
-            setState({ masterIllus: buttonColor });
+        if (state.noviceIllus == 0) {
             setState({ noviceIllus: buttonColor });
+            setState({ animage: buttonColor });
             setState({ animageLine: lineColor });
-            setState({ rageLine: lineColor });
-            setState({ aspectOfTerrorLine: lineColor });
-            setState({ hypnoticGazeLine: lineColor });
-            setState({ masterIllusLine: lineColor });
-            if (state.expertIllus == 1) {
-                setState({ animageLineLight: lineColor });
-            }
-            if (state.aspectOfTerror == 1) {
-                IncrementCounter(2);
-            } else if (state.hypnoticGaze == 1) {
-                IncrementCounter(3);
-            } else if (state.masterIllus == 1) {
-                IncrementCounter(4);
-            } else if (state.noviceIllus == 1) {
-                IncrementCounter(5);
-            } else {
-                IncrementCounter(6);
-            }
+            IncrementCounter(2);
+
+        } else if (state.kindredMage == 1) {
+            // Do nothing....must un-select nodes above it first
         } else {
             setState({ animageLine: lineColor });
             setState({ animage: buttonColor });
             state.animage == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-            if (state.expertIllus == 1) {
-                setState({ animageLineLight: lineColor });
+        }
+    };
+    const CheckIfKindredPressed = (buttonColor, lineColor) => {
+        if (state.animage == 0) {
+            setState({ noviceIllus: buttonColor });
+            setState({ animage: buttonColor });
+            setState({ kindredMage: buttonColor });
+            setState({ animageLine: lineColor });
+            setState({ kindredMageLine: lineColor });
+            if (state.noviceIllus == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.quietCasting == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ kindredMageLine: lineColor });
+            setState({ kindredMage: buttonColor });
+            state.kindredMage == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+
+    const CheckIfQuietCastingPressed = (buttonColor, lineColor) => {
+        if (state.kindredMage == 0) {
+            setState({ noviceIllus: buttonColor });
+            setState({ animage: buttonColor });
+            setState({ kindredMage: buttonColor });
+            setState({ quietCasting: buttonColor });
+            setState({ animageLine: lineColor });
+            setState({ kindredMageLine: lineColor });
+            setState({ quietCastingLine: lineColor });
+            if (state.masterOfMind == 1) {
+                setState({ masterOfMindLine2: lineColor });
+            }
+            if (state.animage == 1) {
+                IncrementCounter(2);
+            } else if (state.noviceIllus == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+        } else {
+            setState({ quietCastingLine: lineColor });
+            setState({ quietCasting: buttonColor });
+            state.quietCasting == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            if (state.masterOfMind == 1) {
+                setState({ masterOfMindLine2: lineColor });
+            }
+        }
+    };
+
+    const CheckIfMasterOfMindPressed = (buttonColor, lineColor) => {
+        if (state.rage == 0) {
+            setState({ noviceIllus: buttonColor });
+            setState({ hypnoticGaze: buttonColor });
+            setState({ aspectOfTerror: buttonColor });
+            setState({ rage: buttonColor });
+            setState({ masterOfMind: buttonColor });
+            setState({ hypnoticGazeLine: lineColor });
+            setState({ aspectOfTerrorLine: lineColor });
+            setState({ rageLine: lineColor });
+            setState({ masterOfMindLine: lineColor });
+            if (state.quietCasting == 1) {
+                setState({ masterOfMindLine2: lineColor });
+            }
+            if (state.aspectOfTerror == 1) {
+                IncrementCounter(2);
+            } else if (state.hypnoticGaze == 1) {
+                IncrementCounter(3);
+            } else if (state.noviceIllus == 1) {
+                IncrementCounter(4);
+            } else {
+                IncrementCounter(5);
+            }
+        } else {
+            setState({ masterOfMindLine: lineColor });
+            setState({ masterOfMind: buttonColor });
+            state.masterOfMind == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            if (state.quietCasting == 1) {
+                setState({ masterOfMindLine2: lineColor });
             }
         }
     };
@@ -468,7 +529,7 @@ const IllusionTree = () => {
             </View>
             <View title='Adept Illusion Gold' style={{
                 position: 'absolute',
-                left: "8%",
+                left: "11%",
                 top: "43%",
                 zIndex: 8,
                 opacity: state.adeptIllus
@@ -672,7 +733,7 @@ const IllusionTree = () => {
             </View>
             <View title='Master of Mind Gold' style={{
                 position: 'absolute',
-                left: "55%",
+                left: "52%",
                 top: "20%",
                 zIndex: 8,
                 opacity: state.masterOfMind
@@ -683,7 +744,7 @@ const IllusionTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfRagePressed(
+                        CheckIfMasterOfMindPressed(
                             state.masterOfMind == 0 ? 1 : 0,
                             state.masterOfMindLine == 'black' ? 'gold' : 'black'
                         );
@@ -720,7 +781,6 @@ const IllusionTree = () => {
                         CheckIfAnimagePressed(
                             state.animage == 0 ? 1 : 0,
                             state.animageLine == 'black' ? 'gold' : 'black',
-                            state.animageLineLight == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
@@ -753,7 +813,7 @@ const IllusionTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfAnimagePressed(
+                        CheckIfKindredPressed(
                             state.kindredMage == 0 ? 1 : 0,
                             state.kindredMageLine == 'black' ? 'gold' : 'black',
                         );
@@ -787,7 +847,7 @@ const IllusionTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfAnimagePressed(
+                        CheckIfQuietCastingPressed(
                             state.quietCasting == 0 ? 1 : 0,
                             state.quietCastingLine == 'black' ? 'gold' : 'black',
                         );
@@ -911,7 +971,7 @@ const IllusionTree = () => {
                     y1="39%"
                     x2="63%"
                     y2="25%"
-                    stroke={state.masterOfMindLine}
+                    stroke={state.masterOfMindLine2}
                     strokeWidth={lineStrokeWidth}
                 />
 
