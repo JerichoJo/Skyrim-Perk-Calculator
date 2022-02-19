@@ -167,8 +167,7 @@ export default class extends Component {
                         />
                         <Text style={styles.title}>Illusion</Text>
 
-                        <tree.SmithingTree style={styles.tree} />
-
+                        <tree.IllusionTree style={styles.tree} />
 
                     </View>
                     <View
@@ -234,6 +233,8 @@ export default class extends Component {
                             source={require('../images/background/BG_Smithing.png')}
                         />
                         <Text style={styles.title}>Smithing</Text>
+
+                        <tree.SmithingTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
