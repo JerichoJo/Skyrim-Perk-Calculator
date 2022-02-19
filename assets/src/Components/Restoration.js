@@ -85,26 +85,26 @@ const RestorationTree = () => {
     const CheckLevel = useCallback(() => {
         if (state.MasterRestoration == 1) {
             TrackLevel(100);
-        } else if (state.ExpertRestoration == 1) {
+        } else if (state.AvoidDeath == 1) {
             TrackLevel(90);
-        } else if (state.AdeptRestoration == 1) {
-            TrackLevel(80);
-        } else if (state.ApprenticeRestoration == 1) {
+        } else if (state.ExpertRestoration == 1) {
+            TrackLevel(75);
+        } else if (state.Necromage == 1) {
             TrackLevel(70);
         } else if (state.WardAbsorb == 1) {
             TrackLevel(60);
-        } else if (state.Regeneration == 1) {
+        } else if (state.AdeptRestoration == 1) {
             TrackLevel(50);
-        } else if (state.Necromage == 1) {
-            TrackLevel(30);
         } else if (state.Respite == 1) {
-            TrackLevel(0);
-        }else if (state.RestoDualCast == 1) {
-            TrackLevel(0);
-        }else if (state.Recovery == 1) {
-            TrackLevel(0);
-        }else if (state.AvoidDeath == 1) {
-            TrackLevel(0);
+            TrackLevel(40);
+        } else if (state.Recovery == 1) {
+            TrackLevel(30);
+        } else if (state.ApprenticeRestoration == 1) {
+            TrackLevel(25);
+        } else if (state.Regeneration == 1) {
+            TrackLevel(20);
+        } else if (state.RestoDualCast == 1) {
+            TrackLevel(20);
         }
     }, [TrackLevel, state]);
 
@@ -306,7 +306,7 @@ const RestorationTree = () => {
         } else {
             setState({ RestoDualCastLine: line });
             setState({ RestoDualCast: button }); // Change the pressed button color back and forth
-            state.Respite == 0
+            state.RestoDualCast == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
@@ -322,7 +322,7 @@ const RestorationTree = () => {
         } else {
             setState({ RecoveryLine: line });
             setState({ Recovery: button }); // Change the pressed button color back and forth
-            state.Respite == 0
+            state.Recovery == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
