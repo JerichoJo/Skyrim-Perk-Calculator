@@ -201,6 +201,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Restoration.png')}
                         />
                         <Text style={styles.title}>Restoration</Text>
+                        <tree.RestorationTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -267,6 +268,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Two_Handed.png')}
                         />
                         <Text style={styles.title}>Two-Handed</Text>
+                        <tree.TwoHandedTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -289,6 +291,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Archery.png')}
                         />
                         <Text style={styles.title}>Archery</Text>
+                        <tree.ArcheryTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -333,6 +336,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Pickpocket.png')}
                         />
                         <Text style={styles.title}>Pickpocket</Text>
+                        <tree.PickpocketTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}

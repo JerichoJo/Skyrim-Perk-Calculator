@@ -32,26 +32,29 @@ const useSetState = (initialState = {}) => {
 const RestorationTree = () => {
     const navigation = useNavigation();
     const [state, setState] = useSetState({
-        basicSmithing: 0,
-        arcaneSmithing: 0,
-        arcaneSmithingLine: 'black',
-        elvinSmithing: 0,
-        elvinSmithingLine: 'black',
-        advancedSmithing: 0,
-        advancedSmithingLine: 'black',
-        glassSmithing: 0,
-        glassSmithingLine: 'black',
-        dwarvenSmithing: 0,
-        dwarvenSmithingLine: 'black',
-        orcishSmithing: 0,
-        orcishSmithingLine: 'black',
-        ebonySmithing: 0,
-        ebonySmithingLine: 'black',
-        daedricSmithing: 0,
-        daedricSmithingLine: 'black',
-        dragonSmithing: 0,
-        dragonSmithingLine: 'black',
-        dragonSmithingLineLight: 'black',
+        noviceRestoration: 0,
+        Respite: 0,
+        RespiteLine: 'black',
+        ApprenticeRestoration: 0,
+        ApprenticeRestorationLine: 'black',
+        AdeptRestoration: 0,
+        AdeptRestorationLine: 'black',
+        ExpertRestoration: 0,
+        ExpertRestorationLine: 'black',
+        MasterRestoration: 0,
+        MasterRestorationLine: 'black',
+        Regeneration: 0,
+        RegenerationLine: 'black',
+        Necromage: 0,
+        NecromageLine: 'black',
+        WardAbsorb: 0,
+        WardAbsorbLine: 'black',
+        RestoDualCast: 0,
+        RestoDualCastLine: 'black',
+        Recovery: 0,
+        RecoveryLine: 'black',
+        AvoidDeath: 0,
+        AvoidDeathLine: 'black',
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -80,360 +83,356 @@ const RestorationTree = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.dragonSmithing == 1) {
+        if (state.MasterRestoration == 1) {
             TrackLevel(100);
-        } else if (state.daedricSmithing == 1) {
+        } else if (state.ExpertRestoration == 1) {
             TrackLevel(90);
-        } else if (state.ebonySmithing == 1) {
+        } else if (state.AdeptRestoration == 1) {
             TrackLevel(80);
-        } else if (state.glassSmithing == 1) {
+        } else if (state.ApprenticeRestoration == 1) {
             TrackLevel(70);
-        } else if (state.arcaneSmithing == 1) {
+        } else if (state.WardAbsorb == 1) {
             TrackLevel(60);
-        } else if (state.advancedSmithing == 1) {
+        } else if (state.Regeneration == 1) {
             TrackLevel(50);
-        } else if (state.elvinSmithing == 1) {
+        } else if (state.Necromage == 1) {
             TrackLevel(30);
-        } else if (state.basicSmithing == 1) {
+        } else if (state.Respite == 1) {
+            TrackLevel(0);
+        }else if (state.RestoDualCast == 1) {
+            TrackLevel(0);
+        }else if (state.Recovery == 1) {
+            TrackLevel(0);
+        }else if (state.AvoidDeath == 1) {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);
 
-    useEffect(() => {
-        CheckLevel();
-    }, [CheckLevel]);
-
-    const CheckIfBasicSmithPressed = (button) => {
+    const CheckIfNoviceRestorationPressed = (button) => {
         if (
-            state.elvinSmithing == 1 ||
-            state.arcaneSmithing == 1 ||
-            state.dwarvenSmithing == 1
+            state.ApprenticeRestoration == 1 ||
+            state.Respite == 1
         ) {
             // Do nothing....must un-select nodes above it first
         }
         else {
-            setState({ basicSmithing: button }); // Change button color back and forth
-            state.basicSmithing == 0
+            setState({ noviceRestoration: button }); // Change button color back and forth
+            state.noviceRestoration == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
 
-    const CheckIfArcaneSmithPressed = (button, line) => {
-        if (state.basicSmithing == 0) {
+    const CheckIfRespitePressed = (button, line) => {
+        if (state.noviceRestoration == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: button });
-            setState({ basicSmithingLine: line });
-            setState({ arcaneSmithing: button });
-            setState({ arcaneSmithingLine: line });
+            setState({ noviceRestoration: button });
+            setState({ noviceRestorationLine: line });
+            setState({ Respite: button });
+            setState({ RespiteLine: line });
             IncrementCounter(2);
         } else {
-            setState({ arcaneSmithingLine: line });
-            setState({ arcaneSmithing: button }); // Change the pressed button color back and forth
-            state.arcaneSmithing == 0
+            setState({ RespiteLine: line });
+            setState({ Respite: button }); // Change the pressed button color back and forth
+            state.Respite == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
 
-    const CheckIfElvinSmithPressed = (buttonColor, lineColor) => {
-        if (state.basicSmithing == 0) {
+    const CheckIfApprenticeRestorationPressed = (buttonColor, lineColor) => {
+        if (state.noviceRestoration == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: buttonColor });
-            setState({ basicSmithingLine: lineColor });
-            setState({ elvinSmithing: buttonColor });
-            setState({ elvinSmithingLine: lineColor });
+            setState({ noviceRestoration: buttonColor });
+            setState({ noviceRestorationLine: lineColor });
+            setState({ ApprenticeRestoration: buttonColor });
+            setState({ ApprenticeRestorationLine: lineColor });
 
             IncrementCounter(2);
-        } else if (state.advancedSmithing == 1) {
+        } else if (state.AdeptRestoration == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ elvinSmithingLine: lineColor });
-            setState({ elvinSmithing: buttonColor }); // Change button color back and forth
-            state.elvinSmithing == 0
+            setState({ ApprenticeRestorationLine: lineColor });
+            setState({ ApprenticeRestoration: buttonColor }); // Change button color back and forth
+            state.ApprenticeRestoration == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
 
         }
     };
-    const CheckIfAdvanceSmithingPressed = (buttonColor, lineColor) => {
-        if (state.elvinSmithing == 0) {
+    const CheckIfAdeptRestorationPressed = (buttonColor, lineColor) => {
+        if (state.ApprenticeRestoration == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: buttonColor });
-            setState({ advancedSmithing: buttonColor });
-            setState({ elvinSmithing: buttonColor });
-            setState({ advancedSmithingLine: lineColor });
-            setState({ elvinSmithingLine: lineColor });
-            if (state.basicSmithing == 1) {
+            setState({ noviceRestoration: buttonColor });
+            setState({ AdeptRestoration: buttonColor });
+            setState({ ApprenticeRestoration: buttonColor });
+            setState({ AdeptRestorationLine: lineColor });
+            setState({ ApprenticeRestorationLine: lineColor });
+            if (state.noviceRestoration == 1) {
                 IncrementCounter(2);
             } else {
                 IncrementCounter(3);
             }
-        } else if (state.glassSmithing == 1) {
+        } else if (state.ExpertRestoration == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ advancedSmithingLine: lineColor });
-            setState({ advancedSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.advancedSmithing == 0
+            setState({ AdeptRestorationLine: lineColor });
+            setState({ AdeptRestoration: buttonColor }); // Change the pressed button color back and forth
+            state.AdeptRestoration == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
 
         }
     };
-    const CheckIfGlassSmithingPressed = (buttonColor, lineColor) => {
-        if (state.advancedSmithing == 0) {
+    const CheckIfExpertRestorationPressed = (buttonColor, lineColor) => {
+        if (state.AdeptRestoration == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ glassSmithing: buttonColor });
-            setState({ advancedSmithing: buttonColor });
-            setState({ elvinSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ glassSmithingLine: lineColor });
-            setState({ advancedSmithingLine: lineColor });
-            setState({ elvinSmithingLine: lineColor });
-            if (state.dragonSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
-            }
-            if (state.elvinSmithing == 1) {
+            setState({ ExpertRestoration: buttonColor });
+            setState({ AdeptRestoration: buttonColor });
+            setState({ ApprenticeRestoration: buttonColor });
+            setState({ noviceRestoration: buttonColor });
+            setState({ ExpertRestorationLine: lineColor });
+            setState({ AdeptRestorationLine: lineColor });
+            setState({ ApprenticeRestorationLine: lineColor });
+            if (state.ApprenticeRestoration == 1) {
                 IncrementCounter(2);
-            } else if (state.basicSmithing == 1) {
+            } else if (state.noviceRestoration == 1) {
                 IncrementCounter(3);
             } else {
                 IncrementCounter(4);
             }
         } else {
-            setState({ glassSmithingLine: lineColor });
-            setState({ glassSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.glassSmithing == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-            if (state.dragonSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
-            }
-
-        }
-    };
-    const CheckIfDwarvenSmithingPressed = (buttonColor, lineColor) => {
-        if (state.basicSmithing == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            IncrementCounter(2);
-        } else if (state.orcishSmithing == 1) {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setState({ dwarvenSmithingLine: lineColor });
-            setState({ dwarvenSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.dwarvenSmithing == 0
+            setState({ ExpertRestorationLine: lineColor });
+            setState({ ExpertRestoration: buttonColor }); // Change the pressed button color back and forth
+            state.ExpertRestoration == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
 
         }
     };
-    const CheckIfOrcishSmithingPressed = (buttonColor, lineColor) => {
-        if (state.dwarvenSmithing == 0) {
+    const CheckIfMasterRestorationPressed = (button, line) => {
+        if (state.ExpertRestoration == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ orcishSmithing: buttonColor });
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ orcishSmithingLine: lineColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            if (state.basicSmithing == 1) {
+            setState({ MasterRestoration: button });
+            setState({ ExpertRestoration: button });
+            setState({ AdeptRestoration: button });
+            setState({ ApprenticeRestoration: button });
+            setState({ noviceRestoration: button });
+            setState({ MasterRestorationLine: line });
+            setState({ ExpertRestorationLine: line });
+            setState({ AdeptRestorationLine: line });
+            setState({ ApprenticeRestorationLine: line });
+            if (state.ExpertRestoration == 1) {
                 IncrementCounter(2);
-            } else {
+            } else if (state.AdeptRestoration == 1) {
                 IncrementCounter(3);
-            }
-        } else if (state.ebonySmithing == 1) {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setState({ orcishSmithingLine: lineColor });
-            setState({ orcishSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.orcishSmithing == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-
-        }
-    };
-    const CheckIfEbonySmithingPressed = (buttonColor, lineColor) => {
-        if (state.orcishSmithing == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
-            setState({ ebonySmithing: buttonColor });
-            setState({ orcishSmithing: buttonColor });
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ ebonySmithingLine: lineColor });
-            setState({ orcishSmithingLine: lineColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            if (state.dwarvenSmithing == 1) {
-                IncrementCounter(2);
-            } else if (state.basicSmithing == 1) {
-                IncrementCounter(3);
-            } else {
-                IncrementCounter(4);
-            }
-        } else if (state.daedricSmithing == 1) {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setState({ ebonySmithingLine: lineColor });
-            setState({ ebonySmithing: buttonColor }); // Change the pressed button color back and forth
-            state.ebonySmithing == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-        }
-    };
-    const CheckIfDaedricSmithingPressed = (buttonColor, lineColor) => {
-        if (state.ebonySmithing == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
-            setState({ daedricSmithing: buttonColor });
-            setState({ ebonySmithing: buttonColor });
-            setState({ orcishSmithing: buttonColor });
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ daedricSmithingLine: lineColor });
-            setState({ ebonySmithingLine: lineColor });
-            setState({ orcishSmithingLine: lineColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            if (state.orcishSmithing == 1) {
-                IncrementCounter(2);
-            } else if (state.dwarvenSmithing == 1) {
-                IncrementCounter(3);
-            } else if (state.basicSmithing == 1) {
+            } else if (state.ApprenticeRestoration == 1) {
                 IncrementCounter(4);
             } else {
                 IncrementCounter(5);
             }
-        } else if (state.dragonSmithing == 1) {
-            // Do nothing....must un-select nodes above it first
         } else {
-            setState({ daedricSmithingLine: lineColor });
-            setState({ daedricSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.daedricSmithing == 0
+            setState({ MasterRestorationLine: line });
+            setState({ MasterRestoration: button }); // Change the pressed button color back and forth
+            state.MasterRestoration == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-        }
-    };
-    const CheckIfDragonSmithingPressed = (buttonColor, lineColor) => {
-        if (state.daedricSmithing == 0) {
-            setState({ dragonSmithing: buttonColor });
-            setState({ daedricSmithing: buttonColor });
-            setState({ ebonySmithing: buttonColor });
-            setState({ orcishSmithing: buttonColor });
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ dragonSmithingLine: lineColor });
-            setState({ daedricSmithingLine: lineColor });
-            setState({ ebonySmithingLine: lineColor });
-            setState({ orcishSmithingLine: lineColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            if (state.glassSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
-            }
-            if (state.ebonySmithing == 1) {
-                IncrementCounter(2);
-            } else if (state.orcishSmithing == 1) {
-                IncrementCounter(3);
-            } else if (state.dwarvenSmithing == 1) {
-                IncrementCounter(4);
-            } else if (state.basicSmithing == 1) {
-                IncrementCounter(5);
-            } else {
-                IncrementCounter(6);
-            }
-        } else {
-            setState({ dragonSmithingLine: lineColor });
-            setState({ dragonSmithing: buttonColor });
-            state.dragonSmithing == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-            if (state.glassSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
-            }
-        }
-    };
 
+        }
+    };
+    const CheckIfRegenerationPressed = (button, line) => {
+        if (state.noviceRestoration == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceRestoration: button });
+            setState({ noviceRestorationLine: line });
+            setState({ Regeneration: button });
+            setState({ Regeneration: line });
+            IncrementCounter(2);
+        } else {
+            setState({ RegenerationLine: line });
+            setState({ Regeneration: button }); // Change the pressed button color back and forth
+            state.Regeneration == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfNecromagePressed = (button, line) => {
+        if (state.Regeneration == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceRestoration: button });
+            setState({ Regeneration: button });
+            setState({ Necromage: button });
+            setState({ noviceRestorationLine: line });
+            setState({ RegenerationLine: line });
+            setState({ NecromageLine: line });
+            if (state.noviceRestoration == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else {
+            setState({ NecromageLine: line });
+            setState({ Necromage: button }); // Change the pressed button color back and forth
+            state.Necromage == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfWardAbsorbPressed = (button, line) => {
+        if (state.noviceRestoration == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceRestoration: button });
+            setState({ noviceRestorationLine: line });
+            setState({ WardAbsorb: button });
+            setState({ WardAbsorbLine: line });
+            IncrementCounter(2);
+        } else {
+            setState({ WardAbsorbLine: line });
+            setState({ WardAbsorb: button }); // Change the pressed button color back and forth
+            state.WardAbsorb == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfRestoDualCastPressed = (button, line) => {
+        if (state.noviceRestoration == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceRestoration: button });
+            setState({ noviceRestorationLine: line });
+            setState({ RestoDualCast: button });
+            setState({ RestoDualCastLine: line });
+            IncrementCounter(2);
+        } else {
+            setState({ RestoDualCastLine: line });
+            setState({ RestoDualCast: button }); // Change the pressed button color back and forth
+            state.Respite == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfRecoveryPressed = (button, line) => {
+        if (state.noviceRestoration == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceRestoration: button });
+            setState({ noviceRestorationLine: line });
+            setState({ Recovery: button });
+            setState({ RecoveryLine: line });
+            IncrementCounter(2);
+        } else {
+            setState({ RecoveryLine: line });
+            setState({ Recovery: button }); // Change the pressed button color back and forth
+            state.Respite == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfAvoidDeathPressed = (button, line) => {
+        if (state.Recovery == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceRestoration: button });
+            setState({ Recovery: button });
+            setState({ AvoidDeath: button });
+            setState({ noviceRestorationLine: line });
+            setState({ RecoveryLine: line });
+            setState({ AvoidDeathLine: line });
+            if (state.noviceRestoration == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else {
+            setState({ AvoidDeathLine: line });
+            setState({ AvoidDeath: button }); // Change the pressed button color back and forth
+            state.AvoidDeath == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
     return (
         <View style={{ zIndex: 2 }}>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
             </View>
-            <View title='Basic Smithing Blue' style={{
+            <View title='Novice Restoration Blue' style={{
                 position: 'absolute',
-                left: "25%",
+                left: "45%",
                 top: "75%",
                 zIndex: 8,
 
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Basic Smithing Gold' style={{
+            <View title='Novice Restoration Gold' style={{
                 position: 'absolute',
-                left: "25%",
+                left: "45%",
                 top: "75%",
                 zIndex: 8,
-                opacity: state.basicSmithing
+                opacity: state.noviceRestoration
 
             }}>
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("BasicSmithingModal")}
                     onPress={() => {
-                        CheckIfBasicSmithPressed(
-                            state.basicSmithing == 0 ? 1 : 0,
+                        CheckIfNoviceRestorationPressed(
+                            state.noviceRestoration == 0 ? 1 : 0,
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.BasicSmithText}>
-                <Text style={styles.PerkText}>Basic Smithing</Text>
+            <View style={styles.NoviceRestorationText}>
+                <Text style={styles.PerkText}>Novice Restoration</Text>
             </View>
-            <View title='Arcane Smithing Blue' style={{
+            <View title='Respite Blue' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "55%",
+                left: "0%",
+                top: "70%",
                 zIndex: 8,
 
             }}>
 
                 <StarIconBlue />
             </View>
-            <View title='Arcane Smithing Gold' style={{
+            <View title='Respite Gold' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "55%",
+                left: "0%",
+                top: "70%",
                 zIndex: 8,
-                opacity: state.arcaneSmithing
+                opacity: state.Respite
 
             }}>
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
                     onPress={() => {
-                        CheckIfArcaneSmithPressed(
-                            state.arcaneSmithing == 0 ? 1 : 0,
-                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
+                        CheckIfRespitePressed(
+                            state.Respite == 0 ? 1 : 0,
+                            state.RespiteLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.ArcaneSmithText}>
-                <Text style={styles.PerkText}>Arcane Blacksmith</Text>
+            <View style={styles.RespiteText}>
+                <Text style={styles.PerkText}>Respite</Text>
             </View>
-            <View title='Elvin Smithing Blue' style={{
+            <View title='Apprentice Restoration Blue' style={{
                 position: 'absolute',
-                left: "-2%",
-                top: "50%",
+                left: "52%",
+                top: "55%",
                 zIndex: 8,
 
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Elvin Smithing Gold' style={{
+            <View title='Apprentice Restoration Gold' style={{
                 position: 'absolute',
-                left: "-2%",
-                top: "50%",
+                left: "52%",
+                top: "55%",
                 zIndex: 8,
-                opacity: state.elvinSmithing
+                opacity: state.ApprenticeRestoration
 
             }}>
                 <TouchableOpacity
@@ -441,32 +440,32 @@ const RestorationTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfElvinSmithPressed(
-                            state.elvinSmithing == 0 ? 1 : 0,
-                            state.elvinSmithingLine == 'black' ? 'gold' : 'black'
+                        CheckIfApprenticeRestorationPressed(
+                            state.ApprenticeRestoration == 0 ? 1 : 0,
+                            state.ApprenticeRestorationLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.ElvenSmithText}>
-                <Text style={styles.PerkText}>Elvin Smithing</Text>
+            <View style={styles.ApprenticeRestorationText}>
+                <Text style={styles.PerkText}>Apprentice Restoration</Text>
             </View>
-            <View title='Advanced Smithing Blue' style={{
+            <View title='Adept Restoration Blue' style={{
                 position: 'absolute',
-                left: "4%",
-                top: "43%",
+                left: "42%",
+                top: "38%",
                 zIndex: 8,
 
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Advanced Smithing Gold' style={{
+            <View title='Adept Restoration Gold' style={{
                 position: 'absolute',
-                left: "4%",
-                top: "43%",
+                left: "42%",
+                top: "38%",
                 zIndex: 8,
-                opacity: state.advancedSmithing
+                opacity: state.AdeptRestoration
 
             }}>
                 <TouchableOpacity
@@ -474,198 +473,98 @@ const RestorationTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfAdvanceSmithingPressed(
-                            state.advancedSmithing == 0 ? 1 : 0,
-                            state.advancedSmithingLine == 'black' ? 'gold' : 'black'
+                        CheckIfAdeptRestorationPressed(
+                            state.AdeptRestoration == 0 ? 1 : 0,
+                            state.AdeptRestorationLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.AdvancedArmorsText}>
-                <Text style={styles.PerkText}>Advanced Armors</Text>
+            <View style={styles.AdeptRestorationText}>
+                <Text style={styles.PerkText}>Adept Restoration</Text>
             </View>
-            <View title='Glass Smithing Blue' style={{
-                position: 'absolute',
-                left: "24%",
-                top: "34%",
-                zIndex: 8,
-
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Glass Smithing Gold' style={{
-                position: 'absolute',
-                left: "24%",
-                top: "34%",
-                zIndex: 8,
-                opacity: state.glassSmithing
-
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfGlassSmithingPressed(
-                            state.glassSmithing == 0 ? 1 : 0,
-                            state.glassSmithingLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.GlassSmithText}>
-                <Text style={styles.PerkText}>Glass Smithing</Text>
-            </View>
-            <View title='Dragon Smithing Blue' style={{
-                position: 'absolute',
-                left: "44%",
-                top: "34%",
-                zIndex: 8,
-
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Dragon Smithing Gold' style={{
-                position: 'absolute',
-                left: "44%",
-                top: "34%",
-                zIndex: 8,
-                opacity: state.dragonSmithing
-
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfDragonSmithingPressed(
-                            state.dragonSmithing == 0 ? 1 : 0,
-                            state.dragonSmithingLine == 'black' ? 'gold' : 'black',
-                            state.dragonSmithingLineLight == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.DragonArmorText}>
-                <Text style={styles.PerkText}>Dragon Armor</Text>
-            </View>
-            <View title='Daedric Smithing Blue' style={{
-                position: 'absolute',
-                left: "64%",
-                top: "40%",
-                zIndex: 8,
-
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Daedric Smithing Gold' style={{
-                position: 'absolute',
-                left: "64%",
-                top: "40%",
-                zIndex: 8,
-                opacity: state.daedricSmithing
-
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfDaedricSmithingPressed(
-                            state.daedricSmithing == 0 ? 1 : 0,
-                            state.daedricSmithingLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.DaedricSmithText}>
-                <Text style={styles.PerkText}>Daedric Smithing</Text>
-            </View>
-            <View title='Ebony Smithing Blue' style={{
-                position: 'absolute',
-                left: "82%",
-                top: "50%",
-                zIndex: 8,
-
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Ebony Smithing Gold' style={{
-                position: 'absolute',
-                left: "82%",
-                top: "50%",
-                zIndex: 8,
-                opacity: state.ebonySmithing
-
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfEbonySmithingPressed(
-                            state.ebonySmithing == 0 ? 1 : 0,
-                            state.ebonySmithingLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.EbonySmithText}>
-                <Text style={styles.PerkText}>Ebony Smithing</Text>
-            </View>
-            <View title='Orcish Smithing Blue' style={{
-                position: 'absolute',
-                left: "70%",
-                top: "50%",
-                zIndex: 8,
-
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Orcish Smithing Gold' style={{
-                position: 'absolute',
-                left: "70%",
-                top: "50%",
-                zIndex: 8,
-                opacity: state.orcishSmithing
-
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfOrcishSmithingPressed(
-                            state.orcishSmithing == 0 ? 1 : 0,
-                            state.orcishSmithingLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.OrcishSmithText}>
-                <Text style={styles.PerkText}>Orcish Smithing</Text>
-            </View>
-            <View title='Dwarven Smithing Blue' style={{
+            <View title='Expert Restoration Blue' style={{
                 position: 'absolute',
                 left: "50%",
+                top: "26%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Expert Restoration Gold' style={{
+                position: 'absolute',
+                left: "50%",
+                top: "26%",
+                zIndex: 8,
+                opacity: state.ExpertRestoration
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfExpertRestorationPressed(
+                            state.ExpertRestoration == 0 ? 1 : 0,
+                            state.ExpertRestorationLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.ExpertRestorationText}>
+                <Text style={styles.PerkText}>Exper Restoration</Text>
+            </View>
+            <View title='Master Restoration Blue' style={{
+                position: 'absolute',
+                left: "35%",
+                top: "15%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Master Restoration Gold' style={{
+                position: 'absolute',
+                left: "35%",
+                top: "15%",
+                zIndex: 8,
+                opacity: state.MasterRestoration
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfMasterRestorationPressed(
+                            state.MasterRestoration == 0 ? 1 : 0,
+                            state.MasterRestorationLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.MasterRestorationText}>
+                <Text style={styles.PerkText}>Master Restoration</Text>
+            </View>
+            <View title='Regeneration Blue' style={{
+                position: 'absolute',
+                left: "20%",
                 top: "60%",
                 zIndex: 8,
 
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Dwarven Smithing Gold' style={{
+            <View title='Regeneration Gold' style={{
                 position: 'absolute',
-                left: "50%",
+                left: "20%",
                 top: "60%",
                 zIndex: 8,
-                opacity: state.dwarvenSmithing
+                opacity: state.Regeneration
 
             }}>
                 <TouchableOpacity
@@ -673,106 +572,282 @@ const RestorationTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfDwarvenSmithingPressed(
-                            state.dwarvenSmithing == 0 ? 1 : 0,
-                            state.dwarvenSmithingLine == 'black' ? 'gold' : 'black'
+                        CheckIfRegenerationPressed(
+                            state.Regeneration == 0 ? 1 : 0,
+                            state.RegenerationLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.DwarvenSmithText}>
-                <Text style={styles.PerkText}>Dwarven Smithing</Text>
+            <View style={styles.RegenerationText}>
+                <Text style={styles.PerkText}>Regeneration</Text>
+            </View>
+            <View title='Necromage Blue' style={{
+                position: 'absolute',
+                left: "0%",
+                top: "48%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Necromage Gold' style={{
+                position: 'absolute',
+                left: "0%",
+                top: "48%",
+                zIndex: 8,
+                opacity: state.Necromage
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfNecromagePressed(
+                            state.Necromage == 0 ? 1 : 0,
+                            state.NecromageLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.NecromageText}>
+                <Text style={styles.PerkText}>Necromage</Text>
+            </View>
+            <View title='Ward Absorb Blue' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "50%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Ward Absorb Gold' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "50%",
+                zIndex: 8,
+                opacity: state.WardAbsorb
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfWardAbsorbPressed(
+                            state.WardAbsorb == 0 ? 1 : 0,
+                            state.WardAbsorbLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.WardAbsorbText}>
+                <Text style={styles.PerkText}>Ward Absorb</Text>
+            </View>
+            <View title='Restoration Dual Casting Blue' style={{
+                position: 'absolute',
+                left: "75%",
+                top: "73%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Restoration Dual Casting Gold' style={{
+                position: 'absolute',
+                left: "75%",
+                top: "73%",
+                zIndex: 8,
+                opacity: state.RestoDualCast
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfRestoDualCastPressed(
+                            state.RestoDualCast == 0 ? 1 : 0,
+                            state.RestoDualCastLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.RestoDualCastText}>
+                <Text style={styles.PerkText}>Dual Casting</Text>
+            </View>
+            <View title='Recovery Blue' style={{
+                position: 'absolute',
+                left: "72%",
+                top: "60%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Recovery Gold' style={{
+                position: 'absolute',
+                left: "72%",
+                top: "60%",
+                zIndex: 8,
+                opacity: state.Recovery
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfRecoveryPressed(
+                            state.Recovery == 0 ? 1 : 0,
+                            state.RecoveryLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.RecoveryText}>
+                <Text style={styles.PerkText}>Recovery</Text>
+            </View>
+            <View title='Avoid Death Blue' style={{
+                position: 'absolute',
+                left: "78%",
+                top: "40%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Avoid Death Gold' style={{
+                position: 'absolute',
+                left: "78%",
+                top: "40%",
+                zIndex: 8,
+                opacity: state.AvoidDeath
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfAvoidDeathPressed(
+                            state.AvoidDeath == 0 ? 1 : 0,
+                            state.AvoidDeathLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.AvoidDeathText}>
+                <Text style={styles.PerkText}>Avoid Death</Text>
             </View>
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
                 <Line
-                    x1="35.3%"
-                    y1="79.2%"
-                    x2="40%"
-                    y2="60%"
-                    stroke={state.arcaneSmithingLine}
+                    x1="55%"
+                    y1="79.6%"
+                    x2="10%"
+                    y2="74.7%"
+                    stroke={state.RespiteLine}
                     strokeWidth={lineStrokeWidth}
                 />
 
-                <Line
-                    x1="34.2%"
-                    y1="79.3%"
-                    x2="8.5%"
-                    y2="55.7%"
-                    stroke={state.elvinSmithingLine}
-                    strokeWidth={lineStrokeWidth}
-
-                />
-                <Line
-                    x1="8.3%"
-                    y1="54.4%"
-                    x2="13.5%"
-                    y2="48.6%"
-                    stroke={state.advancedSmithingLine}
-                    strokeWidth={lineStrokeWidth}
-
-                />
-                <Line
-                    x1="15%"
-                    y1="47.5%"
-                    x2="32.8%"
-                    y2="39.5%"
-                    stroke={state.glassSmithingLine}
-                    strokeWidth={lineStrokeWidth}
-
-                />
-                <Line
-                    x1="35.3%"
-                    y1="39%"
-                    x2="53%"
-                    y2="39%"
-                    stroke={state.dragonSmithingLineLight}
-                    strokeWidth={lineStrokeWidth}
-
-                />
                 <Line
                     x1="55.5%"
-                    y1="39.3%"
-                    x2="74%"
-                    y2="45%"
-                    stroke={state.dragonSmithingLine}
+                    y1="80%"
+                    x2="62.5%"
+                    y2="60%"
+                    stroke={state.ApprenticeRestorationLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="75%"
-                    y1="45.5%"
-                    x2="92%"
-                    y2="55%"
-                    stroke={state.daedricSmithingLine}
+                    x1="62.5%"
+                    y1="60%"
+                    x2="52.5%"
+                    y2="43%"
+                    stroke={state.AdeptRestorationLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="91%"
-                    y1="55%"
-                    x2="80%"
-                    y2="55%"
-                    stroke={state.ebonySmithingLine}
-                    strokeWidth={lineStrokeWidth}
-
-                />
-                <Line
-                    x1="79%"
-                    y1="55.5%"
+                    x1="52.4%"
+                    y1="43%"
                     x2="60%"
-                    y2="65%"
-                    stroke={state.orcishSmithingLine}
+                    y2="31%"
+                    stroke={state.ExpertRestorationLine}
                     strokeWidth={lineStrokeWidth}
+
                 />
                 <Line
-                    x1="59.2%"
-                    y1="65.4%"
-                    x2="36.3%"
-                    y2="79.9%"
-                    stroke={state.dwarvenSmithingLine}
+                    x1="61%"
+                    y1="31%"
+                    x2="45%"
+                    y2="19%"
+                    stroke={state.MasterRestorationLine}
                     strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="55%"
+                    y1="79.6%"
+                    x2="30%"
+                    y2="64.5%"
+                    stroke={state.RegenerationLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="30%"
+                    y1="64.5%"
+                    x2="9%"
+                    y2="52%"
+                    stroke={state.NecromageLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="55%"
+                    y1="79.6%"
+                    x2="35.5%"
+                    y2="55%"
+                    stroke={state.WardAbsorbLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="55%"
+                    y1="79.6%"
+                    x2="85%"
+                    y2="77.6%"
+                    stroke={state.RestoDualCastLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="55%"
+                    y1="79.6%"
+                    x2="82%"
+                    y2="65%"
+                    stroke={state.RecoveryLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="82.3%"
+                    y1="65.5%"
+                    x2="88.5%"
+                    y2="45%"
+                    stroke={state.AvoidDeathLine}
+                    strokeWidth={lineStrokeWidth}
+
                 />
             </Svg>
 
@@ -783,80 +858,92 @@ const RestorationTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "70%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
     },
-    BasicSmithText: {
+    NoviceRestorationText: {
         position: 'absolute',
-        left: "25%",
-        top: "83%",
+        left: "43%",
+        top: "82%",
         zIndex: 10,
     },
-    ArcaneSmithText: {
+    RespiteText: {
+        position: 'absolute',
+        left: "6%",
+        top: "84%",
+        zIndex: 10,
+    },
+    ApprenticeRestorationText: {
+        position: 'absolute',
+        left: "48%",
+        top: "62%",
+        zIndex: 10,
+    },
+    AdeptRestorationText: {
+        position: 'absolute',
+        left: "41%",
+        top: "45%",
+        zIndex: 10,
+    },
+    ExpertRestorationText: {
+        position: 'absolute',
+        left: "48%",
+        top: "33%",
+        zIndex: 10,
+    },
+    MasterRestorationText: {
         position: 'absolute',
         left: "33%",
+        top: "22%",
+        zIndex: 10,
+    },
+    RegenerationText: {
+        position: 'absolute',
+        left: "22%",
+        top: "67%",
+        zIndex: 10,
+    },
+    NecromageText: {
+        position: 'absolute',
+        left: "3%",
         top: "55%",
         zIndex: 10,
     },
-    ElvenSmithText: {
+    WardAbsorbText: {
         position: 'absolute',
-        left: "13%",
-        top: "53%",
+        left: "27%",
+        top: "57%",
         zIndex: 10,
     },
-    AdvancedArmorsText: {
+    RestoDualCastText: {
         position: 'absolute',
-        left: "20%",
-        top: "46%",
+        left: "77%",
+        top: "80%",
         zIndex: 10,
     },
-    GlassSmithText: {
+    RecoveryText: {
         position: 'absolute',
-        left: "24%",
-        top: "34%",
+        left: "76%",
+        top: "67%",
         zIndex: 10,
     },
-    DragonArmorText: {
+    AvoidDeathText: {
         position: 'absolute',
-        left: "44%",
-        top: "34%",
+        left: "80%",
+        top: "47%",
         zIndex: 10,
     },
-    DaedricSmithText: {
-        position: 'absolute',
-        left: "64%",
-        top: "40%",
-        zIndex: 10,
-    },
-    EbonySmithText: {
-        position: 'absolute',
-        left: "82%",
-        top: "50%",
-        zIndex: 10,
-    },
-    OrcishSmithText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
-        zIndex: 10,
-    },
-    DwarvenSmithText: {
-        position: 'absolute',
-        left: "50%",
-        top: "60%",
-        zIndex: 10,
-    },
-
     PerkText: {
         color: 'white',
         fontSize: 12,

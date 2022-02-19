@@ -50,7 +50,8 @@ function Drawers() {
                         <Text
                             style={{
                                 color: 'white',
-                                zIndex: 8
+                                fontWeight: '600',
+                                fontSize: 18,
                             }}
                         >{AllActivePerks}</Text>
                     },
