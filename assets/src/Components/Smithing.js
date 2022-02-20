@@ -55,7 +55,6 @@ const SmithingTree = () => {
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
 
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);

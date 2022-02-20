@@ -1,5 +1,5 @@
 import SmithingTree from "./Smithing";
-import SmithingTree2 from "./Smithing";
+import AlterationTree from "./Alteration";
 import HeavyArmor from "./HeavyArmor";
 import ConjurationTree from "./Conjuration";
 import EnchantingTree from "./Enchanting";
@@ -21,6 +21,7 @@ const tree = {
     RestorationTree,
     ArcheryTree,
     PickpocketTree,
+    AlterationTree
 }
 
 export default tree;
