@@ -515,7 +515,7 @@ const RestorationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.ExpertRestorationText}>
-                <Text style={styles.PerkText}>Exper Restoration</Text>
+                <Text style={styles.PerkText}>Expert Restoration</Text>
             </View>
             <View title='Master Restoration Blue' style={{
                 position: 'absolute',
