@@ -261,15 +261,13 @@ const AlterationTree = () => {
             setState({ adeptAlt: buttonColor });
             setState({ apprenticeAltLine: lineColor });
             setState({ adeptAltLine: lineColor });
-            if (state.mageArmor == 1) {
+            if (state.noviceAlt == 1) {
                 IncrementCounter(2);
-            } else if (state.apprenticeAlt == 1) {
-                IncrementCounter(3);
-            } else if (state.noviceAlt == 1) {
-                IncrementCounter(4);
             } else {
-                IncrementCounter(5);
+                IncrementCounter(3);
             }
+        } else if (state.stability == 1 || state.expertAlt == 1) {
+            // Do nothing....must un-select nodes above it first
         } else {
             setState({ adeptAltLine: lineColor });
             setState({ adeptAlt: buttonColor }); // Change the pressed button color back and forth
@@ -280,15 +278,23 @@ const AlterationTree = () => {
         }
     };
     const CheckIfStabilityPressed = (buttonColor, lineColor) => {
-        if (state.noviceAlt == 0) {
+        if (state.adeptAlt == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceAlt: buttonColor });
+            setState({ apprenticeAlt: buttonColor });
+            setState({ adeptAlt: buttonColor });
             setState({ stability: buttonColor });
+            setState({ apprenticeAltLine: lineColor });
+            setState({ adeptAltLine: lineColor });
             setState({ stabilityLine: lineColor });
-            IncrementCounter(2);
+            if (state.apprenticeAlt == 1) {
+                IncrementCounter(2);
+            } else if (state.noviceAlt == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
 
-        } else if (state.expertAlt == 1) {
-            // Do nothing....must un-select nodes above it first
         } else {
             setState({ stabilityLine: lineColor });
             setState({ stability: buttonColor }); // Change the pressed button color back and forth
@@ -299,19 +305,23 @@ const AlterationTree = () => {
         }
     };
     const CheckIfExpertAltPressed = (buttonColor, lineColor) => {
-        if (state.stability == 0) {
+        if (state.adeptAlt == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceAlt: buttonColor });
-            setState({ stability: buttonColor });
+            setState({ apprenticeAlt: buttonColor });
+            setState({ adeptAlt: buttonColor });
             setState({ expertAlt: buttonColor });
-            setState({ stabilityLine: lineColor });
+            setState({ apprenticeAltLine: lineColor });
+            setState({ adeptAltLine: lineColor });
             setState({ expertAltLine: lineColor });
-            if (state.noviceAlt == 1) {
+            if (state.apprenticeAlt == 1) {
                 IncrementCounter(2);
-            } else {
+            } else if (state.noviceAlt == 1) {
                 IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
             }
-        } else if (state.atronach == 1) {
+        } else if (state.masterAlt == 1 || state.atronach == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ expertAltLine: lineColor });
@@ -325,21 +335,23 @@ const AlterationTree = () => {
         if (state.expertAlt == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceAlt: buttonColor });
-            setState({ stability: buttonColor });
+            setState({ apprenticeAlt: buttonColor });
+            setState({ adeptAlt: buttonColor });
             setState({ expertAlt: buttonColor });
             setState({ atronach: buttonColor });
-            setState({ stabilityLine: lineColor });
+            setState({ apprenticeAltLine: lineColor });
+            setState({ adeptAltLine: lineColor });
             setState({ expertAltLine: lineColor });
             setState({ atronachLine: lineColor });
-            if (state.stability == 1) {
+            if (state.adeptAlt == 1) {
                 IncrementCounter(2);
-            } else if (state.noviceAlt == 1) {
+            } else if (state.apprenticeAlt == 1) {
                 IncrementCounter(3);
-            } else {
+            } else if (state.noviceAlt == 1) {
                 IncrementCounter(4);
+            } else {
+                IncrementCounter(5);
             }
-        } else if (state.masterOfMind == 1) {
-            // Do nothing....must un-select nodes above it first
         } else {
             setState({ atronachLine: lineColor });
             setState({ atronach: buttonColor }); // Change the pressed button color back and forth
@@ -349,14 +361,25 @@ const AlterationTree = () => {
         }
     };
     const CheckIfMasterAltPressed = (buttonColor, lineColor) => {
-        if (state.noviceAlt == 0) {
+        if (state.expertAlt == 0) {
             setState({ noviceAlt: buttonColor });
+            setState({ apprenticeAlt: buttonColor });
+            setState({ adeptAlt: buttonColor });
+            setState({ expertAlt: buttonColor });
             setState({ masterAlt: buttonColor });
+            setState({ apprenticeAltLine: lineColor });
+            setState({ adeptAltLine: lineColor });
+            setState({ expertAltLine: lineColor });
             setState({ masterAltLine: lineColor });
-            IncrementCounter(2);
-
-        } else if (state.kindredMage == 1) {
-            // Do nothing....must un-select nodes above it first
+            if (state.adeptAlt == 1) {
+                IncrementCounter(2);
+            } else if (state.apprenticeAlt == 1) {
+                IncrementCounter(3);
+            } else if (state.noviceAlt == 1) {
+                IncrementCounter(4);
+            } else {
+                IncrementCounter(5);
+            }
         } else {
             setState({ masterAltLine: lineColor });
             setState({ masterAlt: buttonColor });
@@ -365,7 +388,6 @@ const AlterationTree = () => {
                 : DecrementCounter(1);
         }
     };
-
 
     return (
         <View style={{ zIndex: 2 }}>
