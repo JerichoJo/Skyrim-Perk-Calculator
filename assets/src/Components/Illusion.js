@@ -453,7 +453,7 @@ const IllusionTree = () => {
             <View style={styles.NoviceIllusionText}>
 
             </View>
-            <View title='Dual Casting Smithing Blue' style={{
+            <View title='Illusion Dual Casting Blue' style={{
                 position: 'absolute',
                 left: "-1%",
                 top: "75%",
@@ -463,7 +463,7 @@ const IllusionTree = () => {
 
                 <StarIconBlue />
             </View>
-            <View title='Dual Casting Gold' style={{
+            <View title='Illusion Dual Casting Gold' style={{
                 position: 'absolute',
                 left: "-1%",
                 top: "75%",
