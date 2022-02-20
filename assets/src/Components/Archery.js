@@ -32,26 +32,24 @@ const useSetState = (initialState = {}) => {
 const ArcheryTree = () => {
     const navigation = useNavigation();
     const [state, setState] = useSetState({
-        basicSmithing: 0,
-        arcaneSmithing: 0,
-        arcaneSmithingLine: 'black',
-        elvinSmithing: 0,
-        elvinSmithingLine: 'black',
-        advancedSmithing: 0,
-        advancedSmithingLine: 'black',
-        glassSmithing: 0,
-        glassSmithingLine: 'black',
-        dwarvenSmithing: 0,
-        dwarvenSmithingLine: 'black',
-        orcishSmithing: 0,
-        orcishSmithingLine: 'black',
-        ebonySmithing: 0,
-        ebonySmithingLine: 'black',
-        daedricSmithing: 0,
-        daedricSmithingLine: 'black',
-        dragonSmithing: 0,
-        dragonSmithingLine: 'black',
-        dragonSmithingLineLight: 'black',
+        Overdraw: 0,
+        SteadyHand: 0,
+        SteadyHandLine: 'black',
+        HuntersDiscipline: 0,
+        HuntersDisciplineLine: 'black',
+        Ranger: 0,
+        RangerLine: 'black',
+        QuickShot: 0,
+        QuickShotLine: 'black',        
+        Bullseye: 0,
+        BullseyeLine: 'black',
+        BullseyeDevLine: 'black',
+        PowerShot: 0,
+        PowerShotLine: 'black',
+        EagleEye: 0,
+        EagleEyeLine: 'black',
+        CriticalShot: 0,
+        CriticalShotLine: 'black',
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -80,276 +78,243 @@ const ArcheryTree = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.dragonSmithing == 1) {
+        if (state.PowerShot == 1) {
             TrackLevel(100);
-        } else if (state.daedricSmithing == 1) {
+        } else if (state.QuickShot == 1) {
             TrackLevel(90);
-        } else if (state.ebonySmithing == 1) {
-            TrackLevel(80);
-        } else if (state.glassSmithing == 1) {
-            TrackLevel(70);
-        } else if (state.arcaneSmithing == 1) {
+        } else if (state.Bullseye == 1) {
+            TrackLevel(75);
+        }  else if (state.EagleEye == 1) {
             TrackLevel(60);
-        } else if (state.advancedSmithing == 1) {
+        } else if (state.Ranger == 1) {
             TrackLevel(50);
-        } else if (state.elvinSmithing == 1) {
-            TrackLevel(30);
-        } else if (state.basicSmithing == 1) {
-            TrackLevel(0);
+        } else if (state.SteadyHand == 1) {
+            TrackLevel(40);
+        } else if (state.HuntersDiscipline == 1) {
+            TrackLevel(25);
+        } else if (state.CriticalShot == 1) {
+            TrackLevel(20);
         }
     }, [TrackLevel, state]);
 
-    useEffect(() => {
-        CheckLevel();
-    }, [CheckLevel]);
-
-    const CheckIfBasicSmithPressed = (button) => {
+    const CheckIfOverdrawPressed = (button) => {
         if (
-            state.elvinSmithing == 1 ||
-            state.arcaneSmithing == 1 ||
-            state.dwarvenSmithing == 1
+            state.HuntersDiscipline == 1 ||
+            state.SteadyHand == 1 ||
+            state.EagleEye == 1 ||
+            state.CriticalShot == 1
         ) {
             // Do nothing....must un-select nodes above it first
         }
         else {
-            setState({ basicSmithing: button }); // Change button color back and forth
-            state.basicSmithing == 0
+            setState({ Overdraw: button }); // Change button color back and forth
+            state.Overdraw == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
 
-    const CheckIfArcaneSmithPressed = (button, line) => {
-        if (state.basicSmithing == 0) {
+    const CheckIfSteadyHandPressed = (button, line) => {
+        if (state.Overdraw == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: button });
-            setState({ basicSmithingLine: line });
-            setState({ arcaneSmithing: button });
-            setState({ arcaneSmithingLine: line });
+            setState({ Overdraw: button });
+            setState({ OverdrawLine: line });
+            setState({ SteadyHand: button });
+            setState({ SteadyHandLine: line });
             IncrementCounter(2);
         } else {
-            setState({ arcaneSmithingLine: line });
-            setState({ arcaneSmithing: button }); // Change the pressed button color back and forth
-            state.arcaneSmithing == 0
+            setState({ SteadyHandLine: line });
+            setState({ SteadyHand: button }); // Change the pressed button color back and forth
+            state.SteadyHand == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
 
-    const CheckIfElvinSmithPressed = (buttonColor, lineColor) => {
-        if (state.basicSmithing == 0) {
+    const CheckIfHuntersDisciplinePressed = (button, line) => {
+        if (state.Overdraw == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: buttonColor });
-            setState({ basicSmithingLine: lineColor });
-            setState({ elvinSmithing: buttonColor });
-            setState({ elvinSmithingLine: lineColor });
+            setState({ Overdraw: button });
+            setState({ OverdrawLine: line });
+            setState({ HuntersDiscipline: button });
+            setState({ HuntersDisciplineLine: line });
 
             IncrementCounter(2);
-        } else if (state.advancedSmithing == 1) {
+        } else if (state.Ranger == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ elvinSmithingLine: lineColor });
-            setState({ elvinSmithing: buttonColor }); // Change button color back and forth
-            state.elvinSmithing == 0
+            setState({ HuntersDisciplineLine: line });
+            setState({ HuntersDiscipline: button }); // Change button color back and forth
+            state.HuntersDiscipline == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
 
         }
     };
-    const CheckIfAdvanceSmithingPressed = (buttonColor, lineColor) => {
-        if (state.elvinSmithing == 0) {
+    const CheckIfRangerPressed = (button, line) => {
+        if (state.HuntersDiscipline == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ basicSmithing: buttonColor });
-            setState({ advancedSmithing: buttonColor });
-            setState({ elvinSmithing: buttonColor });
-            setState({ advancedSmithingLine: lineColor });
-            setState({ elvinSmithingLine: lineColor });
-            if (state.basicSmithing == 1) {
+            setState({ Overdraw: button });
+            setState({ Ranger: button });
+            setState({ HuntersDiscipline: button });
+            setState({ RangerLine: line });
+            setState({ HuntersDisciplineLine: line });
+            if (state.Overdraw == 1) {
                 IncrementCounter(2);
             } else {
                 IncrementCounter(3);
             }
-        } else if (state.glassSmithing == 1) {
+        } else if (state.Bullseye == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ advancedSmithingLine: lineColor });
-            setState({ advancedSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.advancedSmithing == 0
+            setState({ RangerLine: line });
+            setState({ Ranger: button }); // Change the pressed button color back and forth
+            state.Ranger == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
 
         }
     };
-    const CheckIfGlassSmithingPressed = (buttonColor, lineColor) => {
-        if (state.advancedSmithing == 0) {
+    const CheckIfQuickShotPressed = (button, line) => {
+        if (state.HuntersDiscipline == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ glassSmithing: buttonColor });
-            setState({ advancedSmithing: buttonColor });
-            setState({ elvinSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ glassSmithingLine: lineColor });
-            setState({ advancedSmithingLine: lineColor });
-            setState({ elvinSmithingLine: lineColor });
-            if (state.dragonSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
-            }
-            if (state.elvinSmithing == 1) {
+            setState({ Overdraw: button });
+            setState({ QuickShot: button });
+            setState({ HuntersDiscipline: button });
+            setState({ QuickShotLine: line });
+            setState({ HuntersDisciplineLine: line });
+            if (state.Overdraw == 1) {
                 IncrementCounter(2);
-            } else if (state.basicSmithing == 1) {
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.Bullseye == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ QuickShotLine: line });
+            setState({ QuickShot: button }); // Change the pressed button color back and forth
+            state.QuickShot == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };    
+    const CheckIfBullseyePressed = (button, line, line2) => {
+        if (state.PowerShot == 1 ) {
+            // Do nothing....must un-select nodes above it first
+        }        
+        else if (state.Ranger == 0 && state.QuickShot == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ Bullseye: button });
+            setState({ Ranger: button });
+            setState({ HuntersDiscipline: button });
+            setState({ Overdraw: button });
+            setState({ BullseyeDevLine: line });
+            setState({ RangerLine: line });
+            setState({ HuntersDisciplineLine: line });
+            if (state.HuntersDiscipline == 1) {
+                IncrementCounter(2);
+            } else if (state.Overdraw == 1) {
                 IncrementCounter(3);
             } else {
                 IncrementCounter(4);
             }
-        } else {
-            setState({ glassSmithingLine: lineColor });
-            setState({ glassSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.glassSmithing == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-            if (state.dragonSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
-            }
+        }
+        else if (state.Ranger == 1 && state.QuickShot == 0) {
+            setState({ Bullseye: button });
+            setState({ BullseyeDevLine: line2 });
+            state.Bullseye == 0
+            ? IncrementCounter(1)
+            : DecrementCounter(1);
+        }
+        else if (state.Ranger == 0 && state.QuickShot == 1) {
+            setState({ Bullseye: button });
+            setState({ BullseyeLine: line });
+            state.Bullseye == 0
+            ? IncrementCounter(1)
+            : DecrementCounter(1);
+        }      
+        else if (state.Ranger == 1 && state.QuickShot == 1){
+            setState({ Bullseye: button });
+            setState({ BullseyeLine: line });
+            setState({ BullseyeDevLine: line2 });
+            state.Bullseye == 0
+            ? IncrementCounter(1)
+            : DecrementCounter(1);
+        }    
 
-        }
     };
-    const CheckIfDwarvenSmithingPressed = (buttonColor, lineColor) => {
-        if (state.basicSmithing == 0) {
+    const CheckIfPowerShotPressed = (button, line) => {
+        if (state.Bullseye == 0 && state.QuickShot == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            IncrementCounter(2);
-        } else if (state.orcishSmithing == 1) {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setState({ dwarvenSmithingLine: lineColor });
-            setState({ dwarvenSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.dwarvenSmithing == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-
-        }
-    };
-    const CheckIfOrcishSmithingPressed = (buttonColor, lineColor) => {
-        if (state.dwarvenSmithing == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
-            setState({ orcishSmithing: buttonColor });
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ orcishSmithingLine: lineColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            if (state.basicSmithing == 1) {
+            setState({ PowerShot: button });
+            setState({ Bullseye: button });
+            setState({ HuntersDiscipline: button });
+            setState({ Overdraw: button });  
+            setState({ PowerShotLine: line }); 
+            setState({ HuntersDisciplineLine: line });
+            setState({ Ranger: button });
+            setState({ RangerLine: line });
+            setState({ BullseyeDevLine: line});
+            if (state.Ranger == 1) {
                 IncrementCounter(2);
-            } else {
+            } else if (state.HuntersDiscipline == 1) {
                 IncrementCounter(3);
-            }
-        } else if (state.ebonySmithing == 1) {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setState({ orcishSmithingLine: lineColor });
-            setState({ orcishSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.orcishSmithing == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-
-        }
-    };
-    const CheckIfEbonySmithingPressed = (buttonColor, lineColor) => {
-        if (state.orcishSmithing == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
-            setState({ ebonySmithing: buttonColor });
-            setState({ orcishSmithing: buttonColor });
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ ebonySmithingLine: lineColor });
-            setState({ orcishSmithingLine: lineColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            if (state.dwarvenSmithing == 1) {
-                IncrementCounter(2);
-            } else if (state.basicSmithing == 1) {
-                IncrementCounter(3);
-            } else {
-                IncrementCounter(4);
-            }
-        } else if (state.daedricSmithing == 1) {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setState({ ebonySmithingLine: lineColor });
-            setState({ ebonySmithing: buttonColor }); // Change the pressed button color back and forth
-            state.ebonySmithing == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-        }
-    };
-    const CheckIfDaedricSmithingPressed = (buttonColor, lineColor) => {
-        if (state.ebonySmithing == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
-            setState({ daedricSmithing: buttonColor });
-            setState({ ebonySmithing: buttonColor });
-            setState({ orcishSmithing: buttonColor });
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ daedricSmithingLine: lineColor });
-            setState({ ebonySmithingLine: lineColor });
-            setState({ orcishSmithingLine: lineColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            if (state.orcishSmithing == 1) {
-                IncrementCounter(2);
-            } else if (state.dwarvenSmithing == 1) {
-                IncrementCounter(3);
-            } else if (state.basicSmithing == 1) {
+            } else if (state.Overdraw == 1) {
                 IncrementCounter(4);
             } else {
                 IncrementCounter(5);
             }
-        } else if (state.dragonSmithing == 1) {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setState({ daedricSmithingLine: lineColor });
-            setState({ daedricSmithing: buttonColor }); // Change the pressed button color back and forth
-            state.daedricSmithing == 0
+        }                                 
+        else if (state.Bullseye == 0 && state.QuickShot == 1){
+            setState({ Bullseye: button });    
+            setState({ BullseyeLine: line });
+            setState({ PowerShot: button });
+            setState({ PowerShotLine: line });
+            IncrementCounter(2);         
+        } 
+        else {
+            setState({ PowerShotLine: line });
+            setState({ PowerShot: button }); // Change the pressed button color back and forth
+            state.PowerShot == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
-    const CheckIfDragonSmithingPressed = (buttonColor, lineColor) => {
-        if (state.daedricSmithing == 0) {
-            setState({ dragonSmithing: buttonColor });
-            setState({ daedricSmithing: buttonColor });
-            setState({ ebonySmithing: buttonColor });
-            setState({ orcishSmithing: buttonColor });
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ dragonSmithingLine: lineColor });
-            setState({ daedricSmithingLine: lineColor });
-            setState({ ebonySmithingLine: lineColor });
-            setState({ orcishSmithingLine: lineColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            if (state.glassSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
-            }
-            if (state.ebonySmithing == 1) {
-                IncrementCounter(2);
-            } else if (state.orcishSmithing == 1) {
-                IncrementCounter(3);
-            } else if (state.dwarvenSmithing == 1) {
-                IncrementCounter(4);
-            } else if (state.basicSmithing == 1) {
-                IncrementCounter(5);
-            } else {
-                IncrementCounter(6);
-            }
+
+    const CheckIfEagleEyePressed = (button, line) => {
+        if (state.Overdraw == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ Overdraw: button });
+            setState({ OverdrawLine: line });
+            setState({ EagleEye: button });
+            setState({ EagleEyeLine: line });
+            IncrementCounter(2);
         } else {
-            setState({ dragonSmithingLine: lineColor });
-            setState({ dragonSmithing: buttonColor });
-            state.dragonSmithing == 0
+            setState({ EagleEyeLine: line });
+            setState({ EagleEye: button }); // Change the pressed button color back and forth
+            state.EagleEye == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-            if (state.glassSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
-            }
         }
     };
+    const CheckIfCriticalShotPressed = (button, line) => {
+        if (state.Overdraw == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ Overdraw: button });
+            setState({ OverdrawLine: line });
+            setState({ CriticalShot: button });
+            setState({ CriticalShotLine: line });
+            IncrementCounter(2);
+        } else {
+            setState({ CriticalShotLine: line });
+            setState({ CriticalShot: button }); // Change the pressed button color back and forth
+            state.CriticalShot == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+
 
     return (
         <View style={{ zIndex: 2 }}>
@@ -357,216 +322,83 @@ const ArcheryTree = () => {
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
             </View>
-            <View title='Basic Smithing Blue' style={{
+            <View title='Overdraw Blue' style={{
                 position: 'absolute',
-                left: "25%",
-                top: "75%",
+                left: "65%",
+                top: "80%",
                 zIndex: 8,
 
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Basic Smithing Gold' style={{
+            <View title='Overdraw Gold' style={{
                 position: 'absolute',
-                left: "25%",
-                top: "75%",
+                left: "65%",
+                top: "80%",
                 zIndex: 8,
-                opacity: state.basicSmithing
+                opacity: state.Overdraw
 
             }}>
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("BasicSmithingModal")}
                     onPress={() => {
-                        CheckIfBasicSmithPressed(
-                            state.basicSmithing == 0 ? 1 : 0,
+                        CheckIfOverdrawPressed(
+                            state.Overdraw == 0 ? 1 : 0,
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.BasicSmithText}>
-                <Text style={styles.PerkText}>Basic Smithing</Text>
+            <View style={styles.OverdrawText}>
+                <Text style={styles.PerkText}>Overdraw</Text>
             </View>
-            <View title='Arcane Smithing Blue' style={{
+            <View title='SteadyHand Blue' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "55%",
+                left: "38%",
+                top: "65%",
                 zIndex: 8,
 
             }}>
 
                 <StarIconBlue />
             </View>
-            <View title='Arcane Smithing Gold' style={{
+            <View title='SteadyHand Gold' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "55%",
+                left: "38%",
+                top: "65%",
                 zIndex: 8,
-                opacity: state.arcaneSmithing
+                opacity: state.SteadyHand
 
             }}>
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
                     onPress={() => {
-                        CheckIfArcaneSmithPressed(
-                            state.arcaneSmithing == 0 ? 1 : 0,
-                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
+                        CheckIfSteadyHandPressed(
+                            state.SteadyHand == 0 ? 1 : 0,
+                            state.SteadyHandLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.ArcaneSmithText}>
-                <Text style={styles.PerkText}>Arcane Blacksmith</Text>
+            <View style={styles.SteadyHandText}>
+                <Text style={styles.PerkText}>Steady Hand</Text>
             </View>
-            <View title='Elvin Smithing Blue' style={{
+            <View title='Hunters Discipline Blue' style={{
                 position: 'absolute',
-                left: "-2%",
-                top: "50%",
-                zIndex: 8,
-
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Elvin Smithing Gold' style={{
-                position: 'absolute',
-                left: "-2%",
-                top: "50%",
-                zIndex: 8,
-                opacity: state.elvinSmithing
-
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfElvinSmithPressed(
-                            state.elvinSmithing == 0 ? 1 : 0,
-                            state.elvinSmithingLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.ElvenSmithText}>
-                <Text style={styles.PerkText}>Elvin Smithing</Text>
-            </View>
-            <View title='Advanced Smithing Blue' style={{
-                position: 'absolute',
-                left: "4%",
-                top: "43%",
-                zIndex: 8,
-
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Advanced Smithing Gold' style={{
-                position: 'absolute',
-                left: "4%",
-                top: "43%",
-                zIndex: 8,
-                opacity: state.advancedSmithing
-
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfAdvanceSmithingPressed(
-                            state.advancedSmithing == 0 ? 1 : 0,
-                            state.advancedSmithingLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.AdvancedArmorsText}>
-                <Text style={styles.PerkText}>Advanced Armors</Text>
-            </View>
-            <View title='Glass Smithing Blue' style={{
-                position: 'absolute',
-                left: "24%",
-                top: "34%",
-                zIndex: 8,
-
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Glass Smithing Gold' style={{
-                position: 'absolute',
-                left: "24%",
-                top: "34%",
-                zIndex: 8,
-                opacity: state.glassSmithing
-
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfGlassSmithingPressed(
-                            state.glassSmithing == 0 ? 1 : 0,
-                            state.glassSmithingLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.GlassSmithText}>
-                <Text style={styles.PerkText}>Glass Smithing</Text>
-            </View>
-            <View title='Dragon Smithing Blue' style={{
-                position: 'absolute',
-                left: "44%",
-                top: "34%",
-                zIndex: 8,
-
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Dragon Smithing Gold' style={{
-                position: 'absolute',
-                left: "44%",
-                top: "34%",
-                zIndex: 8,
-                opacity: state.dragonSmithing
-
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfDragonSmithingPressed(
-                            state.dragonSmithing == 0 ? 1 : 0,
-                            state.dragonSmithingLine == 'black' ? 'gold' : 'black',
-                            state.dragonSmithingLineLight == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.DragonArmorText}>
-                <Text style={styles.PerkText}>Dragon Armor</Text>
-            </View>
-            <View title='Daedric Smithing Blue' style={{
-                position: 'absolute',
-                left: "64%",
+                left: "60%",
                 top: "40%",
                 zIndex: 8,
 
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Daedric Smithing Gold' style={{
+            <View title='Hunters Discipline Gold' style={{
                 position: 'absolute',
-                left: "64%",
+                left: "60%",
                 top: "40%",
                 zIndex: 8,
-                opacity: state.daedricSmithing
+                opacity: state.HuntersDiscipline
 
             }}>
                 <TouchableOpacity
@@ -574,32 +406,99 @@ const ArcheryTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfDaedricSmithingPressed(
-                            state.daedricSmithing == 0 ? 1 : 0,
-                            state.daedricSmithingLine == 'black' ? 'gold' : 'black'
+                        CheckIfHuntersDisciplinePressed(
+                            state.HuntersDiscipline == 0 ? 1 : 0,
+                            state.HuntersDisciplineLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.DaedricSmithText}>
-                <Text style={styles.PerkText}>Daedric Smithing</Text>
+            <View style={styles.HuntersDisciplineText}>
+                <Text style={styles.PerkText}>Hunter's Discipline</Text>
             </View>
-            <View title='Ebony Smithing Blue' style={{
+            <View title='Ranger Blue' style={{
                 position: 'absolute',
-                left: "82%",
+                left: "55%",
+                top: "28%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Ranger Gold' style={{
+                position: 'absolute',
+                left: "55%",
+                top: "28%",
+                zIndex: 8,
+                opacity: state.Ranger
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfRangerPressed(
+                            state.Ranger == 0 ? 1 : 0,
+                            state.RangerLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.RangerText}>
+                <Text style={styles.PerkText}>Ranger</Text>
+            </View>
+            <View title='Bullseye Blue' style={{
+                position: 'absolute',
+                left: "38%",
+                top: "20%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Bullseye Gold' style={{
+                position: 'absolute',
+                left: "38%",
+                top: "20%",
+                zIndex: 8,
+                opacity: state.Bullseye
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfBullseyePressed(
+                            state.Bullseye == 0 ? 1 : 0,
+                            state.BullseyeLine == 'black' ? 'gold' : 'black',
+                            state.BullseyeDevLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.BullseyeText}>
+                <Text style={styles.PerkText}>Bullseye</Text>
+            </View>
+            <View title='PowerShot Blue' style={{
+                position: 'absolute',
+                left: "5%",
                 top: "50%",
                 zIndex: 8,
 
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Ebony Smithing Gold' style={{
+            <View title='PowerShot Gold' style={{
                 position: 'absolute',
-                left: "82%",
+                left: "5%",
                 top: "50%",
                 zIndex: 8,
-                opacity: state.ebonySmithing
+                opacity: state.PowerShot
 
             }}>
                 <TouchableOpacity
@@ -607,32 +506,33 @@ const ArcheryTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfEbonySmithingPressed(
-                            state.ebonySmithing == 0 ? 1 : 0,
-                            state.ebonySmithingLine == 'black' ? 'gold' : 'black'
+                        CheckIfPowerShotPressed(
+                            state.PowerShot == 0 ? 1 : 0,
+                            state.PowerShotLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.EbonySmithText}>
-                <Text style={styles.PerkText}>Ebony Smithing</Text>
+            <View style={styles.PowerShotText}>
+                <Text style={styles.PerkText}>Power Shot</Text>
             </View>
-            <View title='Orcish Smithing Blue' style={{
+
+            <View title='Eagle Eye Blue' style={{
                 position: 'absolute',
-                left: "70%",
-                top: "50%",
+                left: "20%",
+                top: "70%",
                 zIndex: 8,
 
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Orcish Smithing Gold' style={{
+            <View title='Eagle Eye Gold' style={{
                 position: 'absolute',
-                left: "70%",
-                top: "50%",
+                left: "20%",
+                top: "70%",
                 zIndex: 8,
-                opacity: state.orcishSmithing
+                opacity: state.EagleEye
 
             }}>
                 <TouchableOpacity
@@ -640,32 +540,32 @@ const ArcheryTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfOrcishSmithingPressed(
-                            state.orcishSmithing == 0 ? 1 : 0,
-                            state.orcishSmithingLine == 'black' ? 'gold' : 'black'
+                        CheckIfEagleEyePressed(
+                            state.EagleEye == 0 ? 1 : 0,
+                            state.EagleEyeLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.OrcishSmithText}>
-                <Text style={styles.PerkText}>Orcish Smithing</Text>
+            <View style={styles.EagleEyeText}>
+                <Text style={styles.PerkText}>Eagle Eye</Text>
             </View>
-            <View title='Dwarven Smithing Blue' style={{
+            <View title='CriticalShot Blue' style={{
                 position: 'absolute',
-                left: "50%",
-                top: "60%",
+                left: "72%",
+                top: "65%",
                 zIndex: 8,
 
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Dwarven Smithing Gold' style={{
+            <View title='CriticalShot Gold' style={{
                 position: 'absolute',
-                left: "50%",
-                top: "60%",
+                left: "72%",
+                top: "65%",
                 zIndex: 8,
-                opacity: state.dwarvenSmithing
+                opacity: state.CriticalShot
 
             }}>
                 <TouchableOpacity
@@ -673,107 +573,138 @@ const ArcheryTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfDwarvenSmithingPressed(
-                            state.dwarvenSmithing == 0 ? 1 : 0,
-                            state.dwarvenSmithingLine == 'black' ? 'gold' : 'black'
+                        CheckIfCriticalShotPressed(
+                            state.CriticalShot == 0 ? 1 : 0,
+                            state.CriticalShotLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.DwarvenSmithText}>
-                <Text style={styles.PerkText}>Dwarven Smithing</Text>
+            <View style={styles.CriticalShotText}>
+                <Text style={styles.PerkText}>Critical Shot</Text>
+            </View>
+
+            <View title='Quick Shot Blue' style={{
+                position: 'absolute',
+                left: "15%",
+                top: "25%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Quick Shot Gold' style={{
+                position: 'absolute',
+                left: "15%",
+                top: "25%",
+                zIndex: 8,
+                opacity: state.QuickShot
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfQuickShotPressed(
+                            state.QuickShot == 0 ? 1 : 0,
+                            state.QuickShotLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.QuickShotText}>
+                <Text style={styles.PerkText}>Quick Shot</Text>
             </View>
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
                 <Line
-                    x1="35.3%"
-                    y1="79.2%"
-                    x2="40%"
-                    y2="60%"
-                    stroke={state.arcaneSmithingLine}
+                    x1="48.2%"
+                    y1="85%"
+                    x2="15%"
+                    y2="66.5%"
+                    stroke={state.SteadyHandLine}
                     strokeWidth={lineStrokeWidth}
                 />
 
                 <Line
-                    x1="34.2%"
-                    y1="79.3%"
-                    x2="8.5%"
-                    y2="55.7%"
-                    stroke={state.elvinSmithingLine}
+                    x1="48.2%"
+                    y1="72%"
+                    x2="48.2%"
+                    y2="85%"
+                    stroke={state.HuntersDisciplineLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="8.3%"
-                    y1="54.4%"
-                    x2="13.5%"
-                    y2="48.6%"
-                    stroke={state.advancedSmithingLine}
+                    x1="48.2%"
+                    y1="72.8%"
+                    x2="66%"
+                    y2="50%"
+                    stroke={state.RangerLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="15%"
-                    y1="47.5%"
-                    x2="32.8%"
-                    y2="39.5%"
-                    stroke={state.glassSmithingLine}
+                    x1="48.2%"
+                    y1="72.8%"
+                    x2="29.5%"
+                    y2="49%"
+                    stroke={state.QuickShotLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />                
+                <Line
+                    x1="30%"
+                    y1="50%"
+                    x2="48.2%"
+                    y2="32%"
+                    stroke={state.BullseyeLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="35.3%"
-                    y1="39%"
-                    x2="53%"
-                    y2="39%"
-                    stroke={state.dragonSmithingLineLight}
+                    x1="66%"
+                    y1="49.5%"
+                    x2="48.2%"
+                    y2="32%"
+                    stroke={state.BullseyeDevLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />                
+                <Line
+                    x1="48.2%"
+                    y1="32%"
+                    x2="48.2%"
+                    y2="20%"
+                    stroke={state.PowerShotLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+
+
+                <Line
+                    x1="68%"
+                    y1="65%"
+                    x2="48.2%"
+                    y2="85%"
+                    stroke={state.EagleEyeLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="55.5%"
-                    y1="39.3%"
-                    x2="74%"
-                    y2="45%"
-                    stroke={state.dragonSmithingLine}
+                    x1="90%"
+                    y1="63%"
+                    x2="48.2%"
+                    y2="85%"
+                    stroke={state.CriticalShotLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
-                <Line
-                    x1="75%"
-                    y1="45.5%"
-                    x2="92%"
-                    y2="55%"
-                    stroke={state.daedricSmithingLine}
-                    strokeWidth={lineStrokeWidth}
 
-                />
-                <Line
-                    x1="91%"
-                    y1="55%"
-                    x2="80%"
-                    y2="55%"
-                    stroke={state.ebonySmithingLine}
-                    strokeWidth={lineStrokeWidth}
 
-                />
-                <Line
-                    x1="79%"
-                    y1="55.5%"
-                    x2="60%"
-                    y2="65%"
-                    stroke={state.orcishSmithingLine}
-                    strokeWidth={lineStrokeWidth}
-                />
-                <Line
-                    x1="59.2%"
-                    y1="65.4%"
-                    x2="36.3%"
-                    y2="79.9%"
-                    stroke={state.dwarvenSmithingLine}
-                    strokeWidth={lineStrokeWidth}
-                />
             </Svg>
 
         </View>
@@ -783,80 +714,75 @@ const ArcheryTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "70%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
     },
-    BasicSmithText: {
+    OverdrawText: {
         position: 'absolute',
-        left: "25%",
-        top: "83%",
+        left: "69%",
+        top: "88%",
         zIndex: 10,
     },
-    ArcaneSmithText: {
+    SteadyHandText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
+        left: "40%",
+        top: "72%",
         zIndex: 10,
     },
-    ElvenSmithText: {
+    HuntersDisciplineText: {
         position: 'absolute',
-        left: "13%",
-        top: "53%",
+        left: "58%",
+        top: "47.5%",
         zIndex: 10,
     },
-    AdvancedArmorsText: {
+    QuickShotText: {
         position: 'absolute',
-        left: "20%",
-        top: "46%",
+        left: "18%",
+        top: "32%",
+        zIndex: 10,
+    },    
+    RangerText: {
+        position: 'absolute',
+        left: "60.5%",
+        top: "35%",
         zIndex: 10,
     },
-    GlassSmithText: {
+    BullseyeText: {
         position: 'absolute',
-        left: "24%",
-        top: "34%",
+        left: "43%",
+        top: "27%",
         zIndex: 10,
     },
-    DragonArmorText: {
+    PowerShotText: {
         position: 'absolute',
-        left: "44%",
-        top: "34%",
-        zIndex: 10,
-    },
-    DaedricSmithText: {
-        position: 'absolute',
-        left: "64%",
-        top: "40%",
-        zIndex: 10,
-    },
-    EbonySmithText: {
-        position: 'absolute',
-        left: "82%",
-        top: "50%",
-        zIndex: 10,
-    },
-    OrcishSmithText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
-        zIndex: 10,
-    },
-    DwarvenSmithText: {
-        position: 'absolute',
-        left: "50%",
-        top: "60%",
+        left: "8%",
+        top: "57%",
         zIndex: 10,
     },
 
+    EagleEyeText: {
+        position: 'absolute',
+        left: "23.5%",
+        top: "77%",
+        zIndex: 10,
+    },
+    CriticalShotText: {
+        position: 'absolute',
+        left: "74%",
+        top: "73%",
+        zIndex: 10,
+    },
     PerkText: {
         color: 'white',
         fontSize: 12,
