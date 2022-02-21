@@ -423,7 +423,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.NoviceAltText}>
-
+                <Text style={styles.PerkText}>Novice Alteration</Text>
             </View>
             <View title='Alteration Dual Casting Blue' style={{
                 position: 'absolute',
@@ -454,8 +454,8 @@ const AlterationTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.DualCastingText}>
-
+            <View style={styles.AlterationDualCastingText}>
+                <Text style={styles.PerkText}>Alteration Dual Casting</Text>
             </View>
             <View title='Apprentice Alteration Blue' style={{
                 position: 'absolute',
@@ -488,7 +488,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.ApprenticeAltText}>
-
+                <Text style={styles.PerkText}>Apprentice Alteration</Text>
             </View>
             <View title='Mage Armor Blue' style={{
                 position: 'absolute',
@@ -589,7 +589,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AdeptAltText}>
-
+                <Text style={styles.PerkText}>Adept Alteration</Text>
             </View>
 
             <View title='Stability Blue' style={{
@@ -623,7 +623,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.StabilityText}>
-
+                <Text style={styles.PerkText}>Stability</Text>
             </View>
 
             <View title='Expert Alteration Blue' style={{
@@ -657,7 +657,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.ExpertAltText}>
-
+                <Text style={styles.PerkText}>Expert Alteration</Text>
             </View>
 
 
@@ -692,7 +692,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AtronachText}>
-
+                <Text style={styles.PerkText}>Atronach</Text>
             </View>
 
 
@@ -727,11 +727,8 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.MasterAltText}>
-
+                <Text style={styles.PerkText}>Master Alteration</Text>
             </View>
-
-
-
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
                 <Line
@@ -843,20 +840,20 @@ const styles = StyleSheet.create({
     },
     NoviceAltText: {
         position: 'absolute',
-        left: "25%",
+        left: "55%",
         top: "83%",
         zIndex: 10,
     },
-    DualCastingText: {
+    AlterationDualCastingText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
+        left: "10%",
+        top: "72%",
         zIndex: 10,
     },
     ApprenticeAltText: {
         position: 'absolute',
-        left: "13%",
-        top: "53%",
+        left: "60%",
+        top: "65%",
         zIndex: 10,
     },
     MageArmorText: {
@@ -871,41 +868,41 @@ const styles = StyleSheet.create({
         top: "54%",
         zIndex: 10,
     },
-    MasterAltText: {
+    AdeptAltText: {
         position: 'absolute',
-        left: "44%",
-        top: "34%",
-        zIndex: 10,
-    },
-    AtronachText: {
-        position: 'absolute',
-        left: "64%",
-        top: "40%",
-        zIndex: 10,
-    },
-    ExpertAltText: {
-        position: 'absolute',
-        left: "82%",
-        top: "50%",
+        left: "45%",
+        top: "48%",
         zIndex: 10,
     },
     StabilityText: {
         position: 'absolute',
-        left: "70%",
-        top: "50%",
+        left: "20%",
+        top: "35%",
         zIndex: 10,
     },
-    AdeptAltText: {
+    ExpertAltText: {
         position: 'absolute',
-        left: "50%",
-        top: "60%",
+        left: "68%",
+        top: "38%",
         zIndex: 10,
     },
-
+    AtronachText: {
+        position: 'absolute',
+        left: "4%",
+        top: "25%",
+        zIndex: 10,
+    },
+    MasterAltText: {
+        position: 'absolute',
+        left: "60%",
+        top: "26%",
+        zIndex: 10,
+    },
     PerkText: {
         color: 'white',
         fontSize: 12,
     }
+
 });
 
 export default AlterationTree;

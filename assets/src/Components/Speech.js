@@ -347,7 +347,8 @@ const SpeechTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.hagglingionText}>
+            <View style={styles.HagglingText}>
+                <Text style={styles.PerkText}>Haggling</Text>
 
             </View>
             <View title='Allure Blue' style={{
@@ -380,7 +381,7 @@ const SpeechTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AllureText}>
-
+                <Text style={styles.PerkText}>Allure</Text>
             </View>
             <View title='Merchant Blue' style={{
                 position: 'absolute',
@@ -413,7 +414,7 @@ const SpeechTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.MerchantText}>
-
+                <Text style={styles.PerkText}>Merchant</Text>
             </View>
             <View title='Investor Blue' style={{
                 position: 'absolute',
@@ -446,7 +447,7 @@ const SpeechTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.InvestorText}>
-
+                <Text style={styles.PerkText}>Investor</Text>
             </View>
             <View title='Fence Blue' style={{
                 position: 'absolute',
@@ -479,7 +480,7 @@ const SpeechTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.FenceText}>
-
+                <Text style={styles.PerkText}>Fence</Text>
             </View>
 
             <View title='Master Trader Blue' style={{
@@ -513,7 +514,7 @@ const SpeechTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.MasterTraderText}>
-
+                <Text style={styles.PerkText}>Master Trader</Text>
             </View>
 
             <View title='Bribery Blue' style={{
@@ -546,8 +547,8 @@ const SpeechTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.briberyText}>
-
+            <View style={styles.BriberyText}>
+                <Text style={styles.PerkText}>Bribery</Text>
             </View>
 
             <View title='Persuasion Blue' style={{
@@ -581,7 +582,7 @@ const SpeechTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.PersuasionText}>
-
+                <Text style={styles.PerkText}>Persuasion</Text>
             </View>
 
             <View title='Intimidation Blue' style={{
@@ -615,10 +616,8 @@ const SpeechTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.IntimidationText}>
-
+                <Text style={styles.PerkText}>Intimidation</Text>
             </View>
-
-
 
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
@@ -724,59 +723,58 @@ const styles = StyleSheet.create({
     },
     HagglingText: {
         position: 'absolute',
-        left: "25%",
+        left: "47%",
         top: "83%",
         zIndex: 10,
     },
     AllureText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
+        left: "32%",
+        top: "70%",
         zIndex: 10,
     },
     MerchantText: {
         position: 'absolute',
-        left: "13%",
-        top: "53%",
+        left: "17%",
+        top: "55%",
         zIndex: 10,
     },
     InvestorText: {
         position: 'absolute',
-        left: "20%",
-        top: "46%",
+        left: "9%",
+        top: "43%",
         zIndex: 10,
     },
     FenceText: {
         position: 'absolute',
-        left: "24%",
-        top: "34%",
+        left: "3%",
+        top: "33%",
         zIndex: 10,
     },
     MasterTraderText: {
         position: 'absolute',
-        left: "50%",
-        top: "60%",
+        left: "67%",
+        top: "25%",
         zIndex: 10,
     },
     BriberyText: {
         position: 'absolute',
-        left: "44%",
-        top: "34%",
+        left: "56%",
+        top: "66%",
         zIndex: 10,
     },
     PersuasionText: {
         position: 'absolute',
-        left: "55%",
-        top: "65%",
+        left: "57%",
+        top: "51%",
         zIndex: 10,
     },
     IntimidationText: {
         position: 'absolute',
-        left: "60%",
-        top: "70%",
+        left: "62%",
+        top: "37%",
         zIndex: 10,
     },
-
     PerkText: {
         color: 'white',
         fontSize: 12,

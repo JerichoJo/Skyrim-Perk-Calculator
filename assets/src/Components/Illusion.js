@@ -15,6 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+const lineStrokeWidth = '2';
 
 const useSetState = (initialState = {}) => {
     const [state, regularSetState] = useState(initialState);
@@ -82,7 +83,7 @@ const IllusionTree = () => {
         SetRequiredLevel(level);
     }, []);
 
-    const lineStrokeWidth = '2';
+
 
     const CheckLevel = useCallback(() => {
         if (state.animage == 1) {
@@ -450,7 +451,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.NoviceIllusionText}>
-
+                <Text style={styles.PerkText}>Novice Illusion</Text>
             </View>
             <View title='Illusion Dual Casting Blue' style={{
                 position: 'absolute',
@@ -481,8 +482,8 @@ const IllusionTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.DualCastingText}>
-
+            <View style={styles.IllusionDualCastingText}>
+                <Text style={styles.PerkText}>Illusion Dual Casting</Text>
             </View>
             <View title='Apprentice Illusion Blue' style={{
                 position: 'absolute',
@@ -514,8 +515,8 @@ const IllusionTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.ElvenSmithText}>
-
+            <View style={styles.ApprenticeIllusionText}>
+                <Text style={styles.PerkText}>Apprentice Illusion</Text>
             </View>
             <View title='Adept Illusion Blue' style={{
                 position: 'absolute',
@@ -548,7 +549,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AdeptIllusionText}>
-
+                <Text style={styles.PerkText}>Adept Illusion</Text>
             </View>
             <View title='expertIllus Blue' style={{
                 position: 'absolute',
@@ -581,7 +582,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.ExpertIllusText}>
-
+                <Text style={styles.PerkText}>Expert Illusion</Text>
             </View>
 
             <View title='Master Illusion Blue' style={{
@@ -615,7 +616,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.MasterIllusText}>
-
+                <Text style={styles.PerkText}>Master Illusion</Text>
             </View>
 
             <View title='Hypnotic Gaze Blue' style={{
@@ -649,7 +650,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.HypnoticGazeText}>
-
+                <Text style={styles.PerkText}>Hypnotic Gaze</Text>
             </View>
 
             <View title='Aspect of Terror Blue' style={{
@@ -683,7 +684,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AspectOfTerrorText}>
-
+                <Text style={styles.PerkText}>Aspect of Terror</Text>
             </View>
 
 
@@ -718,7 +719,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.RageText}>
-
+                <Text style={styles.PerkText}>Rage</Text>
             </View>
 
             <View title='Master of Mind Blue' style={{
@@ -752,7 +753,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.MasterOfMindText}>
-
+                <Text style={styles.PerkText}>Master of the Mind</Text>
             </View>
 
             <View title='Animage Blue' style={{
@@ -786,7 +787,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AnimageText}>
-
+                <Text style={styles.PerkText}>Animage</Text>
             </View>
 
 
@@ -821,7 +822,7 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.KindredMageText}>
-
+                <Text style={styles.PerkText}>Kindred Mage</Text>
             </View>
 
             <View title='Quiet Casting Blue' style={{
@@ -855,11 +856,8 @@ const IllusionTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.QuietCastingText}>
-
+                <Text style={styles.PerkText}>Quiet Casting</Text>
             </View>
-
-
-
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
                 <Line
@@ -989,6 +987,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
+
         bottom: "70%",
         justifyContent: 'center',
         alignItems: 'center',
@@ -998,65 +997,83 @@ const styles = StyleSheet.create({
     },
     NoviceIllusionText: {
         position: 'absolute',
-        left: "25%",
+        left: "56%",
+        top: "85%",
+        zIndex: 10,
+    },
+    IllusionDualCastingText: {
+        position: 'absolute',
+        left: "2%",
         top: "83%",
         zIndex: 10,
     },
-    DualCastingText: {
+    ApprenticeIllusionText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
-        zIndex: 10,
-    },
-    ElvenSmithText: {
-        position: 'absolute',
-        left: "13%",
-        top: "53%",
+        left: "4%",
+        top: "68%",
         zIndex: 10,
     },
     AdeptIllusionText: {
         position: 'absolute',
-        left: "20%",
-        top: "46%",
+        left: "2%",
+        top: "50%",
         zIndex: 10,
     },
     ExpertIllusText: {
         position: 'absolute',
-        left: "24%",
-        top: "34%",
-        zIndex: 10,
-    },
-    AnimageText: {
-        position: 'absolute',
-        left: "44%",
-        top: "34%",
-        zIndex: 10,
-    },
-    RageText: {
-        position: 'absolute',
-        left: "64%",
+        left: "2%",
         top: "40%",
-        zIndex: 10,
-    },
-    AspectOfTerrorText: {
-        position: 'absolute',
-        left: "82%",
-        top: "50%",
-        zIndex: 10,
-    },
-    HypnoticGazeText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
         zIndex: 10,
     },
     MasterIllusText: {
         position: 'absolute',
-        left: "50%",
-        top: "60%",
+        left: "7%",
+        top: "25%",
+        zIndex: 10,
+    },
+    HypnoticGazeText: {
+        position: 'absolute',
+        left: "53%",
+        top: "64%",
+        zIndex: 10,
+    },
+    AspectOfTerrorText: {
+        position: 'absolute',
+        left: "45%",
+        top: "45%",
+        zIndex: 10,
+    },
+    RageText: {
+        position: 'absolute',
+        left: "42%",
+        top: "37%",
+        zIndex: 10,
+    },
+    MasterOfMindText: {
+        position: 'absolute',
+        left: "64%",
+        top: "21%",
         zIndex: 10,
     },
 
+    AnimageText: {
+        position: 'absolute',
+        left: "71%",
+        top: "73%",
+        zIndex: 10,
+    },
+    KindredMageText: {
+        position: 'absolute',
+        left: "77%",
+        top: "53%",
+        zIndex: 10,
+    },
+    QuietCastingText: {
+        position: 'absolute',
+        left: "72%",
+        top: "35%",
+        zIndex: 10,
+    },
     PerkText: {
         color: 'white',
         fontSize: 12,

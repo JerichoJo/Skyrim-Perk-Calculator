@@ -265,7 +265,7 @@ const LightArmorTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AgileDefenderText}>
-
+                <Text style={styles.PerkText}>Agile Defender</Text>
             </View>
             <View title='Custom Fit Blue' style={{
                 position: 'absolute',
@@ -297,7 +297,7 @@ const LightArmorTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.CustomFitText}>
-
+                <Text style={styles.PerkText}>Custom Fit</Text>
             </View>
             <View title='Unhindered Blue' style={{
                 position: 'absolute',
@@ -330,7 +330,7 @@ const LightArmorTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.UnhinderedText}>
-
+                <Text style={styles.PerkText}>Unhindered</Text>
             </View>
             <View title='Wind Walker Blue' style={{
                 position: 'absolute',
@@ -363,7 +363,7 @@ const LightArmorTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.WindWalkerText}>
-
+                <Text style={styles.PerkText}>Wind Walker</Text>
             </View>
             <View title='Matching Set Blue' style={{
                 position: 'absolute',
@@ -396,7 +396,7 @@ const LightArmorTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.MatchingSetText}>
-
+                <Text style={styles.PerkText}>Matching Set</Text>
             </View>
 
             <View title='Deft Movement Blue' style={{
@@ -430,11 +430,10 @@ const LightArmorTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.DeftMovementText}>
-
+                <Text style={styles.PerkText}>Deft Movement</Text>
             </View>
 
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
-
                 <Line
                     x1="63%"
                     y1="85%"
@@ -506,38 +505,38 @@ const styles = StyleSheet.create({
     },
     AgileDefenderText: {
         position: 'absolute',
-        left: "25%",
+        left: "38%",
         top: "83%",
         zIndex: 10,
     },
     CustomFitText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
+        left: "31%",
+        top: "65%",
         zIndex: 10,
     },
     UnhinderedText: {
         position: 'absolute',
-        left: "13%",
-        top: "53%",
+        left: "2%",
+        top: "50%",
         zIndex: 10,
     },
     WindWalkerText: {
         position: 'absolute',
-        left: "20%",
-        top: "46%",
+        left: "8%",
+        top: "37%",
         zIndex: 10,
     },
     MatchingSetText: {
         position: 'absolute',
-        left: "24%",
+        left: "74%",
         top: "34%",
         zIndex: 10,
     },
     DeftMovementText: {
         position: 'absolute',
-        left: "50%",
-        top: "60%",
+        left: "51%",
+        top: "23%",
         zIndex: 10,
     },
 
