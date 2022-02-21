@@ -441,7 +441,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("NoviceIllusionModal")}
                     onPress={() => {
                         CheckIfNoviceIllusPressed(
                             state.noviceIllus == 0 ? 1 : 0,
@@ -472,7 +472,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("IllusionDualCastingModal")}
                     onPress={() => {
                         CheckIfillusionDualPressed(
                             state.illusionDual == 0 ? 1 : 0,
@@ -503,9 +503,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ApprenticeIllusionModal")}
                     onPress={() => {
                         CheckIfApprenticeIllusPressed(
                             state.apprenticeIllus == 0 ? 1 : 0,
@@ -536,9 +534,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdeptIllusionModal")}
                     onPress={() => {
                         CheckIfAdeptIllusPressed(
                             state.adeptIllus == 0 ? 1 : 0,
@@ -569,9 +565,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExpertIllusionModal")}
                     onPress={() => {
                         CheckIfExpertIllusPressed(
                             state.expertIllus == 0 ? 1 : 0,
@@ -603,9 +597,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterIllusionModal")}
                     onPress={() => {
                         CheckIfMasterIllusPressed(
                             state.masterIllus == 0 ? 1 : 0,
@@ -637,9 +629,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("HypnoticGazeModal")}
                     onPress={() => {
                         CheckIfHypnoticGazePressed(
                             state.hypnoticGaze == 0 ? 1 : 0,
@@ -671,9 +661,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AspectOfTerrorModal")}
                     onPress={() => {
                         CheckIfAspectOfTerrorPressed(
                             state.aspectOfTerror == 0 ? 1 : 0,
@@ -706,9 +694,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("RageModal")}
                     onPress={() => {
                         CheckIfRagePressed(
                             state.rage == 0 ? 1 : 0,
@@ -740,9 +726,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterOfTheMindModal")}
                     onPress={() => {
                         CheckIfMasterOfMindPressed(
                             state.masterOfMind == 0 ? 1 : 0,
@@ -774,9 +758,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AnimageModal")}
                     onPress={() => {
                         CheckIfAnimagePressed(
                             state.animage == 0 ? 1 : 0,
@@ -809,9 +791,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("KindredMageModal")}
                     onPress={() => {
                         CheckIfKindredPressed(
                             state.kindredMage == 0 ? 1 : 0,
@@ -843,9 +823,7 @@ const IllusionTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("QuietCastingModal")}
                     onPress={() => {
                         CheckIfQuietCastingPressed(
                             state.quietCasting == 0 ? 1 : 0,

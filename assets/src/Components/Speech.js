@@ -338,7 +338,7 @@ const SpeechTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("HagglingModal")}
                     onPress={() => {
                         CheckIfHagglingPressed(
                             state.haggling == 0 ? 1 : 0,
@@ -370,7 +370,7 @@ const SpeechTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("AllureModal")}
                     onPress={() => {
                         CheckIfAllurePressed(
                             state.allure == 0 ? 1 : 0,
@@ -401,9 +401,7 @@ const SpeechTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MerchantModal")}
                     onPress={() => {
                         CheckIfMerchantPressed(
                             state.merchant == 0 ? 1 : 0,
@@ -434,9 +432,7 @@ const SpeechTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("InvestorModal")}
                     onPress={() => {
                         CheckIfInvestorPressed(
                             state.investor == 0 ? 1 : 0,
@@ -467,9 +463,7 @@ const SpeechTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("FenceModal")}
                     onPress={() => {
                         CheckIfFencePressed(
                             state.fence == 0 ? 1 : 0,
@@ -501,9 +495,7 @@ const SpeechTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterTraderModal")}
                     onPress={() => {
                         CheckIfMasterTraderPressed(
                             state.masterTrader == 0 ? 1 : 0,
@@ -535,9 +527,7 @@ const SpeechTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("BriberyModal")}
                     onPress={() => {
                         CheckIfBriberyPressed(
                             state.bribery == 0 ? 1 : 0,
@@ -569,9 +559,7 @@ const SpeechTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PersuasionModal")}
                     onPress={() => {
                         CheckIfPersuasionPressed(
                             state.persuasion == 0 ? 1 : 0,
@@ -603,9 +591,7 @@ const SpeechTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("IntimidationModal")}
                     onPress={() => {
                         CheckIfIntimidationPressed(
                             state.intimidation == 0 ? 1 : 0,

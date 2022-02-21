@@ -436,9 +436,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ElvenSmithingModal")}
                     onPress={() => {
                         CheckIfElvinSmithPressed(
                             state.elvinSmithing == 0 ? 1 : 0,
@@ -469,9 +467,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdvancedArmorsSmithingModal")}
                     onPress={() => {
                         CheckIfAdvanceSmithingPressed(
                             state.advancedSmithing == 0 ? 1 : 0,
@@ -502,9 +498,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("GlassSmithingModal")}
                     onPress={() => {
                         CheckIfGlassSmithingPressed(
                             state.glassSmithing == 0 ? 1 : 0,
@@ -535,9 +529,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DragonArmorSmithingModal")}
                     onPress={() => {
                         CheckIfDragonSmithingPressed(
                             state.dragonSmithing == 0 ? 1 : 0,
@@ -569,9 +561,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DaedricSmithingModal")}
                     onPress={() => {
                         CheckIfDaedricSmithingPressed(
                             state.daedricSmithing == 0 ? 1 : 0,
@@ -602,9 +592,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("EbonySmithingModal")}
                     onPress={() => {
                         CheckIfEbonySmithingPressed(
                             state.ebonySmithing == 0 ? 1 : 0,
@@ -635,9 +623,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("OrcishSmithingModal")}
                     onPress={() => {
                         CheckIfOrcishSmithingPressed(
                             state.orcishSmithing == 0 ? 1 : 0,
@@ -668,9 +654,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DwarvenSmithingModal")}
                     onPress={() => {
                         CheckIfDwarvenSmithingPressed(
                             state.dwarvenSmithing == 0 ? 1 : 0,
