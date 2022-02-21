@@ -30,8 +30,44 @@ import MasterOfTheMindModal from "./IllusionTreeModals/MasterOfTheMindModal";
 import AnimageModal from "./IllusionTreeModals/AnimageModal";
 import KindredMageModal from "./IllusionTreeModals/KindredMageModal";
 import QuietCastingModal from "./IllusionTreeModals/QuietCastingModal";
+import AgileDefenderModal from "./LightArmorModals/AgileDefenderModal";
+import CustomFitModal from "./LightArmorModals/CustomFitModal";
+import UnhinderedModal from "./LightArmorModals/UnhinderedModal";
+import WindWalkerModal from "./LightArmorModals/WindWalkerModal";
+import DeftMovementModal from "./LightArmorModals/DeftMovementModal";
+import MatchingSetModal from "./LightArmorModals/MatchingSetModal";
+import NoviceAlterationModal from "./AlterationModals/NoviceAlterationModal";
+import AlterationDualCastingModal from "./AlterationModals/AlterationDualCastingModal";
+import ApprenticeAlterationModal from "./AlterationModals/ApprenticeAlterationModal";
+import MageArmorModal from "./AlterationModals/MageArmorModal";
+import MagicResistanceModal from "./AlterationModals/MagicResistanceModal";
+import AdeptAlterationModal from "./AlterationModals/AdeptAlterationModal";
+import StabilityModal from "./AlterationModals/StabilityModal";
+import ExpertAlterationModal from "./AlterationModals/ExpertAlterationModal";
+import AtronachModal from "./AlterationModals/AtronachModal";
+import MasterAlterationModal from "./AlterationModals/MasterAlterationModal";
 
 const modals = {
+    //Alteration Tree
+    NoviceAlterationModal,
+    AlterationDualCastingModal,
+    ApprenticeAlterationModal,
+    MageArmorModal,
+    MagicResistanceModal,
+    AdeptAlterationModal,
+    StabilityModal,
+    ExpertAlterationModal,
+    AtronachModal,
+    MasterAlterationModal,
+
+    // Light Armor Tree
+    AgileDefenderModal,
+    CustomFitModal,
+    UnhinderedModal,
+    WindWalkerModal,
+    DeftMovementModal,
+    MatchingSetModal,
+
     // Illusion Tree
     NoviceIllusionModal,
     IllusionDualCastingModal,

@@ -255,7 +255,7 @@ const LightArmorTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("AgileDefenderModal")}
                     onPress={() => {
                         CheckIfAgileDefenderPressed(
                             state.agileDefender == 0 ? 1 : 0,
@@ -286,7 +286,7 @@ const LightArmorTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("CustomFitModal")}
                     onPress={() => {
                         CheckIfCustomeFitPressed(
                             state.customeFit == 0 ? 1 : 0,
@@ -317,9 +317,7 @@ const LightArmorTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("UnhinderedModal")}
                     onPress={() => {
                         CheckIfUnhinderedPressed(
                             state.unhindered == 0 ? 1 : 0,
@@ -350,9 +348,7 @@ const LightArmorTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("WindWalkerModal")}
                     onPress={() => {
                         CheckIfWindWalkerPressed(
                             state.windWalker == 0 ? 1 : 0,
@@ -383,9 +379,7 @@ const LightArmorTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MatchingSetModal")}
                     onPress={() => {
                         CheckIfMatchingSetPressed(
                             state.matchingSet == 0 ? 1 : 0,
@@ -417,9 +411,7 @@ const LightArmorTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DeftMovementModal")}
                     onPress={() => {
                         CheckIfDeftMovementPressed(
                             state.deftMovement == 0 ? 1 : 0,

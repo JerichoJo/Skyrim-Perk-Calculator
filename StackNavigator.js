@@ -66,6 +66,30 @@ function Modal() {
                 <ModalNav.Screen name="QuietCastingModal" component={modals.QuietCastingModal} />
             </ModalNav.Group>
 
+            {/* Light Armor Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="AgileDefenderModal" component={modals.AgileDefenderModal} />
+                <ModalNav.Screen name="CustomFitModal" component={modals.CustomFitModal} />
+                <ModalNav.Screen name="UnhinderedModal" component={modals.UnhinderedModal} />
+                <ModalNav.Screen name="WindWalkerModal" component={modals.WindWalkerModal} />
+                <ModalNav.Screen name="DeftMovementModal" component={modals.DeftMovementModal} />
+                <ModalNav.Screen name="MatchingSetModal" component={modals.MatchingSetModal} />
+            </ModalNav.Group>
+
+            {/* Alteration Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="NoviceAlterationModal" component={modals.NoviceAlterationModal} />
+                <ModalNav.Screen name="AlterationDualCastingModal" component={modals.AlterationDualCastingModal} />
+                <ModalNav.Screen name="ApprenticeAlterationModal" component={modals.ApprenticeAlterationModal} />
+                <ModalNav.Screen name="MageArmorModal" component={modals.MageArmorModal} />
+                <ModalNav.Screen name="MagicResistanceModal" component={modals.MagicResistanceModal} />
+                <ModalNav.Screen name="AdeptAlterationModal" component={modals.AdeptAlterationModal} />
+                <ModalNav.Screen name="StabilityModal" component={modals.StabilityModal} />
+                <ModalNav.Screen name="ExpertAlterationModal" component={modals.ExpertAlterationModal} />
+                <ModalNav.Screen name="AtronachModal" component={modals.AtronachModal} />
+                <ModalNav.Screen name="MasterAlterationModal" component={modals.MasterAlterationModal} />
+            </ModalNav.Group>
+
         </ModalNav.Navigator>
     );
 }

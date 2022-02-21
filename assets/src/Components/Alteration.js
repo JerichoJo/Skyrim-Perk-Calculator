@@ -413,7 +413,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("NoviceAlterationModal")}
                     onPress={() => {
                         CheckIfNoviceAltPressed(
                             state.noviceAlt == 0 ? 1 : 0,
@@ -444,7 +444,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("AlterationDualCastingModal")}
                     onPress={() => {
                         CheckIfAltDualCastingPressed(
                             state.altDualCasting == 0 ? 1 : 0,
@@ -475,9 +475,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ApprenticeAlterationModal")}
                     onPress={() => {
                         CheckIfApprenticeAltPressed(
                             state.apprenticeAlt == 0 ? 1 : 0,
@@ -508,9 +506,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MageArmorModal")}
                     onPress={() => {
                         CheckIfMageArmorPressed(
                             state.mageArmor == 0 ? 1 : 0,
@@ -541,9 +537,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MagicResistanceModal")}
                     onPress={() => {
                         CheckIfMagicResisPressed(
                             state.magicResis == 0 ? 1 : 0,
@@ -576,9 +570,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdeptAlterationModal")}
                     onPress={() => {
                         CheckIfAdeptAltPressed(
                             state.adeptAlt == 0 ? 1 : 0,
@@ -610,9 +602,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("StabilityModal")}
                     onPress={() => {
                         CheckIfStabilityPressed(
                             state.stability == 0 ? 1 : 0,
@@ -644,9 +634,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExpertAlterationModal")}
                     onPress={() => {
                         CheckIfExpertAltPressed(
                             state.expertAlt == 0 ? 1 : 0,
@@ -679,9 +667,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AtronachModal")}
                     onPress={() => {
                         CheckIfAtronachPressed(
                             state.atronach == 0 ? 1 : 0,
@@ -714,9 +700,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterAlterationModal")}
                     onPress={() => {
                         CheckIfMasterAltPressed(
                             state.masterAlt == 0 ? 1 : 0,
