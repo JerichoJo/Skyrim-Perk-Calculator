@@ -350,6 +350,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Speech.png')}
                         />
                         <Text style={styles.title}>Speech</Text>
+                        <tree.SpeechTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}

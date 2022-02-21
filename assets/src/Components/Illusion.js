@@ -58,7 +58,6 @@ const IllusionTree = () => {
         masterOfMind: 0,
         masterOfMindLine: 'black',
         masterOfMindLine2: 'black',
-        // animageLineLight: 'black',
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
