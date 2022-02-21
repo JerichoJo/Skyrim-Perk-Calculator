@@ -95,33 +95,32 @@ const LightArmorTree = () => {
         CheckLevel();
     }, [CheckLevel]);
 
-    const CheckIfAgileDefenderPressed = (button) => {
+    const CheckIfAgileDefenderPressed = (buttonColor) => {
         if (
-            state.customeFit == 1 ||
-            state.unhindered == 1 ||
-            state.hypnoticGaze == 1 ||
-            state.animage == 1
+            state.customeFit == 1
         ) {
             // Do nothing....must un-select nodes above it first
         }
         else {
-            setState({ agileDefender: button }); // Change button color back and forth
+            setState({ agileDefender: buttonColor }); // Change button color back and forth
             state.agileDefender == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
 
-    const CheckIfCustomeFitPressed = (button, line) => {
+    const CheckIfCustomeFitPressed = (buttonColor, lineColor) => {
         if (state.agileDefender == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ agileDefender: button });
-            setState({ customeFit: button });
-            setState({ customeFitLine: line });
+            setState({ agileDefender: buttonColor });
+            setState({ customeFit: buttonColor });
+            setState({ customeFitLine: lineColor });
             IncrementCounter(2);
+        } else if (state.unhindered == 1 || state.matchingSet == 1) {
+            // Do nothing....must un-select nodes above it first
         } else {
-            setState({ customeFitLine: line });
-            setState({ customeFit: button }); // Change the pressed button color back and forth
+            setState({ customeFitLine: lineColor });
+            setState({ customeFit: buttonColor }); // Change the pressed button color back and forth
             state.customeFit == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
@@ -129,12 +128,18 @@ const LightArmorTree = () => {
     };
 
     const CheckIfUnhinderedPressed = (buttonColor, lineColor) => {
-        if (state.agileDefender == 0) {
+        if (state.customeFit == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ agileDefender: buttonColor });
+            setState({ customeFit: buttonColor });
             setState({ unhindered: buttonColor });
+            setState({ customeFitLine: lineColor });
             setState({ unhinderedLine: lineColor });
-            IncrementCounter(2);
+            if (state.agileDefender == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
         } else if (state.windWalker == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -149,17 +154,21 @@ const LightArmorTree = () => {
         if (state.unhindered == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ agileDefender: buttonColor });
+            setState({ customeFit: buttonColor });
             setState({ unhindered: buttonColor });
-            setState({ unhinderedLine: lineColor });
             setState({ windWalker: buttonColor });
+            setState({ customeFitLine: lineColor });
+            setState({ unhinderedLine: lineColor });
             setState({ windWalkerLine: lineColor });
 
-            if (state.agileDefender == 1) {
+            if (state.customeFit == 1) {
                 IncrementCounter(2);
+            } else if (state.agileDefender == 1) {
+                IncrementCounter(3)
             } else {
-                IncrementCounter(3);
+                IncrementCounter(4);
             }
-        } else if (state.matchingSet == 1) {
+        } else if (state.deftMovement == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ windWalkerLine: lineColor });
@@ -169,53 +178,25 @@ const LightArmorTree = () => {
                 : DecrementCounter(1);
         }
     };
-    const CheckIfMatchingSetPressed = (buttonColor, lineColor) => {
+    const CheckIfDeftMovementPressed = (buttonColor, lineColor) => {
         if (state.windWalker == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ agileDefender: buttonColor });
+            setState({ customeFit: buttonColor });
             setState({ unhindered: buttonColor });
             setState({ windWalker: buttonColor });
-            setState({ matchingSet: buttonColor });
+            setState({ deftMovement: buttonColor });
+            setState({ customeFitLine: lineColor });
             setState({ unhinderedLine: lineColor });
             setState({ windWalkerLine: lineColor });
-            setState({ matchingSetLine: lineColor });
+            setState({ deftMovementLine: lineColor });
 
             if (state.unhindered == 1) {
                 IncrementCounter(2);
-            } else if (state.agileDefender == 1) {
-                IncrementCounter(3);
-            } else {
-                IncrementCounter(4);
-            }
-        }
-        else if (state.deftMovement == 1) {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setState({ matchingSetLine: lineColor });
-            setState({ matchingSet: buttonColor }); // Change the pressed button color back and forth
-            state.matchingSet == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-        }
-    };
-    const CheckIfDeftMovementPressed = (buttonColor, lineColor) => {
-        if (state.matchingSet == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
-            setState({ agileDefender: buttonColor });
-            setState({ unhindered: buttonColor });
-            setState({ windWalker: buttonColor });
-            setState({ matchingSet: buttonColor });
-            setState({ deftMovement: buttonColor });
-            setState({ unhinderedLine: lineColor });
-            setState({ windWalkerLine: lineColor });
-            setState({ matchingSetLine: lineColor });
-            setState({ deftMovementLine: lineColor });
-            if (state.windWalker == 1) {
-                IncrementCounter(2);
-            } else if (state.unhindered == 1) {
+            } else if (state.customeFit == 1) {
                 IncrementCounter(3);
             } else if (state.agileDefender == 1) {
-                IncrementCounter(4);
+                IncrementCounter(4)
             } else {
                 IncrementCounter(5);
             }
@@ -223,6 +204,28 @@ const LightArmorTree = () => {
             setState({ deftMovementLine: lineColor });
             setState({ deftMovement: buttonColor }); // Change the pressed button color back and forth
             state.deftMovement == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfMatchingSetPressed = (buttonColor, lineColor) => {
+        if (state.customeFit == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ agileDefender: buttonColor });
+            setState({ customeFit: buttonColor });
+            setState({ matchingSet: buttonColor });
+            setState({ customeFitLine: lineColor });
+            setState({ matchingSetLine: lineColor });
+            if (state.agileDefender == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else {
+            setState({ matchingSetLine: lineColor });
+            setState({ matchingSet: buttonColor }); // Change the pressed button color back and forth
+            state.matchingSet == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
@@ -236,7 +239,7 @@ const LightArmorTree = () => {
             </View>
             <View title='Agile Defender Blue' style={{
                 position: 'absolute',
-                left: "40%",
+                left: "52%",
                 top: "80%",
                 zIndex: 8,
 
@@ -245,7 +248,7 @@ const LightArmorTree = () => {
             </View>
             <View title='Agile Defender Gold' style={{
                 position: 'absolute',
-                left: "40%",
+                left: "52%",
                 top: "80%",
                 zIndex: 8,
                 opacity: state.agileDefender
@@ -266,8 +269,8 @@ const LightArmorTree = () => {
             </View>
             <View title='Custom Fit Blue' style={{
                 position: 'absolute',
-                left: "-1%",
-                top: "75%",
+                left: "40%",
+                top: "60%",
                 zIndex: 8,
 
             }}>
@@ -276,8 +279,8 @@ const LightArmorTree = () => {
             </View>
             <View title='Custom Fit Gold' style={{
                 position: 'absolute',
-                left: "-1%",
-                top: "75%",
+                left: "40%",
+                top: "60%",
                 zIndex: 8,
                 opacity: state.customeFit
 
@@ -298,8 +301,8 @@ const LightArmorTree = () => {
             </View>
             <View title='Unhindered Blue' style={{
                 position: 'absolute',
-                left: "5%",
-                top: "60%",
+                left: "12%",
+                top: "45%",
                 zIndex: 8,
 
             }}>
@@ -307,8 +310,8 @@ const LightArmorTree = () => {
             </View>
             <View title='Unhindered Gold' style={{
                 position: 'absolute',
-                left: "5%",
-                top: "60%",
+                left: "12%",
+                top: "45%",
                 zIndex: 8,
                 opacity: state.unhindered
 
@@ -331,8 +334,8 @@ const LightArmorTree = () => {
             </View>
             <View title='Wind Walker Blue' style={{
                 position: 'absolute',
-                left: "11%",
-                top: "43%",
+                left: "18%",
+                top: "32%",
                 zIndex: 8,
 
             }}>
@@ -340,8 +343,8 @@ const LightArmorTree = () => {
             </View>
             <View title='Wind Walker Gold' style={{
                 position: 'absolute',
-                left: "11%",
-                top: "43%",
+                left: "18%",
+                top: "32%",
                 zIndex: 8,
                 opacity: state.windWalker
 
@@ -364,8 +367,8 @@ const LightArmorTree = () => {
             </View>
             <View title='Matching Set Blue' style={{
                 position: 'absolute',
-                left: "5%",
-                top: "32%",
+                left: "58%",
+                top: "29%",
                 zIndex: 8,
 
             }}>
@@ -373,8 +376,8 @@ const LightArmorTree = () => {
             </View>
             <View title='Matching Set Gold' style={{
                 position: 'absolute',
-                left: "5%",
-                top: "32%",
+                left: "58%",
+                top: "29%",
                 zIndex: 8,
                 opacity: state.matchingSet
 
@@ -398,7 +401,7 @@ const LightArmorTree = () => {
 
             <View title='Deft Movement Blue' style={{
                 position: 'absolute',
-                left: "20%",
+                left: "36%",
                 top: "20%",
                 zIndex: 8,
 
@@ -407,7 +410,7 @@ const LightArmorTree = () => {
             </View>
             <View title='Deft Movement Gold' style={{
                 position: 'absolute',
-                left: "20%",
+                left: "36%",
                 top: "20%",
                 zIndex: 8,
                 opacity: state.deftMovement
@@ -433,50 +436,53 @@ const LightArmorTree = () => {
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
                 <Line
-                    x1="48%"
+                    x1="63%"
                     y1="85%"
-                    x2="11%"
-                    y2="80%"
+                    x2="51%"
+                    y2="65%"
                     stroke={state.customeFitLine}
                     strokeWidth={lineStrokeWidth}
                 />
-
                 <Line
-                    x1="50%"
-                    y1="85%"
-                    x2="17%"
-                    y2="66%"
+                    x1="51%"
+                    y1="65%"
+                    x2="23%"
+                    y2="50%"
                     stroke={state.unhinderedLine}
                     strokeWidth={lineStrokeWidth}
                 />
                 <Line
-                    x1="17%"
-                    y1="65%"
-                    x2="22%"
-                    y2="48%"
+                    x1="23%"
+                    y1="50%"
+                    x2="29%"
+                    y2="38%"
                     stroke={state.windWalkerLine}
                     strokeWidth={lineStrokeWidth}
-
                 />
                 <Line
-                    x1="22%"
-                    y1="48%"
-                    x2="16%"
-                    y2="37%"
-                    stroke={state.matchingSetLine}
-                    strokeWidth={lineStrokeWidth}
-
-                />
-                <Line
-                    x1="17%"
-                    y1="37%"
-                    x2="32%"
+                    x1="28%"
+                    y1="38%"
+                    x2="47%"
                     y2="25%"
                     stroke={state.deftMovementLine}
                     strokeWidth={lineStrokeWidth}
-
                 />
-
+                <Line
+                    x1="51%"
+                    y1="65%"
+                    x2="69%"
+                    y2="34%"
+                    stroke={state.matchingSetLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line
+                    x1="69%"
+                    y1="34%"
+                    x2="47%"
+                    y2="25%"
+                    stroke={state.deftMovementLine2}
+                    strokeWidth={lineStrokeWidth}
+                />
             </Svg>
         </View>
     );
