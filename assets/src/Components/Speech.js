@@ -102,8 +102,6 @@ const SpeechTree = () => {
     const CheckIfHagglingPressed = (button) => {
         if (
             state.allure == 1 ||
-            state.merchant == 1 ||
-            state.hypnoticGaze == 1 ||
             state.bribery == 1
         ) {
             // Do nothing....must un-select nodes above it first
@@ -123,6 +121,8 @@ const SpeechTree = () => {
             setState({ allure: button });
             setState({ allureLine: line });
             IncrementCounter(2);
+        } else if (state.merchant == 1) {
+            // Do nothing....must un-select nodes above it first
         } else {
             setState({ allureLine: line });
             setState({ allure: button }); // Change the pressed button color back and forth
@@ -133,12 +133,18 @@ const SpeechTree = () => {
     };
 
     const CheckIfMerchantPressed = (buttonColor, lineColor) => {
-        if (state.haggling == 0) {
+        if (state.allure == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ haggling: buttonColor });
+            setState({ allure: buttonColor });
             setState({ merchant: buttonColor });
+            setState({ allureLine: lineColor });
             setState({ merchantLine: lineColor });
-            IncrementCounter(2);
+            if (state.haggling == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
         } else if (state.investor == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -153,15 +159,19 @@ const SpeechTree = () => {
         if (state.merchant == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ haggling: buttonColor });
+            setState({ allure: buttonColor });
             setState({ merchant: buttonColor });
             setState({ merchantLine: lineColor });
             setState({ investor: buttonColor });
+            setState({ allureLine: lineColor });
+            setState({ merchantLine: lineColor });
             setState({ investorLine: lineColor });
-
-            if (state.haggling == 1) {
+            if (state.allure == 1) {
                 IncrementCounter(2);
+            } else if (state.haggling == 1) {
+                IncrementCounter(3)
             } else {
-                IncrementCounter(3);
+                IncrementCounter(4);
             }
         } else if (state.fence == 1) {
             // Do nothing....must un-select nodes above it first
@@ -177,19 +187,22 @@ const SpeechTree = () => {
         if (state.investor == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ haggling: buttonColor });
+            setState({ allure: buttonColor });
             setState({ merchant: buttonColor });
             setState({ investor: buttonColor });
             setState({ fence: buttonColor });
+            setState({ allureLine: lineColor });
             setState({ merchantLine: lineColor });
             setState({ investorLine: lineColor });
             setState({ fenceLine: lineColor });
-
             if (state.merchant == 1) {
                 IncrementCounter(2);
-            } else if (state.haggling == 1) {
+            } else if (state.allure == 1) {
                 IncrementCounter(3);
-            } else {
+            } else if (state.haggling == 1) {
                 IncrementCounter(4);
+            } else {
+                IncrementCounter(5);
             }
         }
         else if (state.masterTrader == 1) {
@@ -206,10 +219,12 @@ const SpeechTree = () => {
         if (state.fence == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ haggling: buttonColor });
+            setState({ allure: buttonColor });
             setState({ merchant: buttonColor });
             setState({ investor: buttonColor });
             setState({ fence: buttonColor });
             setState({ masterTrader: buttonColor });
+            setState({ allureLine: lineColor });
             setState({ merchantLine: lineColor });
             setState({ investorLine: lineColor });
             setState({ fenceLine: lineColor });
@@ -218,10 +233,12 @@ const SpeechTree = () => {
                 IncrementCounter(2);
             } else if (state.merchant == 1) {
                 IncrementCounter(3);
-            } else if (state.haggling == 1) {
+            } else if (state.allure == 1) {
                 IncrementCounter(4);
+            } else if (state.haggling == 1) {
+                IncrementCounter(5)
             } else {
-                IncrementCounter(5);
+                IncrementCounter(6);
             }
         } else {
             setState({ masterTraderLine: lineColor });
@@ -229,7 +246,6 @@ const SpeechTree = () => {
             state.masterTrader == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-
         }
     };
 
@@ -282,9 +298,6 @@ const SpeechTree = () => {
             setState({ briberyLine: lineColor });
             setState({ persuasionLine: lineColor });
             setState({ intimidationLine: lineColor });
-            if (state.masterOfMind == 1) {
-                setState({ masterOfMindLine2: lineColor });
-            }
             if (state.bribery == 1) {
                 IncrementCounter(2);
             } else if (state.haggling == 1) {
@@ -298,9 +311,6 @@ const SpeechTree = () => {
             state.intimidation == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-            if (state.masterOfMind == 1) {
-                setState({ masterOfMindLine2: lineColor });
-            }
         }
     };
 

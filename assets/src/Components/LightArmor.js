@@ -32,17 +32,18 @@ const useSetState = (initialState = {}) => {
 const LightArmorTree = () => {
     const navigation = useNavigation();
     const [state, setState] = useSetState({
-        noviceIllus: 0,
-        illusionDual: 0,
-        illusionDualLine: 'black',
-        apprenticeIllus: 0,
-        apprenticeIllusLine: 'black',
-        adeptIllus: 0,
-        adeptIllusLine: 'black',
-        expertIllus: 0,
-        expertIllusLine: 'black',
-        masterIllus: 0,
-        masterIllusLine: 'black',
+        agileDefender: 0,
+        customeFit: 0,
+        customeFitLine: 'black',
+        unhindered: 0,
+        unhinderedLine: 'black',
+        windWalker: 0,
+        windWalkerLine: 'black',
+        matchingSet: 0,
+        matchingSetLine: 'black',
+        deftMovement: 0,
+        deftMovementLine: 'black',
+        deftMovementLine2: 'black'
 
     });
 
@@ -77,15 +78,15 @@ const LightArmorTree = () => {
             TrackLevel(90);
         } else if (state.aspectOfTerror == 1) {
             TrackLevel(80);
-        } else if (state.expertIllus == 1) {
+        } else if (state.matchingSet == 1) {
             TrackLevel(70);
-        } else if (state.illusionDual == 1) {
+        } else if (state.customeFit == 1) {
             TrackLevel(60);
-        } else if (state.adeptIllus == 1) {
+        } else if (state.windWalker == 1) {
             TrackLevel(50);
         } else if (state.animage == 1) {
             TrackLevel(20);
-        } else if (state.noviceIllus == 1) {
+        } else if (state.agileDefender == 1) {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);
@@ -94,134 +95,134 @@ const LightArmorTree = () => {
         CheckLevel();
     }, [CheckLevel]);
 
-    const CheckIfNoviceIllusPressed = (button) => {
+    const CheckIfAgileDefenderPressed = (button) => {
         if (
-            state.illusionDual == 1 ||
-            state.apprenticeIllus == 1 ||
+            state.customeFit == 1 ||
+            state.unhindered == 1 ||
             state.hypnoticGaze == 1 ||
             state.animage == 1
         ) {
             // Do nothing....must un-select nodes above it first
         }
         else {
-            setState({ noviceIllus: button }); // Change button color back and forth
-            state.noviceIllus == 0
+            setState({ agileDefender: button }); // Change button color back and forth
+            state.agileDefender == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
 
-    const CheckIfillusionDualPressed = (button, line) => {
-        if (state.noviceIllus == 0) {
+    const CheckIfCustomeFitPressed = (button, line) => {
+        if (state.agileDefender == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ noviceIllus: button });
-            setState({ illusionDual: button });
-            setState({ illusionDualLine: line });
+            setState({ agileDefender: button });
+            setState({ customeFit: button });
+            setState({ customeFitLine: line });
             IncrementCounter(2);
         } else {
-            setState({ illusionDualLine: line });
-            setState({ illusionDual: button }); // Change the pressed button color back and forth
-            state.illusionDual == 0
+            setState({ customeFitLine: line });
+            setState({ customeFit: button }); // Change the pressed button color back and forth
+            state.customeFit == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
 
-    const CheckIfApprenticeIllusPressed = (buttonColor, lineColor) => {
-        if (state.noviceIllus == 0) {
+    const CheckIfUnhinderedPressed = (buttonColor, lineColor) => {
+        if (state.agileDefender == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ noviceIllus: buttonColor });
-            setState({ apprenticeIllus: buttonColor });
-            setState({ apprenticeIllusLine: lineColor });
+            setState({ agileDefender: buttonColor });
+            setState({ unhindered: buttonColor });
+            setState({ unhinderedLine: lineColor });
             IncrementCounter(2);
-        } else if (state.adeptIllus == 1) {
+        } else if (state.windWalker == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ apprenticeIllusLine: lineColor });
-            setState({ apprenticeIllus: buttonColor }); // Change button color back and forth
-            state.apprenticeIllus == 0
+            setState({ unhinderedLine: lineColor });
+            setState({ unhindered: buttonColor }); // Change button color back and forth
+            state.unhindered == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
-    const CheckIfAdeptIllusPressed = (buttonColor, lineColor) => {
-        if (state.apprenticeIllus == 0) {
+    const CheckIfWindWalkerPressed = (buttonColor, lineColor) => {
+        if (state.unhindered == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ noviceIllus: buttonColor });
-            setState({ apprenticeIllus: buttonColor });
-            setState({ apprenticeIllusLine: lineColor });
-            setState({ adeptIllus: buttonColor });
-            setState({ adeptIllusLine: lineColor });
+            setState({ agileDefender: buttonColor });
+            setState({ unhindered: buttonColor });
+            setState({ unhinderedLine: lineColor });
+            setState({ windWalker: buttonColor });
+            setState({ windWalkerLine: lineColor });
 
-            if (state.noviceIllus == 1) {
+            if (state.agileDefender == 1) {
                 IncrementCounter(2);
             } else {
                 IncrementCounter(3);
             }
-        } else if (state.expertIllus == 1) {
+        } else if (state.matchingSet == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ adeptIllusLine: lineColor });
-            setState({ adeptIllus: buttonColor }); // Change the pressed button color back and forth
-            state.adeptIllus == 0
+            setState({ windWalkerLine: lineColor });
+            setState({ windWalker: buttonColor }); // Change the pressed button color back and forth
+            state.windWalker == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
-    const CheckIfExpertIllusPressed = (buttonColor, lineColor) => {
-        if (state.adeptIllus == 0) {
+    const CheckIfMatchingSetPressed = (buttonColor, lineColor) => {
+        if (state.windWalker == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ noviceIllus: buttonColor });
-            setState({ apprenticeIllus: buttonColor });
-            setState({ adeptIllus: buttonColor });
-            setState({ expertIllus: buttonColor });
-            setState({ apprenticeIllusLine: lineColor });
-            setState({ adeptIllusLine: lineColor });
-            setState({ expertIllusLine: lineColor });
+            setState({ agileDefender: buttonColor });
+            setState({ unhindered: buttonColor });
+            setState({ windWalker: buttonColor });
+            setState({ matchingSet: buttonColor });
+            setState({ unhinderedLine: lineColor });
+            setState({ windWalkerLine: lineColor });
+            setState({ matchingSetLine: lineColor });
 
-            if (state.apprenticeIllus == 1) {
+            if (state.unhindered == 1) {
                 IncrementCounter(2);
-            } else if (state.noviceIllus == 1) {
+            } else if (state.agileDefender == 1) {
                 IncrementCounter(3);
             } else {
                 IncrementCounter(4);
             }
         }
-        else if (state.masterIllus == 1) {
+        else if (state.deftMovement == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
-            setState({ expertIllusLine: lineColor });
-            setState({ expertIllus: buttonColor }); // Change the pressed button color back and forth
-            state.expertIllus == 0
+            setState({ matchingSetLine: lineColor });
+            setState({ matchingSet: buttonColor }); // Change the pressed button color back and forth
+            state.matchingSet == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
     };
-    const CheckIfMasterIllusPressed = (buttonColor, lineColor) => {
-        if (state.expertIllus == 0) {
+    const CheckIfDeftMovementPressed = (buttonColor, lineColor) => {
+        if (state.matchingSet == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ noviceIllus: buttonColor });
-            setState({ apprenticeIllus: buttonColor });
-            setState({ adeptIllus: buttonColor });
-            setState({ expertIllus: buttonColor });
-            setState({ masterIllus: buttonColor });
-            setState({ apprenticeIllusLine: lineColor });
-            setState({ adeptIllusLine: lineColor });
-            setState({ expertIllusLine: lineColor });
-            setState({ masterIllusLine: lineColor });
-            if (state.adeptIllus == 1) {
+            setState({ agileDefender: buttonColor });
+            setState({ unhindered: buttonColor });
+            setState({ windWalker: buttonColor });
+            setState({ matchingSet: buttonColor });
+            setState({ deftMovement: buttonColor });
+            setState({ unhinderedLine: lineColor });
+            setState({ windWalkerLine: lineColor });
+            setState({ matchingSetLine: lineColor });
+            setState({ deftMovementLine: lineColor });
+            if (state.windWalker == 1) {
                 IncrementCounter(2);
-            } else if (state.apprenticeIllus == 1) {
+            } else if (state.unhindered == 1) {
                 IncrementCounter(3);
-            } else if (state.noviceIllus == 1) {
+            } else if (state.agileDefender == 1) {
                 IncrementCounter(4);
             } else {
                 IncrementCounter(5);
             }
         } else {
-            setState({ masterIllusLine: lineColor });
-            setState({ masterIllus: buttonColor }); // Change the pressed button color back and forth
-            state.masterIllus == 0
+            setState({ deftMovementLine: lineColor });
+            setState({ deftMovement: buttonColor }); // Change the pressed button color back and forth
+            state.deftMovement == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
         }
@@ -233,7 +234,7 @@ const LightArmorTree = () => {
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
             </View>
-            <View title='Novice Illusion Blue' style={{
+            <View title='Agile Defender Blue' style={{
                 position: 'absolute',
                 left: "40%",
                 top: "80%",
@@ -242,28 +243,28 @@ const LightArmorTree = () => {
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Novice Illusion Gold' style={{
+            <View title='Agile Defender Gold' style={{
                 position: 'absolute',
                 left: "40%",
                 top: "80%",
                 zIndex: 8,
-                opacity: state.noviceIllus
+                opacity: state.agileDefender
 
             }}>
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("BasicSmithingModal")}
                     onPress={() => {
-                        CheckIfNoviceIllusPressed(
-                            state.noviceIllus == 0 ? 1 : 0,
+                        CheckIfAgileDefenderPressed(
+                            state.agileDefender == 0 ? 1 : 0,
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.NoviceIllusionText}>
+            <View style={styles.AgileDefenderText}>
 
             </View>
-            <View title='Illusion Dual Casting Blue' style={{
+            <View title='Custom Fit Blue' style={{
                 position: 'absolute',
                 left: "-1%",
                 top: "75%",
@@ -273,29 +274,29 @@ const LightArmorTree = () => {
 
                 <StarIconBlue />
             </View>
-            <View title='Illusion Dual Casting Gold' style={{
+            <View title='Custom Fit Gold' style={{
                 position: 'absolute',
                 left: "-1%",
                 top: "75%",
                 zIndex: 8,
-                opacity: state.illusionDual
+                opacity: state.customeFit
 
             }}>
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
                     onPress={() => {
-                        CheckIfillusionDualPressed(
-                            state.illusionDual == 0 ? 1 : 0,
-                            state.illusionDualLine == 'black' ? 'gold' : 'black'
+                        CheckIfCustomeFitPressed(
+                            state.customeFit == 0 ? 1 : 0,
+                            state.customeFitLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.DualCastingText}>
+            <View style={styles.CustomFitText}>
 
             </View>
-            <View title='Apprentice Illusion Blue' style={{
+            <View title='Unhindered Blue' style={{
                 position: 'absolute',
                 left: "5%",
                 top: "60%",
@@ -304,12 +305,12 @@ const LightArmorTree = () => {
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Apprentice Illusion Gold' style={{
+            <View title='Unhindered Gold' style={{
                 position: 'absolute',
                 left: "5%",
                 top: "60%",
                 zIndex: 8,
-                opacity: state.apprenticeIllus
+                opacity: state.unhindered
 
             }}>
                 <TouchableOpacity
@@ -317,18 +318,18 @@ const LightArmorTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfApprenticeIllusPressed(
-                            state.apprenticeIllus == 0 ? 1 : 0,
-                            state.apprenticeIllusLine == 'black' ? 'gold' : 'black'
+                        CheckIfUnhinderedPressed(
+                            state.unhindered == 0 ? 1 : 0,
+                            state.unhinderedLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.ElvenSmithText}>
+            <View style={styles.UnhinderedText}>
 
             </View>
-            <View title='Adept Illusion Blue' style={{
+            <View title='Wind Walker Blue' style={{
                 position: 'absolute',
                 left: "11%",
                 top: "43%",
@@ -337,12 +338,12 @@ const LightArmorTree = () => {
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Adept Illusion Gold' style={{
+            <View title='Wind Walker Gold' style={{
                 position: 'absolute',
                 left: "11%",
                 top: "43%",
                 zIndex: 8,
-                opacity: state.adeptIllus
+                opacity: state.windWalker
 
             }}>
                 <TouchableOpacity
@@ -350,18 +351,18 @@ const LightArmorTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfAdeptIllusPressed(
-                            state.adeptIllus == 0 ? 1 : 0,
-                            state.adeptIllusLine == 'black' ? 'gold' : 'black'
+                        CheckIfWindWalkerPressed(
+                            state.windWalker == 0 ? 1 : 0,
+                            state.windWalkerLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.AdeptIllusionText}>
+            <View style={styles.WindWalkerText}>
 
             </View>
-            <View title='expertIllus Blue' style={{
+            <View title='Matching Set Blue' style={{
                 position: 'absolute',
                 left: "5%",
                 top: "32%",
@@ -370,12 +371,12 @@ const LightArmorTree = () => {
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Expert Illusion Gold' style={{
+            <View title='Matching Set Gold' style={{
                 position: 'absolute',
                 left: "5%",
                 top: "32%",
                 zIndex: 8,
-                opacity: state.expertIllus
+                opacity: state.matchingSet
 
             }}>
                 <TouchableOpacity
@@ -383,19 +384,19 @@ const LightArmorTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfExpertIllusPressed(
-                            state.expertIllus == 0 ? 1 : 0,
-                            state.expertIllusLine == 'black' ? 'gold' : 'black'
+                        CheckIfMatchingSetPressed(
+                            state.matchingSet == 0 ? 1 : 0,
+                            state.matchingSetLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.ExpertIllusText}>
+            <View style={styles.MatchingSetText}>
 
             </View>
 
-            <View title='Master Illusion Blue' style={{
+            <View title='Deft Movement Blue' style={{
                 position: 'absolute',
                 left: "20%",
                 top: "20%",
@@ -404,12 +405,12 @@ const LightArmorTree = () => {
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Master Illusion Gold' style={{
+            <View title='Deft Movement Gold' style={{
                 position: 'absolute',
                 left: "20%",
                 top: "20%",
                 zIndex: 8,
-                opacity: state.masterIllus
+                opacity: state.deftMovement
 
             }}>
                 <TouchableOpacity
@@ -417,15 +418,15 @@ const LightArmorTree = () => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        CheckIfMasterIllusPressed(
-                            state.masterIllus == 0 ? 1 : 0,
-                            state.masterIllusLine == 'black' ? 'gold' : 'black'
+                        CheckIfDeftMovementPressed(
+                            state.deftMovement == 0 ? 1 : 0,
+                            state.deftMovementLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.MasterIllusText}>
+            <View style={styles.DeftMovementText}>
 
             </View>
 
@@ -436,7 +437,7 @@ const LightArmorTree = () => {
                     y1="85%"
                     x2="11%"
                     y2="80%"
-                    stroke={state.illusionDualLine}
+                    stroke={state.customeFitLine}
                     strokeWidth={lineStrokeWidth}
                 />
 
@@ -445,7 +446,7 @@ const LightArmorTree = () => {
                     y1="85%"
                     x2="17%"
                     y2="66%"
-                    stroke={state.apprenticeIllusLine}
+                    stroke={state.unhinderedLine}
                     strokeWidth={lineStrokeWidth}
                 />
                 <Line
@@ -453,7 +454,7 @@ const LightArmorTree = () => {
                     y1="65%"
                     x2="22%"
                     y2="48%"
-                    stroke={state.adeptIllusLine}
+                    stroke={state.windWalkerLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
@@ -462,7 +463,7 @@ const LightArmorTree = () => {
                     y1="48%"
                     x2="16%"
                     y2="37%"
-                    stroke={state.expertIllusLine}
+                    stroke={state.matchingSetLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
@@ -471,7 +472,7 @@ const LightArmorTree = () => {
                     y1="37%"
                     x2="32%"
                     y2="25%"
-                    stroke={state.masterIllusLine}
+                    stroke={state.deftMovementLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
@@ -497,37 +498,37 @@ const styles = StyleSheet.create({
     Icon: {
         position: 'absolute',
     },
-    NoviceIllusionText: {
+    AgileDefenderText: {
         position: 'absolute',
         left: "25%",
         top: "83%",
         zIndex: 10,
     },
-    DualCastingText: {
+    CustomFitText: {
         position: 'absolute',
         left: "33%",
         top: "55%",
         zIndex: 10,
     },
-    ElvenSmithText: {
+    UnhinderedText: {
         position: 'absolute',
         left: "13%",
         top: "53%",
         zIndex: 10,
     },
-    AdeptIllusionText: {
+    WindWalkerText: {
         position: 'absolute',
         left: "20%",
         top: "46%",
         zIndex: 10,
     },
-    ExpertIllusText: {
+    MatchingSetText: {
         position: 'absolute',
         left: "24%",
         top: "34%",
         zIndex: 10,
     },
-    MasterIllusText: {
+    DeftMovementText: {
         position: 'absolute',
         left: "50%",
         top: "60%",

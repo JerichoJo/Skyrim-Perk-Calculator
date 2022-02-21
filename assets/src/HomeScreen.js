@@ -305,6 +305,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Light_Armor.png')}
                         />
                         <Text style={styles.title}>Light Armor</Text>
+                        <tree.LightArmorTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}

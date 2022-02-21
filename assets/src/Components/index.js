@@ -10,6 +10,7 @@ import RestorationTree from "./Restoration";
 import ArcheryTree from "./Archery";
 import PickpocketTree from "./Pickpocket";
 import SpeechTree from "./Speech";
+import LightArmorTree from "./LightArmor";
 
 const tree = {
     IllusionTree,
@@ -23,7 +24,8 @@ const tree = {
     ArcheryTree,
     PickpocketTree,
     AlterationTree,
-    SpeechTree
+    SpeechTree,
+    LightArmorTree
 }
 
 export default tree;
