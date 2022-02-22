@@ -19,7 +19,7 @@ const FenceModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Fence{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Able to barter stolen goods with merchants previously invested in</Text>
 
             </View>
 

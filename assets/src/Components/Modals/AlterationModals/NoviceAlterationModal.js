@@ -19,7 +19,7 @@ const NoviceAlterationModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Novice Alteration{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Cast novice alteration spells for half magicka</Text>
 
             </View>
 

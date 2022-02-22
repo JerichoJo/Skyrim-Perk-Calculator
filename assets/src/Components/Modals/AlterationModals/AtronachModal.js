@@ -19,7 +19,7 @@ const AtronachModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Atronach{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Absorb 30% of magicka from spells that hit you</Text>
 
             </View>
 

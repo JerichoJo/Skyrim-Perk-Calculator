@@ -19,7 +19,7 @@ const EbonySmithingModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Ebony Smithing{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Can create Ebony armor/weapons at forges and improve them 2x as much</Text>
 
             </View>
 

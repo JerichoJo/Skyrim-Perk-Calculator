@@ -19,7 +19,8 @@ const InvestorModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Investor{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Can invest 500 gold with a shopkeeper which will
+                    permanently increase his gold reserve</Text>
 
             </View>
 

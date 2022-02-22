@@ -19,7 +19,7 @@ const DeftMovementModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Deft Movement{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>10% Chance of avoiding damage while wearing all light armor</Text>
 
             </View>
 

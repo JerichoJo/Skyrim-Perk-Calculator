@@ -19,7 +19,7 @@ const HagglingModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Haggling{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Buying and selling prices are 10%, 15%, 20%, 25%, or 30% better</Text>
 
             </View>
 

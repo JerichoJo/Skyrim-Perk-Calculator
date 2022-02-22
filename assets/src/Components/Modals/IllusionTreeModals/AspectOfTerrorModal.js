@@ -19,7 +19,7 @@ const AspectOfTerrorModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Aspect of Terror{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Fear spells work on higher level opponents. Works with kindred mage and animage</Text>
 
             </View>
 

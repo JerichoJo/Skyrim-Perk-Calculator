@@ -19,7 +19,7 @@ const AnimageModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Animage{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Illusion spells work on higher level animals</Text>
 
             </View>
 

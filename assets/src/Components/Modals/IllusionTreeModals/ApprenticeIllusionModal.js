@@ -19,7 +19,7 @@ const ApprenticeIllusionModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Apprentice Illusion{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Cast apprentice illusion spells for half magicka</Text>
 
             </View>
 

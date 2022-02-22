@@ -19,7 +19,7 @@ const AgileDefenderModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Agile Defender{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Increase armor rating for light armor by 20%, 40%, 60%, 80%, or 100%</Text>
 
             </View>
 

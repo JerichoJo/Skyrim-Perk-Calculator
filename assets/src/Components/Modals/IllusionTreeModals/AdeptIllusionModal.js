@@ -19,7 +19,7 @@ const AdeptIllusionModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Adept Illusion{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Cast adept illusion spells for half magicka</Text>
 
             </View>
 

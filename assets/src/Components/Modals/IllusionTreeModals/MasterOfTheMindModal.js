@@ -19,7 +19,7 @@ const MasterOfTheMindModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Master of the Mind{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Illusion spells work on undead, daedra, and automatons</Text>
 
             </View>
 

@@ -19,7 +19,7 @@ const MerchantModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Merchant Modal{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Able to sell any item to any kind of investor</Text>
 
             </View>
 

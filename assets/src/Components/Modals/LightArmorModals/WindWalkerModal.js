@@ -19,7 +19,7 @@ const WindWalkerModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Wind Walker{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Stamina regenerations 50% faster when wearing all light armor</Text>
 
             </View>
 

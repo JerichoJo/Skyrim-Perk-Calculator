@@ -19,7 +19,7 @@ const StabilityModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Stability{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Alteration spells have 50% longer duration</Text>
 
             </View>
 

@@ -19,7 +19,7 @@ const ApprenticeAlterationModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Apprentice Alteration{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Cast apprentice alterations for half magicka</Text>
 
             </View>
 

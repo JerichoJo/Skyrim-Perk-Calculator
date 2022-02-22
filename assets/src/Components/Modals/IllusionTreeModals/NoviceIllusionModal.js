@@ -19,7 +19,7 @@ const NoviceIllusionModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Novice Illusion{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Cast novice spells for half magicka</Text>
 
             </View>
 

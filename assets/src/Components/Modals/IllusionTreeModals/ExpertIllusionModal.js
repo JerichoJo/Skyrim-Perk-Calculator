@@ -19,7 +19,7 @@ const ExpertIllusionModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Expert Illusion{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Cast expert illusion spells for half magicka</Text>
 
             </View>
 

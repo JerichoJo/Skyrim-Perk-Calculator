@@ -19,7 +19,7 @@ const AdeptAlterationModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Adept Alteration{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Cast adept spells for half magicka</Text>
 
             </View>
 

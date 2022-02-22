@@ -19,7 +19,7 @@ const MasterIllusionModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Master Illusion{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Cast master illusion spells for half magicka</Text>
 
             </View>
 

@@ -19,7 +19,7 @@ const QuietCastingModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Quiet Casting{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>All spells cast from a school of magic are quiet to others</Text>
 
             </View>
 

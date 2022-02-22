@@ -19,7 +19,7 @@ const AllureModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Allure{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>10% better prices when interacting with the opposite sex</Text>
 
             </View>
 

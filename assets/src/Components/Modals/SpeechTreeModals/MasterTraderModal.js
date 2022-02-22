@@ -19,7 +19,7 @@ const MasterTraderModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Master Trader{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Every merchant gains 1000 gold for bartering</Text>
 
             </View>
 

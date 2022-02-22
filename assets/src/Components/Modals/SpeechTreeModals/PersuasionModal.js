@@ -19,7 +19,7 @@ const PersuasionModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Persuasion{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Persuasion attempts are 30% easier</Text>
 
             </View>
 

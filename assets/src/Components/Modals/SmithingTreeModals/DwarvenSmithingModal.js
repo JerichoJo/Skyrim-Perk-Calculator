@@ -19,7 +19,7 @@ const DwarvenSmithingModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Dwarven Smithing{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Can create dwarven armor/weapons at forges and improve them 2x as much</Text>
 
             </View>
 

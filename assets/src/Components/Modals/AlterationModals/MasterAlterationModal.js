@@ -19,7 +19,7 @@ const MasterAlterationModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Master Alteration{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Cast master alteration spells for half magicka</Text>
 
             </View>
 

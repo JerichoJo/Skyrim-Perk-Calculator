@@ -19,7 +19,7 @@ const IntimidationModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Intimidation{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Intimidation 2x as likely to be successful</Text>
 
             </View>
 

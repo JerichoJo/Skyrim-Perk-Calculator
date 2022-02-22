@@ -19,7 +19,7 @@ const KindredMageModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Kindred Mage{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Illusion spell works on higher level people by adding 10 levels to the maximum</Text>
 
             </View>
 

@@ -19,7 +19,7 @@ const AlterationDualCastingModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Alteration Dual Casting{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Dual casting an alteration spell makes the effect more powerful</Text>
 
             </View>
 

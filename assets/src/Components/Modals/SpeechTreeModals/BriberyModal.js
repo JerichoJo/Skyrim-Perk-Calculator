@@ -19,7 +19,7 @@ const BriberyModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Bribery{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Can bribe guards to ignore crimes</Text>
 
             </View>
 

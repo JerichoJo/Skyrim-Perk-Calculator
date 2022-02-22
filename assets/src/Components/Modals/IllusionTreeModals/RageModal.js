@@ -19,7 +19,7 @@ const RageModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Rage{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Frenzy spells work on higher level opponents. Works with kindred mage and animage</Text>
 
             </View>
 

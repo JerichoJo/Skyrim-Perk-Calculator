@@ -19,7 +19,7 @@ const UnhinderedModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Unhindered{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Light armor weighs nothing and will not wear you down</Text>
 
             </View>
 

@@ -19,7 +19,7 @@ const MatchingSetModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Matching Set{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>25% additional bonus if wearing all light armor</Text>
 
             </View>
 

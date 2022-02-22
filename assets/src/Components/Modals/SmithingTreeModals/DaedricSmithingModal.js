@@ -19,7 +19,7 @@ const DaedricSmithingModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Daedric Smithing{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Can create Daedric armor/weapons at forges and improve them 2x as much</Text>
 
             </View>
 

@@ -19,7 +19,7 @@ const CustomFitModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Custom Fit{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>25% Armor bonus if wearing all light armor</Text>
 
             </View>
 

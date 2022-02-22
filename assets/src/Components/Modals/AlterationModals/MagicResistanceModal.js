@@ -19,7 +19,7 @@ const MagicResistanceModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Magic Resistance{"\n"}</Text>
 
-                <Text style={styles.Text}>Can improve magical weapons and armor</Text>
+                <Text style={styles.Text}>Blocks 10%, 20%, or 30% of a casted spells effects</Text>
 
             </View>
 
