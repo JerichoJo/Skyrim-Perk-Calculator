@@ -436,9 +436,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ElvenSmithingModal")}
                     onPress={() => {
                         CheckIfElvinSmithPressed(
                             state.elvinSmithing == 0 ? 1 : 0,
@@ -469,9 +467,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdvancedArmorsSmithingModal")}
                     onPress={() => {
                         CheckIfAdvanceSmithingPressed(
                             state.advancedSmithing == 0 ? 1 : 0,
@@ -502,9 +498,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("GlassSmithingModal")}
                     onPress={() => {
                         CheckIfGlassSmithingPressed(
                             state.glassSmithing == 0 ? 1 : 0,
@@ -535,9 +529,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DragonArmorSmithingModal")}
                     onPress={() => {
                         CheckIfDragonSmithingPressed(
                             state.dragonSmithing == 0 ? 1 : 0,
@@ -569,9 +561,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DaedricSmithingModal")}
                     onPress={() => {
                         CheckIfDaedricSmithingPressed(
                             state.daedricSmithing == 0 ? 1 : 0,
@@ -602,9 +592,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("EbonySmithingModal")}
                     onPress={() => {
                         CheckIfEbonySmithingPressed(
                             state.ebonySmithing == 0 ? 1 : 0,
@@ -615,12 +603,12 @@ const SmithingTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.EbonySmithText}>
-                <Text style={styles.PerkText}>Ebony Smithing</Text>
+                <Text style={styles.PerkText}>   Ebony {'\n'} Smithing</Text>
             </View>
             <View title='Orcish Smithing Blue' style={{
                 position: 'absolute',
-                left: "70%",
-                top: "50%",
+                left: "65%",
+                top: "50.5%",
                 zIndex: 8,
 
             }}>
@@ -628,16 +616,14 @@ const SmithingTree = () => {
             </View>
             <View title='Orcish Smithing Gold' style={{
                 position: 'absolute',
-                left: "70%",
-                top: "50%",
+                left: "65%",
+                top: "50.5%",
                 zIndex: 8,
                 opacity: state.orcishSmithing
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("OrcishSmithingModal")}
                     onPress={() => {
                         CheckIfOrcishSmithingPressed(
                             state.orcishSmithing == 0 ? 1 : 0,
@@ -668,9 +654,7 @@ const SmithingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DwarvenSmithingModal")}
                     onPress={() => {
                         CheckIfDwarvenSmithingPressed(
                             state.dwarvenSmithing == 0 ? 1 : 0,
@@ -751,15 +735,15 @@ const SmithingTree = () => {
                 <Line
                     x1="91%"
                     y1="55%"
-                    x2="80%"
-                    y2="55%"
+                    x2="78%"
+                    y2="55.5%"
                     stroke={state.ebonySmithingLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="79%"
-                    y1="55.5%"
+                    x1="76%"
+                    y1="56%"
                     x2="60%"
                     y2="65%"
                     stroke={state.orcishSmithingLine}
@@ -803,8 +787,8 @@ const styles = StyleSheet.create({
     },
     ArcaneSmithText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
+        left: "25%",
+        top: "62%",
         zIndex: 10,
     },
     ElvenSmithText: {
@@ -821,41 +805,40 @@ const styles = StyleSheet.create({
     },
     GlassSmithText: {
         position: 'absolute',
-        left: "24%",
-        top: "34%",
+        left: "10%",
+        top: "37%",
         zIndex: 10,
     },
     DragonArmorText: {
         position: 'absolute',
-        left: "44%",
+        left: "45%",
         top: "34%",
         zIndex: 10,
     },
     DaedricSmithText: {
         position: 'absolute',
-        left: "64%",
+        left: "67%",
         top: "40%",
         zIndex: 10,
     },
     EbonySmithText: {
         position: 'absolute',
-        left: "82%",
-        top: "50%",
+        left: "85%",
+        top: "49%",
         zIndex: 10,
     },
     OrcishSmithText: {
         position: 'absolute',
-        left: "70%",
-        top: "50%",
+        left: "50%",
+        top: "54%",
         zIndex: 10,
     },
     DwarvenSmithText: {
         position: 'absolute',
-        left: "50%",
-        top: "60%",
+        left: "65%",
+        top: "65%",
         zIndex: 10,
     },
-
     PerkText: {
         color: 'white',
         fontSize: 12,

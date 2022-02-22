@@ -1,0 +1,919 @@
+import * as React from 'react';
+import { useState, useCallback, useEffect, useContext, useRef, Button } from 'react';
+import Svg, { Line } from 'react-native-svg';
+import {
+    View,
+    Dimensions,
+    TouchableOpacity,
+    Text,
+    StyleSheet,
+} from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import Modal from 'react-native-modal';
+import StarIconBlue from './StarIconBlue';
+import StarIconGold from './StarIconGold';
+import { AllActivePerkss } from '../../../App';
+import { useNavigation } from '@react-navigation/native';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+const useSetState = (initialState = {}) => {
+    const [state, regularSetState] = useState(initialState);
+
+    const setState = (newState) => {
+        regularSetState((prevState) => ({
+            ...prevState,
+            ...newState,
+        }));
+    };
+
+    return [state, setState];
+};
+const DestructionTree = () => {
+  const navigation = useNavigation();
+  const [state, setState] = useSetState({
+    noviceDestruction: 0,
+    apprenticeDestruction: 0,
+    apprenticeDestructionLine: 'black',
+    adeptDestruction: 0,
+    adeptDestructionLine: 'black',
+    expertDestruction: 0,
+    expertDestructionLine: 'black',
+    masterDestruction: 0,
+    masterDestructionLine: 'black',
+    runeMaster: 0,
+    runeMasterLine: 'black',
+    augmentedFlames: 0,
+    augmentedFlamesLine: 'black',
+    intenseFlames: 0,
+    intenseFlamesLine: 'black',
+    augmentedFrost: 0,
+    augmentedFrostLine: 'black',
+    deepFreeze: 0,
+    deepFreezeLine: 'black',
+    augmentedShock: 0,
+    augmentedShockLine: 'black',
+    disintegrate: 0,
+    disintegrateLine: 'black',
+    destructionDualCasting: 0,
+    destructionDualCastingLine: 'black',
+    impact: 0,
+    impactLine: 'black',
+  });
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [count, setCount] = useState(0);
+
+  const [ActivePerks, SetActivePerks] = useState(0);
+  const [RequiredLevel, SetRequiredLevel] = useState(0);
+  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
+  const IncrementCounter = (numActivePerks = 0) => {
+    SetActivePerks(ActivePerks + numActivePerks);
+    SetAllActivePerks(AllActivePerks + numActivePerks);
+  };
+  const DecrementCounter = (numActivePerks = 0) => {
+    if (ActivePerks === 0) {
+      return;
+    }
+    SetActivePerks(ActivePerks - numActivePerks);
+    SetAllActivePerks(AllActivePerks - numActivePerks);
+  };
+
+  const TrackLevel = useCallback((level) => {
+    SetRequiredLevel(level);
+  }, []);
+
+  const lineStrokeWidth = '2';
+
+  const CheckLevel = useCallback(() => {
+    if (state.noviceDestruction == 1) {
+      TrackLevel(0);
+    } else if (state.apprenticeDestruction == 1) {
+      TrackLevel(25);
+    } else if (state.adeptDestruction == 1) {
+      TrackLevel(50);
+    } else if (state.expertDestruction == 1) {
+      TrackLevel(75);
+    } else if (state.masterDestruction == 1) {
+      TrackLevel(100);
+    } else if (state.runeMaster == 1) {
+      TrackLevel(40);
+    } else if (state.augmentedFlames == 1) {
+      TrackLevel(60);
+    } else if (state.intenseFlames == 1) {
+      TrackLevel(50);
+    } else if (state.augmentedFrost == 1) {
+      TrackLevel(60);
+    } else if (state.deepFreeze == 1) {
+      TrackLevel(60);
+    } else if (state.augmentedShock == 1) {
+      TrackLevel(60);
+    } else if (state.disintegrate == 1) {
+      TrackLevel(70);
+    } else if (state.destructionDualCasting == 1) {
+      TrackLevel(20);
+    } else if (state.impact == 1) {
+      TrackLevel(40);
+    }
+  }, [TrackLevel, state]);
+
+  useEffect(() => {
+    CheckLevel();
+  }, [CheckLevel]);
+
+  const checkIfNoviceDestructionPressed = (buttonColor) => {
+    if (
+      state.augmentedFlames == 1 ||
+      state.augmentedFrost == 1 ||
+      state.augmentedShock == 1 ||
+      state.apprenticeDestruction == 1 ||
+      state.destructionDualCasting == 1
+    ) {
+      // Do nothing....must un-select nodes above it first
+    } else {
+      setState({ noviceDestruction: buttonColor }); // Change button color back and forth
+    }
+  };
+
+  const checkIfAugmentedFlamesPressed = (buttonColor, lineColor) => {
+    if (state.noviceDestruction == 0) {
+      // Change the colors of the buttons below it if they have not been pressed
+      setState({ noviceDestruction: buttonColor });
+      setState({ augmentedFlames: buttonColor });
+      setState({ augmentedFlamesLine: lineColor });
+    } else if (state.intenseFlames == 1) {
+      // Nothing
+    } else {
+      setState({ augmentedFlames: buttonColor }); // Change the pressed button color back and forth
+      setState({ augmentedFlamesLine: buttonColor });
+    }
+  };
+
+  const checkIntenseFlamesPressed = (buttonColor, lineColor) => {
+    if (state.augmentedFlames == 0) {
+      // Change the colors of the buttons below it if they have not been pressed
+      setState({ noviceDestruction: buttonColor });
+      setState({ augmentedFlames: buttonColor });
+      setState({ augmentedFlamesLine: lineColor });
+      setState({ intenseFlames: buttonColor });
+      setState({ intenseFlamesLine: lineColor });
+    } else {
+      setState({ intenseFlames: buttonColor });
+      setState({ intenseFlamesLine: lineColor }); // Change button color back and forth
+    }
+  };
+  const checkIfAugmentedFrostPressed = (buttonColor, lineColor) => {
+    if (state.noviceDestruction == 0) {
+      // Change the colors of the buttons below it if they have not been pressed
+      setState({ noviceDestruction: buttonColor });
+      setState({ augmentedFrost: buttonColor });
+      setState({ augmentedFrostLine: lineColor });
+    } else if (state.deepFreeze == 1) {
+      // Do nothing....must un-select nodes above it first
+    } else {
+      setState({ augmentedFrost: buttonColor }); // Change the pressed button color back and forth
+      setState({ augmentedFrostLine: lineColor });
+    }
+  };
+  const checkIfDeepFreezePressed = (buttonColor, lineColor) => {
+    if (state.augmentedFrost == 0) {
+      // Change the colors of the buttons below it if they have not been pressed
+      setState({ noviceDestruction: buttonColor });
+      setState({ augmentedFrost: buttonColor });
+      setState({ augmentedFrostLine: lineColor });
+      setState({ deepFreeze: buttonColor });
+      setState({ deepFreezeLine: lineColor });
+    } else {
+      setState({ deepFreeze: buttonColor }); // Change the pressed button color back and forth
+      setState({ deepFreezeLine: lineColor });
+    }
+  };
+  const checkIfAugmentedShockPressed = (buttonColor, lineColor) => {
+    if (state.noviceDestruction == '0') {
+      // Change the colors of the buttons below it if they have not been pressed
+      setState({ noviceDestruction: buttonColor });
+      setState({ augmentedShock: buttonColor });
+      setState({ augmentedShockLine: lineColor });
+    } else if (state.disintegrate == 1) {
+      // Do nothing....must un-select nodes above it first
+    } else {
+      setState({ augmentedShock: buttonColor }); // Change the pressed button color back and forth
+      setState({ augmentedShockLine: lineColor });
+    }
+  };
+  const checkIfDisintegratePressed = (buttonColor, lineColor) => {
+    if (state.augmentedShockLine == 0) {
+      // Change the colors of the buttons below it if they have not been pressed
+      setState({ noviceDestruction: buttonColor });
+      setState({ augmentedShock: buttonColor });
+      setState({ augmentedShockLine: lineColor });
+      setState({ disintegrate: buttonColor });
+      setState({ disintegrateLine: buttonColor });
+    } else {
+      setState({ disintegrate: buttonColor });
+      setState({ disintegrateLine: lineColor }); // Change the pressed button color back and forth
+    }
+  };
+  const checkIfDestructionDualPressed = (buttonColor, lineColor) => {
+    if (state.noviceDestruction == 0) {
+      // Change the colors of the buttons below it if they have not been pressed
+      setState({ noviceDestruction: buttonColor });
+      setState({ destructionDualCasting: buttonColor });
+      setState({ destructionDualCastingLine: lineColor });
+    } else if (state.impact == 1) {
+      // Do nothing....must un-select nodes above it first
+    } else {
+      setState({ destructionDualCastingLine: lineColor }); // Change the pressed button color back and forth
+      setState({ destructionDualCasting: buttonColor });
+    }
+  };
+  const checkIfImpactPressed = (buttonColor, lineColor) => {
+    if (state.destructionDualCasting == 0) {
+      setState({ noviceDestruction: buttonColor });
+      setState({ destructionDualCasting: buttonColor });
+      setState({ destructionDualCastingLine: lineColor });
+      setState({ impact: buttonColor });
+      setState({ impactLine: lineColor });
+    } else {
+      setState({ impact: buttonColor });
+      setState({ impactLine: lineColor });
+    }
+  };
+  const checkIfApprenticeDestructionPressed = (buttonColor, lineColor) => {
+    if (state.noviceDestruction == 0) {
+      // Change the colors of the buttons below it if they have not been pressed
+      setState({ noviceDestruction: buttonColor });
+      setState({ apprenticeDestruction: buttonColor });
+      setState({ apprenticeDestructionLine: lineColor });
+    } else if (state.runeMaster == 1 || state.adeptDestruction == 1) {
+      // Do nothing....must un-select nodes above it first
+    } else {
+      setState({ apprenticeDestruction: buttonColor });
+      setState({ apprenticeDestructionLine: lineColor }); // Change the pressed button color back and forth
+    }
+  };
+  const checkIfRuneMasterPressed = (buttonColor, lineColor) => {
+    if (state.apprenticeDestruction == 0) {
+      setState({ noviceDestruction: buttonColor });
+      setState({ apprenticeDestruction: buttonColor });
+      setState({ apprenticeDestructionLine: lineColor });
+      setState({ runeMaster: buttonColor });
+      setState({ runeMasterLine: lineColor });
+    } else {
+      setState({ runeMaster: buttonColor });
+      setState({ runeMasterLine: lineColor });
+    }
+  };
+  const checkIfAdeptDestructionPressed = (buttonColor, lineColor) => {
+    if (state.apprenticeDestruction == 0) {
+      setState({ noviceDestruction: buttonColor });
+      setState({ apprenticeDestruction: buttonColor });
+      setState({ apprenticeDestructionLine: lineColor });
+      setState({ adeptDestruction: buttonColor });
+      setState({ adeptDestructionLine: lineColor });
+    } else {
+      setState({ adeptDestruction: buttonColor });
+      setState({ adeptDestructionLine: lineColor });
+    }
+  };
+  const checkIfExpertDestructionPressed = (buttonColor, lineColor) => {
+    if (state.adeptDestruction == 0) {
+      setState({ noviceDestruction: buttonColor });
+      setState({ apprenticeDestruction: buttonColor });
+      setState({ apprenticeDestructionLine: lineColor });
+      setState({ adeptDestruction: buttonColor });
+      setState({ adeptDestructionLine: lineColor });
+      setState({ expertDestruction: buttonColor });
+      setState({ expertDestructionLine: lineColor });
+    } else {
+      setState({ expertDestruction: buttonColor });
+      setState({ expertDestructionLine: lineColor });
+    }
+  };
+  const checkIfMasterDestructionPressed = (buttonColor, lineColor) => {
+    if (state.expertDestruction == 0) {
+      setState({ noviceDestruction: buttonColor });
+      setState({ apprenticeDestruction: buttonColor });
+      setState({ apprenticeDestructionLine: lineColor });
+      setState({ expertDestruction: buttonColor });
+      setState({ expertDestructionLine: lineColor });
+      setState({ masterDestruction: buttonColor });
+      setState({ masterDestructionLine: lineColor });
+    } else {
+      setState({ masterDestruction: buttonColor });
+      setState({ masterDestructionLine: lineColor });
+    }
+  };
+    return (
+        <View style={{ zIndex: 2 }}>
+            <View style={styles.bottomText}>
+                <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
+                <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+            </View>
+            <View title='Novice Destruction Blue' style={{
+                position: 'absolute',
+                left: "35%",
+                top: "80%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Novice Destruction Gold' style={{
+                position: 'absolute',
+                left: "35%",
+                top: "80%",
+                zIndex: 8,
+                opacity: state.noviceDestruction
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => navigation.navigate("Other Stuff")}
+                    onPress={() => {
+                        checkIfNoviceDestructionPressed(
+                            state.noviceDestruction == 0 ? 1 : 0,
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Apprentice Destruction Blue' style={{
+                position: 'absolute',
+                left: "60%",
+                top: "60%",
+                zIndex: 8,
+
+            }}>
+
+                <StarIconBlue />
+            </View>
+            <View title='Apprentice Destruction Gold' style={{
+                position: 'absolute',
+                left: "60%",
+                top: "60%",
+                zIndex: 8,
+                opacity: state.apprenticeDestruction
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfApprenticeDestructionPressed(
+                            state.apprenticeDestruction == 0 ? 1 : 0,
+                            state.apprenticeDestructionLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Adept Destruction Blue' style={{
+                position: 'absolute',
+                left: "57%",
+                top: "45%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Adept Destruction Gold' style={{
+                position: 'absolute',
+                left: "57%",
+                top: "45%",
+                zIndex: 8,
+                opacity: state.adeptDestruction
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfAdeptDestructionPressed(
+                            state.adeptDestruction == 0 ? 1 : 0,
+                            state.adeptDestructionLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Expert Destruction Blue' style={{
+                position: 'absolute',
+                left: "62.5%",
+                top: "35%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Expert Destruction Gold' style={{
+                position: 'absolute',
+                left: "62.5%",
+                top: "35%",
+                zIndex: 8,
+                opacity: state.expertDestruction
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfExpertDestructionPressed(
+                            state.expertDestruction == 0 ? 1 : 0,
+                            state.expertDestructionLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Master Destruction Blue' style={{
+                position: 'absolute',
+                left: "61%",
+                top: "25%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Master Destruction Gold' style={{
+                position: 'absolute',
+                left: "61%",
+                top: "25%",
+                zIndex: 8,
+                opacity: state.masterDestruction
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfMasterDestructionPressed(
+                            state.masterDestruction == 0 ? 1 : 0,
+                            state.masterDestructionLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Rune Master Blue' style={{
+                position: 'absolute',
+                left: "75%",
+                top: "49%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Rune Master Gold' style={{
+                position: 'absolute',
+                left: "75%",
+                top: "49%",
+                zIndex: 8,
+                opacity: state.runeMaster
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfRuneMasterPressed(
+                            state.runeMaster == 0 ? 1 : 0,
+                            state.runeMasterLine == 'black' ? 'gold' : 'black',
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Augmented Flames Blue' style={{
+                position: 'absolute',
+                left: "10%",
+                top: "60%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Augmented Flames Gold' style={{
+                position: 'absolute',
+                left: "10%",
+                top: "60%",
+                zIndex: 8,
+                opacity: state.augmentedFlames
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfAugmentedFlamesPressed(
+                            state.augmentedFlames == 0 ? 1 : 0,
+                            state.augmentedFlamesLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Intense Flames Blue' style={{
+                position: 'absolute',
+                left: "9%",
+                top: "50%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Intense Flames Gold' style={{
+                position: 'absolute',
+                left: "9%",
+                top: "50%",
+                zIndex: 8,
+                opacity: state.intenseFlames
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIntenseFlamesPressed(
+                            state.intenseFlames == 0 ? 1 : 0,
+                            state.intenseFlamesLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Augmented Frost Blue' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "55%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Augmented Frost Gold' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "55%",
+                zIndex: 8,
+                opacity: state.augmentedFrost
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfAugmentedFrostPressed(
+                            state.augmentedFrost == 0 ? 1 : 0,
+                            state.augmentedFrostLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Augmented Shock Blue' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "49%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Augmented Shock Gold' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "49%",
+                zIndex: 8,
+                opacity: state.augmentedShock
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfAugmentedShockPressed(
+                            state.augmentedShock == 0 ? 1 : 0,
+                            state.augmentedShockLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Disintegrate Blue' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "35%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Disintegrate Gold' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "35%",
+                zIndex: 8,
+                opacity: state.disintegrate
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfDisintegratePressed(
+                            state.disintegrate == 0 ? 1 : 0,
+                            state.disintegrateLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Destruction Dual Casting Blue' style={{
+                position: 'absolute',
+                left: "70.2%",
+                top: "70%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Destruction Dual Casting Gold' style={{
+                position: 'absolute',
+                left: "70.2%",
+                top: "70%",
+                zIndex: 8,
+                opacity: state.destructionDualCasting
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfDestructionDualPressed(
+                            state.destructionDualCasting == 0 ? 1 : 0,
+                            state.destructionDualCastingLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Impact Blue' style={{
+                position: 'absolute',
+                left: "80%",
+                top: "60%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Impact Gold' style={{
+                position: 'absolute',
+                left: "80%",
+                top: "60%",
+                zIndex: 8,
+                opacity: state.impact
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfImpactPressed(
+                            state.impact == 0 ? 1 : 0,
+                            state.impactLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
+
+        <Line // Novice Destruction to Apprentice Destruction
+          x1="35.3%"
+          y1="79.2%"
+          x2="60%"
+          y2="60%"
+          stroke={state.apprenticeDestruction}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Apprentice to Adept Destruction
+          x1="60%"
+          y1="59%"
+          x2="57%"
+          y2="46%"
+          stroke={state.adeptDestruction}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Adept to Expert Destruction
+          x1="57%"
+          y1="44%"
+          x2="62.5%"
+          y2="36%"
+          stroke={state.expertDestruction}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Expert Destruction to Master Destruction
+          x1="62.5%"
+          y1="34%"
+          x2="61%"
+          y2="26%"
+          stroke={state.masterDestruction}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Apprentice Destruction to Rune Master
+          x1="61%"
+          y1="59%"
+          x2="74%"
+          y2="50%"
+          stroke={state.runeMaster}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Novice Destruction to Augmented flames
+          x1="10%"
+          y1="60%"
+          x2="34%"
+          y2="79%"
+          stroke={state.augmentedFlames}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Augmented Flames to Intense Flames
+          x1="10%"
+          y1="59%"
+          x2="9%"
+          y2="50%"
+          stroke={state.intenseFlames}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Novice Destruction to Augmented Frost
+          x1="24%"
+          y1="55%"
+          x2="35%"
+          y2="79%"
+          stroke={state.augmentedFrost}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Augmented Frost to Deep Freeze
+          x1="25%"
+          y1="53.5%"
+          x2="25%"
+          y2="40%"
+          stroke={state.deepFreeze}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Novice Destruction to Augmented Shock
+          x1="40.2%"
+          y1="50%"
+          x2="35%"
+          y2="79%"
+          stroke={state.augmentedShock}
+          strokeWidth={lineStrokeWidth}
+        />
+        <Line // Augmented Shock to Disintegrate
+          x1="40.2%"
+          y1="35%"
+          x2="40%"
+          y2="48%"
+          stroke={state.augmentedShock}
+          strokeWidth={lineStrokeWidth}
+        />   
+        <Line // Novice Destruction to Destruction Dual Casting
+          x1="70.2%"
+          y1="70%"
+          x2="37%"
+          y2="79%"
+          stroke={state.destructionDualCasting}
+          strokeWidth={lineStrokeWidth}
+        />  
+        <Line // Destruction Dual Casting to Impact
+          x1="80%"
+          y1="60%"
+          x2="71%"
+          y2="69%"
+          stroke={state.impact}
+          strokeWidth={lineStrokeWidth}
+        />  
+        </Svg>
+      </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    HomeScreenText: {
+        color: 'white',
+    },
+    topText: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: "70%",
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    Icon: {
+        position: 'absolute',
+    },
+    NoviceDestructionText: {
+        position: 'absolute',
+        left: "25%",
+        top: "83%",
+        zIndex: 10,
+    },
+    ApprenticeDestructionText: {
+        position: 'absolute',
+        left: "33%",
+        top: "55%",
+        zIndex: 10,
+    },
+    AdeptDestructionText: {
+        position: 'absolute',
+        left: "13%",
+        top: "53%",
+        zIndex: 10,
+    },
+    ExpertDestructionText: {
+        position: 'absolute',
+        left: "20%",
+        top: "46%",
+        zIndex: 10,
+    },
+    MasterDestructionText: {
+        position: 'absolute',
+        left: "24%",
+        top: "34%",
+        zIndex: 10,
+    },
+    RuneMasterText: {
+        position: 'absolute',
+        left: "44%",
+        top: "34%",
+        zIndex: 10,
+    },
+    AugmentedFlamesText: {
+        position: 'absolute',
+        left: "64%",
+        top: "40%",
+        zIndex: 10,
+    },
+    IntenseFlamesText: {
+        position: 'absolute',
+        left: "82%",
+        top: "50%",
+        zIndex: 10,
+    },
+    AugmentedFrostText: {
+        position: 'absolute',
+        left: "70%",
+        top: "50%",
+        zIndex: 10,
+    },
+    DeepFreezeText: {
+        position: 'absolute',
+        left: "70%",
+        top: "50%",
+        zIndex: 10,
+    },
+    AugmentedShockText: {
+        position: 'absolute',
+        left: "70%",
+        top: "50%",
+        zIndex: 10,
+    },
+    DisintegrateText: {
+        position: 'absolute',
+        left: "70%",
+        top: "50%",
+        zIndex: 10,
+    },
+    DestructionDualCastingText: {
+        position: 'absolute',
+        left: "70%",
+        top: "50%",
+        zIndex: 10,
+    },
+    ImpactText: {
+        position: 'absolute',
+        left: "70%",
+        top: "50%",
+        zIndex: 10,
+    },
+    PerkText: {
+        color: 'white',
+        fontSize: 12,
+    }
+});
+
+export default DestructionTree;
