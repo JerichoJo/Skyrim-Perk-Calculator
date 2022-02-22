@@ -265,7 +265,7 @@ const LightArmorTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AgileDefenderText}>
-                <Text style={styles.PerkText}>Agile Defender</Text>
+                <Text style={styles.PerkText}>Agile Defender ({ }/5)</Text>
             </View>
             <View title='Custom Fit Blue' style={{
                 position: 'absolute',
@@ -497,7 +497,7 @@ const styles = StyleSheet.create({
     },
     AgileDefenderText: {
         position: 'absolute',
-        left: "38%",
+        left: "33%",
         top: "83%",
         zIndex: 10,
     },
@@ -531,7 +531,6 @@ const styles = StyleSheet.create({
         top: "23%",
         zIndex: 10,
     },
-
     PerkText: {
         color: 'white',
         fontSize: 12,

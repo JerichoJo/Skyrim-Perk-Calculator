@@ -51,10 +51,9 @@ const SpeechTree = () => {
         intimidationLine: 'black',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [HagglingLevel, SetHagglingLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
     const IncrementCounter = (numActivePerks = 0) => {
@@ -68,6 +67,33 @@ const SpeechTree = () => {
         SetActivePerks(ActivePerks - numActivePerks);
         SetAllActivePerks(AllActivePerks - numActivePerks);
     };
+
+    const IncHagglingCounter = (numActiveHaggling) => {
+        if (HagglingLevel < 5) {
+            SetHagglingLevel(HagglingLevel + numActiveHaggling)
+        }
+        else {
+            SetHagglingLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    // function to control the Haggling perk count (0/5)
+    const IncHagglingCountCall = (buttonColor) => {
+        if (HagglingLevel == 0) {
+            setState({ haggling: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncHagglingCounter(1); // increment basic smith by 1 on first click
+        } else if (HagglingLevel == 5) {
+            setState({ haggling: buttonColor }); // Change the pressed button color back and forth
+            IncHagglingCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncHagglingCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
 
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
@@ -107,10 +133,7 @@ const SpeechTree = () => {
             // Do nothing....must un-select nodes above it first
         }
         else {
-            setState({ haggling: button }); // Change button color back and forth
-            state.haggling == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncHagglingCountCall(button);
         }
     };
 
@@ -121,6 +144,9 @@ const SpeechTree = () => {
             setState({ allure: button });
             setState({ allureLine: line });
             IncrementCounter(2);
+            if (state.haggling == 0) {
+                SetHagglingLevel(1);
+            }
         } else if (state.merchant == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -140,6 +166,9 @@ const SpeechTree = () => {
             setState({ merchant: buttonColor });
             setState({ allureLine: lineColor });
             setState({ merchantLine: lineColor });
+            if (state.haggling == 0) {
+                SetHagglingLevel(1);
+            }
             if (state.haggling == 1) {
                 IncrementCounter(2);
             } else {
@@ -166,6 +195,9 @@ const SpeechTree = () => {
             setState({ allureLine: lineColor });
             setState({ merchantLine: lineColor });
             setState({ investorLine: lineColor });
+            if (state.haggling == 0) {
+                SetHagglingLevel(1);
+            }
             if (state.allure == 1) {
                 IncrementCounter(2);
             } else if (state.haggling == 1) {
@@ -195,6 +227,9 @@ const SpeechTree = () => {
             setState({ merchantLine: lineColor });
             setState({ investorLine: lineColor });
             setState({ fenceLine: lineColor });
+            if (state.haggling == 0) {
+                SetHagglingLevel(1);
+            }
             if (state.merchant == 1) {
                 IncrementCounter(2);
             } else if (state.allure == 1) {
@@ -229,6 +264,9 @@ const SpeechTree = () => {
             setState({ investorLine: lineColor });
             setState({ fenceLine: lineColor });
             setState({ masterTraderLine: lineColor });
+            if (state.haggling == 0) {
+                SetHagglingLevel(1);
+            }
             if (state.investor == 1) {
                 IncrementCounter(2);
             } else if (state.merchant == 1) {
@@ -255,6 +293,9 @@ const SpeechTree = () => {
             setState({ bribery: buttonColor });
             setState({ briberyLine: lineColor });
             IncrementCounter(2);
+            if (state.haggling == 0) {
+                SetHagglingLevel(1);
+            }
 
         } else if (state.persuasion == 1) {
             // Do nothing....must un-select nodes above it first
@@ -273,6 +314,9 @@ const SpeechTree = () => {
             setState({ persuasion: buttonColor });
             setState({ briberyLine: lineColor });
             setState({ persuasionLine: lineColor });
+            if (state.haggling == 0) {
+                SetHagglingLevel(1);
+            }
             if (state.haggling == 1) {
                 IncrementCounter(2);
             } else {
@@ -298,6 +342,9 @@ const SpeechTree = () => {
             setState({ briberyLine: lineColor });
             setState({ persuasionLine: lineColor });
             setState({ intimidationLine: lineColor });
+            if (state.haggling == 0) {
+                SetHagglingLevel(1);
+            }
             if (state.bribery == 1) {
                 IncrementCounter(2);
             } else if (state.haggling == 1) {
@@ -348,7 +395,7 @@ const SpeechTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.HagglingText}>
-                <Text style={styles.PerkText}>Haggling</Text>
+                <Text style={styles.PerkText}>Haggling ({HagglingLevel}/5)</Text>
 
             </View>
             <View title='Allure Blue' style={{
