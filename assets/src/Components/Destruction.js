@@ -12,7 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
-import { AllActivePerkss } from '../../../App';
+import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
@@ -307,9 +307,9 @@ const DestructionTree = () => {
   };
     return (
         <View style={{ zIndex: 2 }}>
-            <View style={styles.bottomText}>
+            <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-                <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+                <Text style={styles.HomeScreenText}>All Active Perks: {RequiredLevel}</Text>
             </View>
             <View title='Novice Destruction Blue' style={{
                 position: 'absolute',

@@ -12,6 +12,10 @@ import PickpocketTree from "./Pickpocket";
 import AlchemyTree from "./Alchemy";
 import SpeechTree from "./Speech";
 import LightArmorTree from "./LightArmor";
+import DestructionTree from "./Destruction";
+import BlockTree from "./Block";
+import LockpickingTree from "./Lockpicking";
+import OneHandedTree from "./OneHanded";
 
 
 const tree = {
@@ -28,7 +32,11 @@ const tree = {
     PickpocketTree,
     AlterationTree,
     SpeechTree,
-    LightArmorTree
+    LightArmorTree,
+    DestructionTree,
+    BlockTree,
+    LockpickingTree,
+    OneHandedTree
 }
 
 export default tree;

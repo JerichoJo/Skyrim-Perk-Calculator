@@ -15,11 +15,11 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+
 import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
-import { AllActivePerkss } from '../../../App';
+import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
@@ -256,7 +256,7 @@ const OneHandedTree = () => {
         <View style={{ zIndex: 2 }}>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-                <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+                <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
             </View>
             <View title='Armsman Blue' style={{
                 position: 'absolute',
@@ -556,9 +556,8 @@ const OneHandedTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-  return (
-            <View style={styles.DwarvenSmithText}>
-                <Text style={styles.PerkText}>Dwarven Smithing</Text>
+            <View style={styles.DualSavageryText}>
+                <Text style={styles.PerkText}>Dual Savagery</Text>
             </View>
       <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
         <Line // Armsman to Hack and Slash

@@ -12,7 +12,7 @@ import { AntDesign } from '@expo/vector-icons';
 import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
-import { AllActivePerkss } from '../../../App';
+import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
