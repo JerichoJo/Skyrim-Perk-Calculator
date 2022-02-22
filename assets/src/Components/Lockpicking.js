@@ -642,7 +642,7 @@ const LockpickingTree = () => {
           y1="68%"
           x2="51%"
           y2="79%"
-          stroke={state.apprenticeLocks}
+          stroke={state.apprenticeLocksLine}
           strokeWidth={lineStrokeWidth}
         />
 
@@ -651,7 +651,7 @@ const LockpickingTree = () => {
           y1="62%"
           x2="57%"
           y2="67%"
-          stroke={state.apprenticeLocks}
+          stroke={state.apprenticeLocksLine}
           strokeWidth={lineStrokeWidth}
         />
 
@@ -660,7 +660,7 @@ const LockpickingTree = () => {
           y1="58%"
           x2="33.5%"
           y2="60.5%"
-          stroke={state.waxKey}
+          stroke={state.waxKeyLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Apprentice Locks to Adept Locks
@@ -668,7 +668,7 @@ const LockpickingTree = () => {
           y1="55%"
           x2="60%"
           y2="67%"
-          stroke={state.adeptLocks}
+          stroke={state.adeptLocksLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Adept Locks to Golden Touch
@@ -676,7 +676,7 @@ const LockpickingTree = () => {
           y1="52%"
           x2="68%"
           y2="54%"
-          stroke={state.goldenTouch}
+          stroke={state.goldenTouchLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Golden Touch to Treasure Hunter
@@ -684,7 +684,7 @@ const LockpickingTree = () => {
           y1="51%"
           x2="40%"
           y2="52%"
-          stroke={state.treasureHunter}
+          stroke={state.treasureHunterLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Adept Locks to Expert Locks
@@ -692,7 +692,7 @@ const LockpickingTree = () => {
           y1="40%"
           x2="70%"
           y2="53%"
-          stroke={state.adeptLocks}
+          stroke={state.adeptLocksLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Expert Locks to Locksmith
@@ -700,7 +700,7 @@ const LockpickingTree = () => {
           y1="40%"
           x2="66%"
           y2="40%"
-          stroke={state.locksmith}
+          stroke={state.locksmithLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Locksmith to Unbreakable
@@ -708,7 +708,7 @@ const LockpickingTree = () => {
           y1="39%"
           x2="40%"
           y2="40%"
-          stroke={state.unbreakable}
+          stroke={state.unbreakableLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Expert Locks to Master Locks
@@ -716,7 +716,7 @@ const LockpickingTree = () => {
           y1="30%"
           x2="68%"
           y2="39%"
-          stroke={state.masterLocks}
+          stroke={state.masterLocksLine}
           strokeWidth={lineStrokeWidth}
         />
       </Svg>

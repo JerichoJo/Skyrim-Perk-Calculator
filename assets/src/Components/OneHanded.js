@@ -565,7 +565,7 @@ const OneHandedTree = () => {
           y1="65%"
           x2="27%"
           y2="79%"
-          stroke={state.hackAndSlash}
+          stroke={state.hackAndSlashLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Armsmen to Bladesman
@@ -573,7 +573,7 @@ const OneHandedTree = () => {
           y1="63%"
           x2="33.3%"
           y2="79%"
-          stroke={state.bladesman}
+          stroke={state.bladesmanLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Armsman to Bone Breaker
@@ -581,7 +581,7 @@ const OneHandedTree = () => {
           y1="63%"
           x2="33%"
           y2="79%"
-          stroke={state.bonebreaker}
+          stroke={state.bonebreakerLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Armsman to Fighting Stance
@@ -589,7 +589,7 @@ const OneHandedTree = () => {
           y1="60%"
           x2="30%"
           y2="79%"
-          stroke={state.fightingStance}
+          stroke={state.fightingStanceLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Fighting Stance to Critical Charge
@@ -597,7 +597,7 @@ const OneHandedTree = () => {
           y1="46%"
           x2="33%"
           y2="59%"
-          stroke={state.criticalCharge}
+          stroke={state.criticalChargeLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Fighting Stance to Savage Strike
@@ -605,7 +605,7 @@ const OneHandedTree = () => {
           y1="45%"
           x2="27%"
           y2="59%"
-          stroke={state.savageStrike}
+          stroke={state.savageStrikeLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Savage Strike to Paralyzing Strike
@@ -613,7 +613,7 @@ const OneHandedTree = () => {
           y1="30%"
           x2="15%"
           y2="44%"
-          stroke={state.paralyzingStrike}
+          stroke={state.paralyzingStrikeLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Critical Charge to Paralyzing Strike
@@ -621,7 +621,7 @@ const OneHandedTree = () => {
           y1="30%"
           x2="45%"
           y2="44%"
-          stroke={state.paralyzingStrike}
+          stroke={state.paralyzingStrikeLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Armsman to Dual Flurry
@@ -629,7 +629,7 @@ const OneHandedTree = () => {
           y1="70%"
           x2="34%"
           y2="80%"
-          stroke={state.dualFlurry}
+          stroke={state.dualFlurryLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Dual Flurry to Dual Savagery
@@ -637,7 +637,7 @@ const OneHandedTree = () => {
           y1="45%"
           x2="80%"
           y2="69%"
-          stroke={state.dualSavagery}
+          stroke={state.dualSavageryLine}
           strokeWidth={lineStrokeWidth}
         />
     </Svg>

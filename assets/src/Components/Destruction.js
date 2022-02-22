@@ -706,7 +706,7 @@ const DestructionTree = () => {
           y1="79.2%"
           x2="60%"
           y2="60%"
-          stroke={state.apprenticeDestruction}
+          stroke={state.apprenticeDestructionLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Apprentice to Adept Destruction
@@ -714,7 +714,7 @@ const DestructionTree = () => {
           y1="59%"
           x2="57%"
           y2="46%"
-          stroke={state.adeptDestruction}
+          stroke={state.adeptDestructionLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Adept to Expert Destruction
@@ -722,7 +722,7 @@ const DestructionTree = () => {
           y1="44%"
           x2="62.5%"
           y2="36%"
-          stroke={state.expertDestruction}
+          stroke={state.expertDestructionLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Expert Destruction to Master Destruction
@@ -730,7 +730,7 @@ const DestructionTree = () => {
           y1="34%"
           x2="61%"
           y2="26%"
-          stroke={state.masterDestruction}
+          stroke={state.masterDestructionLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Apprentice Destruction to Rune Master
@@ -738,7 +738,7 @@ const DestructionTree = () => {
           y1="59%"
           x2="74%"
           y2="50%"
-          stroke={state.runeMaster}
+          stroke={state.runeMasterLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Novice Destruction to Augmented flames
@@ -746,7 +746,7 @@ const DestructionTree = () => {
           y1="60%"
           x2="34%"
           y2="79%"
-          stroke={state.augmentedFlames}
+          stroke={state.augmentedFlamesLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Augmented Flames to Intense Flames
@@ -754,7 +754,7 @@ const DestructionTree = () => {
           y1="59%"
           x2="9%"
           y2="50%"
-          stroke={state.intenseFlames}
+          stroke={state.intenseFlamesLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Novice Destruction to Augmented Frost
@@ -762,7 +762,7 @@ const DestructionTree = () => {
           y1="55%"
           x2="35%"
           y2="79%"
-          stroke={state.augmentedFrost}
+          stroke={state.augmentedFrostLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Augmented Frost to Deep Freeze
@@ -770,7 +770,7 @@ const DestructionTree = () => {
           y1="53.5%"
           x2="25%"
           y2="40%"
-          stroke={state.deepFreeze}
+          stroke={state.deepFreezeLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Novice Destruction to Augmented Shock
@@ -778,7 +778,7 @@ const DestructionTree = () => {
           y1="50%"
           x2="35%"
           y2="79%"
-          stroke={state.augmentedShock}
+          stroke={state.augmentedShockLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Augmented Shock to Disintegrate
@@ -786,7 +786,7 @@ const DestructionTree = () => {
           y1="35%"
           x2="40%"
           y2="48%"
-          stroke={state.augmentedShock}
+          stroke={state.augmentedShockLine}
           strokeWidth={lineStrokeWidth}
         />   
         <Line // Novice Destruction to Destruction Dual Casting
@@ -794,7 +794,7 @@ const DestructionTree = () => {
           y1="70%"
           x2="37%"
           y2="79%"
-          stroke={state.destructionDualCasting}
+          stroke={state.destructionDualCastingLine}
           strokeWidth={lineStrokeWidth}
         />  
         <Line // Destruction Dual Casting to Impact
@@ -802,7 +802,7 @@ const DestructionTree = () => {
           y1="60%"
           x2="71%"
           y2="69%"
-          stroke={state.impact}
+          stroke={state.impactLine}
           strokeWidth={lineStrokeWidth}
         />  
         </Svg>

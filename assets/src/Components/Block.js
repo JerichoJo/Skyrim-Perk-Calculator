@@ -527,7 +527,7 @@ const BlockTree = () => {
           y1="70%"
           x2="48%"
           y2="79%"
-          stroke={state.deflectArrows}
+          stroke={state.deflectArrowsLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Deflect Arrows to Elemental Protection
@@ -535,7 +535,7 @@ const BlockTree = () => {
           y1="55%"
           x2="20%"
           y2="69%"
-          stroke={state.elementalProtection}
+          stroke={state.elementalProtectionLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Elemental Protection to Block Runner
@@ -543,7 +543,7 @@ const BlockTree = () => {
           y1="45%"
           x2="23%"
           y2="53%"
-          stroke={state.powerBash}
+          stroke={state.blockRunnerLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Block Runner to Shield Charge
@@ -551,7 +551,7 @@ const BlockTree = () => {
           y1="43%"
           x2="32%"
           y2="43.5%"
-          stroke={state.shieldCharge}
+          stroke={state.shieldChargeLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Shield Charge to Disarming Bash
@@ -559,7 +559,7 @@ const BlockTree = () => {
           y1="44%"
           x2="56%"
           y2="43%"
-          stroke={state.disarmingBash}
+          stroke={state.disarmingBashLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Disarming Bash to Deadly Bash
@@ -567,7 +567,7 @@ const BlockTree = () => {
           y1="53%"
           x2="81%"
           y2="45%"
-          stroke={state.deadlyBash}
+          stroke={state.deadlyBashLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Deadly Bash to Power Bash
@@ -575,7 +575,7 @@ const BlockTree = () => {
           y1="67%"
           x2="85%"
           y2="54%"
-          stroke={state.powerBash}
+          stroke={state.powerBashLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Shield wall to power bash
@@ -583,7 +583,7 @@ const BlockTree = () => {
           y1="79%"
           x2="86%"
           y2="68%"
-          stroke={state.shieldWall}
+          stroke={state.powerBashLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Shield wall to Quick Reflexes
@@ -591,7 +591,7 @@ const BlockTree = () => {
           y1="66%"
           x2="50%"
           y2="79%"
-          stroke={state.quickReflexes}
+          stroke={state.quickReflexesLine}
           strokeWidth={lineStrokeWidth}
         />
         </Svg>
