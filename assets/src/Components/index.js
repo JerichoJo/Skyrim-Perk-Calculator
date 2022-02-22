@@ -22,6 +22,7 @@ const tree = {
     SmithingTree,
     HeavyArmor,
     ConjurationTree,
+    AlchemyTree,
     EnchantingTree,
     SneakTree,
     TwoHandedTree,
