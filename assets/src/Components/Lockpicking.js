@@ -306,8 +306,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Novice Locks Blue' style={{
                 position: 'absolute',
-                left: "50%",
-                top: "80%",
+                left: "40%",
+                top: "75%",
                 zIndex: 8,
 
             }}>
@@ -315,8 +315,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Novice Locks Gold' style={{
                 position: 'absolute',
-                left: "50%",
-                top: "80%",
+                left: "40%",
+                top: "75%",
                 zIndex: 8,
                 opacity: state.noviceLocks
 
@@ -333,8 +333,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Apprentice Locks Blue' style={{
                 position: 'absolute',
-                left: "60%",
-                top: "68%",
+                left: "49%",
+                top: "64%",
                 zIndex: 8,
 
             }}>
@@ -343,8 +343,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Apprentice Locks Gold' style={{
                 position: 'absolute',
-                left: "60%",
-                top: "68%",
+                left: "49%",
+                top: "64%",
                 zIndex: 8,
                 opacity: state.apprenticeLocks
 
@@ -364,8 +364,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Quick Hands Blue' style={{
                 position: 'absolute',
-                left: "36%",
-                top: "61%",
+                left: "25%",
+                top: "59%",
                 zIndex: 8,
 
             }}>
@@ -373,8 +373,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Quick Hands Gold' style={{
                 position: 'absolute',
-                left: "36%",
-                top: "61%",
+                left: "25%",
+                top: "59%",
                 zIndex: 8,
                 opacity: state.quickHands
 
@@ -394,8 +394,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Wax Key Blue' style={{
                 position: 'absolute',
-                left: "18%",
-                top: "57.5%",
+                left: "6%",
+                top: "55%",
                 zIndex: 8,
 
             }}>
@@ -403,8 +403,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Wax Key Gold' style={{
                 position: 'absolute',
-                left: "18%",
-                top: "57.5%",
+                left: "6%",
+                top: "55%",
                 zIndex: 8,
                 opacity: state.waxKey
 
@@ -424,8 +424,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Adept Locks Blue' style={{
                 position: 'absolute',
-                left: "70.5%",
-                top: "54%",
+                left: "59%",
+                top: "52%",
                 zIndex: 8,
 
             }}>
@@ -433,8 +433,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Adept Locks Gold' style={{
                 position: 'absolute',
-                left: "70.5%",
-                top: "54%",
+                left: "59%",
+                top: "52%",
                 zIndex: 8,
                 opacity: state.adeptlocks
 
@@ -454,8 +454,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Golden Touch Blue' style={{
                 position: 'absolute',
-                left: "43%",
-                top: "52%",
+                left: "33%",
+                top: "50%",
                 zIndex: 8,
 
             }}>
@@ -463,8 +463,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Golden Touch Gold' style={{
                 position: 'absolute',
-                left: "43%",
-                top: "52%",
+                left: "33%",
+                top: "50%",
                 zIndex: 8,
                 opacity: state.goldenTouch
 
@@ -484,8 +484,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Treasure Hunter Blue' style={{
                 position: 'absolute',
-                left: "20%",
-                top: "51%",
+                left: "10%",
+                top: "49%",
                 zIndex: 8,
 
             }}>
@@ -493,8 +493,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Treasure Hunter Gold' style={{
                 position: 'absolute',
-                left: "20%",
-                top: "51%",
+                left: "10%",
+                top: "49%",
                 zIndex: 8,
                 opacity: state.treasureHunter
 
@@ -514,8 +514,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Expert Locks Blue' style={{
                 position: 'absolute',
-                left: "68%",
-                top: "40%",
+                left: "57%",
+                top: "38%",
                 zIndex: 8,
 
             }}>
@@ -523,8 +523,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Expert Locks Gold' style={{
                 position: 'absolute',
-                left: "68%",
-                top: "40%",
+                left: "57%",
+                top: "38%",
                 zIndex: 8,
                 opacity: state.expertLocks
 
@@ -544,8 +544,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Locksmith Blue' style={{
                 position: 'absolute',
-                left: "44%",
-                top: "40%",
+                left: "31.5%",
+                top: "39%",
                 zIndex: 8,
 
             }}>
@@ -553,8 +553,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Locksmith Gold' style={{
                 position: 'absolute',
-                left: "44%",
-                top: "40%",
+                left: "31.5%",
+                top: "39%",
                 zIndex: 8,
                 opacity: state.locksmith
 
@@ -574,8 +574,8 @@ const LockpickingTree = () => {
             </View>
                       <View title='Unbreakable Blue' style={{
                 position: 'absolute',
-                left: "25%",
-                top: "39%",
+                left: "11%",
+                top: "38%",
                 zIndex: 8,
 
             }}>
@@ -583,8 +583,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Unbreakable Gold' style={{
                 position: 'absolute',
-                left: "25%",
-                top: "39%",
+                left: "11%",
+                top: "38%",
                 zIndex: 8,
                 opacity: state.unbreakable
 
@@ -605,8 +605,8 @@ const LockpickingTree = () => {
 
           <View title='Master Locks Blue' style={{
                 position: 'absolute',
-                left: "68%",
-                top: "30%",
+                left: "57%",
+                top: "29%",
                 zIndex: 8,
 
             }}>
@@ -614,8 +614,8 @@ const LockpickingTree = () => {
             </View>
             <View title='Master Locks Gold' style={{
                 position: 'absolute',
-                left: "68%",
-                top: "30%",
+                left: "57%",
+                top: "29%",
                 zIndex: 8,
                 opacity: state.masterLocks
 

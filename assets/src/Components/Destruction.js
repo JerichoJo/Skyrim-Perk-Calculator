@@ -313,8 +313,8 @@ const DestructionTree = () => {
             </View>
             <View title='Novice Destruction Blue' style={{
                 position: 'absolute',
-                left: "35%",
-                top: "80%",
+                left: "24.5%",
+                top: "74.5%",
                 zIndex: 8,
 
             }}>
@@ -322,8 +322,8 @@ const DestructionTree = () => {
             </View>
             <View title='Novice Destruction Gold' style={{
                 position: 'absolute',
-                left: "35%",
-                top: "80%",
+                left: "24.5%",
+                top: "74.5%",
                 zIndex: 8,
                 opacity: state.noviceDestruction
 
@@ -340,8 +340,8 @@ const DestructionTree = () => {
             </View>
             <View title='Apprentice Destruction Blue' style={{
                 position: 'absolute',
-                left: "60%",
-                top: "60%",
+                left: "48%",
+                top: "55%",
                 zIndex: 8,
 
             }}>
@@ -350,8 +350,8 @@ const DestructionTree = () => {
             </View>
             <View title='Apprentice Destruction Gold' style={{
                 position: 'absolute',
-                left: "60%",
-                top: "60%",
+                left: "48%",
+                top: "55%",
                 zIndex: 8,
                 opacity: state.apprenticeDestruction
 
@@ -371,8 +371,8 @@ const DestructionTree = () => {
             </View>
             <View title='Adept Destruction Blue' style={{
                 position: 'absolute',
-                left: "57%",
-                top: "45%",
+                left: "46%",
+                top: "41%",
                 zIndex: 8,
 
             }}>
@@ -380,8 +380,8 @@ const DestructionTree = () => {
             </View>
             <View title='Adept Destruction Gold' style={{
                 position: 'absolute',
-                left: "57%",
-                top: "45%",
+                left: "46%",
+                top: "41%",
                 zIndex: 8,
                 opacity: state.adeptDestruction
 
@@ -401,8 +401,8 @@ const DestructionTree = () => {
             </View>
             <View title='Expert Destruction Blue' style={{
                 position: 'absolute',
-                left: "62.5%",
-                top: "35%",
+                left: "51%",
+                top: "30%",
                 zIndex: 8,
 
             }}>
@@ -410,8 +410,8 @@ const DestructionTree = () => {
             </View>
             <View title='Expert Destruction Gold' style={{
                 position: 'absolute',
-                left: "62.5%",
-                top: "35%",
+                left: "51%",
+                top: "30%",
                 zIndex: 8,
                 opacity: state.expertDestruction
 
@@ -431,8 +431,8 @@ const DestructionTree = () => {
             </View>
             <View title='Master Destruction Blue' style={{
                 position: 'absolute',
-                left: "61%",
-                top: "25%",
+                left: "50%",
+                top: "20%",
                 zIndex: 8,
 
             }}>
@@ -440,8 +440,8 @@ const DestructionTree = () => {
             </View>
             <View title='Master Destruction Gold' style={{
                 position: 'absolute',
-                left: "61%",
-                top: "25%",
+                left: "50%",
+                top: "20%",
                 zIndex: 8,
                 opacity: state.masterDestruction
 
@@ -461,8 +461,8 @@ const DestructionTree = () => {
             </View>
             <View title='Rune Master Blue' style={{
                 position: 'absolute',
-                left: "75%",
-                top: "49%",
+                left: "62%",
+                top: "45%",
                 zIndex: 8,
 
             }}>
@@ -470,8 +470,8 @@ const DestructionTree = () => {
             </View>
             <View title='Rune Master Gold' style={{
                 position: 'absolute',
-                left: "75%",
-                top: "49%",
+                left: "62%",
+                top: "45%",
                 zIndex: 8,
                 opacity: state.runeMaster
 
@@ -491,8 +491,8 @@ const DestructionTree = () => {
             </View>
             <View title='Augmented Flames Blue' style={{
                 position: 'absolute',
-                left: "10%",
-                top: "60%",
+                left: "-1%",
+                top: "55%",
                 zIndex: 8,
 
             }}>
@@ -500,8 +500,8 @@ const DestructionTree = () => {
             </View>
             <View title='Augmented Flames Gold' style={{
                 position: 'absolute',
-                left: "10%",
-                top: "60%",
+                left: "-1%",
+                top: "55%",
                 zIndex: 8,
                 opacity: state.augmentedFlames
 
@@ -521,8 +521,8 @@ const DestructionTree = () => {
             </View>
             <View title='Intense Flames Blue' style={{
                 position: 'absolute',
-                left: "9%",
-                top: "50%",
+                left: "-2%",
+                top: "45%",
                 zIndex: 8,
 
             }}>
@@ -530,8 +530,8 @@ const DestructionTree = () => {
             </View>
             <View title='Intense Flames Gold' style={{
                 position: 'absolute',
-                left: "9%",
-                top: "50%",
+                left: "-2%",
+                top: "45%",
                 zIndex: 8,
                 opacity: state.intenseFlames
 
@@ -551,8 +551,8 @@ const DestructionTree = () => {
             </View>
             <View title='Augmented Frost Blue' style={{
                 position: 'absolute',
-                left: "25%",
-                top: "55%",
+                left: "13%",
+                top: "49%",
                 zIndex: 8,
 
             }}>
@@ -560,8 +560,8 @@ const DestructionTree = () => {
             </View>
             <View title='Augmented Frost Gold' style={{
                 position: 'absolute',
-                left: "25%",
-                top: "55%",
+                left: "13%",
+                top: "49%",
                 zIndex: 8,
                 opacity: state.augmentedFrost
 
@@ -578,11 +578,12 @@ const DestructionTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
-            </View>
+            </View> 
+            
             <View title='Augmented Shock Blue' style={{
                 position: 'absolute',
-                left: "40%",
-                top: "49%",
+                left: "29%",
+                top: "44%",
                 zIndex: 8,
 
             }}>
@@ -590,8 +591,8 @@ const DestructionTree = () => {
             </View>
             <View title='Augmented Shock Gold' style={{
                 position: 'absolute',
-                left: "40%",
-                top: "49%",
+                left: "29%",
+                top: "44%",
                 zIndex: 8,
                 opacity: state.augmentedShock
 
@@ -611,8 +612,8 @@ const DestructionTree = () => {
             </View>
             <View title='Disintegrate Blue' style={{
                 position: 'absolute',
-                left: "40%",
-                top: "35%",
+                left: "29%",
+                top: "30%",
                 zIndex: 8,
 
             }}>
@@ -620,8 +621,8 @@ const DestructionTree = () => {
             </View>
             <View title='Disintegrate Gold' style={{
                 position: 'absolute',
-                left: "40%",
-                top: "35%",
+                left: "29%",
+                top: "30%",
                 zIndex: 8,
                 opacity: state.disintegrate
 
@@ -641,8 +642,8 @@ const DestructionTree = () => {
             </View>
             <View title='Destruction Dual Casting Blue' style={{
                 position: 'absolute',
-                left: "70.2%",
-                top: "70%",
+                left: "59%",
+                top: "64%",
                 zIndex: 8,
 
             }}>
@@ -650,8 +651,8 @@ const DestructionTree = () => {
             </View>
             <View title='Destruction Dual Casting Gold' style={{
                 position: 'absolute',
-                left: "70.2%",
-                top: "70%",
+                left: "59%",
+                top: "64%",
                 zIndex: 8,
                 opacity: state.destructionDualCasting
 
@@ -671,8 +672,8 @@ const DestructionTree = () => {
             </View>
             <View title='Impact Blue' style={{
                 position: 'absolute',
-                left: "80%",
-                top: "60%",
+                left: "69%",
+                top: "55%",
                 zIndex: 8,
 
             }}>
@@ -680,8 +681,8 @@ const DestructionTree = () => {
             </View>
             <View title='Impact Gold' style={{
                 position: 'absolute',
-                left: "80%",
-                top: "60%",
+                left: "69%",
+                top: "55%",
                 zIndex: 8,
                 opacity: state.impact
 
@@ -694,6 +695,36 @@ const DestructionTree = () => {
                         checkIfImpactPressed(
                             state.impact == 0 ? 1 : 0,
                             state.impactLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View title='Deep Freeze Blue' style={{
+                position: 'absolute',
+                left: "14%",
+                top: "35%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Deep Freeze Gold' style={{
+                position: 'absolute',
+                left: "14%",
+                top: "35%",
+                zIndex: 8,
+                opacity: state.deepFreeze
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        checkIfDeepFreezePressed(
+                            state.deepFreeze == 0 ? 1 : 0,
+                            state.deepFreezeLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />

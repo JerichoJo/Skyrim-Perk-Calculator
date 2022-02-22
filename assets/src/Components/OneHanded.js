@@ -260,8 +260,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Armsman Blue' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "80%",
+                left: "19%",
+                top: "75%",
                 zIndex: 8,
 
             }}>
@@ -269,8 +269,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Armsman Gold' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "80%",
+                left: "19%",
+                top: "75%",
                 zIndex: 8,
                 opacity: state.armsman
 
@@ -287,8 +287,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Hack and Slash Blue' style={{
                 position: 'absolute',
-                left: "15%",
-                top: "65%",
+                left: "5%",
+                top: "60%",
                 zIndex: 8,
 
             }}>
@@ -297,8 +297,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Hack and Slash Gold' style={{
                 position: 'absolute',
-                left: "15%",
-                top: "65%",
+                left: "5%",
+                top: "60%",
                 zIndex: 8,
                 opacity: state.hackAndSlash
 
@@ -318,8 +318,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Bladesman Blue' style={{
                 position: 'absolute',
-                left: "62.5%",
-                top: "62%",
+                left: "51%",
+                top: "58%",
                 zIndex: 8,
 
             }}>
@@ -327,8 +327,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Bladesman Gold' style={{
                 position: 'absolute',
-                left: "62.5%",
-                top: "62%",
+                left: "51%",
+                top: "58%",
                 zIndex: 8,
                 opacity: state.bladesman
 
@@ -348,8 +348,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Bone Breaker Blue' style={{
                 position: 'absolute',
-                left: "42%",
-                top: "65%",
+                left: "34%",
+                top: "58%",
                 zIndex: 8,
 
             }}>
@@ -357,8 +357,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Bone Breaker Gold' style={{
                 position: 'absolute',
-                left: "42%",
-                top: "65%",
+                left: "34%",
+                top: "58%",
                 zIndex: 8,
                 opacity: state.bonebreaker
 
@@ -378,8 +378,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Fighting Stance Blue' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "59%",
+                left: "18.5%",
+                top: "54.5%",
                 zIndex: 8,
 
             }}>
@@ -387,8 +387,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Fighting Stance Gold' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "59%",
+                left: "18.5%",
+                top: "54.5%",
                 zIndex: 8,
                 opacity: state.fightingStance
 
@@ -408,8 +408,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Critical Charge Blue' style={{
                 position: 'absolute',
-                left: "45%",
-                top: "45%",
+                left: "34%",
+                top: "40%",
                 zIndex: 8,
 
             }}>
@@ -417,8 +417,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Critical Charge Gold' style={{
                 position: 'absolute',
-                left: "45%",
-                top: "45%",
+                left: "34%",
+                top: "40%",
                 zIndex: 8,
                 opacity: state.criticalCharge
 
@@ -438,8 +438,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Savage Strike Blue' style={{
                 position: 'absolute',
-                left: "15%",
-                top: "45%",
+                left: "4%",
+                top: "40%",
                 zIndex: 8,
 
             }}>
@@ -447,8 +447,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Savage Strike Gold' style={{
                 position: 'absolute',
-                left: "15%",
-                top: "45%",
+                left: "4%",
+                top: "40%",
                 zIndex: 8,
                 opacity: state.savageStrike
 
@@ -468,8 +468,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Paralyzing Strike Blue' style={{
                 position: 'absolute',
-                left: "27%",
-                top: "30%",
+                left: "16%",
+                top: "25%",
                 zIndex: 8,
 
             }}>
@@ -477,8 +477,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Paralyzing Strike Gold' style={{
                 position: 'absolute',
-                left: "27%",
-                top: "30%",
+                left: "16%",
+                top: "25%",
                 zIndex: 8,
                 opacity: state.paralyzingStrike
 
@@ -498,8 +498,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Dual Flurry Blue' style={{
                 position: 'absolute',
-                left: "80%",
-                top: "70%",
+                left: "69%",
+                top: "65%",
                 zIndex: 8,
 
             }}>
@@ -507,8 +507,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Dual Flurry Gold' style={{
                 position: 'absolute',
-                left: "80%",
-                top: "70%",
+                left: "69%",
+                top: "65%",
                 zIndex: 8,
                 opacity: state.dualFlurry
 
@@ -528,8 +528,8 @@ const OneHandedTree = () => {
             </View>
                       <View title='Dual Savagery Blue' style={{
                 position: 'absolute',
-                left: "70%",
-                top: "45%",
+                left: "59%",
+                top: "40%",
                 zIndex: 8,
 
             }}>
@@ -537,8 +537,8 @@ const OneHandedTree = () => {
             </View>
             <View title='Dual Savagery Gold' style={{
                 position: 'absolute',
-                left: "70%",
-                top: "45%",
+                left: "59%",
+                top: "40%",
                 zIndex: 8,
                 opacity: state.dualSavagery
 

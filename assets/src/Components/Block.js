@@ -253,8 +253,8 @@ const BlockTree = () => {
             </View>
             <View title='Shield Wall Blue' style={{
                 position: 'absolute',
-                left: "50%",
-                top: "80%",
+                left: "39%",
+                top: "74%",
                 zIndex: 8,
 
             }}>
@@ -262,8 +262,8 @@ const BlockTree = () => {
             </View>
             <View title='Shield Wall Gold' style={{
                 position: 'absolute',
-                left: "50%",
-                top: "80%",
+                left: "39%",
+                top: "74%",
                 zIndex: 8,
                 opacity: state.shieldWall
 
@@ -280,8 +280,8 @@ const BlockTree = () => {
             </View>
             <View title='Quick Reflexes Blue' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "55%",
+                left: "34%",
+                top: "60%",
                 zIndex: 8,
 
             }}>
@@ -290,8 +290,8 @@ const BlockTree = () => {
             </View>
             <View title='Quick Reflexes Gold' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "55%",
+                left: "34%",
+                top: "60%",
                 zIndex: 8,
                 opacity: state.quickReflexes
 
@@ -302,8 +302,8 @@ const BlockTree = () => {
                     }}
                     onPress={() => {
                         CheckIfQuickReflexesPressed(
-                            state.arcaneSmithing == 0 ? 1 : 0,
-                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
+                            state.quickReflexes == 0 ? 1 : 0,
+                            state.quickReflexesLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
@@ -311,8 +311,8 @@ const BlockTree = () => {
             </View>
             <View title='Deflect Arrows Blue' style={{
                 position: 'absolute',
-                left: "70%",
-                top: "80%",
+                left: "9%",
+                top: "65%",
                 zIndex: 8,
 
             }}>
@@ -320,8 +320,8 @@ const BlockTree = () => {
             </View>
             <View title='Deflect Arrows Gold' style={{
                 position: 'absolute',
-                left: "20%",
-                top: "70%",
+                left: "9%",
+                top: "65%",
                 zIndex: 8,
                 opacity: state.deflectArrows
 
@@ -341,8 +341,8 @@ const BlockTree = () => {
             </View>
             <View title='Elemental Protection Blue' style={{
                 position: 'absolute',
-                left: "22.5%",
-                top: "54%",
+                left: "11%",
+                top: "49%",
                 zIndex: 8,
 
             }}>
@@ -350,8 +350,8 @@ const BlockTree = () => {
             </View>
             <View title='Elemental Protection Gold' style={{
                 position: 'absolute',
-                left: "22.5%",
-                top: "54%",
+                left: "11%",
+                top: "49%",
                 zIndex: 8,
                 opacity: state.elementalProtection
 
@@ -371,8 +371,8 @@ const BlockTree = () => {
             </View>
             <View title='Block Runner Blue' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "44%",
+                left: "20%",
+                top: "39%",
                 zIndex: 8,
 
             }}>
@@ -380,8 +380,8 @@ const BlockTree = () => {
             </View>
             <View title='Block Runner Gold' style={{
                 position: 'absolute',
-                left: "30%",
-                top: "44%",
+                left: "20%",
+                top: "39%",
                 zIndex: 8,
                 opacity: state.blockRunner
 
@@ -401,8 +401,8 @@ const BlockTree = () => {
             </View>
             <View title='Shield Charge Blue' style={{
                 position: 'absolute',
-                left: "54%",
-                top: "43%",
+                left: "43%",
+                top: "38%",
                 zIndex: 8,
 
             }}>
@@ -410,8 +410,8 @@ const BlockTree = () => {
             </View>
             <View title='Shield Charge Gold' style={{
                 position: 'absolute',
-                left: "54%",
-                top: "43%",
+                left: "43%",
+                top: "38%",
                 zIndex: 8,
                 opacity: state.shieldCharge
 
@@ -432,8 +432,8 @@ const BlockTree = () => {
             </View>
             <View title='Disarming Bash Blue' style={{
                 position: 'absolute',
-                left: "80%",
-                top: "44%",
+                left: "68%",
+                top: "39%",
                 zIndex: 8,
 
             }}>
@@ -441,8 +441,8 @@ const BlockTree = () => {
             </View>
             <View title='Disarming Bash Gold' style={{
                 position: 'absolute',
-                left: "80%",
-                top: "44%",
+                left: "68%",
+                top: "39%",
                 zIndex: 8,
                 opacity: state.disarmingBash
 
@@ -462,8 +462,8 @@ const BlockTree = () => {
             </View>
             <View title='Deadly Bash Blue' style={{
                 position: 'absolute',
-                left: "85%",
-                top: "53%",
+                left: "74%",
+                top: "48%",
                 zIndex: 8,
 
             }}>
@@ -471,8 +471,8 @@ const BlockTree = () => {
             </View>
             <View title='Deadly Bash Gold' style={{
                 position: 'absolute',
-                left: "85%",
-                top: "53%",
+                left: "74%",
+                top: "48%",
                 zIndex: 8,
                 opacity: state.deadlyBash
 
@@ -492,8 +492,8 @@ const BlockTree = () => {
             </View>
             <View title='Power Bash Blue' style={{
                 position: 'absolute',
-                left: "86%",
-                top: "67%",
+                left: "74%",
+                top: "63%",
                 zIndex: 8,
 
             }}>
