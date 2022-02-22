@@ -179,6 +179,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Conjuration.png')}
                         />
                         <Text style={styles.title}>Conjuration</Text>
+                        <tree.ConjurationTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -224,6 +225,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Enchanting.png')}
                         />
                         <Text style={styles.title}>Enchanting</Text>
+                        <tree.EnchantingTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -248,6 +250,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Heavy_Armor.png')}
                         />
                         <Text style={styles.title}>Heavy Armor</Text>
+                        <tree.HeavyArmor style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -316,6 +319,8 @@ export default class extends Component {
                             source={require('../images/background/BG_Sneak.png')}
                         />
                         <Text style={styles.title}>Sneak</Text>
+                        <tree.SneakTree style={styles.tree} />
+                        
                     </View>
                     <View
                         style={styles.slide}
@@ -361,6 +366,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Alchemy.png')}
                         />
                         <Text style={styles.title}>Alchemy</Text>
+                        <tree.AlchemyTree style={styles.tree} />
                     </View>
                 </Swiper>
             </View>

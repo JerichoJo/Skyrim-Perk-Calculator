@@ -1,317 +1,773 @@
 import * as React from 'react';
-import { useState } from 'react';
-import Svg, { Circle, Line } from 'react-native-svg';
-import { View, Text } from 'react-native';
+import { useState, useCallback, useEffect, useContext } from 'react';
+import Svg, { Line } from 'react-native-svg';
+import {
+    View,
+    Dimensions,
+    TouchableOpacity,
+    Text,
+    StyleSheet,
+} from 'react-native';
+import StarIconBlue from './StarIconBlue';
+import StarIconGold from './StarIconGold';
+import { AllActivePerkss } from '../../../StackNavigator';
+import { useNavigation } from '@react-navigation/native';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
+const useSetState = (initialState = {}) => {
+    const [state, regularSetState] = useState(initialState);
+
+    const setState = (newState) => {
+        regularSetState((prevState) => ({
+            ...prevState,
+            ...newState,
+        }));
+    };
+
+    return [state, setState];
+};
 
 const HeavyArmor = () => {
-    const [button1Color, setButton1Color] = useState('blue');
-    const [button2Color, setButton2Color] = useState('blue');
-    const [button3Color, setButton3Color] = useState('blue');
-    const [button4Color, setButton4Color] = useState('blue');
-    const [button5Color, setButton5Color] = useState('blue');
-    const [button6Color, setButton6Color] = useState('blue');
-    const [button7Color, setButton7Color] = useState('blue');
-    const [button8Color, setButton8Color] = useState('blue');
+    const navigation = useNavigation();
+    const [state, setState] = useSetState({
+        juggernaut: 0,
+        fistsOfSteel: 0,
+        fistsOfSteelLine: 'black',
+        cushioned: 0,
+        cushionedLine: 'black',
+        conditioning: 0,
+        conditioningLine: 'black',
+        wellFitted: 0,
+        wellFittedLine: 'black',
+        towerOfStrength: 0,
+        towerOfStrengthLine: 'black',
+        matchingSet: 0,
+        matchingSetLine: 'black',
+        reflectBlows: 0,
+        reflectBlowsLine: 'black',
+        
+    });
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [count, setCount] = useState(0);
 
-    const incrementCount = () => {
-        setCount(count + 1);
-        console.log(count);
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
+    const IncrementCounter = (numActivePerks = 0) => {
+        SetActivePerks(ActivePerks + numActivePerks);
+        SetAllActivePerks(AllActivePerks + numActivePerks);
+    };
+    const DecrementCounter = (numActivePerks = 0) => {
+        if (ActivePerks === 0) {
+            return;
+        }
+        SetActivePerks(ActivePerks - numActivePerks);
+        SetAllActivePerks(AllActivePerks - numActivePerks);
     };
 
-    const checkIfPressed1 = (button1ColorProp) => {
-        if ((button2Color || button3Color) == 'red') {
-            //Leave color of lines the same because the ones above it are chosen
-        } else {
-            setButton1Color(button1ColorProp); // Change button color back and forth
-        }
-    };
+    const TrackLevel = useCallback((level) => {
+        SetRequiredLevel(level);
+    }, []);
 
-    const checkIfPressed2 = (button2ColorProp) => {
-        if (button1Color == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setButton1Color(button2ColorProp);
-            setButton2Color(button2ColorProp);
-        } else if (button3Color == 'red') {
-            //Leave color of lines the same because the ones above it are chosen
-        } else {
-            setButton2Color(button2ColorProp); // Change button color back and forth
-        }
-    };
+    const lineStrokeWidth = '2';
 
-    const checkIfPressed3 = (button3ColorProp) => {
-        if ((button1Color && button2Color) == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setButton1Color(button3ColorProp);
-            setButton2Color(button3ColorProp);
-            setButton3Color(button3ColorProp);
-        } else {
-            setButton3Color(button3ColorProp); // Change button color back and forth
+    const CheckLevel = useCallback(() => {
+        if (state.dragonSmithing == 1) {
+            TrackLevel(100);
+        } else if (state.reflectBlows == 1) {
+            TrackLevel(90);
+        } else if (state.matchingSet == 1) {
+            TrackLevel(80);
+        } else if (state.conditioning == 1) {
+            TrackLevel(70);
+        } else if (state.arcaneSmithing == 1) {
+            TrackLevel(60);
+        } else if (state.cushioned == 1) {
+            TrackLevel(50);
+        } else if (state.fistsOfSteel == 1) {
+            TrackLevel(30);
+        } else if (state.juggernaut == 1) {
+            TrackLevel(0);
         }
-    };
-    const checkIfPressed4 = (button4ColorProp) => {
-        if ((button1Color && button2Color && button3Color) == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setButton1Color(button4ColorProp);
-            setButton2Color(button4ColorProp);
-            setButton3Color(button4ColorProp);
-            setButton4Color(button4ColorProp);
-        } else {
-            setButton4Color(button4ColorProp); // Change button color back and forth
+    }, [TrackLevel, state]);
+
+    useEffect(() => {
+        CheckLevel();
+    }, [CheckLevel]);
+
+    const CheckIfJuggernautPressed = (button) => {
+        if (
+            state.fistsOfSteel == 1 ||
+            state.arcaneSmithing == 1 ||
+            state.wellFitted == 1
+        ) {
+            // Do nothing....must un-select nodes above it first
         }
-    };
-    const checkIfPressed5 = (button5ColorProp) => {
-        if ((button1Color &&
-            button2Color &&
-            button3Color &&
-            button4Color) == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setButton1Color(button5ColorProp);
-            setButton2Color(button5ColorProp);
-            setButton3Color(button5ColorProp);
-            setButton4Color(button5ColorProp);
-            setButton5Color(button5ColorProp);
-        } else {
-            setButton5Color(button5ColorProp); // Change button color back and forth
-        }
-    };
-    const checkIfPressed6 = (button6ColorProp) => {
-        if ((button1Color &&
-            button2Color &&
-            button3Color &&
-            button4Color &&
-            button5Color) == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setButton1Color(button6ColorProp);
-            setButton2Color(button6ColorProp);
-            setButton3Color(button6ColorProp);
-            setButton4Color(button6ColorProp);
-            setButton5Color(button6ColorProp);
-            setButton6Color(button6ColorProp);
-        } else {
-            setButton6Color(button6ColorProp); // Change button color back and forth
-        }
-    };
-    const checkIfPressed7 = (button7ColorProp) => {
-        if ((button1Color &&
-            button2Color &&
-            button3Color &&
-            button4Color &&
-            button5Color &&
-            button6Color) == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setButton1Color(button7ColorProp);
-            setButton2Color(button7ColorProp);
-            setButton3Color(button7ColorProp);
-            setButton4Color(button7ColorProp);
-            setButton5Color(button7ColorProp);
-            setButton6Color(button7ColorProp);
-            setButton7Color(button7ColorProp);
-        } else {
-            setButton7Color(button7ColorProp); // Change button color back and forth
-        }
-    };
-    const checkIfPressed8 = (button8ColorProp) => {
-        if ((button1Color &&
-            button2Color &&
-            button3Color &&
-            button4Color &&
-            button5Color &&
-            button6Color &&
-            button7Color &&
-            button8Color) == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setButton1Color(button8ColorProp);
-            setButton2Color(button8ColorProp);
-            setButton3Color(button8ColorProp);
-            setButton4Color(button8ColorProp);
-            setButton5Color(button8ColorProp);
-            setButton6Color(button8ColorProp);
-            setButton7Color(button8ColorProp);
-            setButton8Color(button8ColorProp);
-        } else {
-            setButton7Color(button8ColorProp); // Change button color back and forth
+        else {
+            setState({ juggernaut: button }); // Change button color back and forth
+            state.juggernaut == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
 
+    const CheckIfArcaneSmithPressed = (button, line) => {
+        if (state.juggernaut == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ juggernaut: button });
+            setState({ juggernautLine: line });
+            setState({ arcaneSmithing: button });
+            setState({ arcaneSmithingLine: line });
+            IncrementCounter(2);
+        } else {
+            setState({ arcaneSmithingLine: line });
+            setState({ arcaneSmithing: button }); // Change the pressed button color back and forth
+            state.arcaneSmithing == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
 
+    const CheckIfFistsPressed = (buttonColor, lineColor) => {
+        if (state.juggernaut == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ juggernaut: buttonColor });
+            setState({ juggernautLine: lineColor });
+            setState({ fistsOfSteel: buttonColor });
+            setState({ fistsOfSteelLine: lineColor });
+
+            IncrementCounter(2);
+        } else if (state.cushioned == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ fistsOfSteelLine: lineColor });
+            setState({ fistsOfSteel: buttonColor }); // Change button color back and forth
+            state.fistsOfSteel == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfCushionedPressed = (buttonColor, lineColor) => {
+        if (state.fistsOfSteel == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ juggernaut: buttonColor });
+            setState({ cushioned: buttonColor });
+            setState({ fistsOfSteel: buttonColor });
+            setState({ cushionedLine: lineColor });
+            setState({ fistsOfSteelLine: lineColor });
+            if (state.juggernaut == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.conditioning == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ cushionedLine: lineColor });
+            setState({ cushioned: buttonColor }); // Change the pressed button color back and forth
+            state.cushioned == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfConditioningPressed = (buttonColor, lineColor) => {
+        if (state.cushioned == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ conditioning: buttonColor });
+            setState({ cushioned: buttonColor });
+            setState({ fistsOfSteel: buttonColor });
+            setState({ juggernaut: buttonColor });
+            setState({ conditioningLine: lineColor });
+            setState({ cushionedLine: lineColor });
+            setState({ fistsOfSteelLine: lineColor });
+            if (state.dragonSmithing == 1) {
+                setState({ dragonSmithingLineLight: lineColor });
+            }
+            if (state.fistsOfSteel == 1) {
+                IncrementCounter(2);
+            } else if (state.juggernaut == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+        } else {
+            setState({ conditioningLine: lineColor });
+            setState({ conditioning: buttonColor }); // Change the pressed button color back and forth
+            state.conditioning == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            if (state.dragonSmithing == 1) {
+                setState({ dragonSmithingLineLight: lineColor });
+            }
+
+        }
+    };
+    const CheckIfWellFittedPressed = (buttonColor, lineColor) => {
+        if (state.juggernaut == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ wellFitted: buttonColor });
+            setState({ juggernaut: buttonColor });
+            setState({ wellFittedLine: lineColor });
+            IncrementCounter(2);
+        } else if (state.towerOfStrength == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ wellFittedLine: lineColor });
+            setState({ wellFitted: buttonColor }); // Change the pressed button color back and forth
+            state.wellFitted == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfTowerOfStrengthPressed = (buttonColor, lineColor) => {
+        if (state.wellFitted == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ towerOfStrength: buttonColor });
+            setState({ wellFitted: buttonColor });
+            setState({ juggernaut: buttonColor });
+            setState({ towerOfStrengthLine: lineColor });
+            setState({ wellFittedLine: lineColor });
+            if (state.juggernaut == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.matchingSet == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ towerOfStrengthLine: lineColor });
+            setState({ towerOfStrength: buttonColor }); // Change the pressed button color back and forth
+            state.towerOfStrength == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfMatchingSetPressed = (buttonColor, lineColor) => {
+        if (state.towerOfStrength == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ matchingSet: buttonColor });
+            setState({ towerOfStrength: buttonColor });
+            setState({ wellFitted: buttonColor });
+            setState({ juggernaut: buttonColor });
+            setState({ matchingSetLine: lineColor });
+            setState({ towerOfStrengthLine: lineColor });
+            setState({ wellFittedLine: lineColor });
+            if (state.wellFitted == 1) {
+                IncrementCounter(2);
+            } else if (state.juggernaut == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+        } else if (state.reflectBlows == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ matchingSetLine: lineColor });
+            setState({ matchingSet: buttonColor }); // Change the pressed button color back and forth
+            state.matchingSet == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfReflectBlowsPressed = (buttonColor, lineColor) => {
+        if (state.matchingSet == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ reflectBlows: buttonColor });
+            setState({ matchingSet: buttonColor });
+            setState({ towerOfStrength: buttonColor });
+            setState({ wellFitted: buttonColor });
+            setState({ juggernaut: buttonColor });
+            setState({ reflectBlowsLine: lineColor });
+            setState({ matchingSetLine: lineColor });
+            setState({ towerOfStrengthLine: lineColor });
+            setState({ wellFittedLine: lineColor });
+            if (state.towerOfStrength == 1) {
+                IncrementCounter(2);
+            } else if (state.wellFitted == 1) {
+                IncrementCounter(3);
+            } else if (state.juggernaut == 1) {
+                IncrementCounter(4);
+            } else {
+                IncrementCounter(5);
+            }
+        } else if (state.dragonSmithing == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ reflectBlowsLine: lineColor });
+            setState({ reflectBlows: buttonColor }); // Change the pressed button color back and forth
+            state.reflectBlows == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfDragonSmithingPressed = (buttonColor, lineColor) => {
+        if (state.reflectBlows == 0) {
+            setState({ dragonSmithing: buttonColor });
+            setState({ reflectBlows: buttonColor });
+            setState({ matchingSet: buttonColor });
+            setState({ towerOfStrength: buttonColor });
+            setState({ wellFitted: buttonColor });
+            setState({ juggernaut: buttonColor });
+            setState({ dragonSmithingLine: lineColor });
+            setState({ reflectBlowsLine: lineColor });
+            setState({ matchingSetLine: lineColor });
+            setState({ towerOfStrengthLine: lineColor });
+            setState({ wellFittedLine: lineColor });
+            if (state.conditioning == 1) {
+                setState({ dragonSmithingLineLight: lineColor });
+            }
+            if (state.matchingSet == 1) {
+                IncrementCounter(2);
+            } else if (state.towerOfStrength == 1) {
+                IncrementCounter(3);
+            } else if (state.wellFitted == 1) {
+                IncrementCounter(4);
+            } else if (state.juggernaut == 1) {
+                IncrementCounter(5);
+            } else {
+                IncrementCounter(6);
+            }
+        } else {
+            setState({ dragonSmithingLine: lineColor });
+            setState({ dragonSmithing: buttonColor });
+            state.dragonSmithing == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            if (state.conditioning == 1) {
+                setState({ dragonSmithingLineLight: lineColor });
+            }
+        }
+    };
 
     return (
-        <View>
-            <Svg height="900" width="500">
-                {/* LINE 1 FROM BOTTOM ON RIGHT SIDE */}
+        <View style={{ zIndex: 2 }}>
+            <View style={styles.topText}>
+                <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
+                <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
+            </View>
+            <View title='Juggernaut Blue' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "75%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Juggernaut Gold' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "75%",
+                zIndex: 8,
+                opacity: state.juggernaut
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => navigation.navigate("juggernautModal")}
+                    onPress={() => {
+                        CheckIfJuggernautPressed(
+                            state.juggernaut == 0 ? 1 : 0,
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.JuggernautText}>
+                <Text style={styles.PerkText}>Juggernaut</Text>
+            </View>
+            
+            <View title='Fists Blue' style={{
+                position: 'absolute',
+                left: "18%",
+                top: "65%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Fists Gold' style={{
+                position: 'absolute',
+                left: "18%",
+                top: "65%",
+                zIndex: 8,
+                opacity: state.fistsOfSteel
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfFistsPressed(
+                            state.fistsOfSteel == 0 ? 1 : 0,
+                            state.fistsOfSteelLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.FistsText}>
+                <Text style={styles.PerkText}>Fists of Steel</Text>
+            </View>
+            <View title='Cushioned Blue' style={{
+                position: 'absolute',
+                left: "4%",
+                top: "53%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Cushioned Gold' style={{
+                position: 'absolute',
+                left: "4%",
+                top: "53%",
+                zIndex: 8,
+                opacity: state.cushioned
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfCushionedPressed(
+                            state.cushioned == 0 ? 1 : 0,
+                            state.cushionedLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.CushionedText}>
+                <Text style={styles.PerkText}>Cushioned</Text>
+            </View>
+            <View title='Conditioning Blue' style={{
+                position: 'absolute',
+                left: "6%",
+                top: "38%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Conditioning Gold' style={{
+                position: 'absolute',
+                left: "6%",
+                top: "38%",
+                zIndex: 8,
+                opacity: state.conditioning
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfConditioningPressed(
+                            state.conditioning == 0 ? 1 : 0,
+                            state.conditioningLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.ConditioningText}>
+                <Text style={styles.PerkText}>Conditioning</Text>
+            </View>
+            
+            <View title='Reflect Blows Blue' style={{
+                position: 'absolute',
+                left: "68%",
+                top: "30%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Reflect Blows Gold' style={{
+                position: 'absolute',
+                left: "68%",
+                top: "30%",
+                zIndex: 8,
+                opacity: state.reflectBlows
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfReflectBlowsPressed(
+                            state.reflectBlows == 0 ? 1 : 0,
+                            state.reflectBlowsLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.ReflectBlowsText}>
+                <Text style={styles.PerkText}>Reflect Blows</Text>
+            </View>
+            <View title='Matching Set Blue' style={{
+                position: 'absolute',
+                left: "78%",
+                top: "45%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Matching Set Gold' style={{
+                position: 'absolute',
+                left: "78%",
+                top: "45%",
+                zIndex: 8,
+                opacity: state.matchingSet
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfMatchingSetPressed(
+                            state.matchingSet == 0 ? 1 : 0,
+                            state.matchingSetLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.MatchingSetText}>
+                <Text style={styles.PerkText}>Matching Set</Text>
+            </View>
+            <View title='Tower Of Strength Blue' style={{
+                position: 'absolute',
+                left: "70%",
+                top: "52%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Tower Of Strength Gold' style={{
+                position: 'absolute',
+                left: "70%",
+                top: "52%",
+                zIndex: 8,
+                opacity: state.towerOfStrength
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfTowerOfStrengthPressed(
+                            state.towerOfStrength == 0 ? 1 : 0,
+                            state.towerOfStrengthLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.TowerOfStrengthText}>
+                <Text style={styles.PerkText}>Tower Of Strength</Text>
+            </View>
+            <View title='Well Fitted Blue' style={{
+                position: 'absolute',
+                left: "65%",
+                top: "65%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Well Fitted Gold' style={{
+                position: 'absolute',
+                left: "65%",
+                top: "65%",
+                zIndex: 8,
+                opacity: state.wellFitted
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfWellFittedPressed(
+                            state.wellFitted == 0 ? 1 : 0,
+                            state.wellFittedLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.WellFittedText}>
+                <Text style={styles.PerkText}>Well Fitted</Text>
+            </View>
+            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
+
+
                 <Line
-                    x1="350"
-                    y1="475"
-                    x2="250"
-                    y2="600"
-                    stroke={button1Color}
-                    id="line1"
-                    strokeWidth="3"
-                    onPress={() => {
-                        checkIfPressed1(button1Color == 'blue' ? 'red' : 'blue');
-                        incrementCount();
-                    }}
-                />
-                {/* 1ST CENTER CIRCLE */}
-                <Circle
-                    cx="250"
-                    cy="600"
-                    r="8"
-                    fill={button1Color}
-                    onPress={() => {
-                        checkIfPressed1(button1Color == 'blue' ? 'red' : 'blue');
-                        incrementCount();
-                    }}
-                />
-                {/* LINE 2 FROM BOTTOM ON RIGHT SIDE */}
-                <Line
-                    x1="370"
-                    y1="375"
-                    x2="350"
-                    y2="475"
-                    stroke={button2Color}
-                    strokeWidth="3"
-                    onPress={() => {
-                        checkIfPressed2(button2Color == 'blue' ? 'red' : 'blue');
-                    }}
-                />
-                {/* 2ND CIRCLE UP RIGHT SIDE (INCLUDES CENTER IN COUNT) */}
-                <Circle
-                    cx="350"
-                    cy="475"
-                    r="8"
-                    fill={button2Color}
-                    onPress={() => {
-                        checkIfPressed2(button2Color == 'blue' ? 'red' : 'blue');
-                    }}
-                />
-                {/* LINE 3 FROM BOTTOM ON RIGHT SIDE */}
-                <Line
-                    x1="400"
-                    y1="300"
-                    x2="370"
-                    y2="375"
-                    stroke={button3Color}
-                    strokeWidth="3"
-                    onPress={() => {
-                        checkIfPressed3(button3Color == 'blue' ? 'red' : 'blue');
-                    }}
-                />
-                {/* 3RD CIRCLE UP RIGHT SIDE (INCLUDES CENTER IN COUNT) */}
-                <Circle
-                    cx="370"
-                    cy="375"
-                    r="8"
-                    fill={button3Color}
-                    onPress={() => {
-                        checkIfPressed3(button3Color == 'blue' ? 'red' : 'blue');
-                    }}
-                />
-                {/* LINE 4 FROM BOTTOM ON RIGHT SIDE */}
-                <Line
-                    x1="370"
-                    y1="200"
-                    x2="400"
-                    y2="295"
-                    stroke={button4Color}
-                    strokeWidth="3"
-                    onPress={() => {
-                        checkIfPressed4(button4Color == 'blue' ? 'red' : 'blue');
-                    }}
-                />
-                {/* 4TH CIRCLE UP RIGHT SIDE (INCLUDES CENTER IN COUNT) */}
-                <Circle
-                    cx="400"
-                    cy="300"
-                    r="8"
-                    fill={button4Color}
-                    onPress={() => {
-                        checkIfPressed4(button4Color == 'blue' ? 'red' : 'blue');
-                    }}
-                />
-                <Circle
-                    cx="370"
-                    cy="200"
-                    r="8"
-                    fill={button5Color}
-                    onPress={() => {
-                        checkIfPressed5(button5Color == 'blue' ? 'red' : 'blue');
-                    }}
+                    x1="50.2%"
+                    y1="80%"
+                    x2="28%"
+                    y2="70%"
+                    stroke={state.fistsOfSteelLine}
+                    strokeWidth={lineStrokeWidth}
+
                 />
                 <Line
-                    x1="150"
-                    y1="510"
-                    x2="247"
-                    y2="600"
-                    stroke={button5Color}
-                    strokeWidth="3"
-                    onPress={() => {
-                        checkIfPressed5(button5Color == 'blue' ? 'red' : 'blue');
-                    }}
-                />
-                <Circle
-                    cx="150"
-                    cy="510"
-                    r="8"
-                    fill={button6Color}
-                    onPress={() => {
-                        checkIfPressed6(button6Color == 'blue' ? 'red' : 'blue');
-                    }}
+                    x1="14%"
+                    y1="58.4%"
+                    x2="28.5%"
+                    y2="70.6%"
+                    stroke={state.cushionedLine}
+                    strokeWidth={lineStrokeWidth}
+
                 />
                 <Line
-                    x1="100"
-                    y1="400"
-                    x2="150" // 
-                    y2="510"
-                    stroke={button7Color}
-                    strokeWidth="3"
-                    onPress={() => {
-                        checkIfPressed7(button7Color == 'blue' ? 'red' : 'blue');
-                    }}
+                    x1="15%"
+                    y1="57.5%"
+                    x2="16.8%"
+                    y2="44.5%"
+                    stroke={state.conditioningLine}
+                    strokeWidth={lineStrokeWidth}
+
                 />
-                <Circle
-                    cx="150"
-                    cy="510"
-                    r="8"
-                    fill={button7Color}
-                    onPress={() => {
-                        checkIfPressed7(button7Color == 'blue' ? 'red' : 'blue');
-                    }}
+            
+                <Line
+                    x1="78%"
+                    y1="35.5%"
+                    x2="88%"
+                    y2="50%"
+                    stroke={state.reflectBlowsLine}
+                    strokeWidth={lineStrokeWidth}
+
                 />
                 <Line
-                    x1="110"
-                    y1="300"
-                    x2="100" // 
-                    y2="400"
-                    stroke={button8Color}
-                    strokeWidth="3"
-                    onPress={() => {
-                        checkIfPressed8(button8Color == 'blue' ? 'red' : 'blue');
-                    }}
+                    x1="89%"
+                    y1="50%"
+                    x2="80%"
+                    y2="58%"
+                    stroke={state.matchingSetLine}
+                    strokeWidth={lineStrokeWidth}
+
                 />
-                <Circle
-                    cx="100"
-                    cy="400"
-                    r="8"
-                    fill={button8Color}
-                    onPress={() => {
-                        checkIfPressed8(button8Color == 'blue' ? 'red' : 'blue');
-                    }}
+                <Line
+                    x1="80%"
+                    y1="58.5%"
+                    x2="76%"
+                    y2="70%"
+                    stroke={state.towerOfStrengthLine}
+                    strokeWidth={lineStrokeWidth}
                 />
-                <Circle
-                    cx="110"
-                    cy="300"
-                    r="8"
-                    fill={button8Color}
-                    onPress={() => {
-                        checkIfPressed8(button8Color == 'blue' ? 'red' : 'blue');
-                    }}
+                <Line
+                    x1="75.2%"
+                    y1="70.4%"
+                    x2="51.3%"
+                    y2="79.9%"
+                    stroke={state.wellFittedLine}
+                    strokeWidth={lineStrokeWidth}
                 />
             </Svg>
+
         </View>
     );
-}
+};
+
+const styles = StyleSheet.create({
+    HomeScreenText: {
+        color: 'white',
+    },
+    topText: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: "70%",
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    Icon: {
+        position: 'absolute',
+    },
+    JuggernautText: {
+        position: 'absolute',
+        left: "42%",
+        top: "84%",
+        zIndex: 10,
+    },
+    ArcaneSmithText: {
+        position: 'absolute',
+        left: "33%",
+        top: "55%",
+        zIndex: 10,
+    },
+    FistsText: {
+        position: 'absolute',
+        left: "18%",
+        top: "73%",
+        zIndex: 10,
+    },
+    CushionedText: {
+        position: 'absolute',
+        left: "8%",
+        top: "62%",
+        zIndex: 10,
+    },
+    ConditioningText: {
+        position: 'absolute',
+        left: "8%",
+        top: "45%",
+        zIndex: 10,
+    },
+    DragonArmorText: {
+        position: 'absolute',
+        left: "44%",
+        top: "34%",
+        zIndex: 10,
+    },
+    ReflectBlowsText: {
+        position: 'absolute',
+        left: "68%",
+        top: "31%",
+        zIndex: 10,
+    },
+    MatchingSetText: {
+        position: 'absolute',
+        left: "65%",
+        top: "49%",
+        zIndex: 10,
+    },
+    TowerOfStrengthText: {
+        position: 'absolute',
+        left: "70%",
+        top: "60%",
+        zIndex: 10,
+    },
+    WellFittedText: {
+        position: 'absolute',
+        left: "68.5%",
+        top: "72.5%",
+        zIndex: 10,
+    },
+
+    PerkText: {
+        color: 'white',
+        fontSize: 12,
+    }
+});
 
 export default HeavyArmor;
