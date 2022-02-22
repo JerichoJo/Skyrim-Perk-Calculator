@@ -191,7 +191,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Destruction.png')}
                         />
                         <Text style={styles.title}>Destruction</Text>
-                        <tree.DestructionTree style={styles.tree} />
+                        
                     </View>
                     <View
                         style={styles.slide}
@@ -263,7 +263,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Block.png')}
                         />
                         <Text style={styles.title}>Block</Text>
-                        <tree.BlockTree style={styles.tree} />
+                        
                     </View>
                     <View
                         style={styles.slide}
@@ -287,7 +287,7 @@ export default class extends Component {
                             source={require('../images/background/BG_One_Handed.png')}
                         />
                         <Text style={styles.title}>One-Handed</Text>
-                        <tree.OneHandedTree style={styles.tree} />
+                        
                     </View>
                     <View
                         style={styles.slide}
@@ -336,7 +336,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Lockpicking.png')}
                         />
                         <Text style={styles.title}>Lockpicking</Text>
-                        <tree.LockpickingTree style={styles.tree} />
+
                     </View>
                     <View
                         style={styles.slide}
