@@ -131,6 +131,14 @@ const SpeechTree = () => {
             state.bribery == 1
         ) {
             // Do nothing....must un-select nodes above it first
+            if (HagglingLevel == 5) {
+                DecrementCounter(4); // decrease active perks back down 4 because it is set back to 1
+                SetHagglingLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncHagglingCounter(1) // increment by 1 after it perk is active
+            }
         }
         else {
             IncHagglingCountCall(button);
