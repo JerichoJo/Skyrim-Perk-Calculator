@@ -143,3 +143,6 @@ export default () => (
     </NavigationContainer>
 
 );
+
+//\Skyrim-Perk-Calculator\node_modules\metro-runtime\src\polyfills\require.js
+//commented out lines 111 - 122 for cycle issue (temporary)
