@@ -31,6 +31,10 @@ const useSetState = (initialState = {}) => {
 
 const RestorationTree = () => {
     const navigation = useNavigation();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         noviceRestoration: 0,
         Respite: 0,
@@ -57,12 +61,55 @@ const RestorationTree = () => {
         AvoidDeathLine: 'black',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
+    let resetAllTrees;
+    const resetRestorationPerks = () => {
+        setState({ noviceRestoration: 0 });
+        setState({ Respite: 0 });
+        setState({ RespiteLine: 'black' });
+        setState({ ApprenticeRestoration: 0 });
+        setState({ ApprenticeRestorationLine: 'black' });
+        setState({ AdeptRestoration: 0 });
+        setState({ AdeptRestorationLine: 'black' });
+        setState({ ExpertRestoration: 0 });
+        setState({ ExpertRestorationLine: 'black' });
+        setState({ MasterRestoration: 0 });
+        setState({ MasterRestorationLine: 'black' });
+        setState({ Regeneration: 0 });
+        setState({ RegenerationLine: 'black' });
+        setState({ Necromage: 0 });
+        setState({ NecromageLine: 'black' });
+        setState({ WardAbsorb: 0 });
+        setState({ WardAbsorbLine: 'black' });
+        setState({ RestoDualCast: 0 });
+        setState({ RestoDualCastLine: 'black' });
+        setState({ Recovery: 0 });
+        setState({ RecoveryLine: 'black' });
+        setState({ AvoidDeath: 0 });
+        setState({ AvoidDeathLine: 'black' });
+        SetRequiredLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetRestorationPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetRestorationPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
+
+
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -352,6 +399,12 @@ const RestorationTree = () => {
     };
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Illusion Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -858,16 +911,15 @@ const RestorationTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
-        fontWeight: '600',
-        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: '8.5%',
-        left: '32%',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: "78%",
         justifyContent: 'center',
         alignItems: 'center',
-        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -947,6 +999,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

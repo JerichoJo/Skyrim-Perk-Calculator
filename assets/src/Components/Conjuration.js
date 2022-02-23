@@ -15,6 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+const lineStrokeWidth = '2';
 
 const useSetState = (initialState = {}) => {
     const [state, regularSetState] = useState(initialState);
@@ -31,13 +32,17 @@ const useSetState = (initialState = {}) => {
 
 const ConjurationTree = () => {
     const navigation = useNavigation();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         noviceConjuration: 0,
         conjurationDualCasting: 0,
         conjurationDualCastingLine: 'black',
-        noviceConjurationLine: 'black',
+        //noviceConjurationLine: 'black',
         necromancy: 0,
-        necromancyLine:'black',
+        necromancyLine: 'black',
         darkSouls: 0,
         darkSoulsLine: 'black',
         twinSouls: 0,
@@ -48,7 +53,7 @@ const ConjurationTree = () => {
         soulStealerLine: 'black',
         oblivionBinding: 0,
         oblivionBindingLine: 'black',
-        oblivionBindingLineLight: 'black',
+        //oblivionBindingLineLight: 'black',
         summoner: 0,
         summonerLine: 'black',
         atromancy: 0,
@@ -66,12 +71,59 @@ const ConjurationTree = () => {
 
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
+    let resetAllTrees;
+    const resetConjurationPerks = () => {
+        setState({ noviceConjuration: 0 });
+        setState({ conjurationDualCasting: 0 });
+        setState({ conjurationDualCastingLine: 'black' });
+        setState({ necromancy: 0 });
+        setState({ necromancyLine: 'black' });
+        setState({ darkSouls: 0 });
+        setState({ darkSoulsLine: 'black' });
+        setState({ twinSouls: 0 });
+        setState({ twinSoulsLine: 'black' });
+        setState({ mysticBinding: 0 });
+        setState({ mysticBindingLine: 'black' });
+        setState({ soulStealer: 0 });
+        setState({ soulStealerLine: 'black' });
+        setState({ oblivionBinding: 0 });
+        setState({ oblivionBindingLine: 'black' });
+        setState({ summoner: 0 });
+        setState({ summonerLine: 'black' });
+        setState({ atromancy: 0 });
+        setState({ atromancyLine: 'black' });
+        setState({ elementalPotency: 0 });
+        setState({ elementalPotencyLine: 'black' });
+        setState({ apprenticeConjuration: 0 });
+        setState({ apprenticeConjurationLine: 'black' });
+        setState({ adeptConjuration: 0 });
+        setState({ adeptConjurationLine: 'black' });
+        setState({ expertConjuration: 0 });
+        setState({ expertConjurationLine: 'black' });
+        setState({ masterConjuration: 0 });
+        setState({ masterConjurationLine: 'black' });
+        SetRequiredLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetConjurationPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetConjurationPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -89,7 +141,7 @@ const ConjurationTree = () => {
         SetRequiredLevel(level);
     }, []);
 
-    const lineStrokeWidth = '2';
+
 
     const CheckLevel = useCallback(() => {
         if (state.oblivionBinding == 1) {
@@ -158,9 +210,9 @@ const ConjurationTree = () => {
             setState({ mysticBinding: button });
             setState({ mysticBindingLine: line });
             IncrementCounter(2);
-        }else if (state.soulStealer == 1) {
+        } else if (state.soulStealer == 1) {
             // Do nothing....must un-select nodes above it first
-        }        
+        }
         else {
             setState({ mysticBindingLine: line });
             setState({ mysticBinding: button }); // Change the pressed button color back and forth
@@ -481,6 +533,12 @@ const ConjurationTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Conjuration Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -747,7 +805,7 @@ const ConjurationTree = () => {
             <View style={styles.SummonerText}>
                 <Text style={styles.PerkText}>Summoner</Text>
             </View>
-            
+
             <View title='Atromancy Blue' style={{
                 position: 'absolute',
                 left: "-3%",
@@ -757,7 +815,7 @@ const ConjurationTree = () => {
             }}>
                 <StarIconBlue />
             </View>
-            
+
             <View title='Atromancy Gold' style={{
                 position: 'absolute',
                 left: "-3%",
@@ -1036,7 +1094,7 @@ const ConjurationTree = () => {
                     stroke={state.soulStealerLine}
                     strokeWidth={lineStrokeWidth}
 
-                />  
+                />
 
                 <Line
                     x1="60.2%"
@@ -1132,7 +1190,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: "70%",
+        bottom: "78%",
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -1151,19 +1209,19 @@ const styles = StyleSheet.create({
         top: "73%",
         zIndex: 10,
     },
-    NecromancyText:{
+    NecromancyText: {
         position: 'absolute',
         left: "19%",
         top: "50%",
         zIndex: 10,
     },
-    DarkSoulsText:{
+    DarkSoulsText: {
         position: 'absolute',
         left: "20.5%",
         top: "40%",
         zIndex: 10,
     },
-    TwinSoulsText:{
+    TwinSoulsText: {
         position: 'absolute',
         left: "23.5%",
         top: "25%",
@@ -1233,6 +1291,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

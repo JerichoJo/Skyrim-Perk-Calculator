@@ -7,6 +7,8 @@ import {
     TouchableOpacity,
     Text,
     StyleSheet,
+    Button,
+    Alert
 } from 'react-native';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
@@ -29,8 +31,17 @@ const useSetState = (initialState = {}) => {
     return [state, setState];
 };
 
+
+
 const SmithingTree = () => {
     const navigation = useNavigation();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    let resetAllTrees;
+    const lineStrokeWidth = '2';
     const [state, setState] = useSetState({
         basicSmithing: 0,
         arcaneSmithing: 0,
@@ -54,11 +65,49 @@ const SmithingTree = () => {
         dragonSmithingLineLight: 'black',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const resetSmithingPerks = () => {
+        setState({ basicSmithing: 0 });
+        setState({ arcaneSmithing: 0 });
+        setState({ arcaneSmithingLine: 'black' });
+        setState({ elvinSmithing: 0 });
+        setState({ elvinSmithingLine: 'black' });
+        setState({ advancedSmithing: 0 });
+        setState({ advancedSmithingLine: 'black' });
+        setState({ glassSmithing: 0 });
+        setState({ glassSmithingLine: 'black' });
+        setState({ dwarvenSmithing: 0 });
+        setState({ dwarvenSmithingLine: 'black' });
+        setState({ orcishSmithing: 0 });
+        setState({ orcishSmithingLine: 'black' });
+        setState({ ebonySmithing: 0 });
+        setState({ ebonySmithingLine: 'black' });
+        setState({ daedricSmithing: 0 });
+        setState({ daedricSmithingLine: 'black' });
+        setState({ dragonSmithing: 0 });
+        setState({ dragonSmithingLine: 'black' });
+        setState({ dragonSmithingLineLight: 'black' });
+        SetRequiredLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetSmithingPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetSmithingPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -75,8 +124,6 @@ const SmithingTree = () => {
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
     }, []);
-
-    const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
         if (state.dragonSmithing == 1) {
@@ -352,6 +399,12 @@ const SmithingTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Smithing Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -772,7 +825,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: "70%",
+        bottom: "75%",
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -842,7 +895,24 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '64%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
+
 });
 
 export default SmithingTree;

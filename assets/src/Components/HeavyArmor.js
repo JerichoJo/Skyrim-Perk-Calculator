@@ -31,6 +31,11 @@ const useSetState = (initialState = {}) => {
 
 const HeavyArmor = () => {
     const navigation = useNavigation();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         juggernaut: 0,
         fistsOfSteel: 0,
@@ -47,15 +52,48 @@ const HeavyArmor = () => {
         matchingSetLine: 'black',
         reflectBlows: 0,
         reflectBlowsLine: 'black',
-        
+
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
+    let resetAllTrees;
+    const resetHeavyArmorPerks = () => {
+        setState({ juggernaut: 0 });
+        setState({ fistsOfSteel: 0 });
+        setState({ fistsOfSteelLine: 'black' });
+        setState({ cushioned: 0 });
+        setState({ cushionedLine: 'black' });
+        setState({ conditioning: 0 });
+        setState({ conditioningLine: 'black' });
+        setState({ wellFitted: 0 });
+        setState({ wellFittedLine: 'black' });
+        setState({ towerOfStrength: 0 });
+        setState({ towerOfStrengthLine: 'black' });
+        setState({ matchingSet: 0 });
+        setState({ matchingSetLine: 'black' });
+        setState({ reflectBlows: 0 });
+        setState({ reflectBlowsLine: 'black' });
+        SetRequiredLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetHeavyArmorPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetHeavyArmorPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -349,6 +387,12 @@ const HeavyArmor = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Heavy Armor Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -383,7 +427,7 @@ const HeavyArmor = () => {
             <View style={styles.JuggernautText}>
                 <Text style={styles.PerkText}>Juggernaut</Text>
             </View>
-            
+
             <View title='Fists Blue' style={{
                 position: 'absolute',
                 left: "18%",
@@ -483,7 +527,7 @@ const HeavyArmor = () => {
             <View style={styles.ConditioningText}>
                 <Text style={styles.PerkText}>Conditioning</Text>
             </View>
-            
+
             <View title='Reflect Blows Blue' style={{
                 position: 'absolute',
                 left: "68%",
@@ -646,7 +690,7 @@ const HeavyArmor = () => {
                     strokeWidth={lineStrokeWidth}
 
                 />
-            
+
                 <Line
                     x1="78%"
                     y1="35.5%"
@@ -696,7 +740,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: "70%",
+        bottom: "75%",
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -767,6 +811,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '64%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

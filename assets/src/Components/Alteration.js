@@ -31,6 +31,11 @@ const useSetState = (initialState = {}) => {
 // the next one you should change is the apprenticeAlt variable....it needs to replace all of the apprenticeAlt variables
 const AlterationTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [MageArmorLevel, SetMageArmorLevel] = useState(0);
+    const [MagicResisLevel, SetMagicResisLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         noviceAlt: 0,
         altDualCasting: 0,
@@ -52,14 +57,6 @@ const AlterationTree = () => {
         masterAlt: 0,
         masterAltLine: 'black',
     });
-
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [MageArmorLevel, SetMageArmorLevel] = useState(0);
-    const [MagicResisLevel, SetMagicResisLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
     const IncMageArmorCounter = (numActiveMageArmor) => {
         if (MageArmorLevel < 3) {
@@ -885,6 +882,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 
 });
