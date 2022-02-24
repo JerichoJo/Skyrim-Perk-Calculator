@@ -117,14 +117,14 @@ const IllusionTree = () => {
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
-        SetAllActivePerks(AllActivePerks + numActivePerks);
+        //SetAllActivePerks(AllActivePerks + numActivePerks);
     };
     const DecrementCounter = (numActivePerks = 0) => {
         if (ActivePerks === 0) {
             return;
         }
         SetActivePerks(ActivePerks - numActivePerks);
-        SetAllActivePerks(AllActivePerks - numActivePerks);
+        //SetAllActivePerks(AllActivePerks - numActivePerks);
     };
 
     const TrackLevel = useCallback((level) => {
@@ -1017,7 +1017,6 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-
         bottom: "78%",
         justifyContent: 'center',
         alignItems: 'center',

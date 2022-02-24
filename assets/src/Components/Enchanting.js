@@ -31,6 +31,10 @@ const useSetState = (initialState = {}) => {
 
 const Enchanting = () => {
     const navigation = useNavigation();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         enchanter: 0,
         fireEnchanter: 0,
@@ -51,12 +55,48 @@ const Enchanting = () => {
         soulSiphonLine: 'black'
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
+    let resetAllTrees;
+    const resetEnchantingPerks = () => {
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+        setState({ enchanter: 0 });
+        setState({ fireEnchanter: 0 });
+        setState({ fireEnchanterLine: 'black' });
+        setState({ frostEnchanter: 0 });
+        setState({ frostEnchanterLine: 'black' });
+        setState({ stormEnchanting: 0 });
+        setState({ stormEnchantingLine: 'black' });
+        setState({ extraEffect: 0 });
+        setState({ extraEffectLine: 'black' });
+        setState({ insightfulEnchanter: 0 });
+        setState({ insightfulEnchanterLine: 'black' });
+        setState({ corpusEnchanter: 0 });
+        setState({ corpusEnchanterLine: 'black' });
+        setState({ soulSqueezer: 0 });
+        setState({ soulSqueezerLine: 'black' });
+        setState({ soulSiphon: 0 });
+        setState({ soulSiphonLine: 'black' });
+        SetRequiredLevel(0);
+    }
+
+    const resetActivePerks = () => {
+        resetEnchantingPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetEnchantingPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -187,7 +227,7 @@ const Enchanting = () => {
             setState({ extraEffectLine: lineColor });
             setState({ stormEnchantingLine: lineColor });
             setState({ frostEnchanterLine: lineColor });
-            
+
             if (state.frostEnchanter == 1) {
                 IncrementCounter(2);
             } else if (state.enchanter == 1) {
@@ -344,6 +384,12 @@ const Enchanting = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Enchanting Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -756,7 +802,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: "70%",
+        bottom: "78%",
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -827,6 +873,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

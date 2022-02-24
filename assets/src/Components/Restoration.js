@@ -402,7 +402,7 @@ const RestorationTree = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Illusion Perks</Text>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Restoration Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>

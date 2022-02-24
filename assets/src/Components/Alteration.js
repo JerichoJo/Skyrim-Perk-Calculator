@@ -58,6 +58,52 @@ const AlterationTree = () => {
         masterAltLine: 'black',
     });
 
+    let resetAllTrees;
+    const resetAlterationPerks = () => {
+        setState({ noviceAlt: 0 });
+        setState({ altDualCasting: 0 });
+        setState({ altDualCastingLine: 'black' });
+        setState({ apprenticeAlt: 0 });
+        setState({ apprenticeAltLine: 'black' });
+        setState({ mageArmor: 0 });
+        setState({ mageArmorLine: 'black' });
+        setState({ magicResis: 0 });
+        setState({ magicResisLine: 'black' });
+        setState({ adeptAlt: 0 });
+        setState({ adeptAltLine: 'black' });
+        setState({ stability: 0 });
+        setState({ stabilityLine: 'black' });
+        setState({ expertAlt: 0 });
+        setState({ expertAltLine: 'black' });
+        setState({ atronach: 0 });
+        setState({ atronachLine: 'black' });
+        setState({ masterAlt: 0 });
+        setState({ masterAltLine: 'black' });
+        SetRequiredLevel(0);
+        SetMageArmorLevel(0);
+        SetMagicResisLevel(0);
+    }
+
+    const resetActivePerks = () => {
+        resetAlterationPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetAlterationPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
+
     const IncMageArmorCounter = (numActiveMageArmor) => {
         if (MageArmorLevel < 3) {
             SetMageArmorLevel(MageArmorLevel + numActiveMageArmor)
@@ -388,6 +434,12 @@ const AlterationTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Alteration Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -812,7 +864,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: "70%",
+        bottom: "78%",
         justifyContent: 'center',
         alignItems: 'center',
     },
