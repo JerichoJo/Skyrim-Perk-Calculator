@@ -28,8 +28,11 @@ export function DrawerContent(props) {
           label="Illusion"
           labelStyle={styles.ItemLabel}          
           onPress={()=>{
-            moveIT(0);
+            setTimeout(() => {
+              moveIT(0);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+
           }}
         >
         </DrawerItem>
@@ -38,9 +41,10 @@ export function DrawerContent(props) {
           label="Conjuration"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(1);
-            navigation.dispatch(DrawerActions.closeDrawer());
-            
+            setTimeout(() => {
+              moveIT(1);
+              navigation.dispatch(DrawerActions.closeDrawer());
+            })
           }}
         >
         </DrawerItem>
@@ -49,8 +53,11 @@ export function DrawerContent(props) {
           label="Destruction"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(2);
+            setTimeout(() => {
+              moveIT(2);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -59,8 +66,11 @@ export function DrawerContent(props) {
           label="Restoration"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(3);
+            setTimeout(() => {
+              moveIT(3);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -69,8 +79,11 @@ export function DrawerContent(props) {
           label="Alteration"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(4);
+            setTimeout(() => {
+              moveIT(4);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -79,8 +92,11 @@ export function DrawerContent(props) {
           label="Enchanting"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(5);
+            setTimeout(() => {
+              moveIT(5);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -89,8 +105,11 @@ export function DrawerContent(props) {
           label="Smithing"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(6);
+            setTimeout(() => {
+              moveIT(6);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
             }}
         >
         </DrawerItem>
@@ -99,8 +118,11 @@ export function DrawerContent(props) {
           label="Heavy Armor"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(7);
+            setTimeout(() => {
+              moveIT(7);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -109,8 +131,11 @@ export function DrawerContent(props) {
           label="Block"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(8);
+            setTimeout(() => {
+              moveIT(8);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -119,8 +144,11 @@ export function DrawerContent(props) {
           label="Two-Handed"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(9);
+            setTimeout(() => {
+              moveIT(9);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -129,8 +157,11 @@ export function DrawerContent(props) {
           label="One-Handed"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(10);
+            setTimeout(() => {
+              moveIT(10);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -139,8 +170,11 @@ export function DrawerContent(props) {
           label="Archery"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(11);
+            setTimeout(() => {
+              moveIT(11);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -149,8 +183,11 @@ export function DrawerContent(props) {
           label="Light Armor"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(12);
+            setTimeout(() => {
+              moveIT(12);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -159,8 +196,11 @@ export function DrawerContent(props) {
           label="Sneak"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(13);
+            setTimeout(() => {
+              moveIT(13);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -169,8 +209,11 @@ export function DrawerContent(props) {
           label="Lockpicking"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(14);
+            setTimeout(() => {
+              moveIT(14);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -179,8 +222,11 @@ export function DrawerContent(props) {
           label="Pickpocket"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(15);
+            setTimeout(() => {
+              moveIT(15);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -189,8 +235,11 @@ export function DrawerContent(props) {
           label="Speech"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(16);
+            setTimeout(() => {
+              moveIT(16);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
@@ -198,8 +247,11 @@ export function DrawerContent(props) {
           label="Alchemy"
           labelStyle={styles.ItemLabel}
           onPress={()=>{
-            moveIT(17);
+            setTimeout(() => {
+              moveIT(17);
             navigation.dispatch(DrawerActions.closeDrawer());
+            })
+            
           }}
         >
         </DrawerItem>
