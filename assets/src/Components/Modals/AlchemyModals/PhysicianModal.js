@@ -19,7 +19,10 @@ const PhysicianModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Physician{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Potions made that restore health, magicka, or stamina are 25% more powerful{"\n"}{"\n"}
+                    Requires Alchemist
+                </Text>
 
             </View>
 
