@@ -503,7 +503,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("noviceConjurationModal")}
+                    onLongPress={() => navigation.navigate("NoviceConjurationModal")}
                     onPress={() => {
                         CheckIfNoviceConjurationPressed(
                             state.noviceConjuration == 0 ? 1 : 0,
@@ -534,7 +534,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("conjurationDualCastingModal")}
+                    onLongPress={() => navigation.navigate("ConjurationDualCastingModal")}
                     onPress={() => {
                         CheckIfConjurationDualCastingPressed(
                             state.conjurationDualCasting == 0 ? 1 : 0,
@@ -565,9 +565,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("NecromancyModal")}
                     onPress={() => {
                         CheckIfNecromancyPressed(
                             state.necromancy == 0 ? 1 : 0,
@@ -598,9 +596,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DarkSoulsModal")}
                     onPress={() => {
                         CheckIfDarkSoulsPressed(
                             state.darkSouls == 0 ? 1 : 0,
@@ -631,9 +627,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("TwinSoulsModal")}
                     onPress={() => {
                         CheckIfDarkSoulsPressed(
                             state.darkSouls == 0 ? 1 : 0,
@@ -665,9 +659,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MysticBindingModal")}
                     onPress={() => {
                         CheckIfMysticBindingPressed(
                             state.mysticBinding == 0 ? 1 : 0,
@@ -698,9 +690,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SoulStealerModal")}
                     onPress={() => {
                         CheckIfSoulStealerPressed(
                             state.soulStealer == 0 ? 1 : 0,
@@ -732,9 +722,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SummonerModal")}
                     onPress={() => {
                         CheckIfSummonerPressed(
                             state.summoner == 0 ? 1 : 0,
@@ -767,9 +755,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AtromancyModal")}
                     onPress={() => {
                         CheckIfAtromancyPressed(
                             state.atromancy == 0 ? 1 : 0,
@@ -800,9 +786,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ElementalPotencyModal")}
                     onPress={() => {
                         CheckIfElementalPotencyPressed(
                             state.elementalPotency == 0 ? 1 : 0,
@@ -833,9 +817,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("OblivionBindingModal")}
                     onPress={() => {
                         CheckIfOblivionBindingPressed(
                             state.oblivionBinding == 0 ? 1 : 0,
@@ -867,9 +849,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterConjurationModal")}
                     onPress={() => {
                         CheckIfMasterConjurationPressed(
                             state.masterConjuration == 0 ? 1 : 0,
@@ -900,9 +880,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExpertConjurationModal")}
                     onPress={() => {
                         CheckIfExpertConjurationPressed(
                             state.expertConjuration == 0 ? 1 : 0,
@@ -933,9 +911,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdeptConjurationModal")}
                     onPress={() => {
                         CheckIfAdeptConjurationPressed(
                             state.adeptConjuration == 0 ? 1 : 0,
@@ -966,9 +942,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ApprenticeConjurationModal")}
                     onPress={() => {
                         CheckIfApprenticeConjurationPressed(
                             state.apprenticeConjuration == 0 ? 1 : 0,

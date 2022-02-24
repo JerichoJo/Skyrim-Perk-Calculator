@@ -371,7 +371,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("juggernautModal")}
+                    onLongPress={() => navigation.navigate("JuggernautModal")}
                     onPress={() => {
                         CheckIfJuggernautPressed(
                             state.juggernaut == 0 ? 1 : 0,
@@ -402,9 +402,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("FistsOfSteelModal")}
                     onPress={() => {
                         CheckIfFistsPressed(
                             state.fistsOfSteel == 0 ? 1 : 0,
@@ -435,9 +433,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("CushionedModal")}
                     onPress={() => {
                         CheckIfCushionedPressed(
                             state.cushioned == 0 ? 1 : 0,
@@ -468,9 +464,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ConditioningModal")}
                     onPress={() => {
                         CheckIfConditioningPressed(
                             state.conditioning == 0 ? 1 : 0,
@@ -502,9 +496,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ReflectBlowsModal")}
                     onPress={() => {
                         CheckIfReflectBlowsPressed(
                             state.reflectBlows == 0 ? 1 : 0,
@@ -535,9 +527,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("HeavyMatchingSetModal")}
                     onPress={() => {
                         CheckIfMatchingSetPressed(
                             state.matchingSet == 0 ? 1 : 0,
@@ -568,9 +558,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("TowerOfStrengthModal")}
                     onPress={() => {
                         CheckIfTowerOfStrengthPressed(
                             state.towerOfStrength == 0 ? 1 : 0,
@@ -601,9 +589,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("WellFittedModal")}
                     onPress={() => {
                         CheckIfWellFittedPressed(
                             state.wellFitted == 0 ? 1 : 0,

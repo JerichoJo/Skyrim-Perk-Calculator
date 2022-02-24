@@ -69,6 +69,31 @@ import IntenseFlamesModal from "./DestructionModals/IntenseFlamesModal";
 import MasterDestructionModal from "./DestructionModals/MasterDestructionModal";
 import NoviceDestructionModal from "./DestructionModals/NoviceDestructionModal";
 import RuneMasterModal from "./DestructionModals/RuneMasterModal";
+import JuggernautModal from "./HeavyArmorModals/JuggernautModal";
+import FistsOfSteelModal from "./HeavyArmorModals/FistsOfSteelModal";
+import CushionedModal from "./HeavyArmorModals/CushionedModal";
+import ConditioningModal from "./HeavyArmorModals/ConditioningModal";
+import HeavyMatchingSetModal from "./HeavyArmorModals/HeavyMatchingSetModal";
+import TowerOfStrengthModal from "./HeavyArmorModals/TowerOfStrengthModal";
+import WellFittedModal from "./HeavyArmorModals/WellFittedModal";
+import ReflectBlowsModal from "./HeavyArmorModals/ReflectBlowsModal";
+import NoviceConjurationModal from "./ConjurationModals.js/NoviceConjurationModal";
+import ConjurationDualCastingModal from "./ConjurationModals.js/ConjurationDualCastingModal";
+import SummonerModal from "./ConjurationModals.js/SummonerModal";
+import AtromancyModal from "./ConjurationModals.js/AtromancyModal";
+import ElementalPotencyModal from "./ConjurationModals.js/ElementalPotencyModal";
+import NecromancyModal from "./ConjurationModals.js/NecromancyModal";
+import DarkSoulsModal from "./ConjurationModals.js/DarkSoulsModal";
+import TwinSoulsModal from "./ConjurationModals.js/TwinSoulsModal";
+import MysticBindingModal from "./ConjurationModals.js/MysticBindingModal";
+import SoulStealerModal from "./ConjurationModals.js/SoulStealerModal";
+import OblivionBindingModal from "./ConjurationModals.js/OblivionBindingModal";
+import ApprenticeConjurationModal from "./ConjurationModals.js/ApprenticeConjuration";
+import AdeptConjurationModal from "./ConjurationModals.js/AdeptConjurationModal";
+import ExpertConjurationModal from "./ConjurationModals.js/ExpertConjurationModal";
+import MasterConjurationModal from "./ConjurationModals.js/MasterConjurationModal";
+
+
 
 const modals = {
     //Alteration Tree
@@ -154,7 +179,35 @@ const modals = {
     IntenseFlamesModal,
     MasterDestructionModal,
     NoviceDestructionModal,
-    RuneMasterModal
+    RuneMasterModal,
+
+    // Heavy Armor Modals
+    JuggernautModal,
+    FistsOfSteelModal,
+    CushionedModal,
+    ConditioningModal,
+    HeavyMatchingSetModal,
+    ReflectBlowsModal,
+    TowerOfStrengthModal,
+    WellFittedModal,
+    
+    // Conjuration Modals
+    NoviceConjurationModal,
+    ConjurationDualCastingModal,
+    SummonerModal,
+    AtromancyModal,
+    ElementalPotencyModal,
+    DarkSoulsModal,
+    TwinSoulsModal,
+    NecromancyModal,
+    MysticBindingModal,
+    SoulStealerModal,
+    OblivionBindingModal,
+    MasterConjurationModal,
+    ExpertConjurationModal,
+    AdeptConjurationModal,
+    ApprenticeConjurationModal
+
 }
 
 export default modals;
