@@ -92,6 +92,17 @@ import ApprenticeConjurationModal from "./ConjurationModals.js/ApprenticeConjura
 import AdeptConjurationModal from "./ConjurationModals.js/AdeptConjurationModal";
 import ExpertConjurationModal from "./ConjurationModals.js/ExpertConjurationModal";
 import MasterConjurationModal from "./ConjurationModals.js/MasterConjurationModal";
+import CorpusEnchanterModal from "./EnchantingModals.js/CorpusEnchanterModal";
+import EnchanterModal from "./EnchantingModals.js/EnchanterModal";
+import ExtraEffectModal from "./EnchantingModals.js/ExtraEffectModal";
+import FireEnchanterModal from "./EnchantingModals.js/FireEnchanterModal";
+import FrostEnchanterModal from "./EnchantingModals.js/FrostEnchanterModal";
+import InsightfulEnchanterModal from "./EnchantingModals.js/InsightfulEnchanterModal";
+import SoulSiphonModal from "./EnchantingModals.js/SoulSiphonModal";
+import SoulSqueezerModal from "./EnchantingModals.js/SoulSiphonModal";
+import StormEnchanterModal from "./EnchantingModals.js/StormEnchanterModal";
+
+
 
 
 
@@ -206,7 +217,18 @@ const modals = {
     MasterConjurationModal,
     ExpertConjurationModal,
     AdeptConjurationModal,
-    ApprenticeConjurationModal
+    ApprenticeConjurationModal,
+
+    // Enchanting Tree Modals
+    CorpusEnchanterModal,
+    EnchanterModal,
+    ExtraEffectModal,
+    FireEnchanterModal,
+    FrostEnchanterModal,
+    InsightfulEnchanterModal,
+    SoulSiphonModal,
+    SoulSqueezerModal,
+    StormEnchanterModal,
 
 }
 

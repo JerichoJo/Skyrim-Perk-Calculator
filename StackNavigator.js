@@ -120,6 +120,19 @@ function Modal() {
                 <ModalNav.Screen name="MasterConjurationModal" component={modals.MasterConjurationModal} />
                 <ModalNav.Screen name="DarkSoulsModal" component={modals.DarkSoulsModal} />
             </ModalNav.Group>
+
+            {/* Enchanting Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="CorpusEnchanterModal" component={modals.CorpusEnchanterModal} />
+                <ModalNav.Screen name="EnchanterModal" component={modals.EnchanterModal} />
+                <ModalNav.Screen name="ExtraEffectModal" component={modals.ExtraEffectModal} />
+                <ModalNav.Screen name="FireEnchanterModal" component={modals.FireEnchanterModal} />
+                <ModalNav.Screen name="FrostEnchanterModal" component={modals.FrostEnchanterModal} />
+                <ModalNav.Screen name="InsightfulEnchanterModal" component={modals.InsightfulEnchanterModal} />
+                <ModalNav.Screen name="SoulSiphonModal" component={modals.SoulSiphonModal} />
+                <ModalNav.Screen name="SoulSqueezerModal" component={modals.SoulSqueezerModal} />
+                <ModalNav.Screen name="StormEnchanterModal" component={modals.StormEnchanterModal} />
+            </ModalNav.Group>
             
             
         </ModalNav.Navigator>

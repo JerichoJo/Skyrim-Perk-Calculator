@@ -366,7 +366,7 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("enchanterModal")}
+                    onLongPress={() => navigation.navigate("EnchanterModal")}
                     onPress={() => {
                         CheckIfEnchanterPressed(
                             state.enchanter == 0 ? 1 : 0,
@@ -397,7 +397,7 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("fireEnchanterModal")}
+                    onLongPress={() => navigation.navigate("InsightfulEnchanterModal")}
                     onPress={() => {
                         CheckIfFireEnchanterPressed(
                             state.fireEnchanter == 0 ? 1 : 0,
@@ -428,9 +428,7 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("FireEnchanterModal")}
                     onPress={() => {
                         CheckIfFrostEnchanterPressed(
                             state.frostEnchanter == 0 ? 1 : 0,
@@ -461,9 +459,7 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("FrostEnchanterModal")}
                     onPress={() => {
                         CheckIfStormEnchantingPressed(
                             state.stormEnchanting == 0 ? 1 : 0,
@@ -494,9 +490,7 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("StormEnchanterModal")}
                     onPress={() => {
                         CheckIfExtraEffectPressed(
                             state.extraEffect == 0 ? 1 : 0,
@@ -527,9 +521,7 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SoulSiphonModal")}
                     onPress={() => {
                         CheckIfSoulSiphonPressed(
                             state.soulSiphon == 0 ? 1 : 0,
@@ -556,13 +548,11 @@ const Enchanting = () => {
                 left: "42%",
                 top: "32%",
                 zIndex: 8,
-                opacity: state.soulSqueezer
+                opacity: state.extraEffect
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExtraEffectModal")}
                     onPress={() => {
                         CheckIfSoulSqueezerPressed(
                             state.soulSqueezer == 0 ? 1 : 0,
@@ -593,9 +583,7 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("CorpusEnchanterModal")}
                     onPress={() => {
                         CheckIfCorpusEnchanterPressed(
                             state.corpusEnchanter == 0 ? 1 : 0,
@@ -626,9 +614,7 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SoulSqueezerModal")}
                     onPress={() => {
                         CheckIfInsightfulEnchanterPressed(
                             state.insightfulEnchanter == 0 ? 1 : 0,
