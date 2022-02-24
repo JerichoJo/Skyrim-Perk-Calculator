@@ -1,105 +1,104 @@
 import React from "react";
+import { useContext, useCallback } from 'react';
 import { View, StyleSheet, Dimensions } from "react-native";
-import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
-import {Drawer} from 'react-native-paper';
+import { Drawer } from 'react-native-paper';
+import { AllActivePerkss } from '../../../../StackNavigator';
 
 const moveIT = (dest) => {
-    const x = (dest - ref.current.state.index)
-    ref.current.scrollBy(x)
+  const x = (dest - ref.current.state.index)
+  ref.current.scrollBy(x)
 };
 
+
+
 export function DrawerContent(props) {
+  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
   const navigation = useNavigation();
   return (
-    
-    <View style={{flex:1}}>
-      <DrawerContentScrollView
-      {...props}
-      >
-      
-      <Drawer.Section 
-        Title="Skills"
-        style={{
-          padding:20
-        }}
-      >
-        <DrawerItem
-          label="Illusion"
-          labelStyle={styles.ItemLabel}          
-          onPress={()=>{
-            setTimeout(() => {
-              moveIT(0);
-            navigation.dispatch(DrawerActions.closeDrawer());
-            }, 100)
 
+    <View style={{ flex: 1 }}>
+      <DrawerContentScrollView
+        {...props}
+      >
+
+        <Drawer.Section
+          Title="Skills"
+          style={{
+            padding: 20
           }}
         >
-        </DrawerItem>
+          <DrawerItem
+            label="Reset ALL Perks"
+            labelStyle={styles.ItemLabel}
+            onPress={() => {
+              SetAllActivePerks(0);
+              navigation.dispatch(DrawerActions.closeDrawer());
+            }}
+          >
+          </DrawerItem>
+          <DrawerItem
+            label="Illusion"
+            labelStyle={styles.ItemLabel}
+            onPress={() => {
+              moveIT(0);
+              navigation.dispatch(DrawerActions.closeDrawer());
+            }}
+          >
+          </DrawerItem>
 
-        <DrawerItem
-          label="Conjuration"
-          labelStyle={styles.ItemLabel}
-          onPress={()=>{
-            setTimeout(() => {
+          <DrawerItem
+            label="Conjuration"
+            labelStyle={styles.ItemLabel}
+            onPress={() => {
               moveIT(1);
               navigation.dispatch(DrawerActions.closeDrawer());
-            }, 100)
-          }}
-        >
-        </DrawerItem>
 
-        <DrawerItem
-          label="Destruction"
-          labelStyle={styles.ItemLabel}
-          onPress={()=>{
-            setTimeout(() => {
+            }}
+          >
+          </DrawerItem>
+
+          <DrawerItem
+            label="Destruction"
+            labelStyle={styles.ItemLabel}
+            onPress={() => {
               moveIT(2);
-            navigation.dispatch(DrawerActions.closeDrawer());
-            }, 100)
-            
-          }}
-        >
-        </DrawerItem>
+              navigation.dispatch(DrawerActions.closeDrawer());
+            }}
+          >
+          </DrawerItem>
 
-        <DrawerItem
-          label="Restoration"
-          labelStyle={styles.ItemLabel}
-          onPress={()=>{
-            setTimeout(() => {
+          <DrawerItem
+            label="Restoration"
+            labelStyle={styles.ItemLabel}
+            onPress={() => {
               moveIT(3);
-            navigation.dispatch(DrawerActions.closeDrawer());
-            }, 100)
-            
-          }}
-        >
-        </DrawerItem>
+              navigation.dispatch(DrawerActions.closeDrawer());
+            }}
+          >
+          </DrawerItem>
 
-        <DrawerItem
-          label="Alteration"
-          labelStyle={styles.ItemLabel}
-          onPress={()=>{
-            setTimeout(() => {
+          <DrawerItem
+            label="Alteration"
+            labelStyle={styles.ItemLabel}
+            onPress={() => {
               moveIT(4);
-            navigation.dispatch(DrawerActions.closeDrawer());
-            }, 100)
-            
-          }}
-        >
-        </DrawerItem>
+              navigation.dispatch(DrawerActions.closeDrawer());
+            }}
+          >
+          </DrawerItem>
 
-        <DrawerItem
-          label="Enchanting"
-          labelStyle={styles.ItemLabel}
-          onPress={()=>{
-            setTimeout(() => {
+          <DrawerItem
+            label="Enchanting"
+            labelStyle={styles.ItemLabel}
+            onPress={() => {
               moveIT(5);
-            navigation.dispatch(DrawerActions.closeDrawer());
-            }, 100)
-            
-          }}
-        >
-        </DrawerItem>
+              navigation.dispatch(DrawerActions.closeDrawer());
+            }}
+          >
+          </DrawerItem>
 
         <DrawerItem
           label="Smithing"
@@ -256,9 +255,9 @@ export function DrawerContent(props) {
         >
         </DrawerItem>
 
-      </Drawer.Section>
+        </Drawer.Section>
       </DrawerContentScrollView>
-      
+
     </View>
 
   )
@@ -267,8 +266,8 @@ export function DrawerContent(props) {
 const styles = StyleSheet.create({
 
   ItemLabel: {
-    fontWeight:'bold',
+    fontWeight: 'bold',
     borderColor: 'white',
-        
+
   }
 });

@@ -31,6 +31,11 @@ const useSetState = (initialState = {}) => {
 // the next one you should change is the apprenticeAlt variable....it needs to replace all of the apprenticeAlt variables
 const AlterationTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [MageArmorLevel, SetMageArmorLevel] = useState(0);
+    const [MagicResisLevel, SetMagicResisLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         noviceAlt: 0,
         altDualCasting: 0,
@@ -53,13 +58,51 @@ const AlterationTree = () => {
         masterAltLine: 'black',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    let resetAllTrees;
+    const resetAlterationPerks = () => {
+        setState({ noviceAlt: 0 });
+        setState({ altDualCasting: 0 });
+        setState({ altDualCastingLine: 'black' });
+        setState({ apprenticeAlt: 0 });
+        setState({ apprenticeAltLine: 'black' });
+        setState({ mageArmor: 0 });
+        setState({ mageArmorLine: 'black' });
+        setState({ magicResis: 0 });
+        setState({ magicResisLine: 'black' });
+        setState({ adeptAlt: 0 });
+        setState({ adeptAltLine: 'black' });
+        setState({ stability: 0 });
+        setState({ stabilityLine: 'black' });
+        setState({ expertAlt: 0 });
+        setState({ expertAltLine: 'black' });
+        setState({ atronach: 0 });
+        setState({ atronachLine: 'black' });
+        setState({ masterAlt: 0 });
+        setState({ masterAltLine: 'black' });
+        SetRequiredLevel(0);
+        SetMageArmorLevel(0);
+        SetMagicResisLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [MageArmorLevel, SetMageArmorLevel] = useState(0);
-    const [MagicResisLevel, SetMagicResisLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetAlterationPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetAlterationPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncMageArmorCounter = (numActiveMageArmor) => {
         if (MageArmorLevel < 3) {
@@ -391,6 +434,12 @@ const AlterationTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Alteration Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -815,7 +864,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: "70%",
+        bottom: "78%",
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -885,6 +934,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 
 });

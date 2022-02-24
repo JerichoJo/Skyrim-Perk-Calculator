@@ -32,6 +32,9 @@ const useSetState = (initialState = {}) => {
 
 const IllusionTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         noviceIllus: 0,
         illusionDual: 0,
@@ -61,29 +64,72 @@ const IllusionTree = () => {
         masterOfMindLine2: 'black',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    let resetAllTrees;
+    const resetIllusionPerks = () => {
+        setState({ noviceIllus: 0 });
+        setState({ illusionDual: 0 });
+        setState({ illusionDualLine: 'black' });
+        setState({ apprenticeIllus: 0 });
+        setState({ apprenticeIllusLine: 'black' });
+        setState({ adeptIllus: 0 });
+        setState({ adeptIllusLine: 'black' });
+        setState({ expertIllus: 0 });
+        setState({ expertIllusLine: 'black' });
+        setState({ masterIllus: 0 });
+        setState({ masterIllusLine: 'black' });
+        setState({ hypnoticGaze: 0 });
+        setState({ hypnoticGazeLine: 'black' });
+        setState({ aspectOfTerror: 0 });
+        setState({ aspectOfTerrorLine: 'black' });
+        setState({ rage: 0 });
+        setState({ rageLine: 'black' });
+        setState({ animage: 0 });
+        setState({ animageLine: 'black' });
+        setState({ kindredMage: 0 });
+        setState({ kindredMageLine: 'black' });
+        setState({ quietCasting: 0 });
+        setState({ quietCastingLine: 'black' });
+        setState({ masterOfMind: 0 });
+        setState({ masterOfMindLine: 'black' });
+        setState({ masterOfMindLine2: 'black' });
+        SetRequiredLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetIllusionPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetIllusionPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
-        SetAllActivePerks(AllActivePerks + numActivePerks);
+        //SetAllActivePerks(AllActivePerks + numActivePerks);
     };
     const DecrementCounter = (numActivePerks = 0) => {
         if (ActivePerks === 0) {
             return;
         }
         SetActivePerks(ActivePerks - numActivePerks);
-        SetAllActivePerks(AllActivePerks - numActivePerks);
+        //SetAllActivePerks(AllActivePerks - numActivePerks);
     };
 
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
     }, []);
-
-
 
     const CheckLevel = useCallback(() => {
         if (state.animage == 1) {
@@ -419,6 +465,12 @@ const IllusionTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Illusion Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -965,8 +1017,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-
-        bottom: "70%",
+        bottom: "78%",
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -1055,6 +1106,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

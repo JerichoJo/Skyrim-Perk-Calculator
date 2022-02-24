@@ -2,14 +2,12 @@ import * as React from 'react';
 import { useState, useCallback, useEffect, useContext, useRef, Button } from 'react';
 import Svg, { Line } from 'react-native-svg';
 import {
-    View,
-    Dimensions,
-    TouchableOpacity,
-    Text,
-    StyleSheet,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
@@ -18,19 +16,23 @@ import { useNavigation } from '@react-navigation/native';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const useSetState = (initialState = {}) => {
-    const [state, regularSetState] = useState(initialState);
+  const [state, regularSetState] = useState(initialState);
 
-    const setState = (newState) => {
-        regularSetState((prevState) => ({
-            ...prevState,
-            ...newState,
-        }));
-    };
+  const setState = (newState) => {
+    regularSetState((prevState) => ({
+      ...prevState,
+      ...newState,
+    }));
+  };
 
-    return [state, setState];
+  return [state, setState];
 };
 const DestructionTree = () => {
   const navigation = useNavigation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [ActivePerks, SetActivePerks] = useState(0);
+  const [RequiredLevel, SetRequiredLevel] = useState(0);
+  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
   const [state, setState] = useSetState({
     noviceDestruction: 0,
     apprenticeDestruction: 0,
@@ -61,12 +63,60 @@ const DestructionTree = () => {
     impactLine: 'black',
   });
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [count, setCount] = useState(0);
 
-  const [ActivePerks, SetActivePerks] = useState(0);
-  const [RequiredLevel, SetRequiredLevel] = useState(0);
-  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+  let resetAllTrees;
+  const resetDestructionPerks = () => {
+    setState({ noviceDestruction: 0 });
+    setState({ apprenticeDestruction: 0 });
+    setState({ apprenticeDestructionLine: 'black' });
+    setState({ adeptDestruction: 0 });
+    setState({ adeptDestructionLine: 'black' });
+    setState({ expertDestruction: 0 });
+    setState({ expertDestructionLine: 'black' });
+    setState({ masterDestruction: 0 });
+    setState({ masterDestructionLine: 'black' });
+    setState({ runeMaster: 0 });
+    setState({ runeMasterLine: 'black' });
+    setState({ augmentedFlames: 0 });
+    setState({ augmentedFlamesLine: 'black' });
+    setState({ intenseFlames: 0 });
+    setState({ intenseFlamesLine: 'black' });
+    setState({ augmentedFrost: 0 });
+    setState({ augmentedFrostLine: 'black' });
+    setState({ deepFreeze: 0 });
+    setState({ deepFreezeLine: 'black' });
+    setState({ augmentedShock: 0 });
+    setState({ augmentedShockLine: 'black' });
+    setState({ disintegrate: 0 });
+    setState({ disintegrateLine: 'black' });
+    setState({ destructionDualCasting: 0 });
+    setState({ destructionDualCastingLine: 'black' });
+    setState({ impact: 0 });
+    setState({ impactLine: 'black' });
+    SetRequiredLevel(0);
+  }
+
+  const resetActivePerks = () => {
+    resetDestructionPerks();
+    DecrementCounter(ActivePerks);
+  };
+
+  // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+  if (AllActivePerks == 0) {
+    resetAllTrees = 1;
+  } else {
+    resetAllTrees = 0;
+  }
+
+  // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+  useEffect(() => {
+    if (resetAllTrees == 1) {
+      resetDestructionPerks();
+      SetActivePerks(0);
+    }
+  }, [resetAllTrees]);
+
+
 
   const IncrementCounter = (numActivePerks = 0) => {
     SetActivePerks(ActivePerks + numActivePerks);
@@ -305,432 +355,438 @@ const DestructionTree = () => {
       setState({ masterDestructionLine: lineColor });
     }
   };
-    return (
-        <View style={{ zIndex: 2 }}>
-            <View style={styles.topText}>
-                <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-                <Text style={styles.HomeScreenText}>All Active Perks: {RequiredLevel}</Text>
-            </View>
-            <View title='Novice Destruction Blue' style={{
-                position: 'absolute',
-                left: "24.5%",
-                top: "74.5%",
-                zIndex: 8,
+  return (
+    <View style={{ zIndex: 2 }}>
+      <View
+        style={styles.resetButtonContainer}>
+        <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+          <Text style={{ color: "black", fontWeight: "bold", }}> Reset Destruction Perks</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.topText}>
+        <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
+        <Text style={styles.HomeScreenText}>All Active Perks: {RequiredLevel}</Text>
+      </View>
+      <View title='Novice Destruction Blue' style={{
+        position: 'absolute',
+        left: "24.5%",
+        top: "74.5%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Novice Destruction Gold' style={{
-                position: 'absolute',
-                left: "24.5%",
-                top: "74.5%",
-                zIndex: 8,
-                opacity: state.noviceDestruction
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Novice Destruction Gold' style={{
+        position: 'absolute',
+        left: "24.5%",
+        top: "74.5%",
+        zIndex: 8,
+        opacity: state.noviceDestruction
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => navigation.navigate("Other Stuff")}
-                    onPress={() => {
-                        checkIfNoviceDestructionPressed(
-                            state.noviceDestruction == 0 ? 1 : 0,
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Apprentice Destruction Blue' style={{
-                position: 'absolute',
-                left: "48%",
-                top: "55%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => navigation.navigate("Other Stuff")}
+          onPress={() => {
+            checkIfNoviceDestructionPressed(
+              state.noviceDestruction == 0 ? 1 : 0,
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Apprentice Destruction Blue' style={{
+        position: 'absolute',
+        left: "48%",
+        top: "55%",
+        zIndex: 8,
 
-            }}>
+      }}>
 
-                <StarIconBlue />
-            </View>
-            <View title='Apprentice Destruction Gold' style={{
-                position: 'absolute',
-                left: "48%",
-                top: "55%",
-                zIndex: 8,
-                opacity: state.apprenticeDestruction
+        <StarIconBlue />
+      </View>
+      <View title='Apprentice Destruction Gold' style={{
+        position: 'absolute',
+        left: "48%",
+        top: "55%",
+        zIndex: 8,
+        opacity: state.apprenticeDestruction
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfApprenticeDestructionPressed(
-                            state.apprenticeDestruction == 0 ? 1 : 0,
-                            state.apprenticeDestructionLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Adept Destruction Blue' style={{
-                position: 'absolute',
-                left: "46%",
-                top: "41%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfApprenticeDestructionPressed(
+              state.apprenticeDestruction == 0 ? 1 : 0,
+              state.apprenticeDestructionLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Adept Destruction Blue' style={{
+        position: 'absolute',
+        left: "46%",
+        top: "41%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Adept Destruction Gold' style={{
-                position: 'absolute',
-                left: "46%",
-                top: "41%",
-                zIndex: 8,
-                opacity: state.adeptDestruction
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Adept Destruction Gold' style={{
+        position: 'absolute',
+        left: "46%",
+        top: "41%",
+        zIndex: 8,
+        opacity: state.adeptDestruction
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfAdeptDestructionPressed(
-                            state.adeptDestruction == 0 ? 1 : 0,
-                            state.adeptDestructionLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Expert Destruction Blue' style={{
-                position: 'absolute',
-                left: "51%",
-                top: "30%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfAdeptDestructionPressed(
+              state.adeptDestruction == 0 ? 1 : 0,
+              state.adeptDestructionLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Expert Destruction Blue' style={{
+        position: 'absolute',
+        left: "51%",
+        top: "30%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Expert Destruction Gold' style={{
-                position: 'absolute',
-                left: "51%",
-                top: "30%",
-                zIndex: 8,
-                opacity: state.expertDestruction
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Expert Destruction Gold' style={{
+        position: 'absolute',
+        left: "51%",
+        top: "30%",
+        zIndex: 8,
+        opacity: state.expertDestruction
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfExpertDestructionPressed(
-                            state.expertDestruction == 0 ? 1 : 0,
-                            state.expertDestructionLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Master Destruction Blue' style={{
-                position: 'absolute',
-                left: "50%",
-                top: "20%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfExpertDestructionPressed(
+              state.expertDestruction == 0 ? 1 : 0,
+              state.expertDestructionLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Master Destruction Blue' style={{
+        position: 'absolute',
+        left: "50%",
+        top: "20%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Master Destruction Gold' style={{
-                position: 'absolute',
-                left: "50%",
-                top: "20%",
-                zIndex: 8,
-                opacity: state.masterDestruction
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Master Destruction Gold' style={{
+        position: 'absolute',
+        left: "50%",
+        top: "20%",
+        zIndex: 8,
+        opacity: state.masterDestruction
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfMasterDestructionPressed(
-                            state.masterDestruction == 0 ? 1 : 0,
-                            state.masterDestructionLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Rune Master Blue' style={{
-                position: 'absolute',
-                left: "62%",
-                top: "45%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfMasterDestructionPressed(
+              state.masterDestruction == 0 ? 1 : 0,
+              state.masterDestructionLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Rune Master Blue' style={{
+        position: 'absolute',
+        left: "62%",
+        top: "45%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Rune Master Gold' style={{
-                position: 'absolute',
-                left: "62%",
-                top: "45%",
-                zIndex: 8,
-                opacity: state.runeMaster
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Rune Master Gold' style={{
+        position: 'absolute',
+        left: "62%",
+        top: "45%",
+        zIndex: 8,
+        opacity: state.runeMaster
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfRuneMasterPressed(
-                            state.runeMaster == 0 ? 1 : 0,
-                            state.runeMasterLine == 'black' ? 'gold' : 'black',
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Augmented Flames Blue' style={{
-                position: 'absolute',
-                left: "-1%",
-                top: "55%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfRuneMasterPressed(
+              state.runeMaster == 0 ? 1 : 0,
+              state.runeMasterLine == 'black' ? 'gold' : 'black',
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Augmented Flames Blue' style={{
+        position: 'absolute',
+        left: "-1%",
+        top: "55%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Augmented Flames Gold' style={{
-                position: 'absolute',
-                left: "-1%",
-                top: "55%",
-                zIndex: 8,
-                opacity: state.augmentedFlames
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Augmented Flames Gold' style={{
+        position: 'absolute',
+        left: "-1%",
+        top: "55%",
+        zIndex: 8,
+        opacity: state.augmentedFlames
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfAugmentedFlamesPressed(
-                            state.augmentedFlames == 0 ? 1 : 0,
-                            state.augmentedFlamesLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Intense Flames Blue' style={{
-                position: 'absolute',
-                left: "-2%",
-                top: "45%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfAugmentedFlamesPressed(
+              state.augmentedFlames == 0 ? 1 : 0,
+              state.augmentedFlamesLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Intense Flames Blue' style={{
+        position: 'absolute',
+        left: "-2%",
+        top: "45%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Intense Flames Gold' style={{
-                position: 'absolute',
-                left: "-2%",
-                top: "45%",
-                zIndex: 8,
-                opacity: state.intenseFlames
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Intense Flames Gold' style={{
+        position: 'absolute',
+        left: "-2%",
+        top: "45%",
+        zIndex: 8,
+        opacity: state.intenseFlames
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIntenseFlamesPressed(
-                            state.intenseFlames == 0 ? 1 : 0,
-                            state.intenseFlamesLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Augmented Frost Blue' style={{
-                position: 'absolute',
-                left: "13%",
-                top: "49%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIntenseFlamesPressed(
+              state.intenseFlames == 0 ? 1 : 0,
+              state.intenseFlamesLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Augmented Frost Blue' style={{
+        position: 'absolute',
+        left: "13%",
+        top: "49%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Augmented Frost Gold' style={{
-                position: 'absolute',
-                left: "13%",
-                top: "49%",
-                zIndex: 8,
-                opacity: state.augmentedFrost
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Augmented Frost Gold' style={{
+        position: 'absolute',
+        left: "13%",
+        top: "49%",
+        zIndex: 8,
+        opacity: state.augmentedFrost
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfAugmentedFrostPressed(
-                            state.augmentedFrost == 0 ? 1 : 0,
-                            state.augmentedFrostLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View> 
-            
-            <View title='Augmented Shock Blue' style={{
-                position: 'absolute',
-                left: "29%",
-                top: "44%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfAugmentedFrostPressed(
+              state.augmentedFrost == 0 ? 1 : 0,
+              state.augmentedFrostLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Augmented Shock Gold' style={{
-                position: 'absolute',
-                left: "29%",
-                top: "44%",
-                zIndex: 8,
-                opacity: state.augmentedShock
+      <View title='Augmented Shock Blue' style={{
+        position: 'absolute',
+        left: "29%",
+        top: "44%",
+        zIndex: 8,
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfAugmentedShockPressed(
-                            state.augmentedShock == 0 ? 1 : 0,
-                            state.augmentedShockLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Disintegrate Blue' style={{
-                position: 'absolute',
-                left: "29%",
-                top: "30%",
-                zIndex: 8,
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Augmented Shock Gold' style={{
+        position: 'absolute',
+        left: "29%",
+        top: "44%",
+        zIndex: 8,
+        opacity: state.augmentedShock
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Disintegrate Gold' style={{
-                position: 'absolute',
-                left: "29%",
-                top: "30%",
-                zIndex: 8,
-                opacity: state.disintegrate
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfAugmentedShockPressed(
+              state.augmentedShock == 0 ? 1 : 0,
+              state.augmentedShockLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Disintegrate Blue' style={{
+        position: 'absolute',
+        left: "29%",
+        top: "30%",
+        zIndex: 8,
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfDisintegratePressed(
-                            state.disintegrate == 0 ? 1 : 0,
-                            state.disintegrateLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Destruction Dual Casting Blue' style={{
-                position: 'absolute',
-                left: "59%",
-                top: "64%",
-                zIndex: 8,
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Disintegrate Gold' style={{
+        position: 'absolute',
+        left: "29%",
+        top: "30%",
+        zIndex: 8,
+        opacity: state.disintegrate
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Destruction Dual Casting Gold' style={{
-                position: 'absolute',
-                left: "59%",
-                top: "64%",
-                zIndex: 8,
-                opacity: state.destructionDualCasting
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfDisintegratePressed(
+              state.disintegrate == 0 ? 1 : 0,
+              state.disintegrateLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Destruction Dual Casting Blue' style={{
+        position: 'absolute',
+        left: "59%",
+        top: "64%",
+        zIndex: 8,
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfDestructionDualPressed(
-                            state.destructionDualCasting == 0 ? 1 : 0,
-                            state.destructionDualCastingLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Impact Blue' style={{
-                position: 'absolute',
-                left: "69%",
-                top: "55%",
-                zIndex: 8,
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Destruction Dual Casting Gold' style={{
+        position: 'absolute',
+        left: "59%",
+        top: "64%",
+        zIndex: 8,
+        opacity: state.destructionDualCasting
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Impact Gold' style={{
-                position: 'absolute',
-                left: "69%",
-                top: "55%",
-                zIndex: 8,
-                opacity: state.impact
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfDestructionDualPressed(
+              state.destructionDualCasting == 0 ? 1 : 0,
+              state.destructionDualCastingLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Impact Blue' style={{
+        position: 'absolute',
+        left: "69%",
+        top: "55%",
+        zIndex: 8,
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfImpactPressed(
-                            state.impact == 0 ? 1 : 0,
-                            state.impactLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Deep Freeze Blue' style={{
-                position: 'absolute',
-                left: "14%",
-                top: "35%",
-                zIndex: 8,
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Impact Gold' style={{
+        position: 'absolute',
+        left: "69%",
+        top: "55%",
+        zIndex: 8,
+        opacity: state.impact
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Deep Freeze Gold' style={{
-                position: 'absolute',
-                left: "14%",
-                top: "35%",
-                zIndex: 8,
-                opacity: state.deepFreeze
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfImpactPressed(
+              state.impact == 0 ? 1 : 0,
+              state.impactLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Deep Freeze Blue' style={{
+        position: 'absolute',
+        left: "14%",
+        top: "35%",
+        zIndex: 8,
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfDeepFreezePressed(
-                            state.deepFreeze == 0 ? 1 : 0,
-                            state.deepFreezeLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Deep Freeze Gold' style={{
+        position: 'absolute',
+        left: "14%",
+        top: "35%",
+        zIndex: 8,
+        opacity: state.deepFreeze
+
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfDeepFreezePressed(
+              state.deepFreeze == 0 ? 1 : 0,
+              state.deepFreezeLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
         <Line // Novice Destruction to Apprentice Destruction
           x1="35.3%"
@@ -819,7 +875,7 @@ const DestructionTree = () => {
           y2="48%"
           stroke={state.augmentedShockLine}
           strokeWidth={lineStrokeWidth}
-        />   
+        />
         <Line // Novice Destruction to Destruction Dual Casting
           x1="70.2%"
           y1="70%"
@@ -827,7 +883,7 @@ const DestructionTree = () => {
           y2="79%"
           stroke={state.destructionDualCastingLine}
           strokeWidth={lineStrokeWidth}
-        />  
+        />
         <Line // Destruction Dual Casting to Impact
           x1="80%"
           y1="60%"
@@ -835,116 +891,132 @@ const DestructionTree = () => {
           y2="69%"
           stroke={state.impactLine}
           strokeWidth={lineStrokeWidth}
-        />  
-        </Svg>
-      </View>
-    );
+        />
+      </Svg>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    HomeScreenText: {
-        color: 'white',
-    },
-    topText: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "70%",
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    Icon: {
-        position: 'absolute',
-    },
-    NoviceDestructionText: {
-        position: 'absolute',
-        left: "25%",
-        top: "83%",
-        zIndex: 10,
-    },
-    ApprenticeDestructionText: {
-        position: 'absolute',
-        left: "33%",
-        top: "55%",
-        zIndex: 10,
-    },
-    AdeptDestructionText: {
-        position: 'absolute',
-        left: "13%",
-        top: "53%",
-        zIndex: 10,
-    },
-    ExpertDestructionText: {
-        position: 'absolute',
-        left: "20%",
-        top: "46%",
-        zIndex: 10,
-    },
-    MasterDestructionText: {
-        position: 'absolute',
-        left: "24%",
-        top: "34%",
-        zIndex: 10,
-    },
-    RuneMasterText: {
-        position: 'absolute',
-        left: "44%",
-        top: "34%",
-        zIndex: 10,
-    },
-    AugmentedFlamesText: {
-        position: 'absolute',
-        left: "64%",
-        top: "40%",
-        zIndex: 10,
-    },
-    IntenseFlamesText: {
-        position: 'absolute',
-        left: "82%",
-        top: "50%",
-        zIndex: 10,
-    },
-    AugmentedFrostText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
-        zIndex: 10,
-    },
-    DeepFreezeText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
-        zIndex: 10,
-    },
-    AugmentedShockText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
-        zIndex: 10,
-    },
-    DisintegrateText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
-        zIndex: 10,
-    },
-    DestructionDualCastingText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
-        zIndex: 10,
-    },
-    ImpactText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
-        zIndex: 10,
-    },
-    PerkText: {
-        color: 'white',
-        fontSize: 12,
-    }
+  HomeScreenText: {
+    color: 'white',
+  },
+  topText: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: "78%",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  Icon: {
+    position: 'absolute',
+  },
+  NoviceDestructionText: {
+    position: 'absolute',
+    left: "25%",
+    top: "83%",
+    zIndex: 10,
+  },
+  ApprenticeDestructionText: {
+    position: 'absolute',
+    left: "33%",
+    top: "55%",
+    zIndex: 10,
+  },
+  AdeptDestructionText: {
+    position: 'absolute',
+    left: "13%",
+    top: "53%",
+    zIndex: 10,
+  },
+  ExpertDestructionText: {
+    position: 'absolute',
+    left: "20%",
+    top: "46%",
+    zIndex: 10,
+  },
+  MasterDestructionText: {
+    position: 'absolute',
+    left: "24%",
+    top: "34%",
+    zIndex: 10,
+  },
+  RuneMasterText: {
+    position: 'absolute',
+    left: "44%",
+    top: "34%",
+    zIndex: 10,
+  },
+  AugmentedFlamesText: {
+    position: 'absolute',
+    left: "64%",
+    top: "40%",
+    zIndex: 10,
+  },
+  IntenseFlamesText: {
+    position: 'absolute',
+    left: "82%",
+    top: "50%",
+    zIndex: 10,
+  },
+  AugmentedFrostText: {
+    position: 'absolute',
+    left: "70%",
+    top: "50%",
+    zIndex: 10,
+  },
+  DeepFreezeText: {
+    position: 'absolute',
+    left: "70%",
+    top: "50%",
+    zIndex: 10,
+  },
+  AugmentedShockText: {
+    position: 'absolute',
+    left: "70%",
+    top: "50%",
+    zIndex: 10,
+  },
+  DisintegrateText: {
+    position: 'absolute',
+    left: "70%",
+    top: "50%",
+    zIndex: 10,
+  },
+  DestructionDualCastingText: {
+    position: 'absolute',
+    left: "70%",
+    top: "50%",
+    zIndex: 10,
+  },
+  ImpactText: {
+    position: 'absolute',
+    left: "70%",
+    top: "50%",
+    zIndex: 10,
+  },
+  PerkText: {
+    color: 'white',
+    fontSize: 12,
+  },
+  resetButtonContainer: {
+    position: 'absolute',
+    zIndex: 8,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: '67%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  resetButton: {
+    backgroundColor: "#565656",
+    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 10
+  }
 });
 
 export default DestructionTree;

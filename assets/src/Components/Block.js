@@ -2,14 +2,12 @@ import * as React from 'react';
 import { useState, useCallback, useEffect, useContext, useRef, Button } from 'react';
 import Svg, { Line } from 'react-native-svg';
 import {
-    View,
-    Dimensions,
-    TouchableOpacity,
-    Text,
-    StyleSheet,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
@@ -18,19 +16,23 @@ import { useNavigation } from '@react-navigation/native';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 const useSetState = (initialState = {}) => {
-    const [state, regularSetState] = useState(initialState);
+  const [state, regularSetState] = useState(initialState);
 
-    const setState = (newState) => {
-        regularSetState((prevState) => ({
-            ...prevState,
-            ...newState,
-        }));
-    };
+  const setState = (newState) => {
+    regularSetState((prevState) => ({
+      ...prevState,
+      ...newState,
+    }));
+  };
 
-    return [state, setState];
+  return [state, setState];
 };
 const BlockTree = () => {
   const navigation = useNavigation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [ActivePerks, SetActivePerks] = useState(0);
+  const [RequiredLevel, SetRequiredLevel] = useState(0);
+  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
   const [state, setState] = useSetState({
     shieldWall: 0,
     deflectArrows: 0,
@@ -49,12 +51,45 @@ const BlockTree = () => {
     quickReflexesLine: 'black',
   });
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [count, setCount] = useState(0);
+  let resetAllTrees;
+  const resetBlockPerks = () => {
+    setState({ shieldWall: 0 });
+    setState({ deflectArrows: 0 });
+    setState({ delectArrowsLine: 'black' });
+    setState({ elementalProtection: 0 });
+    setState({ elementalProtectionLine: 'black' });
+    setState({ blockRunner: 0 });
+    setState({ blockRunnerLine: 'black' });
+    setState({ powerBash: 0 });
+    setState({ powerBashLine: 'black' });
+    setState({ disarmingBash: 0 });
+    setState({ disarmingBashLine: 'black' });
+    setState({ shieldCharge: 0 });
+    setState({ shieldChargeLine: 'black' });
+    setState({ quickReflexes: 0 });
+    setState({ quickReflexesLine: 'black' });
+    SetRequiredLevel(0);
+  }
 
-  const [ActivePerks, SetActivePerks] = useState(0);
-  const [RequiredLevel, SetRequiredLevel] = useState(0);
-  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+  const resetActivePerks = () => {
+    resetBlockPerks();
+    DecrementCounter(ActivePerks);
+  };
+
+  // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+  if (AllActivePerks == 0) {
+    resetAllTrees = 1;
+  } else {
+    resetAllTrees = 0;
+  }
+
+  // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+  useEffect(() => {
+    if (resetAllTrees == 1) {
+      resetBlockPerks();
+      SetActivePerks(0);
+    }
+  }, [resetAllTrees]);
 
   const IncrementCounter = (numActivePerks = 0) => {
     SetActivePerks(ActivePerks + numActivePerks);
@@ -245,282 +280,288 @@ const BlockTree = () => {
       setState({ shieldCharge: buttonColor });
     }
   };
-    return (
-        <View style={{ zIndex: 2 }}>
-            <View style={styles.topText}>
-                <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-                <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
-            </View>
-            <View title='Shield Wall Blue' style={{
-                position: 'absolute',
-                left: "39%",
-                top: "74%",
-                zIndex: 8,
+  return (
+    <View style={{ zIndex: 2 }}>
+      <View
+        style={styles.resetButtonContainer}>
+        <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+          <Text style={{ color: "black", fontWeight: "bold", }}> Reset Block Perks</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.topText}>
+        <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
+        <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+      </View>
+      <View title='Shield Wall Blue' style={{
+        position: 'absolute',
+        left: "39%",
+        top: "74%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Shield Wall Gold' style={{
-                position: 'absolute',
-                left: "39%",
-                top: "74%",
-                zIndex: 8,
-                opacity: state.shieldWall
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Shield Wall Gold' style={{
+        position: 'absolute',
+        left: "39%",
+        top: "74%",
+        zIndex: 8,
+        opacity: state.shieldWall
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => navigation.navigate("Other Stuff")}
-                    onPress={() => {
-                        CheckIfShieldWallPressed(
-                            state.shieldWall == 0 ? 1 : 0,
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Quick Reflexes Blue' style={{
-                position: 'absolute',
-                left: "34%",
-                top: "60%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => navigation.navigate("Other Stuff")}
+          onPress={() => {
+            CheckIfShieldWallPressed(
+              state.shieldWall == 0 ? 1 : 0,
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Quick Reflexes Blue' style={{
+        position: 'absolute',
+        left: "34%",
+        top: "60%",
+        zIndex: 8,
 
-            }}>
+      }}>
 
-                <StarIconBlue />
-            </View>
-            <View title='Quick Reflexes Gold' style={{
-                position: 'absolute',
-                left: "34%",
-                top: "60%",
-                zIndex: 8,
-                opacity: state.quickReflexes
+        <StarIconBlue />
+      </View>
+      <View title='Quick Reflexes Gold' style={{
+        position: 'absolute',
+        left: "34%",
+        top: "60%",
+        zIndex: 8,
+        opacity: state.quickReflexes
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfQuickReflexesPressed(
-                            state.quickReflexes == 0 ? 1 : 0,
-                            state.quickReflexesLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Deflect Arrows Blue' style={{
-                position: 'absolute',
-                left: "9%",
-                top: "65%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            CheckIfQuickReflexesPressed(
+              state.quickReflexes == 0 ? 1 : 0,
+              state.quickReflexesLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Deflect Arrows Blue' style={{
+        position: 'absolute',
+        left: "9%",
+        top: "65%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Deflect Arrows Gold' style={{
-                position: 'absolute',
-                left: "9%",
-                top: "65%",
-                zIndex: 8,
-                opacity: state.deflectArrows
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Deflect Arrows Gold' style={{
+        position: 'absolute',
+        left: "9%",
+        top: "65%",
+        zIndex: 8,
+        opacity: state.deflectArrows
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfDeflectArrowsPressed(
-                            state.deflectArrows == 0 ? 1 : 0,
-                            state.deflectArrowsLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Elemental Protection Blue' style={{
-                position: 'absolute',
-                left: "11%",
-                top: "49%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            CheckIfDeflectArrowsPressed(
+              state.deflectArrows == 0 ? 1 : 0,
+              state.deflectArrowsLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Elemental Protection Blue' style={{
+        position: 'absolute',
+        left: "11%",
+        top: "49%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Elemental Protection Gold' style={{
-                position: 'absolute',
-                left: "11%",
-                top: "49%",
-                zIndex: 8,
-                opacity: state.elementalProtection
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Elemental Protection Gold' style={{
+        position: 'absolute',
+        left: "11%",
+        top: "49%",
+        zIndex: 8,
+        opacity: state.elementalProtection
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfElementalProtectionPressed(
-                            state.elementalProtection == 0 ? 1 : 0,
-                            state.elementalProtectionLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Block Runner Blue' style={{
-                position: 'absolute',
-                left: "20%",
-                top: "39%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            CheckIfElementalProtectionPressed(
+              state.elementalProtection == 0 ? 1 : 0,
+              state.elementalProtectionLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Block Runner Blue' style={{
+        position: 'absolute',
+        left: "20%",
+        top: "39%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Block Runner Gold' style={{
-                position: 'absolute',
-                left: "20%",
-                top: "39%",
-                zIndex: 8,
-                opacity: state.blockRunner
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Block Runner Gold' style={{
+        position: 'absolute',
+        left: "20%",
+        top: "39%",
+        zIndex: 8,
+        opacity: state.blockRunner
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfBlockRunnerPressed(
-                            state.blockRunner == 0 ? 1 : 0,
-                            state.blockRunnerLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Shield Charge Blue' style={{
-                position: 'absolute',
-                left: "43%",
-                top: "38%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            CheckIfBlockRunnerPressed(
+              state.blockRunner == 0 ? 1 : 0,
+              state.blockRunnerLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Shield Charge Blue' style={{
+        position: 'absolute',
+        left: "43%",
+        top: "38%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Shield Charge Gold' style={{
-                position: 'absolute',
-                left: "43%",
-                top: "38%",
-                zIndex: 8,
-                opacity: state.shieldCharge
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Shield Charge Gold' style={{
+        position: 'absolute',
+        left: "43%",
+        top: "38%",
+        zIndex: 8,
+        opacity: state.shieldCharge
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        checkIfShieldChargePressed(
-                            state.shieldCharge == 0 ? 1 : 0,
-                            state.shieldChargeLine == 'black' ? 'gold' : 'black',
-                            state.shieldChargeLineLight == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Disarming Bash Blue' style={{
-                position: 'absolute',
-                left: "68%",
-                top: "39%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            checkIfShieldChargePressed(
+              state.shieldCharge == 0 ? 1 : 0,
+              state.shieldChargeLine == 'black' ? 'gold' : 'black',
+              state.shieldChargeLineLight == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Disarming Bash Blue' style={{
+        position: 'absolute',
+        left: "68%",
+        top: "39%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Disarming Bash Gold' style={{
-                position: 'absolute',
-                left: "68%",
-                top: "39%",
-                zIndex: 8,
-                opacity: state.disarmingBash
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Disarming Bash Gold' style={{
+        position: 'absolute',
+        left: "68%",
+        top: "39%",
+        zIndex: 8,
+        opacity: state.disarmingBash
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfDisarmingBashPressed(
-                            state.disarmingBash == 0 ? 1 : 0,
-                            state.disarmingBashLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Deadly Bash Blue' style={{
-                position: 'absolute',
-                left: "74%",
-                top: "48%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            CheckIfDisarmingBashPressed(
+              state.disarmingBash == 0 ? 1 : 0,
+              state.disarmingBashLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Deadly Bash Blue' style={{
+        position: 'absolute',
+        left: "74%",
+        top: "48%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Deadly Bash Gold' style={{
-                position: 'absolute',
-                left: "74%",
-                top: "48%",
-                zIndex: 8,
-                opacity: state.deadlyBash
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Deadly Bash Gold' style={{
+        position: 'absolute',
+        left: "74%",
+        top: "48%",
+        zIndex: 8,
+        opacity: state.deadlyBash
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfDeadlyBashPressed(
-                            state.deadlyBash == 0 ? 1 : 0,
-                            state.deadlyBashLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <View title='Power Bash Blue' style={{
-                position: 'absolute',
-                left: "74%",
-                top: "63%",
-                zIndex: 8,
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            CheckIfDeadlyBashPressed(
+              state.deadlyBash == 0 ? 1 : 0,
+              state.deadlyBashLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <View title='Power Bash Blue' style={{
+        position: 'absolute',
+        left: "74%",
+        top: "63%",
+        zIndex: 8,
 
-            }}>
-                <StarIconBlue />
-            </View>
-            <View title='Power Bash Gold' style={{
-                position: 'absolute',
-                left: "86%",
-                top: "67%",
-                zIndex: 8,
-                opacity: state.powerBash
+      }}>
+        <StarIconBlue />
+      </View>
+      <View title='Power Bash Gold' style={{
+        position: 'absolute',
+        left: "86%",
+        top: "67%",
+        zIndex: 8,
+        opacity: state.powerBash
 
-            }}>
-                <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
-                    onPress={() => {
-                        CheckIfPowerBashPressed(
-                            state.powerBash == 0 ? 1 : 0,
-                            state.powerBashLine == 'black' ? 'gold' : 'black'
-                        );
-                    }}>
-                    <StarIconGold />
-                </TouchableOpacity>
-            </View>
-            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
+      }}>
+        <TouchableOpacity
+          onLongPress={() => {
+            setIsModalVisible(true);
+          }}
+          onPress={() => {
+            CheckIfPowerBashPressed(
+              state.powerBash == 0 ? 1 : 0,
+              state.powerBashLine == 'black' ? 'gold' : 'black'
+            );
+          }}>
+          <StarIconGold />
+        </TouchableOpacity>
+      </View>
+      <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
         <Line // Shield Wall to Deflect Arrows
           x1="20%"
@@ -594,86 +635,102 @@ const BlockTree = () => {
           stroke={state.quickReflexesLine}
           strokeWidth={lineStrokeWidth}
         />
-        </Svg>
-      </View>
-    );
+      </Svg>
+    </View>
+  );
 };
 
 
 const styles = StyleSheet.create({
-    HomeScreenText: {
-        color: 'white',
-    },
-    topText: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "70%",
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    Icon: {
-        position: 'absolute',
-    },
-    ShieldWallText: {
-        position: 'absolute',
-        left: "25%",
-        top: "83%",
-        zIndex: 10,
-    },
-    DeflectArrowsText: {
-        position: 'absolute',
-        left: "33%",
-        top: "55%",
-        zIndex: 10,
-    },
-    ElementalProtectionText: {
-        position: 'absolute',
-        left: "13%",
-        top: "53%",
-        zIndex: 10,
-    },
-    BlockRunnerText: {
-        position: 'absolute',
-        left: "20%",
-        top: "46%",
-        zIndex: 10,
-    },
-    PowerBashText: {
-        position: 'absolute',
-        left: "24%",
-        top: "34%",
-        zIndex: 10,
-    },
-    DeadlyBashText: {
-        position: 'absolute',
-        left: "44%",
-        top: "34%",
-        zIndex: 10,
-    },
-    DisarmingBashText: {
-        position: 'absolute',
-        left: "64%",
-        top: "40%",
-        zIndex: 10,
-    },
-    ShieldChargeText: {
-        position: 'absolute',
-        left: "82%",
-        top: "50%",
-        zIndex: 10,
-    },
-    QuickReflexesText: {
-        position: 'absolute',
-        left: "70%",
-        top: "50%",
-        zIndex: 10,
-    },
-    PerkText: {
-        color: 'white',
-        fontSize: 12,
-    }
+  HomeScreenText: {
+    color: 'white',
+  },
+  topText: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: "78%",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  Icon: {
+    position: 'absolute',
+  },
+  ShieldWallText: {
+    position: 'absolute',
+    left: "25%",
+    top: "83%",
+    zIndex: 10,
+  },
+  DeflectArrowsText: {
+    position: 'absolute',
+    left: "33%",
+    top: "55%",
+    zIndex: 10,
+  },
+  ElementalProtectionText: {
+    position: 'absolute',
+    left: "13%",
+    top: "53%",
+    zIndex: 10,
+  },
+  BlockRunnerText: {
+    position: 'absolute',
+    left: "20%",
+    top: "46%",
+    zIndex: 10,
+  },
+  PowerBashText: {
+    position: 'absolute',
+    left: "24%",
+    top: "34%",
+    zIndex: 10,
+  },
+  DeadlyBashText: {
+    position: 'absolute',
+    left: "44%",
+    top: "34%",
+    zIndex: 10,
+  },
+  DisarmingBashText: {
+    position: 'absolute',
+    left: "64%",
+    top: "40%",
+    zIndex: 10,
+  },
+  ShieldChargeText: {
+    position: 'absolute',
+    left: "82%",
+    top: "50%",
+    zIndex: 10,
+  },
+  QuickReflexesText: {
+    position: 'absolute',
+    left: "70%",
+    top: "50%",
+    zIndex: 10,
+  },
+  PerkText: {
+    color: 'white',
+    fontSize: 12,
+  },
+  resetButtonContainer: {
+    position: 'absolute',
+    zIndex: 8,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: '67%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  resetButton: {
+    backgroundColor: "#565656",
+    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 10
+  }
 });
 
 export default BlockTree;
