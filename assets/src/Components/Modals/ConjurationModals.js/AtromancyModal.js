@@ -19,7 +19,12 @@ const AtromancyModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Atromancy{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    2x duration for conjured Atronachs{"\n"}{"\n"}
+                    Requires Summoner
+
+
+</Text>
 
             </View>
 

@@ -19,7 +19,10 @@ const PurityModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Purity{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    All negative effects are removed from potions made and positive effects are removed from poisons{"\n"}{"\n"}
+                    Requires snakeblood
+</Text>
 
             </View>
 

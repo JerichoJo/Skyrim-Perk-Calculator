@@ -19,7 +19,10 @@ const ElementalPotencyModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Elemental Potency{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Conjured Atronachs are 50% more powerful{"\n"}{"\n"}
+                    Requires Atromancy
+</Text>
 
             </View>
 

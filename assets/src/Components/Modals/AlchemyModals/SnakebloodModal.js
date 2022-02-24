@@ -19,7 +19,10 @@ const SnakeBloodModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Snake Blood{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    50% resistance to poisons{"\n"}{"\n"}
+                    Requires Experimenter or Concentrated Poison
+                </Text>
 
             </View>
 

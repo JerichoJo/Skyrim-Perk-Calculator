@@ -19,7 +19,11 @@ const SoulSiphonModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Soul Siphon{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Death blows to creatures (not people) will trap 5% of the victims soul and recharge the weapon{"\n"}{"\n"}
+                    Requires soul squeezer
+
+                </Text>
 
             </View>
 

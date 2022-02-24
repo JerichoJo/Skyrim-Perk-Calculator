@@ -19,7 +19,12 @@ const InsightfulEnchanterModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Insightful Enchanter{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Skill enchantments on weapons/armor are 25% stronger{"\n"}{"\n"}
+                    Requires Enchanter
+
+
+                </Text>
 
             </View>
 

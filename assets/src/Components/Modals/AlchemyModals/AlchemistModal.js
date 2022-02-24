@@ -19,7 +19,15 @@ const AlchemistModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Alchemist{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    
+                    1: Potions and poisons made are 20% stronger {"\n"}
+                    2:  Potions and poisons made are 40% stronger{"\n"}
+                    3:  Potions and poisons made are 60% stronger{"\n"}
+                    4:  Potions and poisons made are 80% stronger{"\n"}
+                    5:  Potions and poisons made are 2x as strong{"\n"}
+
+                </Text>
 
             </View>
 

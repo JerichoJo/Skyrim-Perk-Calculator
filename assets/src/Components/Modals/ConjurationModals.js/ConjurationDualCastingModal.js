@@ -19,7 +19,12 @@ const ConjurationDualCastingModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Conjuration Dual Casting{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Dual casting an conjuration spell will allow it to last longer{"\n"}{"\n"}
+                    Requires Novice Conjuration
+
+
+                </Text>
 
             </View>
 

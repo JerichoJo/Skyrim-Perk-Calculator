@@ -19,7 +19,10 @@ const CushionedModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Cushioned{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Half damage from falling if wearing all heavy armor items.{"\n"}{"\n"}
+                    Requires Fists of Steel
+                </Text>
 
             </View>
 

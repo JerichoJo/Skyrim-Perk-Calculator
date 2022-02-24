@@ -19,7 +19,10 @@ const FireEnchanterModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Fire Enchanter{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Fire enchantments on weapons/armor are 25% stronger{"\n"}{"\n"}
+                    Requires Enchanter
+</Text>
 
             </View>
 

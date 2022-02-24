@@ -19,7 +19,11 @@ const TowerOfStrengthModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Tower of Strength{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    50% less stagger when wearing all heavy armor {"\n"}{"\n"}
+                    Requires Well Fitted
+
+                </Text>
 
             </View>
 

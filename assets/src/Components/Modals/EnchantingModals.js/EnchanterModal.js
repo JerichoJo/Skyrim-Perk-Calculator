@@ -19,7 +19,13 @@ const EnchanterModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Enchanter{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                1: New enchantments are 20% stronger{"\n"}
+                2: New enchantments are 40% stronger{"\n"}
+                3: New enchantments are 60% stronger{"\n"}
+                4: New enchantments are 80% stronger{"\n"}
+                5: New enchantments are 100% stronger{"\n"}
+                </Text>
 
             </View>
 

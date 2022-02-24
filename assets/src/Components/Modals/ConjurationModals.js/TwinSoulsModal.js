@@ -19,7 +19,11 @@ const TwinSoulsModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Twin Souls{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Can have two atronachs or reanimated zombies{"\n"}{"\n"}
+                    Requires Dark Souls or Elemental Potency
+
+                </Text>
 
             </View>
 

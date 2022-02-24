@@ -19,7 +19,11 @@ const ConcentratedPoisonModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Concentrated Poison{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Poisons applies to weapons last for twice the duration of hits{"\n"}{"\n"}
+                    Requires poisoner
+
+                </Text>
 
             </View>
 

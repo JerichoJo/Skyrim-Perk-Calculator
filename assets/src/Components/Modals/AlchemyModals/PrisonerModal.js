@@ -19,7 +19,12 @@ const PrisonerModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Prisoner{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Poisons made are 25% more effective{"\n"}{"\n"}
+                    Requires Physician
+
+
+                </Text>
 
             </View>
 

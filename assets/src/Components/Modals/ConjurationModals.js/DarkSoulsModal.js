@@ -19,7 +19,11 @@ const DarkSoulsModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Dark Souls{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Reanimated undead have 100 more health{"\n"}{"\n"}
+                    Requires Necromancy
+
+                </Text>
 
             </View>
 

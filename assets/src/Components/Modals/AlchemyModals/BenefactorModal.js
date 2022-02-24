@@ -19,7 +19,10 @@ const BenefactorModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Benefactor{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Potions mixed with beneficial effects will have 25% greater magnitude{"\n"}{"\n"}
+                    Requires Physician
+</Text>
 
             </View>
 

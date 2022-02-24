@@ -19,7 +19,12 @@ const JuggernautModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Juggernaut{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>1: Increases heavy armor rating by 20%{"\n"}
+                        2: increases heavy armor rating by 40%{"\n"}
+                        3: Increases heavy armor rating by 60%{"\n"}
+                        4: Increases heavy armor rating by 80%{"\n"}
+                        5: Increases heavy armor rating by 100%{"\n"}
+</Text>
 
             </View>
 

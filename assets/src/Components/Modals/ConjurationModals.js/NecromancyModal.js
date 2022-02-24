@@ -19,7 +19,12 @@ const NecromancyModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Necromancy{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Longer duration for reanimated undead{"\n"}{"\n"}
+                    Requires Novice Conjuration
+
+
+                </Text>
 
             </View>
 

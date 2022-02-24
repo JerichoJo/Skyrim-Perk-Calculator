@@ -19,7 +19,11 @@ const ReflectBlowsModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Reflect Blows{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    10% chance to deflect damage to enemy if wearing all heavy armor{"\n"}{"\n"}
+                    Requires Matching Set
+
+                </Text>
 
             </View>
 

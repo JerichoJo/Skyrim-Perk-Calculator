@@ -19,7 +19,11 @@ const CorpusEnchanterModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Corpus Enchanter{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Health, magicka, and stamina enchantments on weapons/armor are 25% stronger{"\n"}{"\n"}
+                    Requires Insightful Enchanter
+
+                </Text>
 
             </View>
 

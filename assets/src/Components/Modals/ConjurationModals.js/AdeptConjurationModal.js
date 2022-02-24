@@ -19,7 +19,10 @@ const AdeptConjurationModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Adept Conjuration{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Cast Adept level Conjuration spells for half magicka.{"\n"}{"\n"}
+                    Requires Apprentice Conjuration
+                </Text>
 
             </View>
 

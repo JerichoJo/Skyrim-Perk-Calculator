@@ -19,7 +19,12 @@ const ExperimenterModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Experimenter{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    1: Eating an ingredient reveals its first two effects{"\n"}
+                    2: Eating an ingredient reveals its first three effects{"\n"}
+                    3: Eating an ingredient reveals all its effects{"\n"}{"\n"}
+                    Requires Benefactor
+</Text>
 
             </View>
 

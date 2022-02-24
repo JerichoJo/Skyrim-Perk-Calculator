@@ -19,7 +19,13 @@ const SummonerModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Summoner{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    
+                1: Summon atronachs of raise undead 2x far away{"\n"}
+                2: Summon atronachs or raise undead 3x as far away{"\n"}
+                    Requires Novice Conjuration{"\n"}{"\n"}
+
+                </Text>
 
             </View>
 

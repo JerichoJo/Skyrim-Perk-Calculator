@@ -19,7 +19,10 @@ const MysticBindingModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Mystic Binding{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Bound weapons do more damage{"\n"}{"\n"}
+                    Requires Novice Conjuration
+</Text>
 
             </View>
 

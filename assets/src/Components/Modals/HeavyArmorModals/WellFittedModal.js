@@ -19,7 +19,11 @@ const WellFittedModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Well Fitted{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    25% armor increase if wearing all heavy armor items{"\n"}{"\n"}
+                    Requires Juggernaut
+
+                </Text>
 
             </View>
 

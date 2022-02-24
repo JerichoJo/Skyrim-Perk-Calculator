@@ -19,7 +19,12 @@ const ExtraEffectModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Extra Effect{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Can put two enchantments on the same item{"\n"}{"\n"}
+                    Requires Corpus Enchanter or Storm Enchanter
+
+
+                </Text>
 
             </View>
 

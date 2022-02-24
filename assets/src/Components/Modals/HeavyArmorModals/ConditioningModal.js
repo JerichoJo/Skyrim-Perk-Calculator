@@ -19,7 +19,10 @@ const ConditioningModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Conditioning{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Heavy armor weighs nothing/will not weigh you down.{"\n"}{"\n"}
+                    Requires Cushioned
+                </Text>
 
             </View>
 

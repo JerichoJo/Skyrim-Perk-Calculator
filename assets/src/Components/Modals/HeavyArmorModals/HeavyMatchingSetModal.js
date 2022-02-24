@@ -19,7 +19,12 @@ const HeavyMatchingSetModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Heavy Matching Set{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Additional 25% armor if wearing matched set of heavy armor{"\n"}{"\n"}
+                    Requires Tower of Strength
+
+
+                </Text>
 
             </View>
 

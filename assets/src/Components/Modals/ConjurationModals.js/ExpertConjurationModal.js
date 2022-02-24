@@ -19,7 +19,10 @@ const ExpertConjurationModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Expert Conjuration{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Cast expert conjuration spells for half magicka{"\n"}{"\n"}
+                    Requires Adept Conjuration
+                </Text>
 
             </View>
 

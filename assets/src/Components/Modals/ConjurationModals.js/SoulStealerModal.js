@@ -19,7 +19,12 @@ const SoulStealModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Soul Stealer{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Bound weapons Soul Trap targets{"\n"}{"\n"}
+                    Requires Mystic Binding
+
+
+                </Text>
 
             </View>
 

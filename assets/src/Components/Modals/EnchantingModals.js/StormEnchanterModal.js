@@ -19,7 +19,11 @@ const StormEnchanterModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Storm Enchanter{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>
+                    Storm enchantments on weapons/armor are 25% stronger{"\n"}{"\n"}
+                    Requires Frost Enchanter
+
+                </Text>
 
             </View>
 
