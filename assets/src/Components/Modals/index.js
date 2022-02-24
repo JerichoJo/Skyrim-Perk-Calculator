@@ -101,9 +101,24 @@ import InsightfulEnchanterModal from "./EnchantingModals.js/InsightfulEnchanterM
 import SoulSiphonModal from "./EnchantingModals.js/SoulSiphonModal";
 import SoulSqueezerModal from "./EnchantingModals.js/SoulSiphonModal";
 import StormEnchanterModal from "./EnchantingModals.js/StormEnchanterModal";
-
-
-
+import AlchemistModal from "./AlchemyModals/AlchemistModal";
+import BenefactorModal from "./AlchemyModals/BenefactorModal";
+import ConcentratedPoisonModal from "./AlchemyModals/ConcentratedPoisonModal";
+import ExperimenterModal from "./AlchemyModals/ExperimenterModal";
+import GreenThumbModal from "./AlchemyModals/GreenThumbModal";
+import PhysicianModal from "./AlchemyModals/PhysicianModal";
+import PrisonerModal from "./AlchemyModals/PrisonerModal";
+import PurityModal from "./AlchemyModals/PurityModal";
+import SnakebloodModal from "./AlchemyModals/SnakebloodModal";
+import AssasinsBladeModal from "./SneakModals.js/AssasinsBladeModal";
+import BackstabModal from "./SneakModals.js/BackstabModal";
+import DeadlyAimModal from "./SneakModals.js/DeadlyAimModal";
+import LightFootModal from "./SneakModals.js/LightFootModal";
+import MuffledMovementModal from "./SneakModals.js/MuffledMovementModal";
+import ShadowWarriorModal from "./SneakModals.js/ShadowWarriorModal";
+import SilenceModal from "./SneakModals.js/SilenceModal";
+import SilentRollModal from "./SneakModals.js/SilentRollModal";
+import StealthModal from "./SneakModals.js/StealthModal";
 
 
 const modals = {
@@ -230,6 +245,28 @@ const modals = {
     SoulSqueezerModal,
     StormEnchanterModal,
 
+    // Alchemy Tree Modals
+    AlchemistModal,
+    BenefactorModal,
+    ConcentratedPoisonModal,
+    ExperimenterModal, 
+    GreenThumbModal,
+    PhysicianModal,
+    PrisonerModal,
+    PurityModal,
+    SnakebloodModal,
+
+    // Sneak Tree Modals
+    AssasinsBladeModal,
+    BackstabModal,
+    DeadlyAimModal,
+    LightFootModal,
+    MuffledMovementModal,
+    ShadowWarriorModal,
+    SilenceModal,
+    SilentRollModal,
+    StealthModal,
+    
 }
 
 export default modals;

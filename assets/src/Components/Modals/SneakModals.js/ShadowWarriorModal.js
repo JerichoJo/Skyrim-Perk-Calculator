@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
-const SnakeBloodModal = ({ navigation }) => {
+const ShadowWarriorModal = ({ navigation }) => {
 
     return (
         <View
@@ -17,16 +17,19 @@ const SnakeBloodModal = ({ navigation }) => {
             <View
                 style={styles.TextBox}
                 onPress={navigation.goBack}>
-                <Text style={styles.Title}>Snake Blood{"\n"}</Text>
+                <Text style={styles.Title}>Shadow Warrior{"\n"}</Text>
 
-                <Text style={styles.Text}>Can create Scaled and plate armor at forges and improve them 2x as much</Text>
+                <Text style={styles.Text}>Crouching will temporarily stop combat and cause distant opponents to search for a target{"\n"}
+
+                {"\n"}Requires Silence
+</Text>
 
             </View>
 
         </View>
     );
 }
-export default SnakeBloodModal;
+export default ShadowWarriorModal;
 
 const styles = StyleSheet.create({
     Container: {

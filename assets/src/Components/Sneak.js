@@ -356,7 +356,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("stealthModal")}
+                    onLongPress={() => navigation.navigate("StealthModal")}
                     onPress={() => {
                         CheckIfStealthPressed(
                             state.stealth == 0 ? 1 : 0,
@@ -387,9 +387,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MuffledMovementModal")}
                     onPress={() => {
                         CheckIfMuffledMovementPressed(
                             state.muffledMovement == 0 ? 1 : 0,
@@ -420,9 +418,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("LightFootModal")}
                     onPress={() => {
                         CheckIfLightFootPressed(
                             state.lightFoot == 0 ? 1 : 0,
@@ -453,9 +449,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SilentRollModal")}
                     onPress={() => {
                         CheckIfSilentRollPressed(
                             state.silentRoll == 0 ? 1 : 0,
@@ -486,9 +480,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ShadowWarriorModal")}
                     onPress={() => {
                         CheckIfShadowWarriorPressed(
                             state.shadowWarrior == 0 ? 1 : 0,
@@ -520,9 +512,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SilenceModal")}
                     onPress={() => {
                         CheckIfSilencePressed(
                             state.silence == 0 ? 1 : 0,
@@ -553,9 +543,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AssasinsBladeModal")}
                     onPress={() => {
                         CheckIfAssassinsBladePressed(
                             state.assassinsBlade == 0 ? 1 : 0,
@@ -586,9 +574,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DeadlyAimModal")}
                     onPress={() => {
                         CheckIfDeadlyAimPressed(
                             state.deadlyAim == 0 ? 1 : 0,
@@ -619,9 +605,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("BackstabModal")}
                     onPress={() => {
                         CheckIfBackstabPressed(
                             state.backstab == 0 ? 1 : 0,
