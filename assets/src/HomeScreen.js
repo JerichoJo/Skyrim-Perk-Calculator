@@ -117,7 +117,9 @@ export default class extends Component {
             <View style={styles.container}>
 
                 <Swiper
+                    pagingEnabled={true}
                     removeClippedSubviews={false}
+                    
                     ref={ref}
                     style={styles.wrapper}
                     height={240}
@@ -154,7 +156,7 @@ export default class extends Component {
                         left: null,
                         right: 10
                     }}
-                    loop
+                    
                 >
                     <View
                         style={styles.slide}

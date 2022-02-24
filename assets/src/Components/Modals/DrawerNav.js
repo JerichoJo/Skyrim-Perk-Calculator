@@ -100,124 +100,160 @@ export function DrawerContent(props) {
           >
           </DrawerItem>
 
-          <DrawerItem
-            label="Smithing"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="Smithing"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(6);
-              navigation.dispatch(DrawerActions.closeDrawer());
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
             }}
-          >
-          </DrawerItem>
+        >
+        </DrawerItem>
 
-          <DrawerItem
-            label="Heavy Armor"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="Heavy Armor"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(7);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
 
-          <DrawerItem
-            label="Block"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="Block"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(8);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
 
-          <DrawerItem
-            label="Two-Handed"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="Two-Handed"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(9);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
 
-          <DrawerItem
-            label="One-Handed"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="One-Handed"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(10);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
 
-          <DrawerItem
-            label="Archery"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="Archery"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(11);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
 
-          <DrawerItem
-            label="Light Armor"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="Light Armor"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(12);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
 
-          <DrawerItem
-            label="Sneak"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="Sneak"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(13);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
 
-          <DrawerItem
-            label="Lockpicking"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="Lockpicking"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(14);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
 
-          <DrawerItem
-            label="Pickpocket"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+        <DrawerItem
+          label="Pickpocket"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(15);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
-
-          <DrawerItem
-            label="Speech"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
+        
+        <DrawerItem
+          label="Speech"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(16);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
-          <DrawerItem
-            label="Alchemy"
-            labelStyle={styles.ItemLabel}
-            onPress={() => {
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
+        <DrawerItem
+          label="Alchemy"
+          labelStyle={styles.ItemLabel}
+          onPress={()=>{
+            setTimeout(() => {
               moveIT(17);
-              navigation.dispatch(DrawerActions.closeDrawer());
-            }}
-          >
-          </DrawerItem>
+            navigation.dispatch(DrawerActions.closeDrawer());
+            }, 100)
+            
+          }}
+        >
+        </DrawerItem>
 
         </Drawer.Section>
       </DrawerContentScrollView>
