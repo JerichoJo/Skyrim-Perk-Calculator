@@ -31,7 +31,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(0);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
 
           }}
         >
@@ -44,7 +44,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(1);
               navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
           }}
         >
         </DrawerItem>
@@ -56,7 +56,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(2);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -69,7 +69,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(3);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -82,7 +82,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(4);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -95,7 +95,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(5);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -108,7 +108,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(6);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
             }}
         >
@@ -121,7 +121,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(7);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -134,7 +134,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(8);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -147,7 +147,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(9);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -160,7 +160,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(10);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -173,7 +173,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(11);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -186,7 +186,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(12);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -199,7 +199,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(13);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -212,7 +212,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(14);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -225,7 +225,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(15);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -238,7 +238,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(16);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
@@ -250,7 +250,7 @@ export function DrawerContent(props) {
             setTimeout(() => {
               moveIT(17);
             navigation.dispatch(DrawerActions.closeDrawer());
-            })
+            }, 100)
             
           }}
         >
