@@ -46,6 +46,29 @@ import StabilityModal from "./AlterationModals/StabilityModal";
 import ExpertAlterationModal from "./AlterationModals/ExpertAlterationModal";
 import AtronachModal from "./AlterationModals/AtronachModal";
 import MasterAlterationModal from "./AlterationModals/MasterAlterationModal";
+import BlockRunnerModal from "./BlockModals/BlockRunnerModal";
+import DeadlyBashModal from "./BlockModals/DeadlyBashModal";
+import DeflectArrowsModal from "./BlockModals/DeflectArrowsModal";
+import DisarmingBashModal from "./BlockModals/DisarmingBashModal";
+import ElementalProtectionModal from "./BlockModals/ElementalProtectionModal";
+import PowerBashModal from "./BlockModals/PowerBashModal";
+import QuickReflexesModal from "./BlockModals/QuickReflexesModal";
+import ShieldChargeModal from "./BlockModals/ShieldChargeModal";
+import ShieldWallModal from "./BlockModals/ShieldWallModal";
+import AdeptDestructionModal from "./DestructionModals/AdeptDestructionModal";
+import ApprenticeDestructionModal from "./DestructionModals/ApprenticeDestructionModal";
+import AugmentedFlamesModal from "./DestructionModals/AugmentedFlamesModal";
+import AugmentedFrostModal from "./DestructionModals/AugmentedFrostModals";
+import AugmentedShockModal from "./DestructionModals/AugmentedShockModal";
+import DeepFreezeModal from "./DestructionModals/DeepFreezeModal";
+import DestructionDualCastingModal from "./DestructionModals/DestructionDualCastingModal";
+import DisintegrateModal from "./DestructionModals/DisintegrateModal";
+import ExpertDestructionModal from "./DestructionModals/ExpertDestructionModal";
+import ImpactModal from "./DestructionModals/ImpactModal";
+import IntenseFlamesModal from "./DestructionModals/IntenseFlamesModal";
+import MasterDestructionModal from "./DestructionModals/MasterDestructionModal";
+import NoviceDestructionModal from "./DestructionModals/NoviceDestructionModal";
+import RuneMasterModal from "./DestructionModals/RuneMasterModal";
 
 const modals = {
     //Alteration Tree
@@ -104,8 +127,34 @@ const modals = {
     MasterTraderModal,
     BriberyModal,
     PersuasionModal,
-    IntimidationModal
+    IntimidationModal,
 
+    // Block Tree
+    BlockRunnerModal,
+    DeadlyBashModal,
+    DeflectArrowsModal,
+    DisarmingBashModal,
+    ElementalProtectionModal,
+    PowerBashModal,
+    QuickReflexesModal,
+    ShieldChargeModal,
+    ShieldWallModal,
+
+    // Destruction Modals
+    AdeptDestructionModal,
+    ApprenticeDestructionModal,
+    AugmentedFlamesModal,
+    AugmentedFrostModal,
+    AugmentedShockModal,
+    DeepFreezeModal,
+    DestructionDualCastingModal,
+    DisintegrateModal,
+    ExpertDestructionModal,
+    ImpactModal,
+    IntenseFlamesModal,
+    MasterDestructionModal,
+    NoviceDestructionModal,
+    RuneMasterModal
 }
 
 export default modals;
