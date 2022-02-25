@@ -391,7 +391,7 @@ const AlchemyTree = () => {
                     onPress={() => {
                         CheckIfPhysicianPressed(
                             state.physician == 0 ? 1 : 0,
-                            state.physicianLine == 'black' ? 'gold' : 'black'
+                            state.physicianLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -422,7 +422,7 @@ const AlchemyTree = () => {
                     onPress={() => {
                         CheckIfPrisonerPressed(
                             state.prisoner == 0 ? 1 : 0,
-                            state.prisonerLine == 'black' ? 'gold' : 'black'
+                            state.prisonerLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -453,7 +453,7 @@ const AlchemyTree = () => {
                     onPress={() => {
                         CheckIfConcentratedPoisonPressed(
                             state.concentratedPoison == 0 ? 1 : 0,
-                            state.concentratedPoisonLine == 'black' ? 'gold' : 'black'
+                            state.concentratedPoisonLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -484,8 +484,8 @@ const AlchemyTree = () => {
                     onPress={() => {
                         CheckIfGreenThumbPressed(
                             state.greenThumb == 0 ? 1 : 0,
-                            state.greenThumbLine == 'black' ? 'gold' : 'black',
-                            state.greenThumbLineLight == 'black' ? 'gold' : 'black'
+                            state.greenThumbLine == 'white' ? 'gold' : 'white',
+                            state.greenThumbLineLight == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -516,7 +516,7 @@ const AlchemyTree = () => {
                     onPress={() => {
                         CheckIfPurityPressed(
                             state.purity == 0 ? 1 : 0,
-                            state.purityLine == 'black' ? 'gold' : 'black'
+                            state.purityLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -547,7 +547,7 @@ const AlchemyTree = () => {
                     onPress={() => {
                         CheckIfSnakebloodPressed(
                             state.snakeblood == 0 ? 1 : 0,
-                            state.snakebloodLine == 'black' ? 'gold' : 'black'
+                            state.snakebloodLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -578,7 +578,7 @@ const AlchemyTree = () => {
                     onPress={() => {
                         CheckIfExperimenterPressed(
                             state.experimenter == 0 ? 1 : 0,
-                            state.experimenterLine == 'black' ? 'gold' : 'black'
+                            state.experimenterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -609,7 +609,7 @@ const AlchemyTree = () => {
                     onPress={() => {
                         CheckIfBenefactorPressed(
                             state.benefactor == 0 ? 1 : 0,
-                            state.benefactorLine == 'black' ? 'gold' : 'black'
+                            state.benefactorLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

@@ -391,7 +391,7 @@ const SneakTree = () => {
                     onPress={() => {
                         CheckIfMuffledMovementPressed(
                             state.muffledMovement == 0 ? 1 : 0,
-                            state.muffledMovementLine == 'black' ? 'gold' : 'black'
+                            state.muffledMovementLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -422,7 +422,7 @@ const SneakTree = () => {
                     onPress={() => {
                         CheckIfLightFootPressed(
                             state.lightFoot == 0 ? 1 : 0,
-                            state.lightFootLine == 'black' ? 'gold' : 'black'
+                            state.lightFootLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -453,7 +453,7 @@ const SneakTree = () => {
                     onPress={() => {
                         CheckIfSilentRollPressed(
                             state.silentRoll == 0 ? 1 : 0,
-                            state.silentRollLine == 'black' ? 'gold' : 'black'
+                            state.silentRollLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -484,8 +484,8 @@ const SneakTree = () => {
                     onPress={() => {
                         CheckIfShadowWarriorPressed(
                             state.shadowWarrior == 0 ? 1 : 0,
-                            state.shadowWarriorLine == 'black' ? 'gold' : 'black',
-                            state.shadowWarriorLineLight == 'black' ? 'gold' : 'black'
+                            state.shadowWarriorLine == 'white' ? 'gold' : 'white',
+                            state.shadowWarriorLineLight == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -516,7 +516,7 @@ const SneakTree = () => {
                     onPress={() => {
                         CheckIfSilencePressed(
                             state.silence == 0 ? 1 : 0,
-                            state.silenceLine == 'black' ? 'gold' : 'black'
+                            state.silenceLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -547,7 +547,7 @@ const SneakTree = () => {
                     onPress={() => {
                         CheckIfAssassinsBladePressed(
                             state.assassinsBlade == 0 ? 1 : 0,
-                            state.assassinsBladeLine == 'black' ? 'gold' : 'black'
+                            state.assassinsBladeLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -578,7 +578,7 @@ const SneakTree = () => {
                     onPress={() => {
                         CheckIfDeadlyAimPressed(
                             state.deadlyAim == 0 ? 1 : 0,
-                            state.deadlyAimLine == 'black' ? 'gold' : 'black'
+                            state.deadlyAimLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -609,7 +609,7 @@ const SneakTree = () => {
                     onPress={() => {
                         CheckIfBackstabPressed(
                             state.backstab == 0 ? 1 : 0,
-                            state.backstabLine == 'black' ? 'gold' : 'black'
+                            state.backstabLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

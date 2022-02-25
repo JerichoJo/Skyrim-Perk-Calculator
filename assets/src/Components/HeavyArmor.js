@@ -406,7 +406,7 @@ const HeavyArmor = () => {
                     onPress={() => {
                         CheckIfFistsPressed(
                             state.fistsOfSteel == 0 ? 1 : 0,
-                            state.fistsOfSteelLine == 'black' ? 'gold' : 'black'
+                            state.fistsOfSteelLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -437,7 +437,7 @@ const HeavyArmor = () => {
                     onPress={() => {
                         CheckIfCushionedPressed(
                             state.cushioned == 0 ? 1 : 0,
-                            state.cushionedLine == 'black' ? 'gold' : 'black'
+                            state.cushionedLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -468,7 +468,7 @@ const HeavyArmor = () => {
                     onPress={() => {
                         CheckIfConditioningPressed(
                             state.conditioning == 0 ? 1 : 0,
-                            state.conditioningLine == 'black' ? 'gold' : 'black'
+                            state.conditioningLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -500,7 +500,7 @@ const HeavyArmor = () => {
                     onPress={() => {
                         CheckIfReflectBlowsPressed(
                             state.reflectBlows == 0 ? 1 : 0,
-                            state.reflectBlowsLine == 'black' ? 'gold' : 'black'
+                            state.reflectBlowsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -531,7 +531,7 @@ const HeavyArmor = () => {
                     onPress={() => {
                         CheckIfMatchingSetPressed(
                             state.matchingSet == 0 ? 1 : 0,
-                            state.matchingSetLine == 'black' ? 'gold' : 'black'
+                            state.matchingSetLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -562,7 +562,7 @@ const HeavyArmor = () => {
                     onPress={() => {
                         CheckIfTowerOfStrengthPressed(
                             state.towerOfStrength == 0 ? 1 : 0,
-                            state.towerOfStrengthLine == 'black' ? 'gold' : 'black'
+                            state.towerOfStrengthLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -593,7 +593,7 @@ const HeavyArmor = () => {
                     onPress={() => {
                         CheckIfWellFittedPressed(
                             state.wellFitted == 0 ? 1 : 0,
-                            state.wellFittedLine == 'black' ? 'gold' : 'black'
+                            state.wellFittedLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

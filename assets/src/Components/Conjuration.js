@@ -538,7 +538,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfConjurationDualCastingPressed(
                             state.conjurationDualCasting == 0 ? 1 : 0,
-                            state.conjurationDualCastingLine == 'black' ? 'gold' : 'black'
+                            state.conjurationDualCastingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -569,7 +569,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfNecromancyPressed(
                             state.necromancy == 0 ? 1 : 0,
-                            state.necromancyLine == 'black' ? 'gold' : 'black'
+                            state.necromancyLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -600,7 +600,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfDarkSoulsPressed(
                             state.darkSouls == 0 ? 1 : 0,
-                            state.darkSoulsLine == 'black' ? 'gold' : 'black'
+                            state.darkSoulsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -631,7 +631,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfDarkSoulsPressed(
                             state.darkSouls == 0 ? 1 : 0,
-                            state.darkSoulsLine == 'black' ? 'gold' : 'black'
+                            state.darkSoulsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -663,7 +663,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfMysticBindingPressed(
                             state.mysticBinding == 0 ? 1 : 0,
-                            state.mysticBindingLine == 'black' ? 'gold' : 'black'
+                            state.mysticBindingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -694,7 +694,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfSoulStealerPressed(
                             state.soulStealer == 0 ? 1 : 0,
-                            state.soulStealerLine == 'black' ? 'gold' : 'black'
+                            state.soulStealerLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -726,7 +726,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfSummonerPressed(
                             state.summoner == 0 ? 1 : 0,
-                            state.summonerLine == 'black' ? 'gold' : 'black'
+                            state.summonerLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -759,7 +759,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfAtromancyPressed(
                             state.atromancy == 0 ? 1 : 0,
-                            state.atromancyLine == 'black' ? 'gold' : 'black'
+                            state.atromancyLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -790,7 +790,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfElementalPotencyPressed(
                             state.elementalPotency == 0 ? 1 : 0,
-                            state.elementalPotencyLine == 'black' ? 'gold' : 'black'
+                            state.elementalPotencyLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -821,8 +821,8 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfOblivionBindingPressed(
                             state.oblivionBinding == 0 ? 1 : 0,
-                            state.oblivionBindingLine == 'black' ? 'gold' : 'black',
-                            state.oblivionBindingLineLight == 'black' ? 'gold' : 'black'
+                            state.oblivionBindingLine == 'white' ? 'gold' : 'white',
+                            state.oblivionBindingLineLight == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -853,7 +853,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfMasterConjurationPressed(
                             state.masterConjuration == 0 ? 1 : 0,
-                            state.masterConjurationLine == 'black' ? 'gold' : 'black'
+                            state.masterConjurationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -884,7 +884,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfExpertConjurationPressed(
                             state.expertConjuration == 0 ? 1 : 0,
-                            state.expertConjurationLine == 'black' ? 'gold' : 'black'
+                            state.expertConjurationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -915,7 +915,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfAdeptConjurationPressed(
                             state.adeptConjuration == 0 ? 1 : 0,
-                            state.adeptConjurationLine == 'black' ? 'gold' : 'black'
+                            state.adeptConjurationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -946,7 +946,7 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfApprenticeConjurationPressed(
                             state.apprenticeConjuration == 0 ? 1 : 0,
-                            state.apprenticeConjurationLine == 'black' ? 'gold' : 'black'
+                            state.apprenticeConjurationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

@@ -401,7 +401,7 @@ const Enchanting = () => {
                     onPress={() => {
                         CheckIfFireEnchanterPressed(
                             state.fireEnchanter == 0 ? 1 : 0,
-                            state.fireEnchanterLine == 'black' ? 'gold' : 'black'
+                            state.fireEnchanterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -432,7 +432,7 @@ const Enchanting = () => {
                     onPress={() => {
                         CheckIfFrostEnchanterPressed(
                             state.frostEnchanter == 0 ? 1 : 0,
-                            state.frostEnchanterLine == 'black' ? 'gold' : 'black'
+                            state.frostEnchanterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -463,7 +463,7 @@ const Enchanting = () => {
                     onPress={() => {
                         CheckIfStormEnchantingPressed(
                             state.stormEnchanting == 0 ? 1 : 0,
-                            state.stormEnchantingLine == 'black' ? 'gold' : 'black'
+                            state.stormEnchantingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -494,7 +494,7 @@ const Enchanting = () => {
                     onPress={() => {
                         CheckIfExtraEffectPressed(
                             state.extraEffect == 0 ? 1 : 0,
-                            state.extraEffectLine == 'black' ? 'gold' : 'black'
+                            state.extraEffectLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -525,7 +525,7 @@ const Enchanting = () => {
                     onPress={() => {
                         CheckIfSoulSiphonPressed(
                             state.soulSiphon == 0 ? 1 : 0,
-                            state.soulSiphonLine == 'black' ? 'gold' : 'black'
+                            state.soulSiphonLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -556,7 +556,7 @@ const Enchanting = () => {
                     onPress={() => {
                         CheckIfSoulSqueezerPressed(
                             state.soulSqueezer == 0 ? 1 : 0,
-                            state.soulSqueezerLine == 'black' ? 'gold' : 'black'
+                            state.soulSqueezerLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -587,7 +587,7 @@ const Enchanting = () => {
                     onPress={() => {
                         CheckIfCorpusEnchanterPressed(
                             state.corpusEnchanter == 0 ? 1 : 0,
-                            state.corpusEnchanterLine == 'black' ? 'gold' : 'black'
+                            state.corpusEnchanterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -618,7 +618,7 @@ const Enchanting = () => {
                     onPress={() => {
                         CheckIfInsightfulEnchanterPressed(
                             state.insightfulEnchanter == 0 ? 1 : 0,
-                            state.insightfulEnchanterLine == 'black' ? 'gold' : 'black'
+                            state.insightfulEnchanterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
