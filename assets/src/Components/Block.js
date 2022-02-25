@@ -36,38 +36,38 @@ const BlockTree = () => {
   const [state, setState] = useSetState({
     shieldWall: 0,
     deflectArrows: 0,
-    delectArrowsLine: 'black',
+    delectArrowsLine: 'white',
     elementalProtection: 0,
-    elementalProtectionLine: 'black',
+    elementalProtectionLine: 'white',
     blockRunner: 0,
-    blockRunnerLine: 'black',
+    blockRunnerLine: 'white',
     powerBash: 0,
-    powerBashLine: 'black',
+    powerBashLine: 'white',
     disarmingBash: 0,
-    disarmingBashLine: 'black',
+    disarmingBashLine: 'white',
     shieldCharge: 0,
-    shieldChargeLine: 'black',
+    shieldChargeLine: 'white',
     quickReflexes: 0,
-    quickReflexesLine: 'black',
+    quickReflexesLine: 'white',
   });
 
   let resetAllTrees;
   const resetBlockPerks = () => {
     setState({ shieldWall: 0 });
     setState({ deflectArrows: 0 });
-    setState({ delectArrowsLine: 'black' });
+    setState({ delectArrowsLine: 'white' });
     setState({ elementalProtection: 0 });
-    setState({ elementalProtectionLine: 'black' });
+    setState({ elementalProtectionLine: 'white' });
     setState({ blockRunner: 0 });
-    setState({ blockRunnerLine: 'black' });
+    setState({ blockRunnerLine: 'white' });
     setState({ powerBash: 0 });
-    setState({ powerBashLine: 'black' });
+    setState({ powerBashLine: 'white' });
     setState({ disarmingBash: 0 });
-    setState({ disarmingBashLine: 'black' });
+    setState({ disarmingBashLine: 'white' });
     setState({ shieldCharge: 0 });
-    setState({ shieldChargeLine: 'black' });
+    setState({ shieldChargeLine: 'white' });
     setState({ quickReflexes: 0 });
-    setState({ quickReflexesLine: 'black' });
+    setState({ quickReflexesLine: 'white' });
     SetRequiredLevel(0);
   }
 
@@ -285,7 +285,7 @@ const BlockTree = () => {
       <View
         style={styles.resetButtonContainer}>
         <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-          <Text style={{ color: "black", fontWeight: "bold", }}> Reset Block Perks</Text>
+          <Text style={{ color: "white", fontWeight: "bold", }}> Reset Block Perks</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.topText}>
@@ -344,7 +344,7 @@ const BlockTree = () => {
           onPress={() => {
             CheckIfQuickReflexesPressed(
               state.quickReflexes == 0 ? 1 : 0,
-              state.quickReflexesLine == 'black' ? 'gold' : 'black'
+              state.quickReflexesLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -374,7 +374,7 @@ const BlockTree = () => {
           onPress={() => {
             CheckIfDeflectArrowsPressed(
               state.deflectArrows == 0 ? 1 : 0,
-              state.deflectArrowsLine == 'black' ? 'gold' : 'black'
+              state.deflectArrowsLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -404,7 +404,7 @@ const BlockTree = () => {
           onPress={() => {
             CheckIfElementalProtectionPressed(
               state.elementalProtection == 0 ? 1 : 0,
-              state.elementalProtectionLine == 'black' ? 'gold' : 'black'
+              state.elementalProtectionLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -434,7 +434,7 @@ const BlockTree = () => {
           onPress={() => {
             CheckIfBlockRunnerPressed(
               state.blockRunner == 0 ? 1 : 0,
-              state.blockRunnerLine == 'black' ? 'gold' : 'black'
+              state.blockRunnerLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -464,8 +464,8 @@ const BlockTree = () => {
           onPress={() => {
             checkIfShieldChargePressed(
               state.shieldCharge == 0 ? 1 : 0,
-              state.shieldChargeLine == 'black' ? 'gold' : 'black',
-              state.shieldChargeLineLight == 'black' ? 'gold' : 'black'
+              state.shieldChargeLine == 'white' ? 'gold' : 'white',
+              state.shieldChargeLineLight == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -495,7 +495,7 @@ const BlockTree = () => {
           onPress={() => {
             CheckIfDisarmingBashPressed(
               state.disarmingBash == 0 ? 1 : 0,
-              state.disarmingBashLine == 'black' ? 'gold' : 'black'
+              state.disarmingBashLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -525,7 +525,7 @@ const BlockTree = () => {
           onPress={() => {
             CheckIfDeadlyBashPressed(
               state.deadlyBash == 0 ? 1 : 0,
-              state.deadlyBashLine == 'black' ? 'gold' : 'black'
+              state.deadlyBashLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -555,7 +555,7 @@ const BlockTree = () => {
           onPress={() => {
             CheckIfPowerBashPressed(
               state.powerBash == 0 ? 1 : 0,
-              state.powerBashLine == 'black' ? 'gold' : 'black'
+              state.powerBashLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />

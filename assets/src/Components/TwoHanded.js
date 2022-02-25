@@ -38,44 +38,44 @@ const TwoHandedTree = () => {
     const [state, setState] = useSetState({
         Barbarian: 0,
         Limbsplitter: 0,
-        LimbsplitterLine: 'black',
+        LimbsplitterLine: 'white',
         ChampionsStance: 0,
-        ChampionsStanceLine: 'black',
+        ChampionsStanceLine: 'white',
         DevastatingBlow: 0,
-        DevastatingBlowLine: 'black',
+        DevastatingBlowLine: 'white',
         CriticalCharge: 0,
-        CriticalChargeLine: 'black',
+        CriticalChargeLine: 'white',
         Sweep: 0,
-        SweepLine: 'black',
-        SweepDevLine: 'black',
+        SweepLine: 'white',
+        SweepDevLine: 'white',
         Warmaster: 0,
-        WarmasterLine: 'black',
+        WarmasterLine: 'white',
         DeepWounds: 0,
-        DeepWoundsLine: 'black',
+        DeepWoundsLine: 'white',
         Skullcrusher: 0,
-        SkullcrusherLine: 'black',
+        SkullcrusherLine: 'white',
     });
 
     let resetAllTrees;
     const resetTwoHandedPerks = () => {
         setState({ Barbarian: 0 });
         setState({ Limbsplitter: 0 });
-        setState({ LimbsplitterLine: 'black' });
+        setState({ LimbsplitterLine: 'white' });
         setState({ ChampionsStance: 0 });
-        setState({ ChampionsStanceLine: 'black' });
+        setState({ ChampionsStanceLine: 'white' });
         setState({ DevastatingBlow: 0 });
-        setState({ DevastatingBlowLine: 'black' });
+        setState({ DevastatingBlowLine: 'white' });
         setState({ CriticalCharge: 0 });
-        setState({ CriticalChargeLine: 'black' });
+        setState({ CriticalChargeLine: 'white' });
         setState({ Sweep: 0 });
-        setState({ SweepLine: 'black' });
-        setState({ SweepDevLine: 'black' });
+        setState({ SweepLine: 'white' });
+        setState({ SweepDevLine: 'white' });
         setState({ Warmaster: 0 });
-        setState({ WarmasterLine: 'black' });
+        setState({ WarmasterLine: 'white' });
         setState({ DeepWounds: 0 });
-        setState({ DeepWoundsLine: 'black' });
+        setState({ DeepWoundsLine: 'white' });
         setState({ Skullcrusher: 0 });
-        setState({ SkullcrusherLine: 'black' });
+        setState({ SkullcrusherLine: 'white' });
         SetRequiredLevel(0);
     }
 
@@ -360,7 +360,7 @@ const TwoHandedTree = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Two-Handed Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Two-Handed Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -420,7 +420,7 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfLimbsplitterPressed(
                             state.Limbsplitter == 0 ? 1 : 0,
-                            state.LimbsplitterLine == 'black' ? 'gold' : 'black'
+                            state.LimbsplitterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -453,7 +453,7 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfChampionsStancePressed(
                             state.ChampionsStance == 0 ? 1 : 0,
-                            state.ChampionsStanceLine == 'black' ? 'gold' : 'black'
+                            state.ChampionsStanceLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -486,7 +486,7 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfDevastatingBlowPressed(
                             state.DevastatingBlow == 0 ? 1 : 0,
-                            state.DevastatingBlowLine == 'black' ? 'gold' : 'black'
+                            state.DevastatingBlowLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -519,8 +519,8 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfSweepPressed(
                             state.Sweep == 0 ? 1 : 0,
-                            state.SweepLine == 'black' ? 'gold' : 'black',
-                            state.SweepDevLine == 'black' ? 'gold' : 'black'
+                            state.SweepLine == 'white' ? 'gold' : 'white',
+                            state.SweepDevLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -553,7 +553,7 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfWarmasterPressed(
                             state.Warmaster == 0 ? 1 : 0,
-                            state.WarmasterLine == 'black' ? 'gold' : 'black'
+                            state.WarmasterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -587,7 +587,7 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfDeepWoundsPressed(
                             state.DeepWounds == 0 ? 1 : 0,
-                            state.DeepWoundsLine == 'black' ? 'gold' : 'black'
+                            state.DeepWoundsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -620,7 +620,7 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfSkullcrusherPressed(
                             state.Skullcrusher == 0 ? 1 : 0,
-                            state.SkullcrusherLine == 'black' ? 'gold' : 'black'
+                            state.SkullcrusherLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -654,7 +654,7 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfCriticalChargePressed(
                             state.CriticalCharge == 0 ? 1 : 0,
-                            state.CriticalChargeLine == 'black' ? 'gold' : 'black'
+                            state.CriticalChargeLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

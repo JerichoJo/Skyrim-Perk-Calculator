@@ -38,60 +38,60 @@ const IllusionTree = () => {
     const [state, setState] = useSetState({
         noviceIllus: 0,
         illusionDual: 0,
-        illusionDualLine: 'black',
+        illusionDualLine: 'white',
         apprenticeIllus: 0,
-        apprenticeIllusLine: 'black',
+        apprenticeIllusLine: 'white',
         adeptIllus: 0,
-        adeptIllusLine: 'black',
+        adeptIllusLine: 'white',
         expertIllus: 0,
-        expertIllusLine: 'black',
+        expertIllusLine: 'white',
         masterIllus: 0,
-        masterIllusLine: 'black',
+        masterIllusLine: 'white',
         hypnoticGaze: 0,
-        hypnoticGazeLine: 'black',
+        hypnoticGazeLine: 'white',
         aspectOfTerror: 0,
-        aspectOfTerrorLine: 'black',
+        aspectOfTerrorLine: 'white',
         rage: 0,
-        rageLine: 'black',
+        rageLine: 'white',
         animage: 0,
-        animageLine: 'black',
+        animageLine: 'white',
         kindredMage: 0,
-        kindredMageLine: 'black',
+        kindredMageLine: 'white',
         quietCasting: 0,
-        quietCastingLine: 'black',
+        quietCastingLine: 'white',
         masterOfMind: 0,
-        masterOfMindLine: 'black',
-        masterOfMindLine2: 'black',
+        masterOfMindLine: 'white',
+        masterOfMindLine2: 'white',
     });
 
     let resetAllTrees;
     const resetIllusionPerks = () => {
         setState({ noviceIllus: 0 });
         setState({ illusionDual: 0 });
-        setState({ illusionDualLine: 'black' });
+        setState({ illusionDualLine: 'white' });
         setState({ apprenticeIllus: 0 });
-        setState({ apprenticeIllusLine: 'black' });
+        setState({ apprenticeIllusLine: 'white' });
         setState({ adeptIllus: 0 });
-        setState({ adeptIllusLine: 'black' });
+        setState({ adeptIllusLine: 'white' });
         setState({ expertIllus: 0 });
-        setState({ expertIllusLine: 'black' });
+        setState({ expertIllusLine: 'white' });
         setState({ masterIllus: 0 });
-        setState({ masterIllusLine: 'black' });
+        setState({ masterIllusLine: 'white' });
         setState({ hypnoticGaze: 0 });
-        setState({ hypnoticGazeLine: 'black' });
+        setState({ hypnoticGazeLine: 'white' });
         setState({ aspectOfTerror: 0 });
-        setState({ aspectOfTerrorLine: 'black' });
+        setState({ aspectOfTerrorLine: 'white' });
         setState({ rage: 0 });
-        setState({ rageLine: 'black' });
+        setState({ rageLine: 'white' });
         setState({ animage: 0 });
-        setState({ animageLine: 'black' });
+        setState({ animageLine: 'white' });
         setState({ kindredMage: 0 });
-        setState({ kindredMageLine: 'black' });
+        setState({ kindredMageLine: 'white' });
         setState({ quietCasting: 0 });
-        setState({ quietCastingLine: 'black' });
+        setState({ quietCastingLine: 'white' });
         setState({ masterOfMind: 0 });
-        setState({ masterOfMindLine: 'black' });
-        setState({ masterOfMindLine2: 'black' });
+        setState({ masterOfMindLine: 'white' });
+        setState({ masterOfMindLine2: 'white' });
         SetRequiredLevel(0);
     }
 
@@ -468,7 +468,7 @@ const IllusionTree = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Illusion Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Illusion Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -528,7 +528,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfillusionDualPressed(
                             state.illusionDual == 0 ? 1 : 0,
-                            state.illusionDualLine == 'black' ? 'gold' : 'black'
+                            state.illusionDualLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -559,7 +559,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfApprenticeIllusPressed(
                             state.apprenticeIllus == 0 ? 1 : 0,
-                            state.apprenticeIllusLine == 'black' ? 'gold' : 'black'
+                            state.apprenticeIllusLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -590,7 +590,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfAdeptIllusPressed(
                             state.adeptIllus == 0 ? 1 : 0,
-                            state.adeptIllusLine == 'black' ? 'gold' : 'black'
+                            state.adeptIllusLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -621,7 +621,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfExpertIllusPressed(
                             state.expertIllus == 0 ? 1 : 0,
-                            state.expertIllusLine == 'black' ? 'gold' : 'black'
+                            state.expertIllusLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -653,7 +653,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfMasterIllusPressed(
                             state.masterIllus == 0 ? 1 : 0,
-                            state.masterIllusLine == 'black' ? 'gold' : 'black'
+                            state.masterIllusLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -685,7 +685,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfHypnoticGazePressed(
                             state.hypnoticGaze == 0 ? 1 : 0,
-                            state.hypnoticGazeLine == 'black' ? 'gold' : 'black'
+                            state.hypnoticGazeLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -717,7 +717,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfAspectOfTerrorPressed(
                             state.aspectOfTerror == 0 ? 1 : 0,
-                            state.aspectOfTerrorLine == 'black' ? 'gold' : 'black'
+                            state.aspectOfTerrorLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -750,7 +750,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfRagePressed(
                             state.rage == 0 ? 1 : 0,
-                            state.rageLine == 'black' ? 'gold' : 'black'
+                            state.rageLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -782,7 +782,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfMasterOfMindPressed(
                             state.masterOfMind == 0 ? 1 : 0,
-                            state.masterOfMindLine == 'black' ? 'gold' : 'black'
+                            state.masterOfMindLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -814,7 +814,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfAnimagePressed(
                             state.animage == 0 ? 1 : 0,
-                            state.animageLine == 'black' ? 'gold' : 'black',
+                            state.animageLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />
@@ -847,7 +847,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfKindredPressed(
                             state.kindredMage == 0 ? 1 : 0,
-                            state.kindredMageLine == 'black' ? 'gold' : 'black',
+                            state.kindredMageLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />
@@ -879,7 +879,7 @@ const IllusionTree = () => {
                     onPress={() => {
                         CheckIfQuietCastingPressed(
                             state.quietCasting == 0 ? 1 : 0,
-                            state.quietCastingLine == 'black' ? 'gold' : 'black',
+                            state.quietCastingLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />

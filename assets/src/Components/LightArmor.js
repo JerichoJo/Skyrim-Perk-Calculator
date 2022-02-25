@@ -34,16 +34,16 @@ const LightArmorTree = () => {
     const [state, setState] = useSetState({
         agileDefender: 0,
         customeFit: 0,
-        customeFitLine: 'black',
+        customeFitLine: 'white',
         unhindered: 0,
-        unhinderedLine: 'black',
+        unhinderedLine: 'white',
         windWalker: 0,
-        windWalkerLine: 'black',
+        windWalkerLine: 'white',
         matchingSet: 0,
-        matchingSetLine: 'black',
+        matchingSetLine: 'white',
         deftMovement: 0,
-        deftMovementLine: 'black',
-        deftMovementLine2: 'black'
+        deftMovementLine: 'white',
+        deftMovementLine2: 'white'
 
     });
 
@@ -290,7 +290,7 @@ const LightArmorTree = () => {
                     onPress={() => {
                         CheckIfCustomeFitPressed(
                             state.customeFit == 0 ? 1 : 0,
-                            state.customeFitLine == 'black' ? 'gold' : 'black'
+                            state.customeFitLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -321,7 +321,7 @@ const LightArmorTree = () => {
                     onPress={() => {
                         CheckIfUnhinderedPressed(
                             state.unhindered == 0 ? 1 : 0,
-                            state.unhinderedLine == 'black' ? 'gold' : 'black'
+                            state.unhinderedLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -352,7 +352,7 @@ const LightArmorTree = () => {
                     onPress={() => {
                         CheckIfWindWalkerPressed(
                             state.windWalker == 0 ? 1 : 0,
-                            state.windWalkerLine == 'black' ? 'gold' : 'black'
+                            state.windWalkerLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -383,7 +383,7 @@ const LightArmorTree = () => {
                     onPress={() => {
                         CheckIfMatchingSetPressed(
                             state.matchingSet == 0 ? 1 : 0,
-                            state.matchingSetLine == 'black' ? 'gold' : 'black'
+                            state.matchingSetLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -415,7 +415,7 @@ const LightArmorTree = () => {
                     onPress={() => {
                         CheckIfDeftMovementPressed(
                             state.deftMovement == 0 ? 1 : 0,
-                            state.deftMovementLine == 'black' ? 'gold' : 'black'
+                            state.deftMovementLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

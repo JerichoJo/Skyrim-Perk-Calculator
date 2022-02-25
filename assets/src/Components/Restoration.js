@@ -38,54 +38,54 @@ const RestorationTree = () => {
     const [state, setState] = useSetState({
         noviceRestoration: 0,
         Respite: 0,
-        RespiteLine: 'black',
+        RespiteLine: 'white',
         ApprenticeRestoration: 0,
-        ApprenticeRestorationLine: 'black',
+        ApprenticeRestorationLine: 'white',
         AdeptRestoration: 0,
-        AdeptRestorationLine: 'black',
+        AdeptRestorationLine: 'white',
         ExpertRestoration: 0,
-        ExpertRestorationLine: 'black',
+        ExpertRestorationLine: 'white',
         MasterRestoration: 0,
-        MasterRestorationLine: 'black',
+        MasterRestorationLine: 'white',
         Regeneration: 0,
-        RegenerationLine: 'black',
+        RegenerationLine: 'white',
         Necromage: 0,
-        NecromageLine: 'black',
+        NecromageLine: 'white',
         WardAbsorb: 0,
-        WardAbsorbLine: 'black',
+        WardAbsorbLine: 'white',
         RestoDualCast: 0,
-        RestoDualCastLine: 'black',
+        RestoDualCastLine: 'white',
         Recovery: 0,
-        RecoveryLine: 'black',
+        RecoveryLine: 'white',
         AvoidDeath: 0,
-        AvoidDeathLine: 'black',
+        AvoidDeathLine: 'white',
     });
 
     let resetAllTrees;
     const resetRestorationPerks = () => {
         setState({ noviceRestoration: 0 });
         setState({ Respite: 0 });
-        setState({ RespiteLine: 'black' });
+        setState({ RespiteLine: 'white' });
         setState({ ApprenticeRestoration: 0 });
-        setState({ ApprenticeRestorationLine: 'black' });
+        setState({ ApprenticeRestorationLine: 'white' });
         setState({ AdeptRestoration: 0 });
-        setState({ AdeptRestorationLine: 'black' });
+        setState({ AdeptRestorationLine: 'white' });
         setState({ ExpertRestoration: 0 });
-        setState({ ExpertRestorationLine: 'black' });
+        setState({ ExpertRestorationLine: 'white' });
         setState({ MasterRestoration: 0 });
-        setState({ MasterRestorationLine: 'black' });
+        setState({ MasterRestorationLine: 'white' });
         setState({ Regeneration: 0 });
-        setState({ RegenerationLine: 'black' });
+        setState({ RegenerationLine: 'white' });
         setState({ Necromage: 0 });
-        setState({ NecromageLine: 'black' });
+        setState({ NecromageLine: 'white' });
         setState({ WardAbsorb: 0 });
-        setState({ WardAbsorbLine: 'black' });
+        setState({ WardAbsorbLine: 'white' });
         setState({ RestoDualCast: 0 });
-        setState({ RestoDualCastLine: 'black' });
+        setState({ RestoDualCastLine: 'white' });
         setState({ Recovery: 0 });
-        setState({ RecoveryLine: 'black' });
+        setState({ RecoveryLine: 'white' });
         setState({ AvoidDeath: 0 });
-        setState({ AvoidDeathLine: 'black' });
+        setState({ AvoidDeathLine: 'white' });
         SetRequiredLevel(0);
     }
 
@@ -402,7 +402,7 @@ const RestorationTree = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Restoration Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Restoration Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -462,7 +462,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfRespitePressed(
                             state.Respite == 0 ? 1 : 0,
-                            state.RespiteLine == 'black' ? 'gold' : 'black'
+                            state.RespiteLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -495,7 +495,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfApprenticeRestorationPressed(
                             state.ApprenticeRestoration == 0 ? 1 : 0,
-                            state.ApprenticeRestorationLine == 'black' ? 'gold' : 'black'
+                            state.ApprenticeRestorationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -528,7 +528,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfAdeptRestorationPressed(
                             state.AdeptRestoration == 0 ? 1 : 0,
-                            state.AdeptRestorationLine == 'black' ? 'gold' : 'black'
+                            state.AdeptRestorationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -561,7 +561,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfExpertRestorationPressed(
                             state.ExpertRestoration == 0 ? 1 : 0,
-                            state.ExpertRestorationLine == 'black' ? 'gold' : 'black'
+                            state.ExpertRestorationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -594,7 +594,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfMasterRestorationPressed(
                             state.MasterRestoration == 0 ? 1 : 0,
-                            state.MasterRestorationLine == 'black' ? 'gold' : 'black'
+                            state.MasterRestorationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -627,7 +627,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfRegenerationPressed(
                             state.Regeneration == 0 ? 1 : 0,
-                            state.RegenerationLine == 'black' ? 'gold' : 'black'
+                            state.RegenerationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -660,7 +660,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfNecromagePressed(
                             state.Necromage == 0 ? 1 : 0,
-                            state.NecromageLine == 'black' ? 'gold' : 'black'
+                            state.NecromageLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -693,7 +693,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfWardAbsorbPressed(
                             state.WardAbsorb == 0 ? 1 : 0,
-                            state.WardAbsorbLine == 'black' ? 'gold' : 'black'
+                            state.WardAbsorbLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -726,7 +726,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfRestoDualCastPressed(
                             state.RestoDualCast == 0 ? 1 : 0,
-                            state.RestoDualCastLine == 'black' ? 'gold' : 'black'
+                            state.RestoDualCastLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -759,7 +759,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfRecoveryPressed(
                             state.Recovery == 0 ? 1 : 0,
-                            state.RecoveryLine == 'black' ? 'gold' : 'black'
+                            state.RecoveryLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -792,7 +792,7 @@ const RestorationTree = () => {
                     onPress={() => {
                         CheckIfAvoidDeathPressed(
                             state.AvoidDeath == 0 ? 1 : 0,
-                            state.AvoidDeathLine == 'black' ? 'gold' : 'black'
+                            state.AvoidDeathLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

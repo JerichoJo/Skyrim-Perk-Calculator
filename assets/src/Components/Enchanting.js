@@ -60,21 +60,21 @@ const Enchanting = () => {
 
         setState({ enchanter: 0 });
         setState({ fireEnchanter: 0 });
-        setState({ fireEnchanterLine: 'black' });
+        setState({ fireEnchanterLine: 'white' });
         setState({ frostEnchanter: 0 });
-        setState({ frostEnchanterLine: 'black' });
+        setState({ frostEnchanterLine: 'white' });
         setState({ stormEnchanting: 0 });
-        setState({ stormEnchantingLine: 'black' });
+        setState({ stormEnchantingLine: 'white' });
         setState({ extraEffect: 0 });
-        setState({ extraEffectLine: 'black' });
+        setState({ extraEffectLine: 'white' });
         setState({ insightfulEnchanter: 0 });
-        setState({ insightfulEnchanterLine: 'black' });
+        setState({ insightfulEnchanterLine: 'white' });
         setState({ corpusEnchanter: 0 });
-        setState({ corpusEnchanterLine: 'black' });
+        setState({ corpusEnchanterLine: 'white' });
         setState({ soulSqueezer: 0 });
-        setState({ soulSqueezerLine: 'black' });
+        setState({ soulSqueezerLine: 'white' });
         setState({ soulSiphon: 0 });
-        setState({ soulSiphonLine: 'black' });
+        setState({ soulSiphonLine: 'white' });
         SetRequiredLevel(0);
     }
 
@@ -387,7 +387,7 @@ const Enchanting = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Enchanting Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Enchanting Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>

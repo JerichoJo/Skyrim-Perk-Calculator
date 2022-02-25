@@ -45,47 +45,47 @@ const SmithingTree = () => {
     const [state, setState] = useSetState({
         basicSmithing: 0,
         arcaneSmithing: 0,
-        arcaneSmithingLine: 'black',
+        arcaneSmithingLine: 'white',
         elvinSmithing: 0,
-        elvinSmithingLine: 'black',
+        elvinSmithingLine: 'white',
         advancedSmithing: 0,
-        advancedSmithingLine: 'black',
+        advancedSmithingLine: 'white',
         glassSmithing: 0,
-        glassSmithingLine: 'black',
+        glassSmithingLine: 'white',
         dwarvenSmithing: 0,
-        dwarvenSmithingLine: 'black',
+        dwarvenSmithingLine: 'white',
         orcishSmithing: 0,
-        orcishSmithingLine: 'black',
+        orcishSmithingLine: 'white',
         ebonySmithing: 0,
-        ebonySmithingLine: 'black',
+        ebonySmithingLine: 'white',
         daedricSmithing: 0,
-        daedricSmithingLine: 'black',
+        daedricSmithingLine: 'white',
         dragonSmithing: 0,
-        dragonSmithingLine: 'black',
-        dragonSmithingLineLight: 'black',
+        dragonSmithingLine: 'white',
+        dragonSmithingLineLight: 'white',
     });
 
     const resetSmithingPerks = () => {
         setState({ basicSmithing: 0 });
         setState({ arcaneSmithing: 0 });
-        setState({ arcaneSmithingLine: 'black' });
+        setState({ arcaneSmithingLine: 'white' });
         setState({ elvinSmithing: 0 });
-        setState({ elvinSmithingLine: 'black' });
+        setState({ elvinSmithingLine: 'white' });
         setState({ advancedSmithing: 0 });
-        setState({ advancedSmithingLine: 'black' });
+        setState({ advancedSmithingLine: 'white' });
         setState({ glassSmithing: 0 });
-        setState({ glassSmithingLine: 'black' });
+        setState({ glassSmithingLine: 'white' });
         setState({ dwarvenSmithing: 0 });
-        setState({ dwarvenSmithingLine: 'black' });
+        setState({ dwarvenSmithingLine: 'white' });
         setState({ orcishSmithing: 0 });
-        setState({ orcishSmithingLine: 'black' });
+        setState({ orcishSmithingLine: 'white' });
         setState({ ebonySmithing: 0 });
-        setState({ ebonySmithingLine: 'black' });
+        setState({ ebonySmithingLine: 'white' });
         setState({ daedricSmithing: 0 });
-        setState({ daedricSmithingLine: 'black' });
+        setState({ daedricSmithingLine: 'white' });
         setState({ dragonSmithing: 0 });
-        setState({ dragonSmithingLine: 'black' });
-        setState({ dragonSmithingLineLight: 'black' });
+        setState({ dragonSmithingLine: 'white' });
+        setState({ dragonSmithingLineLight: 'white' });
         SetRequiredLevel(0);
     }
 
@@ -402,7 +402,7 @@ const SmithingTree = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Smithing Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Smithing Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -462,14 +462,14 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfArcaneSmithPressed(
                             state.arcaneSmithing == 0 ? 1 : 0,
-                            state.arcaneSmithingLine == 'black' ? 'gold' : 'black'
+                            state.arcaneSmithingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
             <View style={styles.ArcaneSmithText}>
-                <Text style={styles.PerkText}>Arcane Blacksmith</Text>
+                <Text style={styles.PerkText}>Arcane whitesmith</Text>
             </View>
             <View title='Elvin Smithing Blue' style={{
                 position: 'absolute',
@@ -493,7 +493,7 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfElvinSmithPressed(
                             state.elvinSmithing == 0 ? 1 : 0,
-                            state.elvinSmithingLine == 'black' ? 'gold' : 'black'
+                            state.elvinSmithingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -524,7 +524,7 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfAdvanceSmithingPressed(
                             state.advancedSmithing == 0 ? 1 : 0,
-                            state.advancedSmithingLine == 'black' ? 'gold' : 'black'
+                            state.advancedSmithingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -555,7 +555,7 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfGlassSmithingPressed(
                             state.glassSmithing == 0 ? 1 : 0,
-                            state.glassSmithingLine == 'black' ? 'gold' : 'black'
+                            state.glassSmithingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -586,8 +586,8 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfDragonSmithingPressed(
                             state.dragonSmithing == 0 ? 1 : 0,
-                            state.dragonSmithingLine == 'black' ? 'gold' : 'black',
-                            state.dragonSmithingLineLight == 'black' ? 'gold' : 'black'
+                            state.dragonSmithingLine == 'white' ? 'gold' : 'white',
+                            state.dragonSmithingLineLight == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -618,7 +618,7 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfDaedricSmithingPressed(
                             state.daedricSmithing == 0 ? 1 : 0,
-                            state.daedricSmithingLine == 'black' ? 'gold' : 'black'
+                            state.daedricSmithingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -649,7 +649,7 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfEbonySmithingPressed(
                             state.ebonySmithing == 0 ? 1 : 0,
-                            state.ebonySmithingLine == 'black' ? 'gold' : 'black'
+                            state.ebonySmithingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -680,7 +680,7 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfOrcishSmithingPressed(
                             state.orcishSmithing == 0 ? 1 : 0,
-                            state.orcishSmithingLine == 'black' ? 'gold' : 'black'
+                            state.orcishSmithingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -711,7 +711,7 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfDwarvenSmithingPressed(
                             state.dwarvenSmithing == 0 ? 1 : 0,
-                            state.dwarvenSmithingLine == 'black' ? 'gold' : 'black'
+                            state.dwarvenSmithingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

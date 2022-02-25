@@ -62,23 +62,23 @@ const AlterationTree = () => {
     const resetAlterationPerks = () => {
         setState({ noviceAlt: 0 });
         setState({ altDualCasting: 0 });
-        setState({ altDualCastingLine: 'black' });
+        setState({ altDualCastingLine: 'white' });
         setState({ apprenticeAlt: 0 });
-        setState({ apprenticeAltLine: 'black' });
+        setState({ apprenticeAltLine: 'white' });
         setState({ mageArmor: 0 });
-        setState({ mageArmorLine: 'black' });
+        setState({ mageArmorLine: 'white' });
         setState({ magicResis: 0 });
-        setState({ magicResisLine: 'black' });
+        setState({ magicResisLine: 'white' });
         setState({ adeptAlt: 0 });
-        setState({ adeptAltLine: 'black' });
+        setState({ adeptAltLine: 'white' });
         setState({ stability: 0 });
-        setState({ stabilityLine: 'black' });
+        setState({ stabilityLine: 'white' });
         setState({ expertAlt: 0 });
-        setState({ expertAltLine: 'black' });
+        setState({ expertAltLine: 'white' });
         setState({ atronach: 0 });
-        setState({ atronachLine: 'black' });
+        setState({ atronachLine: 'white' });
         setState({ masterAlt: 0 });
-        setState({ masterAltLine: 'black' });
+        setState({ masterAltLine: 'white' });
         SetRequiredLevel(0);
         SetMageArmorLevel(0);
         SetMagicResisLevel(0);
@@ -437,7 +437,7 @@ const AlterationTree = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Alteration Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Alteration Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>

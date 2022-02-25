@@ -75,33 +75,33 @@ const ConjurationTree = () => {
     const resetConjurationPerks = () => {
         setState({ noviceConjuration: 0 });
         setState({ conjurationDualCasting: 0 });
-        setState({ conjurationDualCastingLine: 'black' });
+        setState({ conjurationDualCastingLine: 'white' });
         setState({ necromancy: 0 });
-        setState({ necromancyLine: 'black' });
+        setState({ necromancyLine: 'white' });
         setState({ darkSouls: 0 });
-        setState({ darkSoulsLine: 'black' });
+        setState({ darkSoulsLine: 'white' });
         setState({ twinSouls: 0 });
-        setState({ twinSoulsLine: 'black' });
+        setState({ twinSoulsLine: 'white' });
         setState({ mysticBinding: 0 });
-        setState({ mysticBindingLine: 'black' });
+        setState({ mysticBindingLine: 'white' });
         setState({ soulStealer: 0 });
-        setState({ soulStealerLine: 'black' });
+        setState({ soulStealerLine: 'white' });
         setState({ oblivionBinding: 0 });
-        setState({ oblivionBindingLine: 'black' });
+        setState({ oblivionBindingLine: 'white' });
         setState({ summoner: 0 });
-        setState({ summonerLine: 'black' });
+        setState({ summonerLine: 'white' });
         setState({ atromancy: 0 });
-        setState({ atromancyLine: 'black' });
+        setState({ atromancyLine: 'white' });
         setState({ elementalPotency: 0 });
-        setState({ elementalPotencyLine: 'black' });
+        setState({ elementalPotencyLine: 'white' });
         setState({ apprenticeConjuration: 0 });
-        setState({ apprenticeConjurationLine: 'black' });
+        setState({ apprenticeConjurationLine: 'white' });
         setState({ adeptConjuration: 0 });
-        setState({ adeptConjurationLine: 'black' });
+        setState({ adeptConjurationLine: 'white' });
         setState({ expertConjuration: 0 });
-        setState({ expertConjurationLine: 'black' });
+        setState({ expertConjurationLine: 'white' });
         setState({ masterConjuration: 0 });
-        setState({ masterConjurationLine: 'black' });
+        setState({ masterConjurationLine: 'white' });
         SetRequiredLevel(0);
     }
 
@@ -536,7 +536,7 @@ const ConjurationTree = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Conjuration Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Conjuration Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>

@@ -34,21 +34,21 @@ const SpeechTree = () => {
     const [state, setState] = useSetState({
         haggling: 0,
         allure: 0,
-        allureLine: 'black',
+        allureLine: 'white',
         merchant: 0,
-        merchantLine: 'black',
+        merchantLine: 'white',
         investor: 0,
-        investorLine: 'black',
+        investorLine: 'white',
         fence: 0,
-        fenceLine: 'black',
+        fenceLine: 'white',
         masterTrader: 0,
-        masterTraderLine: 'black',
+        masterTraderLine: 'white',
         bribery: 0,
-        briberyLine: 'black',
+        briberyLine: 'white',
         persuasion: 0,
-        persuasionLine: 'black',
+        persuasionLine: 'white',
         intimidation: 0,
-        intimidationLine: 'black',
+        intimidationLine: 'white',
     });
 
     const [ActivePerks, SetActivePerks] = useState(0);
@@ -429,7 +429,7 @@ const SpeechTree = () => {
                     onPress={() => {
                         CheckIfAllurePressed(
                             state.allure == 0 ? 1 : 0,
-                            state.allureLine == 'black' ? 'gold' : 'black'
+                            state.allureLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -460,7 +460,7 @@ const SpeechTree = () => {
                     onPress={() => {
                         CheckIfMerchantPressed(
                             state.merchant == 0 ? 1 : 0,
-                            state.merchantLine == 'black' ? 'gold' : 'black'
+                            state.merchantLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -491,7 +491,7 @@ const SpeechTree = () => {
                     onPress={() => {
                         CheckIfInvestorPressed(
                             state.investor == 0 ? 1 : 0,
-                            state.investorLine == 'black' ? 'gold' : 'black'
+                            state.investorLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -522,7 +522,7 @@ const SpeechTree = () => {
                     onPress={() => {
                         CheckIfFencePressed(
                             state.fence == 0 ? 1 : 0,
-                            state.fenceLine == 'black' ? 'gold' : 'black'
+                            state.fenceLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -554,7 +554,7 @@ const SpeechTree = () => {
                     onPress={() => {
                         CheckIfMasterTraderPressed(
                             state.masterTrader == 0 ? 1 : 0,
-                            state.masterTraderLine == 'black' ? 'gold' : 'black'
+                            state.masterTraderLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -586,7 +586,7 @@ const SpeechTree = () => {
                     onPress={() => {
                         CheckIfBriberyPressed(
                             state.bribery == 0 ? 1 : 0,
-                            state.briberyLine == 'black' ? 'gold' : 'black',
+                            state.briberyLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />
@@ -618,7 +618,7 @@ const SpeechTree = () => {
                     onPress={() => {
                         CheckIfPersuasionPressed(
                             state.persuasion == 0 ? 1 : 0,
-                            state.persuasionLine == 'black' ? 'gold' : 'black',
+                            state.persuasionLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />
@@ -650,7 +650,7 @@ const SpeechTree = () => {
                     onPress={() => {
                         CheckIfIntimidationPressed(
                             state.intimidation == 0 ? 1 : 0,
-                            state.intimidationLine == 'black' ? 'gold' : 'black',
+                            state.intimidationLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />

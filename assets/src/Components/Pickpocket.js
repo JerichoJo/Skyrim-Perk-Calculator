@@ -34,19 +34,19 @@ const PickpocketTree = () => {
     const [state, setState] = useSetState({
         LightFingers: 0,
         NightThief: 0,
-        NightThiefLine: 'black',
+        NightThiefLine: 'white',
         Cutpurse: 0,
-        CutpurseLine: 'black',
+        CutpurseLine: 'white',
         Misdirection: 0,
-        MisdirectionLine: 'black',
+        MisdirectionLine: 'white',
         PerfectTouch: 0,
-        PerfectTouchLine: 'black',
+        PerfectTouchLine: 'white',
         Poisoned: 0,
-        PoisonedLine: 'black',
+        PoisonedLine: 'white',
         Keymaster: 0,
-        KeymasterLine: 'black',
+        KeymasterLine: 'white',
         ExtraPockets: 0,
-        ExtraPocketsLine: 'black',
+        ExtraPocketsLine: 'white',
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -343,7 +343,7 @@ const PickpocketTree = () => {
                     onPress={() => {
                         CheckIfNightThiefPressed(
                             state.NightThief == 0 ? 1 : 0,
-                            state.NightThiefLine == 'black' ? 'gold' : 'black'
+                            state.NightThiefLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -376,7 +376,7 @@ const PickpocketTree = () => {
                     onPress={() => {
                         CheckIfCutpursePressed(
                             state.Cutpurse == 0 ? 1 : 0,
-                            state.CutpurseLine == 'black' ? 'gold' : 'black'
+                            state.CutpurseLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -409,7 +409,7 @@ const PickpocketTree = () => {
                     onPress={() => {
                         CheckIfMisdirectionPressed(
                             state.Misdirection == 0 ? 1 : 0,
-                            state.MisdirectionLine == 'black' ? 'gold' : 'black'
+                            state.MisdirectionLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -442,7 +442,7 @@ const PickpocketTree = () => {
                     onPress={() => {
                         CheckIfPerfectTouchPressed(
                             state.PerfectTouch == 0 ? 1 : 0,
-                            state.PerfectTouchLine == 'black' ? 'gold' : 'black'
+                            state.PerfectTouchLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -476,7 +476,7 @@ const PickpocketTree = () => {
                     onPress={() => {
                         CheckIfPoisonedPressed(
                             state.Poisoned == 0 ? 1 : 0,
-                            state.PoisonedLine == 'black' ? 'gold' : 'black'
+                            state.PoisonedLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -509,7 +509,7 @@ const PickpocketTree = () => {
                     onPress={() => {
                         CheckIfKeymasterPressed(
                             state.Keymaster == 0 ? 1 : 0,
-                            state.KeymasterLine == 'black' ? 'gold' : 'black'
+                            state.KeymasterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -542,7 +542,7 @@ const PickpocketTree = () => {
                     onPress={() => {
                         CheckIfExtraPocketsPressed(
                             state.ExtraPockets == 0 ? 1 : 0,
-                            state.ExtraPocketsLine == 'black' ? 'gold' : 'black'
+                            state.ExtraPocketsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

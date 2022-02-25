@@ -36,31 +36,31 @@ const DestructionTree = () => {
   const [state, setState] = useSetState({
     noviceDestruction: 0,
     apprenticeDestruction: 0,
-    apprenticeDestructionLine: 'black',
+    apprenticeDestructionLine: 'white',
     adeptDestruction: 0,
-    adeptDestructionLine: 'black',
+    adeptDestructionLine: 'white',
     expertDestruction: 0,
-    expertDestructionLine: 'black',
+    expertDestructionLine: 'white',
     masterDestruction: 0,
-    masterDestructionLine: 'black',
+    masterDestructionLine: 'white',
     runeMaster: 0,
-    runeMasterLine: 'black',
+    runeMasterLine: 'white',
     augmentedFlames: 0,
-    augmentedFlamesLine: 'black',
+    augmentedFlamesLine: 'white',
     intenseFlames: 0,
-    intenseFlamesLine: 'black',
+    intenseFlamesLine: 'white',
     augmentedFrost: 0,
-    augmentedFrostLine: 'black',
+    augmentedFrostLine: 'white',
     deepFreeze: 0,
-    deepFreezeLine: 'black',
+    deepFreezeLine: 'white',
     augmentedShock: 0,
-    augmentedShockLine: 'black',
+    augmentedShockLine: 'white',
     disintegrate: 0,
-    disintegrateLine: 'black',
+    disintegrateLine: 'white',
     destructionDualCasting: 0,
-    destructionDualCastingLine: 'black',
+    destructionDualCastingLine: 'white',
     impact: 0,
-    impactLine: 'black',
+    impactLine: 'white',
   });
 
 
@@ -68,31 +68,31 @@ const DestructionTree = () => {
   const resetDestructionPerks = () => {
     setState({ noviceDestruction: 0 });
     setState({ apprenticeDestruction: 0 });
-    setState({ apprenticeDestructionLine: 'black' });
+    setState({ apprenticeDestructionLine: 'white' });
     setState({ adeptDestruction: 0 });
-    setState({ adeptDestructionLine: 'black' });
+    setState({ adeptDestructionLine: 'white' });
     setState({ expertDestruction: 0 });
-    setState({ expertDestructionLine: 'black' });
+    setState({ expertDestructionLine: 'white' });
     setState({ masterDestruction: 0 });
-    setState({ masterDestructionLine: 'black' });
+    setState({ masterDestructionLine: 'white' });
     setState({ runeMaster: 0 });
-    setState({ runeMasterLine: 'black' });
+    setState({ runeMasterLine: 'white' });
     setState({ augmentedFlames: 0 });
-    setState({ augmentedFlamesLine: 'black' });
+    setState({ augmentedFlamesLine: 'white' });
     setState({ intenseFlames: 0 });
-    setState({ intenseFlamesLine: 'black' });
+    setState({ intenseFlamesLine: 'white' });
     setState({ augmentedFrost: 0 });
-    setState({ augmentedFrostLine: 'black' });
+    setState({ augmentedFrostLine: 'white' });
     setState({ deepFreeze: 0 });
-    setState({ deepFreezeLine: 'black' });
+    setState({ deepFreezeLine: 'white' });
     setState({ augmentedShock: 0 });
-    setState({ augmentedShockLine: 'black' });
+    setState({ augmentedShockLine: 'white' });
     setState({ disintegrate: 0 });
-    setState({ disintegrateLine: 'black' });
+    setState({ disintegrateLine: 'white' });
     setState({ destructionDualCasting: 0 });
-    setState({ destructionDualCastingLine: 'black' });
+    setState({ destructionDualCastingLine: 'white' });
     setState({ impact: 0 });
-    setState({ impactLine: 'black' });
+    setState({ impactLine: 'white' });
     SetRequiredLevel(0);
   }
 
@@ -360,7 +360,7 @@ const DestructionTree = () => {
       <View
         style={styles.resetButtonContainer}>
         <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-          <Text style={{ color: "black", fontWeight: "bold", }}> Reset Destruction Perks</Text>
+          <Text style={{ color: "white", fontWeight: "bold", }}> Reset Destruction Perks</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.topText}>
@@ -419,7 +419,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfApprenticeDestructionPressed(
               state.apprenticeDestruction == 0 ? 1 : 0,
-              state.apprenticeDestructionLine == 'black' ? 'gold' : 'black'
+              state.apprenticeDestructionLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -449,7 +449,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfAdeptDestructionPressed(
               state.adeptDestruction == 0 ? 1 : 0,
-              state.adeptDestructionLine == 'black' ? 'gold' : 'black'
+              state.adeptDestructionLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -479,7 +479,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfExpertDestructionPressed(
               state.expertDestruction == 0 ? 1 : 0,
-              state.expertDestructionLine == 'black' ? 'gold' : 'black'
+              state.expertDestructionLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -509,7 +509,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfMasterDestructionPressed(
               state.masterDestruction == 0 ? 1 : 0,
-              state.masterDestructionLine == 'black' ? 'gold' : 'black'
+              state.masterDestructionLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -539,7 +539,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfRuneMasterPressed(
               state.runeMaster == 0 ? 1 : 0,
-              state.runeMasterLine == 'black' ? 'gold' : 'black',
+              state.runeMasterLine == 'white' ? 'gold' : 'white',
             );
           }}>
           <StarIconGold />
@@ -569,7 +569,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfAugmentedFlamesPressed(
               state.augmentedFlames == 0 ? 1 : 0,
-              state.augmentedFlamesLine == 'black' ? 'gold' : 'black'
+              state.augmentedFlamesLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -599,7 +599,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIntenseFlamesPressed(
               state.intenseFlames == 0 ? 1 : 0,
-              state.intenseFlamesLine == 'black' ? 'gold' : 'black'
+              state.intenseFlamesLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -629,7 +629,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfAugmentedFrostPressed(
               state.augmentedFrost == 0 ? 1 : 0,
-              state.augmentedFrostLine == 'black' ? 'gold' : 'black'
+              state.augmentedFrostLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -660,7 +660,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfAugmentedShockPressed(
               state.augmentedShock == 0 ? 1 : 0,
-              state.augmentedShockLine == 'black' ? 'gold' : 'black'
+              state.augmentedShockLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -690,7 +690,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfDisintegratePressed(
               state.disintegrate == 0 ? 1 : 0,
-              state.disintegrateLine == 'black' ? 'gold' : 'black'
+              state.disintegrateLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -720,7 +720,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfDestructionDualPressed(
               state.destructionDualCasting == 0 ? 1 : 0,
-              state.destructionDualCastingLine == 'black' ? 'gold' : 'black'
+              state.destructionDualCastingLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -750,7 +750,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfImpactPressed(
               state.impact == 0 ? 1 : 0,
-              state.impactLine == 'black' ? 'gold' : 'black'
+              state.impactLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -780,7 +780,7 @@ const DestructionTree = () => {
           onPress={() => {
             checkIfDeepFreezePressed(
               state.deepFreeze == 0 ? 1 : 0,
-              state.deepFreezeLine == 'black' ? 'gold' : 'black'
+              state.deepFreezeLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />

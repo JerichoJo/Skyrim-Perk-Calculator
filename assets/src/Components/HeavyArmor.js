@@ -59,19 +59,19 @@ const HeavyArmor = () => {
     const resetHeavyArmorPerks = () => {
         setState({ juggernaut: 0 });
         setState({ fistsOfSteel: 0 });
-        setState({ fistsOfSteelLine: 'black' });
+        setState({ fistsOfSteelLine: 'white' });
         setState({ cushioned: 0 });
-        setState({ cushionedLine: 'black' });
+        setState({ cushionedLine: 'white' });
         setState({ conditioning: 0 });
-        setState({ conditioningLine: 'black' });
+        setState({ conditioningLine: 'white' });
         setState({ wellFitted: 0 });
-        setState({ wellFittedLine: 'black' });
+        setState({ wellFittedLine: 'white' });
         setState({ towerOfStrength: 0 });
-        setState({ towerOfStrengthLine: 'black' });
+        setState({ towerOfStrengthLine: 'white' });
         setState({ matchingSet: 0 });
-        setState({ matchingSetLine: 'black' });
+        setState({ matchingSetLine: 'white' });
         setState({ reflectBlows: 0 });
-        setState({ reflectBlowsLine: 'black' });
+        setState({ reflectBlowsLine: 'white' });
         SetRequiredLevel(0);
     }
 
@@ -390,7 +390,7 @@ const HeavyArmor = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Heavy Armor Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Heavy Armor Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
