@@ -117,7 +117,9 @@ export default class extends Component {
             <View style={styles.container}>
 
                 <Swiper
+                    pagingEnabled={true}
                     removeClippedSubviews={false}
+                    
                     ref={ref}
                     style={styles.wrapper}
                     height={240}
@@ -154,7 +156,7 @@ export default class extends Component {
                         left: null,
                         right: 10
                     }}
-                    loop
+                    
                 >
                     <View
                         style={styles.slide}
@@ -179,6 +181,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Conjuration.png')}
                         />
                         <Text style={styles.title}>Conjuration</Text>
+                        <tree.ConjurationTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -190,6 +193,8 @@ export default class extends Component {
                             source={require('../images/background/BG_Destruction.png')}
                         />
                         <Text style={styles.title}>Destruction</Text>
+                        <tree.DestructionTree style={styles.tree} />
+                        
                     </View>
                     <View
                         style={styles.slide}
@@ -224,6 +229,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Enchanting.png')}
                         />
                         <Text style={styles.title}>Enchanting</Text>
+                        <tree.EnchantingTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -248,6 +254,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Heavy_Armor.png')}
                         />
                         <Text style={styles.title}>Heavy Armor</Text>
+                        <tree.HeavyArmor style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -259,6 +266,8 @@ export default class extends Component {
                             source={require('../images/background/BG_Block.png')}
                         />
                         <Text style={styles.title}>Block</Text>
+                        <tree.BlockTree style={styles.tree} />
+                        
                     </View>
                     <View
                         style={styles.slide}
@@ -282,6 +291,8 @@ export default class extends Component {
                             source={require('../images/background/BG_One_Handed.png')}
                         />
                         <Text style={styles.title}>One-Handed</Text>
+                        <tree.OneHandedTree style={styles.tree} />
+                        
                     </View>
                     <View
                         style={styles.slide}
@@ -305,6 +316,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Light_Armor.png')}
                         />
                         <Text style={styles.title}>Light Armor</Text>
+                        <tree.LightArmorTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -316,6 +328,8 @@ export default class extends Component {
                             source={require('../images/background/BG_Sneak.png')}
                         />
                         <Text style={styles.title}>Sneak</Text>
+                        <tree.SneakTree style={styles.tree} />
+                        
                     </View>
                     <View
                         style={styles.slide}
@@ -327,6 +341,8 @@ export default class extends Component {
                             source={require('../images/background/BG_Lockpicking.png')}
                         />
                         <Text style={styles.title}>Lockpicking</Text>
+                        <tree.LockpickingTree style={styles.tree} />
+
                     </View>
                     <View
                         style={styles.slide}
@@ -350,6 +366,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Speech.png')}
                         />
                         <Text style={styles.title}>Speech</Text>
+                        <tree.SpeechTree style={styles.tree} />
                     </View>
                     <View
                         style={styles.slide}
@@ -361,6 +378,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Alchemy.png')}
                         />
                         <Text style={styles.title}>Alchemy</Text>
+                        <tree.AlchemyTree style={styles.tree} />
                     </View>
                 </Swiper>
             </View>

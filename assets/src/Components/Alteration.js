@@ -31,6 +31,11 @@ const useSetState = (initialState = {}) => {
 // the next one you should change is the apprenticeAlt variable....it needs to replace all of the apprenticeAlt variables
 const AlterationTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [MageArmorLevel, SetMageArmorLevel] = useState(0);
+    const [MagicResisLevel, SetMagicResisLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         noviceAlt: 0,
         altDualCasting: 0,
@@ -53,13 +58,51 @@ const AlterationTree = () => {
         masterAltLine: 'black',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    let resetAllTrees;
+    const resetAlterationPerks = () => {
+        setState({ noviceAlt: 0 });
+        setState({ altDualCasting: 0 });
+        setState({ altDualCastingLine: 'black' });
+        setState({ apprenticeAlt: 0 });
+        setState({ apprenticeAltLine: 'black' });
+        setState({ mageArmor: 0 });
+        setState({ mageArmorLine: 'black' });
+        setState({ magicResis: 0 });
+        setState({ magicResisLine: 'black' });
+        setState({ adeptAlt: 0 });
+        setState({ adeptAltLine: 'black' });
+        setState({ stability: 0 });
+        setState({ stabilityLine: 'black' });
+        setState({ expertAlt: 0 });
+        setState({ expertAltLine: 'black' });
+        setState({ atronach: 0 });
+        setState({ atronachLine: 'black' });
+        setState({ masterAlt: 0 });
+        setState({ masterAltLine: 'black' });
+        SetRequiredLevel(0);
+        SetMageArmorLevel(0);
+        SetMagicResisLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [MageArmorLevel, SetMageArmorLevel] = useState(0);
-    const [MagicResisLevel, SetMagicResisLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetAlterationPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetAlterationPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncMageArmorCounter = (numActiveMageArmor) => {
         if (MageArmorLevel < 3) {
@@ -391,6 +434,12 @@ const AlterationTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Alteration Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -413,7 +462,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("NoviceAlterationModal")}
                     onPress={() => {
                         CheckIfNoviceAltPressed(
                             state.noviceAlt == 0 ? 1 : 0,
@@ -423,7 +472,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.NoviceAltText}>
-
+                <Text style={styles.PerkText}>Novice Alteration</Text>
             </View>
             <View title='Alteration Dual Casting Blue' style={{
                 position: 'absolute',
@@ -444,7 +493,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("AlterationDualCastingModal")}
                     onPress={() => {
                         CheckIfAltDualCastingPressed(
                             state.altDualCasting == 0 ? 1 : 0,
@@ -454,8 +503,8 @@ const AlterationTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.DualCastingText}>
-
+            <View style={styles.AlterationDualCastingText}>
+                <Text style={styles.PerkText}>Alteration Dual Casting</Text>
             </View>
             <View title='Apprentice Alteration Blue' style={{
                 position: 'absolute',
@@ -475,9 +524,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ApprenticeAlterationModal")}
                     onPress={() => {
                         CheckIfApprenticeAltPressed(
                             state.apprenticeAlt == 0 ? 1 : 0,
@@ -488,7 +535,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.ApprenticeAltText}>
-
+                <Text style={styles.PerkText}>Apprentice Alteration</Text>
             </View>
             <View title='Mage Armor Blue' style={{
                 position: 'absolute',
@@ -508,9 +555,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MageArmorModal")}
                     onPress={() => {
                         CheckIfMageArmorPressed(
                             state.mageArmor == 0 ? 1 : 0,
@@ -541,9 +586,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MagicResistanceModal")}
                     onPress={() => {
                         CheckIfMagicResisPressed(
                             state.magicResis == 0 ? 1 : 0,
@@ -576,9 +619,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdeptAlterationModal")}
                     onPress={() => {
                         CheckIfAdeptAltPressed(
                             state.adeptAlt == 0 ? 1 : 0,
@@ -589,7 +630,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AdeptAltText}>
-
+                <Text style={styles.PerkText}>Adept Alteration</Text>
             </View>
 
             <View title='Stability Blue' style={{
@@ -610,9 +651,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("StabilityModal")}
                     onPress={() => {
                         CheckIfStabilityPressed(
                             state.stability == 0 ? 1 : 0,
@@ -623,7 +662,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.StabilityText}>
-
+                <Text style={styles.PerkText}>Stability</Text>
             </View>
 
             <View title='Expert Alteration Blue' style={{
@@ -644,9 +683,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExpertAlterationModal")}
                     onPress={() => {
                         CheckIfExpertAltPressed(
                             state.expertAlt == 0 ? 1 : 0,
@@ -657,7 +694,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.ExpertAltText}>
-
+                <Text style={styles.PerkText}>Expert Alteration</Text>
             </View>
 
 
@@ -679,9 +716,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AtronachModal")}
                     onPress={() => {
                         CheckIfAtronachPressed(
                             state.atronach == 0 ? 1 : 0,
@@ -692,7 +727,7 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AtronachText}>
-
+                <Text style={styles.PerkText}>Atronach</Text>
             </View>
 
 
@@ -714,9 +749,7 @@ const AlterationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterAlterationModal")}
                     onPress={() => {
                         CheckIfMasterAltPressed(
                             state.masterAlt == 0 ? 1 : 0,
@@ -727,11 +760,8 @@ const AlterationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.MasterAltText}>
-
+                <Text style={styles.PerkText}>Master Alteration</Text>
             </View>
-
-
-
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
                 <Line
@@ -834,7 +864,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: "70%",
+        bottom: "78%",
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -843,20 +873,20 @@ const styles = StyleSheet.create({
     },
     NoviceAltText: {
         position: 'absolute',
-        left: "25%",
+        left: "55%",
         top: "83%",
         zIndex: 10,
     },
-    DualCastingText: {
+    AlterationDualCastingText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
+        left: "10%",
+        top: "72%",
         zIndex: 10,
     },
     ApprenticeAltText: {
         position: 'absolute',
-        left: "13%",
-        top: "53%",
+        left: "60%",
+        top: "65%",
         zIndex: 10,
     },
     MageArmorText: {
@@ -871,41 +901,57 @@ const styles = StyleSheet.create({
         top: "54%",
         zIndex: 10,
     },
-    MasterAltText: {
+    AdeptAltText: {
         position: 'absolute',
-        left: "44%",
-        top: "34%",
-        zIndex: 10,
-    },
-    AtronachText: {
-        position: 'absolute',
-        left: "64%",
-        top: "40%",
-        zIndex: 10,
-    },
-    ExpertAltText: {
-        position: 'absolute',
-        left: "82%",
-        top: "50%",
+        left: "45%",
+        top: "48%",
         zIndex: 10,
     },
     StabilityText: {
         position: 'absolute',
-        left: "70%",
-        top: "50%",
+        left: "20%",
+        top: "35%",
         zIndex: 10,
     },
-    AdeptAltText: {
+    ExpertAltText: {
         position: 'absolute',
-        left: "50%",
-        top: "60%",
+        left: "68%",
+        top: "38%",
         zIndex: 10,
     },
-
+    AtronachText: {
+        position: 'absolute',
+        left: "4%",
+        top: "25%",
+        zIndex: 10,
+    },
+    MasterAltText: {
+        position: 'absolute',
+        left: "60%",
+        top: "26%",
+        zIndex: 10,
+    },
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
+
 });
 
 export default AlterationTree;

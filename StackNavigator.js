@@ -22,11 +22,72 @@ function Modal() {
 
             <ModalNav.Screen name="Homescreen" component={HomeScreen} />
 
+            {/* Smithing Tree Modals */}
             <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
-
                 <ModalNav.Screen name="BasicSmithingModal" component={modals.BasicSmithingModal} />
                 <ModalNav.Screen name="ArcaneSmithingModal" component={modals.ArcaneSmithingModal} />
+                <ModalNav.Screen name="ElvenSmithingModal" component={modals.ElvenSmithingModal} />
+                <ModalNav.Screen name="AdvancedArmorsSmithingModal" component={modals.AdvancedArmorsSmithingModal} />
+                <ModalNav.Screen name="GlassSmithingModal" component={modals.GlassSmithingModal} />
+                <ModalNav.Screen name="DragonArmorSmithingModal" component={modals.DragonArmorSmithingModal} />
+                <ModalNav.Screen name="DaedricSmithingModal" component={modals.DaedricSmithingModal} />
+                <ModalNav.Screen name="EbonySmithingModal" component={modals.EbonySmithingModal} />
+                <ModalNav.Screen name="OrcishSmithingModal" component={modals.OrcishSmithingModal} />
+                <ModalNav.Screen name="DwarvenSmithingModal" component={modals.DwarvenSmithingModal} />
+            </ModalNav.Group>
 
+            {/* Speech Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="HagglingModal" component={modals.HagglingModal} />
+                <ModalNav.Screen name="AllureModal" component={modals.AllureModal} />
+                <ModalNav.Screen name="MerchantModal" component={modals.MerchantModal} />
+                <ModalNav.Screen name="InvestorModal" component={modals.InvestorModal} />
+                <ModalNav.Screen name="FenceModal" component={modals.FenceModal} />
+                <ModalNav.Screen name="MasterTraderModal" component={modals.MasterTraderModal} />
+                <ModalNav.Screen name="BriberyModal" component={modals.BriberyModal} />
+                <ModalNav.Screen name="PersuasionModal" component={modals.PersuasionModal} />
+                <ModalNav.Screen name="IntimidationModal" component={modals.IntimidationModal} />
+            </ModalNav.Group>
+
+            {/* Illusion Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="NoviceIllusionModal" component={modals.NoviceIllusionModal} />
+                <ModalNav.Screen name="IllusionDualCastingModal" component={modals.IllusionDualCastingModal} />
+                <ModalNav.Screen name="ApprenticeIllusionModal" component={modals.ApprenticeIllusionModal} />
+                <ModalNav.Screen name="AdeptIllusionModal" component={modals.AdeptIllusionModal} />
+                <ModalNav.Screen name="ExpertIllusionModal" component={modals.ExpertIllusionModal} />
+                <ModalNav.Screen name="MasterIllusionModal" component={modals.MasterIllusionModal} />
+                <ModalNav.Screen name="HypnoticGazeModal" component={modals.HypnoticGazeModal} />
+                <ModalNav.Screen name="AspectOfTerrorModal" component={modals.AspectOfTerrorModal} />
+                <ModalNav.Screen name="RageModal" component={modals.RageModal} />
+                <ModalNav.Screen name="MasterOfTheMindModal" component={modals.MasterOfTheMindModal} />
+                <ModalNav.Screen name="AnimageModal" component={modals.AnimageModal} />
+                <ModalNav.Screen name="KindredMageModal" component={modals.KindredMageModal} />
+                <ModalNav.Screen name="QuietCastingModal" component={modals.QuietCastingModal} />
+            </ModalNav.Group>
+
+            {/* Light Armor Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="AgileDefenderModal" component={modals.AgileDefenderModal} />
+                <ModalNav.Screen name="CustomFitModal" component={modals.CustomFitModal} />
+                <ModalNav.Screen name="UnhinderedModal" component={modals.UnhinderedModal} />
+                <ModalNav.Screen name="WindWalkerModal" component={modals.WindWalkerModal} />
+                <ModalNav.Screen name="DeftMovementModal" component={modals.DeftMovementModal} />
+                <ModalNav.Screen name="MatchingSetModal" component={modals.MatchingSetModal} />
+            </ModalNav.Group>
+
+            {/* Alteration Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="NoviceAlterationModal" component={modals.NoviceAlterationModal} />
+                <ModalNav.Screen name="AlterationDualCastingModal" component={modals.AlterationDualCastingModal} />
+                <ModalNav.Screen name="ApprenticeAlterationModal" component={modals.ApprenticeAlterationModal} />
+                <ModalNav.Screen name="MageArmorModal" component={modals.MageArmorModal} />
+                <ModalNav.Screen name="MagicResistanceModal" component={modals.MagicResistanceModal} />
+                <ModalNav.Screen name="AdeptAlterationModal" component={modals.AdeptAlterationModal} />
+                <ModalNav.Screen name="StabilityModal" component={modals.StabilityModal} />
+                <ModalNav.Screen name="ExpertAlterationModal" component={modals.ExpertAlterationModal} />
+                <ModalNav.Screen name="AtronachModal" component={modals.AtronachModal} />
+                <ModalNav.Screen name="MasterAlterationModal" component={modals.MasterAlterationModal} />
             </ModalNav.Group>
 
         </ModalNav.Navigator>
@@ -82,3 +143,6 @@ export default () => (
     </NavigationContainer>
 
 );
+
+//\Skyrim-Perk-Calculator\node_modules\metro-runtime\src\polyfills\require.js
+//commented out lines 111 - 122 for cycle issue (temporary)

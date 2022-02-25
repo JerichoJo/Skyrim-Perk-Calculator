@@ -31,6 +31,10 @@ const useSetState = (initialState = {}) => {
 
 const TwoHandedTree = () => {
     const navigation = useNavigation();
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         Barbarian: 0,
         Limbsplitter: 0,
@@ -40,7 +44,7 @@ const TwoHandedTree = () => {
         DevastatingBlow: 0,
         DevastatingBlowLine: 'black',
         CriticalCharge: 0,
-        CriticalChargeLine: 'black',        
+        CriticalChargeLine: 'black',
         Sweep: 0,
         SweepLine: 'black',
         SweepDevLine: 'black',
@@ -52,12 +56,48 @@ const TwoHandedTree = () => {
         SkullcrusherLine: 'black',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
+    let resetAllTrees;
+    const resetTwoHandedPerks = () => {
+        setState({ Barbarian: 0 });
+        setState({ Limbsplitter: 0 });
+        setState({ LimbsplitterLine: 'black' });
+        setState({ ChampionsStance: 0 });
+        setState({ ChampionsStanceLine: 'black' });
+        setState({ DevastatingBlow: 0 });
+        setState({ DevastatingBlowLine: 'black' });
+        setState({ CriticalCharge: 0 });
+        setState({ CriticalChargeLine: 'black' });
+        setState({ Sweep: 0 });
+        setState({ SweepLine: 'black' });
+        setState({ SweepDevLine: 'black' });
+        setState({ Warmaster: 0 });
+        setState({ WarmasterLine: 'black' });
+        setState({ DeepWounds: 0 });
+        setState({ DeepWoundsLine: 'black' });
+        setState({ Skullcrusher: 0 });
+        setState({ SkullcrusherLine: 'black' });
+        SetRequiredLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetTwoHandedPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetTwoHandedPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -84,7 +124,7 @@ const TwoHandedTree = () => {
             TrackLevel(90);
         } else if (state.Sweep == 1) {
             TrackLevel(75);
-        }  else if (state.DeepWounds == 1) {
+        } else if (state.DeepWounds == 1) {
             TrackLevel(60);
         } else if (state.DevastatingBlow == 1) {
             TrackLevel(50);
@@ -198,11 +238,11 @@ const TwoHandedTree = () => {
                 : DecrementCounter(1);
 
         }
-    };    
+    };
     const CheckIfSweepPressed = (button, line, line2) => {
-        if (state.Warmaster == 1 ) {
+        if (state.Warmaster == 1) {
             // Do nothing....must un-select nodes above it first
-        }        
+        }
         else if (state.DevastatingBlow == 0 && state.CriticalCharge == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ Sweep: button });
@@ -224,24 +264,24 @@ const TwoHandedTree = () => {
             setState({ Sweep: button });
             setState({ SweepDevLine: line2 });
             state.Sweep == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
         else if (state.DevastatingBlow == 0 && state.CriticalCharge == 1) {
             setState({ Sweep: button });
             setState({ SweepLine: line });
             state.Sweep == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
-        }      
-        else if (state.DevastatingBlow == 1 && state.CriticalCharge == 1){
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+        else if (state.DevastatingBlow == 1 && state.CriticalCharge == 1) {
             setState({ Sweep: button });
             setState({ SweepLine: line });
             setState({ SweepDevLine: line2 });
             state.Sweep == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
-        }    
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
 
     };
     const CheckIfWarmasterPressed = (button, line) => {
@@ -250,12 +290,12 @@ const TwoHandedTree = () => {
             setState({ Warmaster: button });
             setState({ Sweep: button });
             setState({ ChampionsStance: button });
-            setState({ Barbarian: button });  
-            setState({ WarmasterLine: line }); 
+            setState({ Barbarian: button });
+            setState({ WarmasterLine: line });
             setState({ ChampionsStanceLine: line });
             setState({ DevastatingBlow: button });
             setState({ DevastatingBlowLine: line });
-            setState({ SweepDevLine: line});
+            setState({ SweepDevLine: line });
             if (state.DevastatingBlow == 1) {
                 IncrementCounter(2);
             } else if (state.ChampionsStance == 1) {
@@ -265,14 +305,14 @@ const TwoHandedTree = () => {
             } else {
                 IncrementCounter(5);
             }
-        }                                 
-        else if (state.Sweep == 0 && state.CriticalCharge == 1){
-            setState({ Sweep: button });    
+        }
+        else if (state.Sweep == 0 && state.CriticalCharge == 1) {
+            setState({ Sweep: button });
             setState({ SweepLine: line });
             setState({ Warmaster: button });
             setState({ WarmasterLine: line });
-            IncrementCounter(2);         
-        } 
+            IncrementCounter(2);
+        }
         else {
             setState({ WarmasterLine: line });
             setState({ Warmaster: button }); // Change the pressed button color back and forth
@@ -315,9 +355,14 @@ const TwoHandedTree = () => {
         }
     };
 
-
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Two-Handed Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -655,7 +700,7 @@ const TwoHandedTree = () => {
                     stroke={state.CriticalChargeLine}
                     strokeWidth={lineStrokeWidth}
 
-                />                
+                />
                 <Line
                     x1="30%"
                     y1="50%"
@@ -673,7 +718,7 @@ const TwoHandedTree = () => {
                     stroke={state.SweepDevLine}
                     strokeWidth={lineStrokeWidth}
 
-                />                
+                />
                 <Line
                     x1="48.2%"
                     y1="32%"
@@ -714,16 +759,15 @@ const TwoHandedTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
-        fontWeight: '600',
-        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: '8.5%',
-        left: '32%',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: "78%",
         justifyContent: 'center',
         alignItems: 'center',
-        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -751,7 +795,7 @@ const styles = StyleSheet.create({
         left: "20%",
         top: "53%",
         zIndex: 10,
-    },    
+    },
     DevastatingBlowText: {
         position: 'absolute',
         left: "59%",
@@ -786,6 +830,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

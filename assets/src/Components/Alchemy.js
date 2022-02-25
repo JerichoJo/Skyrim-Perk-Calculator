@@ -1,0 +1,804 @@
+import * as React from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
+import Svg, { Line } from 'react-native-svg';
+import {
+    View,
+    Dimensions,
+    TouchableOpacity,
+    Text,
+    StyleSheet,
+} from 'react-native';
+import StarIconBlue from './StarIconBlue';
+import StarIconGold from './StarIconGold';
+import { AllActivePerkss } from '../../../StackNavigator';
+import { useNavigation } from '@react-navigation/native';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
+const useSetState = (initialState = {}) => {
+    const [state, regularSetState] = useState(initialState);
+
+    const setState = (newState) => {
+        regularSetState((prevState) => ({
+            ...prevState,
+            ...newState,
+        }));
+    };
+
+    return [state, setState];
+};
+
+const AlchemyTree = () => {
+    const navigation = useNavigation();
+    const [state, setState] = useSetState({
+        alchemist: 0,
+        physician: 0,
+        physicianLine: 'black',
+        prisoner: 0,
+        prisonerLine: 'black',
+        concentratedPoison: 0,
+        concentratedPoisonLine: 'black',
+        benefactor: 0,
+        benefactorLine: 'black',
+        experimenter: 0,
+        experimenterLine: 'black',
+        snakeblood: 0,
+        snakebloodLine: 'black',
+        purity: 0,
+        purityLine: 'black',
+        greenThumb: 0,
+        greenThumbLine: 'black',
+        greenThumbLineLight: 'black',
+    });
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [count, setCount] = useState(0);
+
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
+    const IncrementCounter = (numActivePerks = 0) => {
+        SetActivePerks(ActivePerks + numActivePerks);
+        SetAllActivePerks(AllActivePerks + numActivePerks);
+    };
+    const DecrementCounter = (numActivePerks = 0) => {
+        if (ActivePerks === 0) {
+            return;
+        }
+        SetActivePerks(ActivePerks - numActivePerks);
+        SetAllActivePerks(AllActivePerks - numActivePerks);
+    };
+
+    const TrackLevel = useCallback((level) => {
+        SetRequiredLevel(level);
+    }, []);
+
+    const lineStrokeWidth = '2';
+
+    const CheckLevel = useCallback(() => {
+        if (state.greenThumb == 1) {
+            TrackLevel(100);
+        } else if (state.purity == 1) {
+            TrackLevel(90);
+        } else if (state.snakeblood == 1) {
+            TrackLevel(80);
+        } else if (state.concentratedPoison == 1) {
+            TrackLevel(70);
+        } else if (state.arcaneSmithing == 1) {
+            TrackLevel(60);
+        } else if (state.prisoner == 1) {
+            TrackLevel(50);
+        } else if (state.physician == 1) {
+            TrackLevel(30);
+        } else if (state.alchemist == 1) {
+            TrackLevel(0);
+        }
+    }, [TrackLevel, state]);
+
+    useEffect(() => {
+        CheckLevel();
+    }, [CheckLevel]);
+
+    const CheckIfAlchemistPressed = (button) => {
+        if (
+            state.physician == 1 ||
+            state.arcaneSmithing == 1 ||
+            state.benefactor == 1
+        ) {
+            // Do nothing....must un-select nodes above it first
+        }
+        else {
+            setState({ alchemist: button }); // Change button color back and forth
+            state.alchemist == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+
+    const CheckIfPhysicianPressed = (buttonColor, lineColor) => {
+        if (state.alchemist == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ alchemist: buttonColor });
+            setState({ alchemistLine: lineColor });
+            setState({ physician: buttonColor });
+            setState({ physicianLine: lineColor });
+
+            IncrementCounter(2);
+        } else if (state.prisoner == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ physicianLine: lineColor });
+            setState({ physician: buttonColor }); // Change button color back and forth
+            state.physician == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfPrisonerPressed = (buttonColor, lineColor) => {
+        if (state.physician == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ alchemist: buttonColor });
+            setState({ prisoner: buttonColor });
+            setState({ physician: buttonColor });
+            setState({ prisonerLine: lineColor });
+            setState({ physicianLine: lineColor });
+            if (state.alchemist == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.concentratedPoison == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ prisonerLine: lineColor });
+            setState({ prisoner: buttonColor }); // Change the pressed button color back and forth
+            state.prisoner == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfConcentratedPoisonPressed = (buttonColor, lineColor) => {
+        if (state.prisoner == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ concentratedPoison: buttonColor });
+            setState({ prisoner: buttonColor });
+            setState({ physician: buttonColor });
+            setState({ alchemist: buttonColor });
+            setState({ concentratedPoisonLine: lineColor });
+            setState({ prisonerLine: lineColor });
+            setState({ physicianLine: lineColor });
+            if (state.greenThumb == 1) {
+                setState({ greenThumbLineLight: lineColor });
+            }
+            if (state.physician == 1) {
+                IncrementCounter(2);
+            } else if (state.alchemist == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+        } else {
+            setState({ concentratedPoisonLine: lineColor });
+            setState({ concentratedPoison: buttonColor }); // Change the pressed button color back and forth
+            state.concentratedPoison == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            if (state.greenThumb == 1) {
+                setState({ greenThumbLineLight: lineColor });
+            }
+
+        }
+    };
+    const CheckIfBenefactorPressed = (buttonColor, lineColor) => {
+        if (state.alchemist == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ benefactor: buttonColor });
+            setState({ alchemist: buttonColor });
+            setState({ benefactorLine: lineColor });
+            IncrementCounter(2);
+        } else if (state.experimenter == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ benefactorLine: lineColor });
+            setState({ benefactor: buttonColor }); // Change the pressed button color back and forth
+            state.benefactor == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfExperimenterPressed = (buttonColor, lineColor) => {
+        if (state.benefactor == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ experimenter: buttonColor });
+            setState({ benefactor: buttonColor });
+            setState({ alchemist: buttonColor });
+            setState({ experimenterLine: lineColor });
+            setState({ benefactorLine: lineColor });
+            if (state.alchemist == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.snakeblood == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ experimenterLine: lineColor });
+            setState({ experimenter: buttonColor }); // Change the pressed button color back and forth
+            state.experimenter == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfSnakebloodPressed = (buttonColor, lineColor) => {
+        if (state.experimenter == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ snakeblood: buttonColor });
+            setState({ experimenter: buttonColor });
+            setState({ benefactor: buttonColor });
+            setState({ alchemist: buttonColor });
+            setState({ snakebloodLine: lineColor });
+            setState({ experimenterLine: lineColor });
+            setState({ benefactorLine: lineColor });
+            if (state.benefactor == 1) {
+                IncrementCounter(2);
+            } else if (state.alchemist == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+        } else if (state.purity == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ snakebloodLine: lineColor });
+            setState({ snakeblood: buttonColor }); // Change the pressed button color back and forth
+            state.snakeblood == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfPurityPressed = (buttonColor, lineColor) => {
+        if (state.snakeblood == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ purity: buttonColor });
+            setState({ snakeblood: buttonColor });
+            setState({ experimenter: buttonColor });
+            setState({ benefactor: buttonColor });
+            setState({ alchemist: buttonColor });
+            setState({ purityLine: lineColor });
+            setState({ snakebloodLine: lineColor });
+            setState({ experimenterLine: lineColor });
+            setState({ benefactorLine: lineColor });
+            if (state.experimenter == 1) {
+                IncrementCounter(2);
+            } else if (state.benefactor == 1) {
+                IncrementCounter(3);
+            } else if (state.alchemist == 1) {
+                IncrementCounter(4);
+            } else {
+                IncrementCounter(5);
+            }
+        } else if (state.greenThumb == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ purityLine: lineColor });
+            setState({ purity: buttonColor }); // Change the pressed button color back and forth
+            state.purity == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfGreenThumbPressed = (buttonColor, lineColor) => {
+        if (state.purity == 0) {
+            setState({ greenThumb: buttonColor });
+            setState({ purity: buttonColor });
+            setState({ snakeblood: buttonColor });
+            setState({ experimenter: buttonColor });
+            setState({ benefactor: buttonColor });
+            setState({ alchemist: buttonColor });
+            setState({ greenThumbLine: lineColor });
+            setState({ purityLine: lineColor });
+            setState({ snakebloodLine: lineColor });
+            setState({ experimenterLine: lineColor });
+            setState({ benefactorLine: lineColor });
+            if (state.concentratedPoison == 1) {
+                setState({ greenThumbLineLight: lineColor });
+            }
+            if (state.snakeblood == 1) {
+                IncrementCounter(2);
+            } else if (state.experimenter == 1) {
+                IncrementCounter(3);
+            } else if (state.benefactor == 1) {
+                IncrementCounter(4);
+            } else if (state.alchemist == 1) {
+                IncrementCounter(5);
+            } else {
+                IncrementCounter(6);
+            }
+        } else {
+            setState({ greenThumbLine: lineColor });
+            setState({ greenThumb: buttonColor });
+            state.greenThumb == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            if (state.concentratedPoison == 1) {
+                setState({ greenThumbLineLight: lineColor });
+            }
+        }
+    };
+
+    return (
+        <View style={{ zIndex: 2 }}>
+            <View style={styles.topText}>
+                <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
+                <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
+            </View>
+            <View title='Alchemist Blue' style={{
+                position: 'absolute',
+                left: "15%",
+                top: "75%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Alchemist Gold' style={{
+                position: 'absolute',
+                left: "15%",
+                top: "75%",
+                zIndex: 8,
+                opacity: state.alchemist
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => navigation.navigate("alchemistModal")}
+                    onPress={() => {
+                        CheckIfAlchemistPressed(
+                            state.alchemist == 0 ? 1 : 0,
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.AlchemistText}>
+                <Text style={styles.PerkText}>Alchemist</Text>
+            </View>
+            
+            <View title='Physician Blue' style={{
+                position: 'absolute',
+                left: "60%",
+                top: "71%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Physician Gold' style={{
+                position: 'absolute',
+                left: "60%",
+                top: "71%",
+                zIndex: 8,
+                opacity: state.physician
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfPhysicianPressed(
+                            state.physician == 0 ? 1 : 0,
+                            state.physicianLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.PhysicianText}>
+                <Text style={styles.PerkText}>Physician</Text>
+            </View>
+            <View title='Prisoner Blue' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "60%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Prisoner Gold' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "60%",
+                zIndex: 8,
+                opacity: state.prisoner
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfPrisonerPressed(
+                            state.prisoner == 0 ? 1 : 0,
+                            state.prisonerLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.PrisonerText}>
+                <Text style={styles.PerkText}>Prisoner</Text>
+            </View>
+            <View title='Concentrated Poison Blue' style={{
+                position: 'absolute',
+                left: "28%",
+                top: "49%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Concentrated Poison Gold' style={{
+                position: 'absolute',
+                left: "28%",
+                top: "49%",
+                zIndex: 8,
+                opacity: state.concentratedPoison
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfConcentratedPoisonPressed(
+                            state.concentratedPoison == 0 ? 1 : 0,
+                            state.concentratedPoisonLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.ConcentratedPoisonText}>
+                <Text style={styles.PerkText}>Concentrated Poison</Text>
+            </View>
+            <View title='Green Thumb Blue' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "40%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Green Thumb Gold' style={{
+                position: 'absolute',
+                left: "25%",
+                top: "40%",
+                zIndex: 8,
+                opacity: state.greenThumb
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfGreenThumbPressed(
+                            state.greenThumb == 0 ? 1 : 0,
+                            state.greenThumbLine == 'black' ? 'gold' : 'black',
+                            state.greenThumbLineLight == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.GreenThumbText}>
+                <Text style={styles.PerkText}>Green Thumb</Text>
+            </View>
+            <View title='Purity Blue' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "20%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Purity Gold' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "20%",
+                zIndex: 8,
+                opacity: state.purity
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfPurityPressed(
+                            state.purity == 0 ? 1 : 0,
+                            state.purityLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.PurityText}>
+                <Text style={styles.PerkText}>Purity</Text>
+            </View>
+            <View title='Snakeblood Blue' style={{
+                position: 'absolute',
+                left: "43%",
+                top: "35%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Snakeblood Gold' style={{
+                position: 'absolute',
+                left: "43%",
+                top: "35%",
+                zIndex: 8,
+                opacity: state.snakeblood
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfSnakebloodPressed(
+                            state.snakeblood == 0 ? 1 : 0,
+                            state.snakebloodLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.SnakebloodText}>
+                <Text style={styles.PerkText}>Snakeblood</Text>
+            </View>
+            <View title='Experimenter Blue' style={{
+                position: 'absolute',
+                left: "45%",
+                top: "50%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Experimenter Gold' style={{
+                position: 'absolute',
+                left: "45%",
+                top: "50%",
+                zIndex: 8,
+                opacity: state.experimenter
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfExperimenterPressed(
+                            state.experimenter == 0 ? 1 : 0,
+                            state.experimenterLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.ExperimenterText}>
+                <Text style={styles.PerkText}>Experimenter</Text>
+            </View>
+            <View title='Benefactor Blue' style={{
+                position: 'absolute',
+                left: "52%",
+                top: "60%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Benefactor Gold' style={{
+                position: 'absolute',
+                left: "52%",
+                top: "60%",
+                zIndex: 8,
+                opacity: state.benefactor
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfBenefactorPressed(
+                            state.benefactor == 0 ? 1 : 0,
+                            state.benefactorLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.BenefactorText}>
+                <Text style={styles.PerkText}>Benefactor</Text>
+            </View>
+            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
+
+                
+
+                <Line
+                    x1="25.2%"
+                    y1="80.3%"
+                    x2="71%"
+                    y2="76.7%"
+                    stroke={state.physicianLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="70%"
+                    y1="76.4%"
+                    x2="35%"
+                    y2="65.5%"
+                    stroke={state.prisonerLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="38%"
+                    y1="55.5%"
+                    x2="35.8%"
+                    y2="65.5%"
+                    stroke={state.concentratedPoisonLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="53.3%"
+                    y1="39%"
+                    x2="55%"
+                    y2="55%"
+                    stroke={state.greenThumbLineLight}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="35.5%"
+                    y1="45.3%"
+                    x2="38%"
+                    y2="55%"
+                    stroke={state.greenThumbLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="50%"
+                    y1="25.5%"
+                    x2="53%"
+                    y2="40%"
+                    stroke={state.purityLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="54%"
+                    y1="40%"
+                    x2="38%"
+                    y2="55%"
+                    stroke={state.snakebloodLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="56%"
+                    y1="55.5%"
+                    x2="62%"
+                    y2="65%"
+                    stroke={state.experimenterLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line
+                    x1="62.2%"
+                    y1="65.4%"
+                    x2="70.3%"
+                    y2="76.9%"
+                    stroke={state.benefactorLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+            </Svg>
+
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    HomeScreenText: {
+        color: 'white',
+    },
+    topText: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: "70%",
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    Icon: {
+        position: 'absolute',
+    },
+    AlchemistText: {
+        position: 'absolute',
+        left: "25%",
+        top: "83%",
+        zIndex: 10,
+    },
+    
+    PhysicianText: {
+        position: 'absolute',
+        left: "63%",
+        top: "79%",
+        zIndex: 10,
+    },
+    PrisonerText: {
+        position: 'absolute',
+        left: "20%",
+        top: "66%",
+        zIndex: 10,
+    },
+    ConcentratedPoisonText: {
+        position: 'absolute',
+        left: "2%",
+        top: "53%",
+        zIndex: 10,
+    },
+    GreenThumbText: {
+        position: 'absolute',
+        left: "20%",
+        top: "40%",
+        zIndex: 10,
+    },
+    PurityText: {
+        position: 'absolute',
+        left: "46%",
+        top: "27%",
+        zIndex: 10,
+    },
+    SnakebloodText: {
+        position: 'absolute',
+        left: "45%",
+        top: "43%",
+        zIndex: 10,
+    },
+    ExperimenterText: {
+        position: 'absolute',
+        left: "47%",
+        top: "57%",
+        zIndex: 10,
+    },
+    BenefactorText: {
+        position: 'absolute',
+        left: "55%",
+        top: "68%",
+        zIndex: 10,
+    },
+
+    PerkText: {
+        color: 'white',
+        fontSize: 12,
+    }
+});
+
+export default AlchemyTree;

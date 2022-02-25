@@ -1,467 +1,801 @@
 import * as React from 'react';
-import { useState } from 'react';
-import Svg, { Circle, Line } from 'react-native-svg';
-import { View, Dimensions, TouchableOpacity, Text } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import Modal from 'react-native-modal';
+import { useState, useCallback, useEffect, useContext } from 'react';
+import Svg, { Line } from 'react-native-svg';
+import {
+    View,
+    Dimensions,
+    TouchableOpacity,
+    Text,
+    StyleSheet,
+} from 'react-native';
+import StarIconBlue from './StarIconBlue';
+import StarIconGold from './StarIconGold';
+import { AllActivePerkss } from '../../../StackNavigator';
+import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
+const useSetState = (initialState = {}) => {
+    const [state, regularSetState] = useState(initialState);
+
+    const setState = (newState) => {
+        regularSetState((prevState) => ({
+            ...prevState,
+            ...newState,
+        }));
+    };
+
+    return [state, setState];
+};
+
 const SneakTree = () => {
-    const [hold, sethold] = useState('blue');
-    const [basicSmithing, setBasicSmithing] = useState('blue');
-    const [arcaneSmith, setArcaneSmith] = useState('blue');
-    const [elvinSmithing, setElvinSmithing] = useState('blue');
-    const [advancedSmithing, setAdvancedSmithing] = useState('blue');
-    const [glassSmithing, setGlassSmithing] = useState('blue');
-    const [dwarvenSmithing, setDwarvenSmithing] = useState('blue');
-    const [orcishSmithing, setOrcishSmithing] = useState('blue');
-    const [ebonySmithing, setEbonySmithing] = useState('blue');
-    const [daedricSmithing, setDaedricSmithing] = useState('blue');
-    const [dragonSmithing, setDragonSmithing] = useState('blue');
-    const [middleLine, setMiddleLine] = useState('blue');
+    const navigation = useNavigation();
+    const [state, setState] = useSetState({
+        stealth: 0,
+        muffledMovement: 0,
+        muffledMovementLine: 'black',
+        lightFoot: 0,
+        lightFootLine: 'black',
+        silentRoll: 0,
+        silentRollLine: 'black',
+        backstab: 0,
+        backstabLine: 'black',
+        deadlyAim: 0,
+        deadlyAimLine: 'black',
+        assassinsBlade: 0,
+        assassinsBladeLine: 'black',
+        silence: 0,
+        silenceLine: 'black',
+        shadowWarrior: 0,
+        shadowWarriorLine: 'black',
+        shadowWarriorLineLight: 'black',
+    });
 
-    const [isModalVisible, setIsModalVisible] = React.useState(false);
-    const [isMenuVisible, setIsMenuVisible] = React.useState(false);
-
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [count, setCount] = useState(0);
 
-    const circleRadius = '8';
-    const circleStrokeWidth = '8';
-    const lineStrokeWidth = '3';
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
-    const checkIfBasicSmithPressed = (buttonColorProp) => {
+    const IncrementCounter = (numActivePerks = 0) => {
+        SetActivePerks(ActivePerks + numActivePerks);
+        SetAllActivePerks(AllActivePerks + numActivePerks);
+    };
+    const DecrementCounter = (numActivePerks = 0) => {
+        if (ActivePerks === 0) {
+            return;
+        }
+        SetActivePerks(ActivePerks - numActivePerks);
+        SetAllActivePerks(AllActivePerks - numActivePerks);
+    };
+
+    const TrackLevel = useCallback((level) => {
+        SetRequiredLevel(level);
+    }, []);
+
+    const lineStrokeWidth = '2';
+
+    const CheckLevel = useCallback(() => {
+        if (state.shadowWarrior == 1) {
+            TrackLevel(100);
+        } else if (state.silence == 1) {
+            TrackLevel(90);
+        } else if (state.assassinsBlade == 1) {
+            TrackLevel(80);
+        } else if (state.silentRoll == 1) {
+            TrackLevel(70);
+        } else if (state.arcaneSmithing == 1) {
+            TrackLevel(60);
+        } else if (state.lightFoot == 1) {
+            TrackLevel(50);
+        } else if (state.muffledMovement == 1) {
+            TrackLevel(30);
+        } else if (state.stealth == 1) {
+            TrackLevel(0);
+        }
+    }, [TrackLevel, state]);
+
+    useEffect(() => {
+        CheckLevel();
+    }, [CheckLevel]);
+
+    const CheckIfStealthPressed = (button) => {
         if (
-            elvinSmithing == 'red' ||
-            arcaneSmith == 'red' ||
-            dwarvenSmithing == 'red'
+            state.muffledMovement == 1 ||
+            state.arcaneSmithing == 1 ||
+            state.backstab == 1
         ) {
             // Do nothing....must un-select nodes above it first
-        } else {
-            setBasicSmithing(buttonColorProp); // Change button color back and forth
         }
-    };
-    const checkIfArcaneSmithPressed = (button2ColorProp) => {
-        if (basicSmithing == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setBasicSmithing(button2ColorProp);
-            setArcaneSmith(button2ColorProp);
-        } else {
-            setArcaneSmith(button2ColorProp); // Change the pressed button color back and forth
+        else {
+            setState({ stealth: button }); // Change button color back and forth
+            state.stealth == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
 
-    const checkIfElvinSmithPressed = (button3ColorProp) => {
-        if (basicSmithing == 'blue') {
+    const CheckIfMuffledMovementPressed = (buttonColor, lineColor) => {
+        if (state.stealth == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setBasicSmithing(button3ColorProp);
-            setElvinSmithing(button3ColorProp);
-        } else if (advancedSmithing == 'red') {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setElvinSmithing(button3ColorProp); // Change button color back and forth
-        }
-    };
-    const checkIfAdvanceSmithingPressed = (button4ColorProp) => {
-        if (elvinSmithing == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setAdvancedSmithing(button4ColorProp);
-            setElvinSmithing(button4ColorProp);
-            setBasicSmithing(button4ColorProp);
-        } else if (glassSmithing == 'red') {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setAdvancedSmithing(button4ColorProp); // Change the pressed button color back and forth
-        }
-    };
-    const checkIfGlassSmithingPressed = (button5ColorProp) => {
-        if (advancedSmithing == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setGlassSmithing(button5ColorProp);
-            setAdvancedSmithing(button5ColorProp);
-            setElvinSmithing(button5ColorProp);
-            setBasicSmithing(button5ColorProp);
-        } else {
-            setGlassSmithing(button5ColorProp); // Change the pressed button color back and forth
-        }
-    };
-    const checkIfDwarvenSmithingPressed = (button6ColorProp) => {
-        if (basicSmithing == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setDwarvenSmithing(button6ColorProp);
-            setBasicSmithing(button6ColorProp);
-        } else if (orcishSmithing == 'red') {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setDwarvenSmithing(button6ColorProp); // Change the pressed button color back and forth
-        }
-    };
-    const checkIfOrcishSmithingPressed = (button7ColorProp) => {
-        if (dwarvenSmithing == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setOrcishSmithing(button7ColorProp);
-            setDwarvenSmithing(button7ColorProp);
-            setBasicSmithing(button7ColorProp);
-        } else if (ebonySmithing == 'red') {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setOrcishSmithing(button7ColorProp); // Change the pressed button color back and forth
-        }
-    };
-    const checkIfEbonySmithingPressed = (button8ColorProp) => {
-        if (orcishSmithing == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setEbonySmithing(button8ColorProp);
-            setOrcishSmithing(button8ColorProp);
-            setDwarvenSmithing(button8ColorProp);
-            setBasicSmithing(button8ColorProp);
-        } else if (daedricSmithing == 'red') {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setEbonySmithing(button8ColorProp); // Change the pressed button color back and forth
-        }
-    };
-    const checkIfDaedricSmithingPressed = (button9ColorProp) => {
-        if (ebonySmithing == 'blue') {
-            // Change the colors of the buttons below it if they have not been pressed
-            setDaedricSmithing(button9ColorProp);
-            setEbonySmithing(button9ColorProp);
-            setOrcishSmithing(button9ColorProp);
-            setDwarvenSmithing(button9ColorProp);
-            setBasicSmithing(button9ColorProp);
-        } else if (dragonSmithing == 'red') {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setDaedricSmithing(button9ColorProp); // Change the pressed button color back and forth
-        }
-    };
-    const checkIfDragonSmithingPressed = (button10ColorProp) => {
-        if (daedricSmithing == 'blue') {
-            setDragonSmithing(button10ColorProp);
-            setDaedricSmithing(button10ColorProp);
-            setEbonySmithing(button10ColorProp);
-            setOrcishSmithing(button10ColorProp);
-            setDwarvenSmithing(button10ColorProp);
-            setBasicSmithing(button10ColorProp);
-        } else {
-            setDragonSmithing(button10ColorProp);
-        }
+            setState({ stealth: buttonColor });
+            setState({ stealthLine: lineColor });
+            setState({ muffledMovement: buttonColor });
+            setState({ muffledMovementLine: lineColor });
 
+            IncrementCounter(2);
+        } else if (state.lightFoot == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ muffledMovementLine: lineColor });
+            setState({ muffledMovement: buttonColor }); // Change button color back and forth
+            state.muffledMovement == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
     };
-    const checkFinalMiddleLine = (buttonColor11Prop) => {
-        if (glassSmithing == 'red' && dragonSmithing == 'red') {
-            setMiddleLine(buttonColor11Prop);
+    const CheckIfLightFootPressed = (buttonColor, lineColor) => {
+        if (state.muffledMovement == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ stealth: buttonColor });
+            setState({ lightFoot: buttonColor });
+            setState({ muffledMovement: buttonColor });
+            setState({ lightFootLine: lineColor });
+            setState({ muffledMovementLine: lineColor });
+            if (state.stealth == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.silentRoll == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ lightFootLine: lineColor });
+            setState({ lightFoot: buttonColor }); // Change the pressed button color back and forth
+            state.lightFoot == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfSilentRollPressed = (buttonColor, lineColor) => {
+        if (state.lightFoot == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ silentRoll: buttonColor });
+            setState({ lightFoot: buttonColor });
+            setState({ muffledMovement: buttonColor });
+            setState({ stealth: buttonColor });
+            setState({ silentRollLine: lineColor });
+            setState({ lightFootLine: lineColor });
+            setState({ muffledMovementLine: lineColor });
+            if (state.shadowWarrior == 1) {
+                setState({ shadowWarriorLineLight: lineColor });
+            }
+            if (state.muffledMovement == 1) {
+                IncrementCounter(2);
+            } else if (state.stealth == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+        } else {
+            setState({ silentRollLine: lineColor });
+            setState({ silentRoll: buttonColor }); // Change the pressed button color back and forth
+            state.silentRoll == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            if (state.shadowWarrior == 1) {
+                setState({ shadowWarriorLineLight: lineColor });
+            }
+
+        }
+    };
+    const CheckIfBackstabPressed = (buttonColor, lineColor) => {
+        if (state.stealth == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ backstab: buttonColor });
+            setState({ stealth: buttonColor });
+            setState({ backstabLine: lineColor });
+            IncrementCounter(2);
+        } else if (state.deadlyAim == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ backstabLine: lineColor });
+            setState({ backstab: buttonColor }); // Change the pressed button color back and forth
+            state.backstab == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfDeadlyAimPressed = (buttonColor, lineColor) => {
+        if (state.backstab == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ deadlyAim: buttonColor });
+            setState({ backstab: buttonColor });
+            setState({ stealth: buttonColor });
+            setState({ deadlyAimLine: lineColor });
+            setState({ backstabLine: lineColor });
+            if (state.stealth == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.assassinsBlade == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ deadlyAimLine: lineColor });
+            setState({ deadlyAim: buttonColor }); // Change the pressed button color back and forth
+            state.deadlyAim == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfAssassinsBladePressed = (buttonColor, lineColor) => {
+        if (state.deadlyAim == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ assassinsBlade: buttonColor });
+            setState({ deadlyAim: buttonColor });
+            setState({ backstab: buttonColor });
+            setState({ stealth: buttonColor });
+            setState({ assassinsBladeLine: lineColor });
+            setState({ deadlyAimLine: lineColor });
+            setState({ backstabLine: lineColor });
+            if (state.backstab == 1) {
+                IncrementCounter(2);
+            } else if (state.stealth == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+        } else if (state.silence == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ assassinsBladeLine: lineColor });
+            setState({ assassinsBlade: buttonColor }); // Change the pressed button color back and forth
+            state.assassinsBlade == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfSilencePressed = (buttonColor, lineColor) => {
+        if (state.silentRoll == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ silence: buttonColor });
+            setState({ muffledMovement: buttonColor });
+            setState({ lightFoot: buttonColor });
+            setState({ silentRoll: buttonColor });
+            setState({ stealth: buttonColor });
+            setState({ silenceLine: lineColor });
+            setState({ muffledMovementLine: lineColor });
+            setState({ lightFootLine: lineColor });
+            setState({ silentRollLine: lineColor });
+            if (state.silentRoll == 1) {
+                IncrementCounter(2);
+            } else if (state.lightFoot == 1) {
+                IncrementCounter(3);
+            } else if (state.muffledMovement == 1) {
+                IncrementCounter(4);
+            } else if (state.silentRoll == 1) {
+                IncrementCounter(5);
+            }
+        } else if (state.shadowWarrior == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ silenceLine: lineColor });
+            setState({ silence: buttonColor }); // Change the pressed button color back and forth
+            state.silence == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+    const CheckIfShadowWarriorPressed = (buttonColor, lineColor) => {
+        if (state.silence == 0) {
+            setState({ shadowWarrior: buttonColor });
+            setState({ silence: buttonColor });
+            setState({ silentRoll: buttonColor });
+            setState({ lightFoot: buttonColor });
+            setState({ muffledMovement: buttonColor });
+            setState({ stealth: buttonColor });
+            setState({ shadowWarriorLine: lineColor });
+            setState({ silenceLine: lineColor });
+            setState({ silentRollLine: lineColor });
+            setState({ lightFootLine: lineColor });
+            setState({ muffledMovementLine: lineColor });
+            if (state.silentRoll == 1) {
+                setState({ shadowWarriorLineLight: lineColor });
+            }
+            if (state.assassinsBlade == 1) {
+                IncrementCounter(2);
+            } else if (state.deadlyAim == 1) {
+                IncrementCounter(3);
+            } else if (state.backstab == 1) {
+                IncrementCounter(4);
+            } else if (state.stealth == 1) {
+                IncrementCounter(5);
+            } else {
+                IncrementCounter(6);
+            }
+        } else {
+            setState({ shadowWarriorLine: lineColor });
+            setState({ shadowWarrior: buttonColor });
+            state.shadowWarrior == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+            if (state.silentRoll == 1) {
+                setState({ shadowWarriorLineLight: lineColor });
+            }
         }
     };
 
     return (
-        <View>
-            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
-                {/* Stealth Circle*/}
-                <Circle
-                    cx="50%"
-                    cy="80%"
-                    r={circleRadius}
-                    stroke={basicSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="blue"
+        <View style={{ zIndex: 2 }}>
+            <View style={styles.topText}>
+                <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
+                <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
+            </View>
+            <View title='Stealth Blue' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "75%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Stealth Gold' style={{
+                position: 'absolute',
+                left: "40%",
+                top: "75%",
+                zIndex: 8,
+                opacity: state.stealth
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => navigation.navigate("stealthModal")}
+                    onPress={() => {
+                        CheckIfStealthPressed(
+                            state.stealth == 0 ? 1 : 0,
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.StealthText}>
+                <Text style={styles.PerkText}>Stealth</Text>
+            </View>
+            
+            <View title='Muffled Movement Blue' style={{
+                position: 'absolute',
+                left: "10%",
+                top: "60%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Muffled Movement Gold' style={{
+                position: 'absolute',
+                left: "10%",
+                top: "60%",
+                zIndex: 8,
+                opacity: state.muffledMovement
+
+            }}>
+                <TouchableOpacity
                     onLongPress={() => {
                         setIsModalVisible(true);
                     }}
                     onPress={() => {
-                        checkIfBasicSmithPressed(basicSmithing == 'blue' ? 'red' : 'blue');
+                        CheckIfMuffledMovementPressed(
+                            state.muffledMovement == 0 ? 1 : 0,
+                            state.muffledMovementLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.MuffledText}>
+                <Text style={styles.PerkText}>Muffled Movement</Text>
+            </View>
+            <View title='Light Foot Blue' style={{
+                position: 'absolute',
+                left: "20%",
+                top: "46%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Light Foot Gold' style={{
+                position: 'absolute',
+                left: "20%",
+                top: "46%",
+                zIndex: 8,
+                opacity: state.lightFoot
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
                     }}
-                />
-                {/* Muffled Movement Line*/}
+                    onPress={() => {
+                        CheckIfLightFootPressed(
+                            state.lightFoot == 0 ? 1 : 0,
+                            state.lightFootLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.LightFootText}>
+                <Text style={styles.PerkText}>Light Foot</Text>
+            </View>
+            <View title='Silent Roll Blue' style={{
+                position: 'absolute',
+                left: "34%",
+                top: "40%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Silent Roll Gold' style={{
+                position: 'absolute',
+                left: "34%",
+                top: "40%",
+                zIndex: 8,
+                opacity: state.silentRoll
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfSilentRollPressed(
+                            state.silentRoll == 0 ? 1 : 0,
+                            state.silentRollLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.SilentRollText}>
+                <Text style={styles.PerkText}>Silent Roll</Text>
+            </View>
+            <View title='Shadow Warrior Blue' style={{
+                position: 'absolute',
+                left: "66%",
+                top: "30%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Shadow Warrior Gold' style={{
+                position: 'absolute',
+                left: "66%",
+                top: "30%",
+                zIndex: 8,
+                opacity: state.shadowWarrior
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfShadowWarriorPressed(
+                            state.shadowWarrior == 0 ? 1 : 0,
+                            state.shadowWarriorLine == 'black' ? 'gold' : 'black',
+                            state.shadowWarriorLineLight == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.ShadowWarriorText}>
+                <Text style={styles.PerkText}>Shadow Warrior</Text>
+            </View>
+            <View title='Silence Blue' style={{
+                position: 'absolute',
+                left: "44%",
+                top: "34%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Silence Gold' style={{
+                position: 'absolute',
+                left: "44%",
+                top: "34%",
+                zIndex: 8,
+                opacity: state.silence
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfSilencePressed(
+                            state.silence == 0 ? 1 : 0,
+                            state.silenceLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.SilenceText}>
+                <Text style={styles.PerkText}>Silence</Text>
+            </View>
+            <View title='Assassins Blade Blue' style={{
+                position: 'absolute',
+                left: "56%",
+                top: "42%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Assassins Blade Gold' style={{
+                position: 'absolute',
+                left: "56%",
+                top: "42%",
+                zIndex: 8,
+                opacity: state.assassinsBlade
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfAssassinsBladePressed(
+                            state.assassinsBlade == 0 ? 1 : 0,
+                            state.assassinsBladeLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.AssassinsBladeText}>
+                <Text style={styles.PerkText}>Assassins Blade</Text>
+            </View>
+            <View title='Deadly Aim Blue' style={{
+                position: 'absolute',
+                left: "69%",
+                top: "45%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Deadly Aim Gold' style={{
+                position: 'absolute',
+                left: "69%",
+                top: "45%",
+                zIndex: 8,
+                opacity: state.deadlyAim
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfDeadlyAimPressed(
+                            state.deadlyAim == 0 ? 1 : 0,
+                            state.deadlyAimLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.DeadlyAimText}>
+                <Text style={styles.PerkText}>Deadly Aim</Text>
+            </View>
+            <View title='Backstab Blue' style={{
+                position: 'absolute',
+                left: "66%",
+                top: "60%",
+                zIndex: 8,
+
+            }}>
+                <StarIconBlue />
+            </View>
+            <View title='Backstab Gold' style={{
+                position: 'absolute',
+                left: "66%",
+                top: "60%",
+                zIndex: 8,
+                opacity: state.backstab
+
+            }}>
+                <TouchableOpacity
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
+                    onPress={() => {
+                        CheckIfBackstabPressed(
+                            state.backstab == 0 ? 1 : 0,
+                            state.backstabLine == 'black' ? 'gold' : 'black'
+                        );
+                    }}>
+                    <StarIconGold />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.BackstabText}>
+                <Text style={styles.PerkText}>Backstab</Text>
+            </View>
+            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
+
                 <Line
-                    x1="15%"
-                    y1="60%"
-                    x2="50%"
-                    y2="80%"
-                    stroke={arcaneSmith}
+                    x1="49.2%"
+                    y1="79.3%"
+                    x2="20%"
+                    y2="65.7%"
+                    stroke={state.muffledMovementLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        checkIfArcaneSmithPressed(arcaneSmith == 'blue' ? 'red' : 'blue');
-                    }}
+
                 />
-                {/* Muffled Movement Circle*/}
-                <Circle
-                    cx="15%"
-                    cy="60%"
-                    r={circleRadius}
-                    stroke={arcaneSmith}
-                    strokeWidth={circleStrokeWidth}
-                    fill="blue"
-                    onPress={() => {
-                        checkIfArcaneSmithPressed(arcaneSmith == 'blue' ? 'red' : 'blue');
-                    }}
-                />
-                {/* Light Foot Circle */}
-                <Circle
-                    cx="25%"
-                    cy="40%"
-                    r={circleRadius}
-                    stroke={elvinSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="blue"
-                    onPress={() => {
-                        checkIfElvinSmithPressed(elvinSmithing == 'blue' ? 'red' : 'blue');
-                    }}
-                />
-                {/* Light Foot Line */}
                 <Line
-                    x1="25%"
-                    y1="40%"
-                    x2="15%"
-                    y2="60%"
-                    stroke={elvinSmithing}
+                    x1="20%"
+                    y1="65.4%"
+                    x2="30.5%"
+                    y2="50.6%"
+                    stroke={state.lightFootLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        checkIfElvinSmithPressed(elvinSmithing == 'blue' ? 'red' : 'blue');
-                    }}
+
                 />
-                {/* Silent Roll Circle */}
-                <Circle
-                    cx="40%"
-                    cy="35%"
-                    r={circleRadius}
-                    stroke={advancedSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="blue"
-                    onPress={() => {
-                        checkIfAdvanceSmithingPressed(
-                            advancedSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                {/* Silent Roll Line */}
                 <Line
-                    x1="40%"
-                    y1="35%"
-                    x2="25%"
-                    y2="40%"
-                    stroke={advancedSmithing}
+                    x1="31%"
+                    y1="50.5%"
+                    x2="42.8%"
+                    y2="45.5%"
+                    stroke={state.silentRollLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        checkIfAdvanceSmithingPressed(
-                            advancedSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+
                 />
-                {/* Silence Circle*/}
-                <Circle
-                    cx="55%"
-                    cy="28%"
-                    r={circleRadius}
-                    stroke={glassSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="blue"
-                    onPress={() => {
-                        checkIfGlassSmithingPressed(
-                            glassSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                {/* Silence Line*/}
                 <Line
-                    x1="55%"
-                    y1="28%"
-                    x2="40%"
-                    y2="35%"
-                    stroke={glassSmithing}
+                    x1="35.3%"
+                    y1="39%"
+                    x2="53%"
+                    y2="39%"
+                    stroke={state.shadowWarriorLineLight}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        checkIfGlassSmithingPressed(
-                            glassSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+
                 />
-                {/* Shadow Warrior Circle*/}
-                <Circle
-                    cx="80%"
-                    cy="23%"
-                    r={circleRadius}
-                    stroke={dragonSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="blue"
-                    onPress={() => {
-                        checkIfDragonSmithingPressed(
-                            dragonSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
+                <Line
+                    x1="76.5%"
+                    y1="35.3%"
+                    x2="55%"
+                    y2="39%"
+                    stroke={state.shadowWarriorLine}
+                    strokeWidth={lineStrokeWidth}
+
                 />
-                {/* Shadow Warrior Line*/}
+                <Line
+                    x1="56%"
+                    y1="38.7%"
+                    x2="43%"
+                    y2="46%"
+                    stroke={state.silenceLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
+                <Line
+                    x1="66%"
+                    y1="47%"
+                    x2="80%"
+                    y2="51%"
+                    stroke={state.assassinsBladeLine}
+                    strokeWidth={lineStrokeWidth}
+
+                />
                 <Line
                     x1="80%"
-                    y1="23%"
-                    x2="55%"
-                    y2="28%"
-                    stroke={glassSmithing}
+                    y1="49.5%"
+                    x2="77%"
+                    y2="65%"
+                    stroke={state.deadlyAimLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        checkIfGlassSmithingPressed(
-                            glassSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
                 />
-                {/* Backstab Line*/}
                 <Line
-                    x1="75%"
-                    y1="61%"
-                    x2="50%"
-                    y2="80%"
-                    stroke={dragonSmithing}
+                    x1="76.2%"
+                    y1="65.4%"
+                    x2="50.3%"
+                    y2="79.9%"
+                    stroke={state.backstabLine}
                     strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        checkIfDragonSmithingPressed(
-                            dragonSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
                 />
-                {/* Backstab Circle*/}
-                <Circle
-                    cx="75%"
-                    cy="61%"
-                    r={circleRadius}
-                    stroke={daedricSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="blue"
-                    onPress={() => {
-                        checkIfDaedricSmithingPressed(
-                            daedricSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                {/* Deadly Aim Line*/}
-                <Line
-                    x1="76%"
-                    y1="45%"
-                    x2="75%"
-                    y2="61%"
-                    stroke={daedricSmithing}
-                    strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        checkIfDaedricSmithingPressed(
-                            daedricSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                {/* Deadly Aim Circle*/}
-                <Circle
-                    cx="76%"
-                    cy="45%"
-                    r={circleRadius}
-                    stroke={ebonySmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="blue"
-                    onPress={() => {
-                        checkIfEbonySmithingPressed(
-                            ebonySmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                {/* Soul Squeezer Line*/}
-                <Line
-                    x1="60%"
-                    y1="40%"
-                    x2="76%"
-                    y2="45%"
-                    stroke={ebonySmithing}
-                    strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        checkIfEbonySmithingPressed(
-                            ebonySmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                {/* Assassins Circle */}
-                <Circle
-                    cx="60%"
-                    cy="40%"
-                    r={circleRadius}
-                    stroke={orcishSmithing}
-                    strokeWidth={circleStrokeWidth}
-                    fill="blue"
-                    onPress={() => {
-                        checkIfOrcishSmithingPressed(
-                            orcishSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-                {/* Soul Siphon Line */}
-                <Line
-                    x1="0%"
-                    y1="0%"
-                    x2="0%"
-                    y2="0%"
-                    stroke={orcishSmithing}
-                    strokeWidth={lineStrokeWidth}
-                    onPress={() => {
-                        checkIfOrcishSmithingPressed(
-                            orcishSmithing == 'blue' ? 'red' : 'blue'
-                        );
-                    }}
-                />
-
-                {/* MODAL POPUP */}
-                <Modal
-                    animationType="slide"
-                    transparent
-                    backdropColor="black"
-                    onBackdropPress={() => {
-                        setIsModalVisible(false);
-                    }}
-                    visible={isModalVisible}>
-                    <View
-                        style={{
-                            backgroundColor: 'firebrick',
-                            margin: 5,
-                            alignSelf: 'auto',
-
-                            justifyContent: 'center',
-                            padding: 30,
-                            borderRadius: 8,
-                            borderWidth: 2,
-                        }}>
-                        <Text>Skill: blah blah</Text>
-                        <Text>Skill: more skill blah</Text>
-                        {/* +/- BUTTONS*/}
-                        <View style={{ flexDirection: 'row' }}>
-                            <View>
-                                <TouchableOpacity
-                                    style={{
-                                        alignSelf: 'flex-end',
-                                        padding: 10,
-                                    }}
-                                    onPress={() => {
-                                        setCount(count + 1);
-                                    }}>
-                                    <AntDesign name="plus" size={24} color="black" />
-                                </TouchableOpacity>
-                            </View>
-
-                            <Text style={{ padding: 10 }}>{count}</Text>
-                            <View>
-                                <TouchableOpacity
-                                    style={{
-                                        alignSelf: 'flex-start',
-                                        padding: 10,
-                                    }}
-                                    onPress={() => {
-                                        setCount(count - 1);
-                                    }}>
-                                    <AntDesign name="minus" size={24} color="black" />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </Modal>
             </Svg>
+
         </View>
     );
 };
 
+const styles = StyleSheet.create({
+    HomeScreenText: {
+        color: 'white',
+    },
+    topText: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: "70%",
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    Icon: {
+        position: 'absolute',
+    },
+    StealthText: {
+        position: 'absolute',
+        left: "46%",
+        top: "83%",
+        zIndex: 10,
+    },
+    MuffledText: {
+        position: 'absolute',
+        left: "8%",
+        top: "68%",
+        zIndex: 10,
+    },
+    LightFootText: {
+        position: 'absolute',
+        left: "20%",
+        top: "46%",
+        zIndex: 10,
+    },
+    SilentRollText: {
+        position: 'absolute',
+        left: "38%",
+        top: "47%",
+        zIndex: 10,
+    },
+    ShadowWarriorText: {
+        position: 'absolute',
+        left: "65%",
+        top: "30%",
+        zIndex: 10,
+    },
+    SilenceText: {
+        position: 'absolute',
+        left: "55%",
+        top: "34%",
+        zIndex: 10,
+    },
+    AssassinsBladeText: {
+        position: 'absolute',
+        left: "66%",
+        top: "42%",
+        zIndex: 10,
+    },
+    DeadlyAimText: {
+        position: 'absolute',
+        left: "72%",
+        top: "52%",
+        zIndex: 10,
+    },
+    BackstabText: {
+        position: 'absolute',
+        left: "66%",
+        top: "60%",
+        zIndex: 10,
+    },
+
+    PerkText: {
+        color: 'white',
+        fontSize: 12,
+    }
+});
+
 export default SneakTree;
-
-

@@ -9,19 +9,34 @@ import TwoHandedTree from "./TwoHanded";
 import RestorationTree from "./Restoration";
 import ArcheryTree from "./Archery";
 import PickpocketTree from "./Pickpocket";
+import AlchemyTree from "./Alchemy";
+import SpeechTree from "./Speech";
+import LightArmorTree from "./LightArmor";
+import DestructionTree from "./Destruction";
+import BlockTree from "./Block";
+import LockpickingTree from "./Lockpicking";
+import OneHandedTree from "./OneHanded";
+
 
 const tree = {
     IllusionTree,
     SmithingTree,
     HeavyArmor,
     ConjurationTree,
+    AlchemyTree,
     EnchantingTree,
     SneakTree,
     TwoHandedTree,
     RestorationTree,
     ArcheryTree,
     PickpocketTree,
-    AlterationTree
+    AlterationTree,
+    SpeechTree,
+    LightArmorTree,
+    DestructionTree,
+    BlockTree,
+    LockpickingTree,
+    OneHandedTree
 }
 
 export default tree;
