@@ -37,7 +37,7 @@ export function DrawerContent(props) {
               setTimeout(() => {
                 SetAllActivePerks(0);
                 navigation.dispatch(DrawerActions.closeDrawer());
-              })
+              }, 100)
               
             }}
           >
