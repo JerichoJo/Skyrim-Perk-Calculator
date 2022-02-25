@@ -39,23 +39,23 @@ const AlterationTree = () => {
     const [state, setState] = useSetState({
         noviceAlt: 0,
         altDualCasting: 0,
-        altDualCastingLine: 'black',
+        altDualCastingLine: 'white',
         apprenticeAlt: 0,
-        apprenticeAltLine: 'black',
+        apprenticeAltLine: 'white',
         mageArmor: 0,
-        mageArmorLine: 'black',
+        mageArmorLine: 'white',
         magicResis: 0,
-        magicResisLine: 'black',
+        magicResisLine: 'white',
         adeptAlt: 0,
-        adeptAltLine: 'black',
+        adeptAltLine: 'white',
         stability: 0,
-        stabilityLine: 'black',
+        stabilityLine: 'white',
         expertAlt: 0,
-        expertAltLine: 'black',
+        expertAltLine: 'white',
         atronach: 0,
-        atronachLine: 'black',
+        atronachLine: 'white',
         masterAlt: 0,
-        masterAltLine: 'black',
+        masterAltLine: 'white',
     });
 
     let resetAllTrees;
@@ -497,7 +497,7 @@ const AlterationTree = () => {
                     onPress={() => {
                         CheckIfAltDualCastingPressed(
                             state.altDualCasting == 0 ? 1 : 0,
-                            state.altDualCastingLine == 'black' ? 'gold' : 'black'
+                            state.altDualCastingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -528,7 +528,7 @@ const AlterationTree = () => {
                     onPress={() => {
                         CheckIfApprenticeAltPressed(
                             state.apprenticeAlt == 0 ? 1 : 0,
-                            state.apprenticeAltLine == 'black' ? 'gold' : 'black'
+                            state.apprenticeAltLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -559,7 +559,7 @@ const AlterationTree = () => {
                     onPress={() => {
                         CheckIfMageArmorPressed(
                             state.mageArmor == 0 ? 1 : 0,
-                            state.mageArmorLine == 'black' ? 'gold' : 'black'
+                            state.mageArmorLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -590,7 +590,7 @@ const AlterationTree = () => {
                     onPress={() => {
                         CheckIfMagicResisPressed(
                             state.magicResis == 0 ? 1 : 0,
-                            state.magicResisLine == 'black' ? 'gold' : 'black'
+                            state.magicResisLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -623,7 +623,7 @@ const AlterationTree = () => {
                     onPress={() => {
                         CheckIfAdeptAltPressed(
                             state.adeptAlt == 0 ? 1 : 0,
-                            state.adeptAltLine == 'black' ? 'gold' : 'black'
+                            state.adeptAltLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -655,7 +655,7 @@ const AlterationTree = () => {
                     onPress={() => {
                         CheckIfStabilityPressed(
                             state.stability == 0 ? 1 : 0,
-                            state.stabilityLine == 'black' ? 'gold' : 'black'
+                            state.stabilityLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -687,7 +687,7 @@ const AlterationTree = () => {
                     onPress={() => {
                         CheckIfExpertAltPressed(
                             state.expertAlt == 0 ? 1 : 0,
-                            state.expertAltLine == 'black' ? 'gold' : 'black'
+                            state.expertAltLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -720,7 +720,7 @@ const AlterationTree = () => {
                     onPress={() => {
                         CheckIfAtronachPressed(
                             state.atronach == 0 ? 1 : 0,
-                            state.atronachLine == 'black' ? 'gold' : 'black'
+                            state.atronachLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -753,7 +753,7 @@ const AlterationTree = () => {
                     onPress={() => {
                         CheckIfMasterAltPressed(
                             state.masterAlt == 0 ? 1 : 0,
-                            state.masterAltLine == 'black' ? 'gold' : 'black',
+                            state.masterAltLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />

@@ -39,20 +39,20 @@ const HeavyArmor = () => {
     const [state, setState] = useSetState({
         juggernaut: 0,
         fistsOfSteel: 0,
-        fistsOfSteelLine: 'black',
+        fistsOfSteelLine: 'white',
         cushioned: 0,
-        cushionedLine: 'black',
+        cushionedLine: 'white',
         conditioning: 0,
-        conditioningLine: 'black',
+        conditioningLine: 'white',
         wellFitted: 0,
-        wellFittedLine: 'black',
+        wellFittedLine: 'white',
         towerOfStrength: 0,
-        towerOfStrengthLine: 'black',
+        towerOfStrengthLine: 'white',
         matchingSet: 0,
-        matchingSetLine: 'black',
+        matchingSetLine: 'white',
         reflectBlows: 0,
-        reflectBlowsLine: 'black',
-
+        reflectBlowsLine: 'white',
+        
     });
 
     let resetAllTrees;
@@ -415,7 +415,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("juggernautModal")}
+                    onLongPress={() => navigation.navigate("JuggernautModal")}
                     onPress={() => {
                         CheckIfJuggernautPressed(
                             state.juggernaut == 0 ? 1 : 0,
@@ -446,13 +446,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("FistsOfSteelModal")}
                     onPress={() => {
                         CheckIfFistsPressed(
                             state.fistsOfSteel == 0 ? 1 : 0,
-                            state.fistsOfSteelLine == 'black' ? 'gold' : 'black'
+                            state.fistsOfSteelLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -479,13 +477,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("CushionedModal")}
                     onPress={() => {
                         CheckIfCushionedPressed(
                             state.cushioned == 0 ? 1 : 0,
-                            state.cushionedLine == 'black' ? 'gold' : 'black'
+                            state.cushionedLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -512,13 +508,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ConditioningModal")}
                     onPress={() => {
                         CheckIfConditioningPressed(
                             state.conditioning == 0 ? 1 : 0,
-                            state.conditioningLine == 'black' ? 'gold' : 'black'
+                            state.conditioningLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -546,13 +540,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ReflectBlowsModal")}
                     onPress={() => {
                         CheckIfReflectBlowsPressed(
                             state.reflectBlows == 0 ? 1 : 0,
-                            state.reflectBlowsLine == 'black' ? 'gold' : 'black'
+                            state.reflectBlowsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -579,13 +571,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("HeavyMatchingSetModal")}
                     onPress={() => {
                         CheckIfMatchingSetPressed(
                             state.matchingSet == 0 ? 1 : 0,
-                            state.matchingSetLine == 'black' ? 'gold' : 'black'
+                            state.matchingSetLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -612,13 +602,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("TowerOfStrengthModal")}
                     onPress={() => {
                         CheckIfTowerOfStrengthPressed(
                             state.towerOfStrength == 0 ? 1 : 0,
-                            state.towerOfStrengthLine == 'black' ? 'gold' : 'black'
+                            state.towerOfStrengthLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -645,13 +633,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("WellFittedModal")}
                     onPress={() => {
                         CheckIfWellFittedPressed(
                             state.wellFitted == 0 ? 1 : 0,
-                            state.wellFittedLine == 'black' ? 'gold' : 'black'
+                            state.wellFittedLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

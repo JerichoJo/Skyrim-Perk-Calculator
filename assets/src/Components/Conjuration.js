@@ -39,35 +39,35 @@ const ConjurationTree = () => {
     const [state, setState] = useSetState({
         noviceConjuration: 0,
         conjurationDualCasting: 0,
-        conjurationDualCastingLine: 'black',
-        //noviceConjurationLine: 'black',
+        conjurationDualCastingLine: 'white',
+        noviceConjurationLine: 'white',
         necromancy: 0,
-        necromancyLine: 'black',
+        necromancyLine:'white',
         darkSouls: 0,
-        darkSoulsLine: 'black',
+        darkSoulsLine: 'white',
         twinSouls: 0,
-        twinSoulsLine: 'black',
+        twinSoulsLine: 'white',
         mysticBinding: 0,
-        mysticBindingLine: 'black',
+        mysticBindingLine: 'white',
         soulStealer: 0,
-        soulStealerLine: 'black',
+        soulStealerLine: 'white',
         oblivionBinding: 0,
-        oblivionBindingLine: 'black',
-        //oblivionBindingLineLight: 'black',
+        oblivionBindingLine: 'white',
+        oblivionBindingLineLight: 'white',
         summoner: 0,
-        summonerLine: 'black',
+        summonerLine: 'white',
         atromancy: 0,
-        atromancyLine: 'black',
+        atromancyLine: 'white',
         elementalPotency: 0,
-        elementalPotencyLine: 'black',
+        elementalPotencyLine: 'white',
         apprenticeConjuration: 0,
-        apprenticeConjurationLine: 'black',
+        apprenticeConjurationLine: 'white',
         adeptConjuration: 0,
-        adeptConjurationLine: 'black',
+        adeptConjurationLine: 'white',
         expertConjuration: 0,
-        expertConjurationLine: 'black',
+        expertConjurationLine: 'white',
         masterConjuration: 0,
-        masterConjurationLine: 'black',
+        masterConjurationLine: 'white',
 
     });
 
@@ -561,7 +561,7 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("noviceConjurationModal")}
+                    onLongPress={() => navigation.navigate("NoviceConjurationModal")}
                     onPress={() => {
                         CheckIfNoviceConjurationPressed(
                             state.noviceConjuration == 0 ? 1 : 0,
@@ -592,11 +592,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("conjurationDualCastingModal")}
+                    onLongPress={() => navigation.navigate("ConjurationDualCastingModal")}
                     onPress={() => {
                         CheckIfConjurationDualCastingPressed(
                             state.conjurationDualCasting == 0 ? 1 : 0,
-                            state.conjurationDualCastingLine == 'black' ? 'gold' : 'black'
+                            state.conjurationDualCastingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -623,13 +623,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("NecromancyModal")}
                     onPress={() => {
                         CheckIfNecromancyPressed(
                             state.necromancy == 0 ? 1 : 0,
-                            state.necromancyLine == 'black' ? 'gold' : 'black'
+                            state.necromancyLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -656,13 +654,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DarkSoulsModal")}
                     onPress={() => {
                         CheckIfDarkSoulsPressed(
                             state.darkSouls == 0 ? 1 : 0,
-                            state.darkSoulsLine == 'black' ? 'gold' : 'black'
+                            state.darkSoulsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -689,13 +685,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("TwinSoulsModal")}
                     onPress={() => {
                         CheckIfDarkSoulsPressed(
                             state.darkSouls == 0 ? 1 : 0,
-                            state.darkSoulsLine == 'black' ? 'gold' : 'black'
+                            state.darkSoulsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -723,13 +717,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MysticBindingModal")}
                     onPress={() => {
                         CheckIfMysticBindingPressed(
                             state.mysticBinding == 0 ? 1 : 0,
-                            state.mysticBindingLine == 'black' ? 'gold' : 'black'
+                            state.mysticBindingLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -756,13 +748,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SoulStealerModal")}
                     onPress={() => {
                         CheckIfSoulStealerPressed(
                             state.soulStealer == 0 ? 1 : 0,
-                            state.soulStealerLine == 'black' ? 'gold' : 'black'
+                            state.soulStealerLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -790,13 +780,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SummonerModal")}
                     onPress={() => {
                         CheckIfSummonerPressed(
                             state.summoner == 0 ? 1 : 0,
-                            state.summonerLine == 'black' ? 'gold' : 'black'
+                            state.summonerLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -825,13 +813,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AtromancyModal")}
                     onPress={() => {
                         CheckIfAtromancyPressed(
                             state.atromancy == 0 ? 1 : 0,
-                            state.atromancyLine == 'black' ? 'gold' : 'black'
+                            state.atromancyLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -858,13 +844,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ElementalPotencyModal")}
                     onPress={() => {
                         CheckIfElementalPotencyPressed(
                             state.elementalPotency == 0 ? 1 : 0,
-                            state.elementalPotencyLine == 'black' ? 'gold' : 'black'
+                            state.elementalPotencyLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -891,14 +875,12 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("OblivionBindingModal")}
                     onPress={() => {
                         CheckIfOblivionBindingPressed(
                             state.oblivionBinding == 0 ? 1 : 0,
-                            state.oblivionBindingLine == 'black' ? 'gold' : 'black',
-                            state.oblivionBindingLineLight == 'black' ? 'gold' : 'black'
+                            state.oblivionBindingLine == 'white' ? 'gold' : 'white',
+                            state.oblivionBindingLineLight == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -925,13 +907,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterConjurationModal")}
                     onPress={() => {
                         CheckIfMasterConjurationPressed(
                             state.masterConjuration == 0 ? 1 : 0,
-                            state.masterConjurationLine == 'black' ? 'gold' : 'black'
+                            state.masterConjurationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -958,13 +938,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExpertConjurationModal")}
                     onPress={() => {
                         CheckIfExpertConjurationPressed(
                             state.expertConjuration == 0 ? 1 : 0,
-                            state.expertConjurationLine == 'black' ? 'gold' : 'black'
+                            state.expertConjurationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -991,13 +969,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdeptConjurationModal")}
                     onPress={() => {
                         CheckIfAdeptConjurationPressed(
                             state.adeptConjuration == 0 ? 1 : 0,
-                            state.adeptConjurationLine == 'black' ? 'gold' : 'black'
+                            state.adeptConjurationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -1024,13 +1000,11 @@ const ConjurationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ApprenticeConjurationModal")}
                     onPress={() => {
                         CheckIfApprenticeConjurationPressed(
                             state.apprenticeConjuration == 0 ? 1 : 0,
-                            state.apprenticeConjurationLine == 'black' ? 'gold' : 'black'
+                            state.apprenticeConjurationLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

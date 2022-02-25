@@ -34,22 +34,22 @@ const AlchemyTree = () => {
     const [state, setState] = useSetState({
         alchemist: 0,
         physician: 0,
-        physicianLine: 'black',
+        physicianLine: 'white',
         prisoner: 0,
-        prisonerLine: 'black',
+        prisonerLine: 'white',
         concentratedPoison: 0,
-        concentratedPoisonLine: 'black',
+        concentratedPoisonLine: 'white',
         benefactor: 0,
-        benefactorLine: 'black',
+        benefactorLine: 'white',
         experimenter: 0,
-        experimenterLine: 'black',
+        experimenterLine: 'white',
         snakeblood: 0,
-        snakebloodLine: 'black',
+        snakebloodLine: 'white',
         purity: 0,
-        purityLine: 'black',
+        purityLine: 'white',
         greenThumb: 0,
-        greenThumbLine: 'black',
-        greenThumbLineLight: 'black',
+        greenThumbLine: 'white',
+        greenThumbLineLight: 'white',
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -356,7 +356,7 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("alchemistModal")}
+                    onLongPress={() => navigation.navigate("AlchemistModal")}
                     onPress={() => {
                         CheckIfAlchemistPressed(
                             state.alchemist == 0 ? 1 : 0,
@@ -387,13 +387,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PhysicianModal")}
                     onPress={() => {
                         CheckIfPhysicianPressed(
                             state.physician == 0 ? 1 : 0,
-                            state.physicianLine == 'black' ? 'gold' : 'black'
+                            state.physicianLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -420,13 +418,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PrisonerModal")}
                     onPress={() => {
                         CheckIfPrisonerPressed(
                             state.prisoner == 0 ? 1 : 0,
-                            state.prisonerLine == 'black' ? 'gold' : 'black'
+                            state.prisonerLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -453,13 +449,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ConcentratedPoisonModal")}
                     onPress={() => {
                         CheckIfConcentratedPoisonPressed(
                             state.concentratedPoison == 0 ? 1 : 0,
-                            state.concentratedPoisonLine == 'black' ? 'gold' : 'black'
+                            state.concentratedPoisonLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -486,14 +480,12 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("GreenThumbModal")}
                     onPress={() => {
                         CheckIfGreenThumbPressed(
                             state.greenThumb == 0 ? 1 : 0,
-                            state.greenThumbLine == 'black' ? 'gold' : 'black',
-                            state.greenThumbLineLight == 'black' ? 'gold' : 'black'
+                            state.greenThumbLine == 'white' ? 'gold' : 'white',
+                            state.greenThumbLineLight == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -520,13 +512,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PurityModal")}
                     onPress={() => {
                         CheckIfPurityPressed(
                             state.purity == 0 ? 1 : 0,
-                            state.purityLine == 'black' ? 'gold' : 'black'
+                            state.purityLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -553,13 +543,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SnakebloodModal")}
                     onPress={() => {
                         CheckIfSnakebloodPressed(
                             state.snakeblood == 0 ? 1 : 0,
-                            state.snakebloodLine == 'black' ? 'gold' : 'black'
+                            state.snakebloodLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -586,13 +574,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExperimenterModal")}
                     onPress={() => {
                         CheckIfExperimenterPressed(
                             state.experimenter == 0 ? 1 : 0,
-                            state.experimenterLine == 'black' ? 'gold' : 'black'
+                            state.experimenterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -619,13 +605,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("BenefactorModal")}
                     onPress={() => {
                         CheckIfBenefactorPressed(
                             state.benefactor == 0 ? 1 : 0,
-                            state.benefactorLine == 'black' ? 'gold' : 'black'
+                            state.benefactorLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
