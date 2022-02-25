@@ -399,7 +399,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("OverdrawModal")}
                     onPress={() => {
                         CheckIfOverdrawPressed(
                             state.Overdraw == 0 ? 1 : 0,
@@ -430,7 +430,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("SteadyHandModal")}
                     onPress={() => {
                         CheckIfSteadyHandPressed(
                             state.SteadyHand == 0 ? 1 : 0,
@@ -461,9 +461,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("HuntersDisciplineModal")}
                     onPress={() => {
                         CheckIfHuntersDisciplinePressed(
                             state.HuntersDiscipline == 0 ? 1 : 0,
@@ -494,9 +492,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("RangerModal")}
                     onPress={() => {
                         CheckIfRangerPressed(
                             state.Ranger == 0 ? 1 : 0,
@@ -528,9 +524,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("BullseyeModal")}
                     onPress={() => {
                         CheckIfBullseyePressed(
                             state.Bullseye == 0 ? 1 : 0,
@@ -562,9 +556,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PowerShotModal")}
                     onPress={() => {
                         CheckIfPowerShotPressed(
                             state.PowerShot == 0 ? 1 : 0,
@@ -596,9 +588,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("EagleEyeModal")}
                     onPress={() => {
                         CheckIfEagleEyePressed(
                             state.EagleEye == 0 ? 1 : 0,
@@ -629,9 +619,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("CriticalShotModal")}
                     onPress={() => {
                         CheckIfCriticalShotPressed(
                             state.CriticalShot == 0 ? 1 : 0,
@@ -663,9 +651,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("QuickShotModal")}
                     onPress={() => {
                         CheckIfQuickShotPressed(
                             state.QuickShot == 0 ? 1 : 0,

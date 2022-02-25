@@ -307,7 +307,7 @@ const PickpocketTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("LightFingersModal")}
                     onPress={() => {
                         CheckIfLightFingersPressed(
                             state.LightFingers == 0 ? 1 : 0,
@@ -337,9 +337,7 @@ const PickpocketTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("NightThiefModal")}
                     onPress={() => {
                         CheckIfNightThiefPressed(
                             state.NightThief == 0 ? 1 : 0,
@@ -370,9 +368,7 @@ const PickpocketTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("CutpurseModal")}
                     onPress={() => {
                         CheckIfCutpursePressed(
                             state.Cutpurse == 0 ? 1 : 0,
@@ -403,9 +399,7 @@ const PickpocketTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MisdirectionModal")}
                     onPress={() => {
                         CheckIfMisdirectionPressed(
                             state.Misdirection == 0 ? 1 : 0,
@@ -436,9 +430,7 @@ const PickpocketTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PerfectTouchModal")}
                     onPress={() => {
                         CheckIfPerfectTouchPressed(
                             state.PerfectTouch == 0 ? 1 : 0,
@@ -470,9 +462,7 @@ const PickpocketTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PoisonedModal")}
                     onPress={() => {
                         CheckIfPoisonedPressed(
                             state.Poisoned == 0 ? 1 : 0,
@@ -503,9 +493,7 @@ const PickpocketTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("KeymasterModal")}
                     onPress={() => {
                         CheckIfKeymasterPressed(
                             state.Keymaster == 0 ? 1 : 0,
@@ -536,9 +524,7 @@ const PickpocketTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExtraPocketsModal")}
                     onPress={() => {
                         CheckIfExtraPocketsPressed(
                             state.ExtraPockets == 0 ? 1 : 0,

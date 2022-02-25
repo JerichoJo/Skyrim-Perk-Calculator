@@ -427,7 +427,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("NoviceModal")}
                     onPress={() => {
                         CheckIfNoviceRestorationPressed(
                             state.noviceRestoration == 0 ? 1 : 0,
@@ -458,7 +458,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("RespiteModal")}
                     onPress={() => {
                         CheckIfRespitePressed(
                             state.Respite == 0 ? 1 : 0,
@@ -489,9 +489,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ApprenticeModal")}
                     onPress={() => {
                         CheckIfApprenticeRestorationPressed(
                             state.ApprenticeRestoration == 0 ? 1 : 0,
@@ -522,9 +520,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdeptModal")}
                     onPress={() => {
                         CheckIfAdeptRestorationPressed(
                             state.AdeptRestoration == 0 ? 1 : 0,
@@ -555,9 +551,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExpertModal")}
                     onPress={() => {
                         CheckIfExpertRestorationPressed(
                             state.ExpertRestoration == 0 ? 1 : 0,
@@ -588,9 +582,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterModal")}
                     onPress={() => {
                         CheckIfMasterRestorationPressed(
                             state.MasterRestoration == 0 ? 1 : 0,
@@ -621,9 +613,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("RegenerationModal")}
                     onPress={() => {
                         CheckIfRegenerationPressed(
                             state.Regeneration == 0 ? 1 : 0,
@@ -654,9 +644,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("NecromageModal")}
                     onPress={() => {
                         CheckIfNecromagePressed(
                             state.Necromage == 0 ? 1 : 0,
@@ -687,9 +675,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("WardAbsorbModal")}
                     onPress={() => {
                         CheckIfWardAbsorbPressed(
                             state.WardAbsorb == 0 ? 1 : 0,
@@ -720,9 +706,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DualCastingModal")}
                     onPress={() => {
                         CheckIfRestoDualCastPressed(
                             state.RestoDualCast == 0 ? 1 : 0,
@@ -753,9 +737,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("RecoveryModal")}
                     onPress={() => {
                         CheckIfRecoveryPressed(
                             state.Recovery == 0 ? 1 : 0,
@@ -786,9 +768,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AvoidDeathModal")}
                     onPress={() => {
                         CheckIfAvoidDeathPressed(
                             state.AvoidDeath == 0 ? 1 : 0,
@@ -933,7 +913,7 @@ const styles = StyleSheet.create({
     RespiteText: {
         position: 'absolute',
         left: "6%",
-        top: "84%",
+        top: "77.5%",
         zIndex: 10,
     },
     ApprenticeRestorationText: {

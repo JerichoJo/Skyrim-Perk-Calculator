@@ -69,6 +69,44 @@ import IntenseFlamesModal from "./DestructionModals/IntenseFlamesModal";
 import MasterDestructionModal from "./DestructionModals/MasterDestructionModal";
 import NoviceDestructionModal from "./DestructionModals/NoviceDestructionModal";
 import RuneMasterModal from "./DestructionModals/RuneMasterModal";
+import BullseyeModal from "./ArcheryModals/BullseyeModal";
+import CriticalShotModal from "./ArcheryModals/CriticalShotModal";
+import EagleEyeModal from "./ArcheryModals/EagleEyeModal";
+import HuntersDisciplineModal from "./ArcheryModals/HuntersDisciplineModal";
+import OverdrawModal from "./ArcheryModals/OverdrawModal";
+import PowerShotModal from "./ArcheryModals/PowerShotModal";
+import QuickShotModal from "./ArcheryModals/QuickShotModal";
+import RangerModal from "./ArcheryModals/RangerModal";
+import SteadyHandModal from "./ArcheryModals/SteadyHandModal";
+import CutpurseModal from "./PickpocketModals/CutpurseModal";
+import ExtraPocketsModal from "./PickpocketModals/ExtraPocketsModal";
+import KeymasterModal from "./PickpocketModals/KeymasterModal";
+import LightFingersModal from "./PickpocketModals/LightFingersModal";
+import MisdirectionModal from "./PickpocketModals/MisdirectionModal";
+import NightThiefModal from "./PickpocketModals/NightThiefModal";
+import PerfectTouchModal from "./PickpocketModals/PerfectTouchModal";
+import PoisonedModal from "./PickpocketModals/PoisonedModal";
+import AdeptModal from "./RestorationModals/AdeptModal";
+import ApprenticeModal from "./RestorationModals/ApprenticeModal";
+import AvoidDeathModal from "./RestorationModals/AvoidDeathModal";
+import DualCastingModal from "./RestorationModals/DualCastingModal";
+import ExpertModal from "./RestorationModals/ExpertModal";
+import MasterModal from "./RestorationModals/MasterModal";
+import NecromageModal from "./RestorationModals/NecromageModal";
+import NoviceModal from "./RestorationModals/NoviceModal";
+import RecoveryModal from "./RestorationModals/RecoveryModal";
+import RegenerationModal from "./RestorationModals/RegenerationModal";
+import RespiteModal from "./RestorationModals/RespiteModal";
+import WardAbsorbModal from "./RestorationModals/WardAbsorbModal";
+import BarbarianModal from "./TwoHandedModals/BarbarianModal";
+import ChampionsStanceModal from "./TwoHandedModals/ChampionsStanceModal";
+import CriticalChargeModal from "./TwoHandedModals/CriticalChargeModal";
+import DeepWoundsModal from "./TwoHandedModals/DeepWoundsModal";
+import DevastatingBlowModal from "./TwoHandedModals/DevastatingBlowModal";
+import LimbsplitterModal from "./TwoHandedModals/LimbsplitterModal";
+import SkullCrusherModal from "./TwoHandedModals/SkullCrusherModal";
+import SweepModal from "./TwoHandedModals/SweepModal";
+import WarmasterModal from "./TwoHandedModals/WarmasterModal";
 
 const modals = {
     //Alteration Tree
@@ -154,7 +192,54 @@ const modals = {
     IntenseFlamesModal,
     MasterDestructionModal,
     NoviceDestructionModal,
-    RuneMasterModal
+    RuneMasterModal,
+
+    // Archery Modals
+    BullseyeModal,
+    CriticalShotModal,
+    EagleEyeModal,
+    HuntersDisciplineModal,
+    OverdrawModal,
+    PowerShotModal,
+    QuickShotModal,
+    RangerModal,
+    SteadyHandModal,
+
+    // Pickpocket Modals
+    CutpurseModal,
+    ExtraPocketsModal,
+    KeymasterModal,
+    LightFingersModal,
+    MisdirectionModal,
+    NightThiefModal,
+    PerfectTouchModal,
+    PoisonedModal,
+
+    // Restoration Modals
+    AdeptModal,
+    ApprenticeModal,
+    AvoidDeathModal,
+    DualCastingModal,
+    ExpertModal,
+    MasterModal,
+    NecromageModal,
+    NoviceModal,
+    RecoveryModal,
+    RegenerationModal,
+    RespiteModal,
+    WardAbsorbModal,
+
+    // Two Handed Modals
+    BarbarianModal,
+    ChampionsStanceModal,
+    CriticalChargeModal,
+    DeepWoundsModal,
+    DevastatingBlowModal,
+    LimbsplitterModal,
+    SkullCrusherModal,
+    SweepModal,
+    WarmasterModal,
+
 }
 
 export default modals;

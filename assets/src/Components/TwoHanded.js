@@ -385,7 +385,7 @@ const TwoHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("BarbarianModal")}
                     onPress={() => {
                         CheckIfBarbarianPressed(
                             state.Barbarian == 0 ? 1 : 0,
@@ -416,7 +416,7 @@ const TwoHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("LimbsplitterModal")}
                     onPress={() => {
                         CheckIfLimbsplitterPressed(
                             state.Limbsplitter == 0 ? 1 : 0,
@@ -447,9 +447,7 @@ const TwoHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ChampionsStanceModal")}
                     onPress={() => {
                         CheckIfChampionsStancePressed(
                             state.ChampionsStance == 0 ? 1 : 0,
@@ -480,9 +478,7 @@ const TwoHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DevastatingBlowModal")}
                     onPress={() => {
                         CheckIfDevastatingBlowPressed(
                             state.DevastatingBlow == 0 ? 1 : 0,
@@ -513,9 +509,7 @@ const TwoHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SweepModal")}
                     onPress={() => {
                         CheckIfSweepPressed(
                             state.Sweep == 0 ? 1 : 0,
@@ -547,9 +541,7 @@ const TwoHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("WarmasterModal")}
                     onPress={() => {
                         CheckIfWarmasterPressed(
                             state.Warmaster == 0 ? 1 : 0,
@@ -581,9 +573,7 @@ const TwoHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DeepWoundsModal")}
                     onPress={() => {
                         CheckIfDeepWoundsPressed(
                             state.DeepWounds == 0 ? 1 : 0,
@@ -614,9 +604,7 @@ const TwoHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SkullCrusherModal")}
                     onPress={() => {
                         CheckIfSkullcrusherPressed(
                             state.Skullcrusher == 0 ? 1 : 0,
@@ -648,9 +636,7 @@ const TwoHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("CriticalChargeModal")}
                     onPress={() => {
                         CheckIfCriticalChargePressed(
                             state.CriticalCharge == 0 ? 1 : 0,
