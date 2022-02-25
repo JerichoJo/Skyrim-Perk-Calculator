@@ -34,8 +34,11 @@ export function DrawerContent(props) {
             label="Reset ALL Perks"
             labelStyle={styles.ItemLabel}
             onPress={() => {
-              SetAllActivePerks(0);
-              navigation.dispatch(DrawerActions.closeDrawer());
+              setTimeout(() => {
+                SetAllActivePerks(0);
+                navigation.dispatch(DrawerActions.closeDrawer());
+              })
+              
             }}
           >
           </DrawerItem>
