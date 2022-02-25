@@ -57,6 +57,9 @@ const ArcheryTree = () => {
 
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [OverdrawLevel, SetOverdrawLevel] = useState(0);
+    const [SteadyHandLevel, SetSteadyHandLevel] = useState(0);
+    const [CriticalShotLevel, SetCriticalShotLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
     const IncrementCounter = (numActivePerks = 0) => {
@@ -96,7 +99,62 @@ const ArcheryTree = () => {
             TrackLevel(20);
         }
     }, [TrackLevel, state]);
+    const IncCriticalShotCounter = (numActiveCriticalShot) => {
+        if (CriticalShotLevel < 3) {
+            SetCriticalShotLevel(CriticalShotLevel + numActiveCriticalShot)
+        }
+        else {
+            SetCriticalShotLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
 
+    // function to control the Renew perk count (0/2)
+    const IncCriticalShotCountCall = (buttonColor, line) => {
+        if (CriticalShotLevel == 0) {
+            setState({ CriticalShot: buttonColor });  // Change the pressed button color back and forth
+            setState ({CriticalShotLine: line}); // Change the line color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncCriticalShotCounter(1); // increment basic smith by 1 on first click
+        } else if (CriticalShotLevel == 3) {
+            setState({ CriticalShot: buttonColor }); // Change the pressed button color back and forth
+            setState({ CriticalShotLine: line}) // Change the line color back and forth
+            IncCriticalShotCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(2); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncCriticalShotCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
+    const IncSteadyHandCounter = (numActiveSteadyHand) => {
+        if (SteadyHandLevel < 2) {
+            SetSteadyHandLevel(SteadyHandLevel + numActiveSteadyHand)
+        }
+        else {
+            SetSteadyHandLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    // function to control the SteadyHand perk count (0/5)
+    const IncSteadyHandCountCall = (buttonColor, line) => {
+        if (SteadyHandLevel == 0) {
+            setState({ SteadyHand: buttonColor }); // Change the pressed button color back and forth
+            setState({ SteadyHandLine: line }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncSteadyHandCounter(1); // increment basic smith by 1 on first click
+        } else if (SteadyHandLevel == 2) {
+            setState({ SteadyHand: buttonColor }); // Change the line color back and forth
+            setState({ SteadyHandLine: line }); // Change the line color back and forth
+            IncSteadyHandCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(2); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncSteadyHandCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
     const CheckIfOverdrawPressed = (button) => {
         if (
             state.HuntersDiscipline == 1 ||
@@ -105,34 +163,67 @@ const ArcheryTree = () => {
             state.CriticalShot == 1
         ) {
             // Do nothing....must un-select nodes above it first
+            if (OverdrawLevel == 5) {
+                DecrementCounter(4); // decrease active perks back down 4 because it is set back to 1
+                SetOverdrawLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncOverdrawCounter(1) // increment by 1 after it perk is active
+            }
         }
         else {
-            setState({ Overdraw: button }); // Change button color back and forth
-            state.Overdraw == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncOverdrawCountCall(button);
         }
     };
+    const IncOverdrawCounter = (numActiveOverdraw) => {
+        if (OverdrawLevel < 5) {
+            SetOverdrawLevel(OverdrawLevel + numActiveOverdraw)
+        }
+        else {
+            SetOverdrawLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
 
+    // function to control the Overdraw perk count (0/5)
+    const IncOverdrawCountCall = (buttonColor) => {
+        if (OverdrawLevel == 0) {
+            setState({ Overdraw: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncOverdrawCounter(1); // increment basic smith by 1 on first click
+        } else if (OverdrawLevel == 5) {
+            setState({ Overdraw: buttonColor }); // Change the pressed button color back and forth
+            IncOverdrawCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncOverdrawCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
     const CheckIfSteadyHandPressed = (button, line) => {
-        if (state.EagleEye == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
+        if (state.EagleEye == 0 && state.Overdraw == 0)  {
             setState({ Overdraw: button });
-            setState({ EagleEye: button });
-            setState({ EagleEyeLine: line });
             setState({ SteadyHand: button });
             setState({ SteadyHandLine: line });
-            if (state.Overdraw == 1) {
-                IncrementCounter(2);
-            } else {
-                IncrementCounter(3);
-            }
-        } else {
+            setState({ EagleEye: button });
+            setState({ EagleEyeLine: line });
+            IncrementCounter(3);
+            SetSteadyHandLevel(1);
+            SetOverdrawLevel(1);
+        }
+        else if (state.EagleEye == 0 && state.Overdraw == 1)  {
+            setState({ Overdraw: button });
+            setState({ SteadyHand: button });
             setState({ SteadyHandLine: line });
-            setState({ SteadyHand: button }); // Change the pressed button color back and forth
-            state.SteadyHand == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            setState({ EagleEye: button });
+            setState({ EagleEyeLine: line });
+            IncrementCounter(2);
+            SetSteadyHandLevel(1);
+        }
+        else {
+            IncSteadyHandCountCall(button, line);
         }
     };
 
@@ -144,6 +235,10 @@ const ArcheryTree = () => {
             setState({ HuntersDisciplineLine: line });
             setState({ CriticalShot: button });
             setState({ CriticalShotLine: line });
+            SetCriticalShotLevel(1);
+            if (state.Overdraw == 0){
+                SetOverdrawLevel(1);
+            }
             if (state.Overdraw == 1) {
                 IncrementCounter(2);
             } else {
@@ -170,6 +265,12 @@ const ArcheryTree = () => {
             setState({ HuntersDisciplineLine: line });
             setState({ CriticalShot: button });
             setState({ CriticalShotLine: line });
+            if (state.CriticalShot == 0){
+                SetCriticalShotLevel(1);
+            }
+            if (state.Overdraw == 0){
+                SetOverdrawLevel(1);
+            }
             if (state.Bullseye == 1){
             setState({ BullseyeDevLine: line2 });
             }
@@ -209,6 +310,9 @@ const ArcheryTree = () => {
             setState({ QuickShot: button });
             setState({ QuickShotLine: line });
             setState({ Overdraw: button });
+            if (state.Overdraw == 0){
+                SetOverdrawLevel(1);
+            }
             if (state.Bullseye == 1){
                 setState({ BullseyeLine: line });
                 }
@@ -273,6 +377,12 @@ const ArcheryTree = () => {
             setState({ CriticalShotLine: line });
             setState({ Overdraw: button });
             IncrementCounter(5);
+            if (state.CriticalShot == 0){
+                SetCriticalShotLevel(1);
+            }
+            if (state.Overdraw == 0){
+                SetOverdrawLevel(1);
+            }
         } 
         else if (state.EagleEye == 1 && state.HuntersDiscipline == 0){
             setState({ Bullseye: button });
@@ -301,6 +411,9 @@ const ArcheryTree = () => {
             setState({ CriticalShot: button });
             setState({ CriticalShotLine: line });
             setState({ Overdraw: button });
+            if (state.CriticalShot == 0){
+                SetCriticalShotLevel(1);
+            }
             if (state.HuntersDiscipline == 1){
                 IncrementCounter(2);
             }
@@ -318,6 +431,9 @@ const ArcheryTree = () => {
             setState({ Overdraw: button });  
             setState({ EagleEye: button });
             setState({ EagleEyeLine: line });
+            if (state.Overdraw == 0){
+                SetOverdrawLevel(1);
+            }
             if (state.Overdraw == 1) {
                 IncrementCounter(2);
             } else {
@@ -342,6 +458,9 @@ const ArcheryTree = () => {
             setState({ EagleEye: button });
             setState({ EagleEyeLine: line });
             IncrementCounter(2);
+            if (state.Overdraw == 0){
+                SetOverdrawLevel(1);
+            }
         }
         else if (state.PowerShot == 1 || state.SteadyHand == 1) {
             // Do nothing....must un-select nodes above it first
@@ -358,19 +477,25 @@ const ArcheryTree = () => {
         if (state.Overdraw == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ Overdraw: button });
+            setState({ noviceRestorationLine: line });
             setState({ CriticalShot: button });
             setState({ CriticalShotLine: line });
             IncrementCounter(2);
-        } 
-        else if (state.HuntersDiscipline == 1 ) {
-            // Do nothing....must un-select nodes above it first
-        }     
+            SetOverdrawLevel(1);
+            SetCriticalShotLevel(1);
+        }
+        else if (state.HuntersDiscipline == 1){
+            if (CriticalShotLevel == 3) {
+                DecrementCounter(1); // decrease active perks back down 4 because it is set back to 1
+                SetCriticalShotLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncCriticalShotCounter(1) // increment by 1 after it perk is active
+            }
+        }
         else {
-            setState({ CriticalShotLine: line });
-            setState({ CriticalShot: button }); // Change the pressed button color back and forth
-            state.CriticalShot == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+                IncCriticalShotCountCall(button, line);
         }
     };
 
@@ -409,7 +534,7 @@ const ArcheryTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.OverdrawText}>
-                <Text style={styles.PerkText}>Overdraw</Text>
+                <Text style={styles.PerkText}>Overdraw({OverdrawLevel}/5)</Text>
             </View>
             <View title='SteadyHand Blue' style={{
                 position: 'absolute',
@@ -441,7 +566,7 @@ const ArcheryTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.SteadyHandText}>
-                <Text style={styles.PerkText}>Steady Hand</Text>
+                <Text style={styles.PerkText}>Steady Hand({SteadyHandLevel}/2)</Text>
             </View>
             <View title='Hunters Discipline Blue' style={{
                 position: 'absolute',
@@ -630,7 +755,7 @@ const ArcheryTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.CriticalShotText}>
-                <Text style={styles.PerkText}>Critical Shot</Text>
+                <Text style={styles.PerkText}>Critical Shot({CriticalShotLevel}/3)</Text>
             </View>
 
             <View title='Quick Shot Blue' style={{

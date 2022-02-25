@@ -54,6 +54,7 @@ const PickpocketTree = () => {
 
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [LightFingersLevel, SetLightFingersLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
     const IncrementCounter = (numActivePerks = 0) => {
@@ -97,16 +98,46 @@ const PickpocketTree = () => {
             state.NightThief == 1 
         ) {
             // Do nothing....must un-select nodes above it first
+            if (LightFingersLevel == 5) {
+                DecrementCounter(4); // decrease active perks back down 4 because it is set back to 1
+                SetLightFingersLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncLightFingersCounter(1) // increment by 1 after it perk is active
+            }
         }
         else {
-            setState({ LightFingers: button }); // Change button color back and forth
-            state.LightFingers == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncLightFingersCountCall(button);
         }
     };
 
+    const IncLightFingersCounter = (numActiveLightFingers) => {
+        if (LightFingersLevel < 5) {
+            SetLightFingersLevel(LightFingersLevel + numActiveLightFingers)
+        }
+        else {
+            SetLightFingersLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
 
+    // function to control the LightFingers perk count (0/5)
+    const IncLightFingersCountCall = (buttonColor) => {
+        if (LightFingersLevel == 0) {
+            setState({ LightFingers: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncLightFingersCounter(1); // increment basic smith by 1 on first click
+        } else if (LightFingersLevel == 5) {
+            setState({ LightFingers: buttonColor }); // Change the pressed button color back and forth
+            IncLightFingersCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncLightFingersCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
 
     const CheckIfNightThiefPressed = (buttonColor, lineColor) => {
         if (state.LightFingers == 0) {
@@ -115,7 +146,7 @@ const PickpocketTree = () => {
             setState({ LightFingersLine: lineColor });
             setState({ NightThief: buttonColor });
             setState({ NightThiefLine: lineColor });
-
+            SetLightFingersLevel(1);
             IncrementCounter(2);
         } else if (state.Cutpurse == 1 || state.Poisoned == 1 || state.ExtraPockets == 1) {
             // Do nothing....must un-select nodes above it first
@@ -136,6 +167,9 @@ const PickpocketTree = () => {
             setState({ NightThief: buttonColor });
             setState({ CutpurseLine: lineColor });
             setState({ NightThiefLine: lineColor });
+            if (state.LightFingers == 0){
+                SetLightFingersLevel(1);
+            }
             if (state.LightFingers == 1) {
                 IncrementCounter(2);
             } else {
@@ -162,6 +196,9 @@ const PickpocketTree = () => {
             setState({ MisdirectionLine: lineColor });
             setState({ CutpurseLine: lineColor });
             setState({ NightThiefLine: lineColor });
+            if (state.LightFingers == 0){
+                SetLightFingersLevel(1);
+            }
             if (state.Cutpurse == 1) {
                 IncrementCounter(2);
             } else if (state.LightFingers == 1) {
@@ -194,6 +231,9 @@ const PickpocketTree = () => {
             setState({ MisdirectionLine: line });
             setState({ CutpurseLine: line });
             setState({ NightThiefLine: line });
+            if (state.LightFingers == 0){
+                SetLightFingersLevel(1);
+            }
             if (state.Misdirection == 1) {
                 IncrementCounter(2);
             } else if (state.Cutpurse == 1) {
@@ -220,6 +260,9 @@ const PickpocketTree = () => {
             setState({ Poisoned: button });
             setState({ NightThiefLine: line });
             setState({ PoisonedLine: line });
+            if (state.LightFingers == 0){
+                SetLightFingersLevel(1);
+            }
             if (state.LightFingers == 1) {
                 IncrementCounter(2);
             } else {
@@ -245,6 +288,9 @@ const PickpocketTree = () => {
             setState({ CutpurseLine: line });                       
             setState({ Keymaster: button });
             setState({ KeymasterLine: line });
+            if (state.LightFingers == 0){
+                SetLightFingersLevel(1);
+            }
             if (state.NightThief == 1) {
                 IncrementCounter(2);
             } else if (state.LightFingers == 1) {
@@ -269,6 +315,9 @@ const PickpocketTree = () => {
             setState({ LightFingersLine: line });
             setState({ NightThiefLine: line });
             setState({ ExtraPocketsLine: line });
+            if (state.LightFingers == 0){
+                SetLightFingersLevel(1);
+            }
             if (state.LightFingers == 1) {
                 IncrementCounter(2);
             } else {
@@ -317,7 +366,7 @@ const PickpocketTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.LightFingersText}>
-                <Text style={styles.PerkText}>Light Fingers</Text>
+                <Text style={styles.PerkText}>Light Fingers({LightFingersLevel}/5)</Text>
             </View>
             <View title='Night Thief Blue' style={{
                 position: 'absolute',

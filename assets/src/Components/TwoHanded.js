@@ -34,6 +34,10 @@ const TwoHandedTree = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [BarbarianLevel, SetBarbarianLevel] = useState(0);
+    const [LimbsplitterLevel, SetLimbsplitterLevel] = useState(0);
+    const [DeepWoundsLevel, SetDeepWoundsLevel] = useState(0);
+    const [SkullCrusherLevel, SetSkullCrusherLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         Barbarian: 0,
@@ -52,8 +56,8 @@ const TwoHandedTree = () => {
         WarmasterLine: 'black',
         DeepWounds: 0,
         DeepWoundsLine: 'black',
-        Skullcrusher: 0,
-        SkullcrusherLine: 'black',
+        SkullCrusher: 0,
+        SkullCrusherLine: 'black',
     });
 
     let resetAllTrees;
@@ -74,8 +78,8 @@ const TwoHandedTree = () => {
         setState({ WarmasterLine: 'black' });
         setState({ DeepWounds: 0 });
         setState({ DeepWoundsLine: 'black' });
-        setState({ Skullcrusher: 0 });
-        setState({ SkullcrusherLine: 'black' });
+        setState({ SkullCrusher: 0 });
+        setState({ SkullCrusherLine: 'black' });
         SetRequiredLevel(0);
     }
 
@@ -132,45 +136,143 @@ const TwoHandedTree = () => {
             TrackLevel(40);
         } else if (state.ChampionsStance == 1) {
             TrackLevel(25);
-        } else if (state.Skullcrusher == 1) {
+        } else if (state.SkullCrusher == 1) {
             TrackLevel(20);
         }
     }, [TrackLevel, state]);
+    const IncBarbarianCounter = (numActiveBarbarian) => {
+        if (BarbarianLevel < 5) {
+            SetBarbarianLevel(BarbarianLevel + numActiveBarbarian)
+        }
+        else {
+            SetBarbarianLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
 
+    // function to control the Barbarian perk count (0/5)
+    const IncBarbarianCountCall = (buttonColor) => {
+        if (BarbarianLevel == 0) {
+            setState({ Barbarian: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncBarbarianCounter(1); // increment basic smith by 1 on first click
+        } else if (BarbarianLevel == 5) {
+            setState({ Barbarian: buttonColor }); // Change the pressed button color back and forth
+            IncBarbarianCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncBarbarianCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
     const CheckIfBarbarianPressed = (button) => {
         if (
             state.ChampionsStance == 1 ||
             state.Limbsplitter == 1 ||
             state.DeepWounds == 1 ||
-            state.Skullcrusher == 1
+            state.SkullCrusher == 1
         ) {
             // Do nothing....must un-select nodes above it first
+            if (BarbarianLevel == 5) {
+                DecrementCounter(4); // decrease active perks back down 4 because it is set back to 1
+                SetBarbarianLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncBarbarianCounter(1) // increment by 1 after it perk is active
+            }
         }
         else {
-            setState({ Barbarian: button }); // Change button color back and forth
-            state.Barbarian == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncBarbarianCountCall(button);
         }
     };
 
-    const CheckIfLimbsplitterPressed = (button, line) => {
-        if (state.Barbarian == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
-            setState({ Barbarian: button });
-            setState({ BarbarianLine: line });
-            setState({ Limbsplitter: button });
-            setState({ LimbsplitterLine: line });
-            IncrementCounter(2);
+    const IncLimbsplitterCounter = (numActiveLimbsplitter) => {
+        if (LimbsplitterLevel < 3) {
+            SetLimbsplitterLevel(LimbsplitterLevel + numActiveLimbsplitter)
+        }
+        else {
+            SetLimbsplitterLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    // function to control the Limbsplitter perk count (0/5)
+    const IncLimbsplitterCountCall = (buttonColor, line) => {
+        if (LimbsplitterLevel == 0) {
+            setState({ Limbsplitter: buttonColor }); // Change the pressed button color back and forth
+            setState({ LimbsplitterLine: line }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncLimbsplitterCounter(1); // increment basic smith by 1 on first click
+        } else if (LimbsplitterLevel == 3) {
+            setState({ Limbsplitter: buttonColor }); // Change the line color back and forth
+            setState({ LimbsplitterLine: line }); // Change the line color back and forth
+            IncLimbsplitterCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(3); // decrease active perks back down 3 because it is set back to 0
+
         } else {
-            setState({ LimbsplitterLine: line });
-            setState({ Limbsplitter: button }); // Change the pressed button color back and forth
-            state.Limbsplitter == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncrementCounter(1);
+            IncLimbsplitterCounter(1) // increment by 1 after it perk is active
         }
-    };
 
+    }
+
+    const IncDeepWoundsCounter = (numActiveDeepWounds) => {
+        if (DeepWoundsLevel < 3) {
+            SetDeepWoundsLevel(DeepWoundsLevel + numActiveDeepWounds)
+        }
+        else {
+            SetDeepWoundsLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    // function to control the DeepWounds perk count (0/5)
+    const IncDeepWoundsCountCall = (buttonColor, line) => {
+        if (DeepWoundsLevel == 0) {
+            setState({ DeepWounds: buttonColor }); // Change the pressed button color back and forth
+            setState({ DeepWoundsLine: line }); // Change the line color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncDeepWoundsCounter(1); // increment basic smith by 1 on first click
+        } else if (DeepWoundsLevel == 3) {
+            setState({ DeepWounds: buttonColor }); // Change the pressed button color back and forth
+            setState({ DeepWoundsLine: line }); // Change the line color back and forth
+            IncDeepWoundsCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(3); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncDeepWoundsCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
+    const IncSkullCrusherCounter = (numActiveSkullCrusher) => {
+        if (SkullCrusherLevel < 3) {
+            SetSkullCrusherLevel(SkullCrusherLevel + numActiveSkullCrusher)
+        }
+        else {
+            SetSkullCrusherLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    // function to control the SkullCrusher perk count (0/5)
+    const IncSkullCrusherCountCall = (buttonColor, line) => {
+        if (SkullCrusherLevel == 0) {
+            setState({ SkullCrusher: buttonColor }); // Change the pressed button color back and forth
+            setState({ SkullCrusherLine: line }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncSkullCrusherCounter(1); // increment basic smith by 1 on first click
+        } else if (SkullCrusherLevel == 3) {
+            setState({ SkullCrusher: buttonColor }); // Change the pressed button color back and forth
+            setState({ SkullCrusherLine: line }); // Change the pressed button color back and forth
+            IncSkullCrusherCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(3); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncSkullCrusherCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
     const CheckIfChampionsStancePressed = (button, line) => {
         if (state.Barbarian == 0) {
             // Change the colors of the buttons below it if they have not been pressed
@@ -178,8 +280,10 @@ const TwoHandedTree = () => {
             setState({ BarbarianLine: line });
             setState({ ChampionsStance: button });
             setState({ ChampionsStanceLine: line });
-
             IncrementCounter(2);
+            if (state.Barbarian == 0){
+                SetBarbarianLevel(1);
+            }
         } else if (state.DevastatingBlow == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -199,6 +303,9 @@ const TwoHandedTree = () => {
             setState({ ChampionsStance: button });
             setState({ DevastatingBlowLine: line });
             setState({ ChampionsStanceLine: line });
+            if (state.Barbarian == 0){
+                SetBarbarianLevel(1);
+            }
             if (state.Barbarian == 1) {
                 IncrementCounter(2);
             } else {
@@ -223,6 +330,9 @@ const TwoHandedTree = () => {
             setState({ ChampionsStance: button });
             setState({ CriticalChargeLine: line });
             setState({ ChampionsStanceLine: line });
+            if (state.Barbarian == 0){
+                SetBarbarianLevel(1);
+            }
             if (state.Barbarian == 1) {
                 IncrementCounter(2);
             } else {
@@ -252,6 +362,9 @@ const TwoHandedTree = () => {
             setState({ SweepDevLine: line });
             setState({ DevastatingBlowLine: line });
             setState({ ChampionsStanceLine: line });
+            if (state.Barbarian == 0){
+                SetBarbarianLevel(1);
+            }
             if (state.ChampionsStance == 1) {
                 IncrementCounter(2);
             } else if (state.Barbarian == 1) {
@@ -296,6 +409,9 @@ const TwoHandedTree = () => {
             setState({ DevastatingBlow: button });
             setState({ DevastatingBlowLine: line });
             setState({ SweepDevLine: line });
+            if (state.Barbarian == 0){
+                SetBarbarianLevel(1);
+            }
             if (state.DevastatingBlow == 1) {
                 IncrementCounter(2);
             } else if (state.ChampionsStance == 1) {
@@ -312,6 +428,9 @@ const TwoHandedTree = () => {
             setState({ Warmaster: button });
             setState({ WarmasterLine: line });
             IncrementCounter(2);
+            if (state.Barbarian == 0){
+                SetBarbarianLevel(1);
+            }
         }
         else {
             setState({ WarmasterLine: line });
@@ -324,37 +443,43 @@ const TwoHandedTree = () => {
 
     const CheckIfDeepWoundsPressed = (button, line) => {
         if (state.Barbarian == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
             setState({ Barbarian: button });
-            setState({ BarbarianLine: line });
             setState({ DeepWounds: button });
             setState({ DeepWoundsLine: line });
             IncrementCounter(2);
-        } else {
-            setState({ DeepWoundsLine: line });
-            setState({ DeepWounds: button }); // Change the pressed button color back and forth
-            state.DeepWounds == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            SetDeepWoundsLevel(1);
+            SetBarbarianLevel(1);
+        }
+        else {
+            IncDeepWoundsCountCall(button, line);
         }
     };
-    const CheckIfSkullcrusherPressed = (button, line) => {
+    const CheckIfSkullCrusherPressed = (button, line) => {
         if (state.Barbarian == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
             setState({ Barbarian: button });
-            setState({ BarbarianLine: line });
-            setState({ Skullcrusher: button });
-            setState({ SkullcrusherLine: line });
+            setState({ SkullCrusher: button });
+            setState({ SkullCrusherLine: line });
             IncrementCounter(2);
-        } else {
-            setState({ SkullcrusherLine: line });
-            setState({ Skullcrusher: button }); // Change the pressed button color back and forth
-            state.Skullcrusher == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            SetSkullCrusherLevel(1);
+            SetBarbarianLevel(1);
+        }
+        else {
+            IncSkullCrusherCountCall(button, line);
         }
     };
-
+    const CheckIfLimbsplitterPressed = (button, line) => {
+        if (state.Barbarian == 0) {
+            setState({ Barbarian: button });
+            setState({ Limbsplitter: button });
+            setState({ LimbsplitterLine: line });
+            IncrementCounter(2);
+            SetLimbsplitterLevel(1);
+            SetBarbarianLevel(1);
+        }
+        else {
+            IncLimbsplitterCountCall(button, line);
+        }
+    };
     return (
         <View style={{ zIndex: 2 }}>
             <View
@@ -395,7 +520,7 @@ const TwoHandedTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.BarbarianText}>
-                <Text style={styles.PerkText}>Barbarian</Text>
+                <Text style={styles.PerkText}>Barbarian({BarbarianLevel}/5)</Text>
             </View>
             <View title='Limbsplitter Blue' style={{
                 position: 'absolute',
@@ -427,7 +552,7 @@ const TwoHandedTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.LimbsplitterText}>
-                <Text style={styles.PerkText}>Limbsplitter</Text>
+                <Text style={styles.PerkText}>Limbsplitter({LimbsplitterLevel}/3)</Text>
             </View>
             <View title='Champions Stance Blue' style={{
                 position: 'absolute',
@@ -584,9 +709,9 @@ const TwoHandedTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.DeepWoundsText}>
-                <Text style={styles.PerkText}>Deep Wounds</Text>
+                <Text style={styles.PerkText}>Deep Wounds({DeepWoundsLevel}/3)</Text>
             </View>
-            <View title='Skullcrusher Blue' style={{
+            <View title='SkullCrusher Blue' style={{
                 position: 'absolute',
                 left: "80%",
                 top: "58%",
@@ -595,27 +720,27 @@ const TwoHandedTree = () => {
             }}>
                 <StarIconBlue />
             </View>
-            <View title='Skullcrusher Gold' style={{
+            <View title='SkullCrusher Gold' style={{
                 position: 'absolute',
                 left: "80%",
                 top: "58%",
                 zIndex: 8,
-                opacity: state.Skullcrusher
+                opacity: state.SkullCrusher
 
             }}>
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("SkullCrusherModal")}
                     onPress={() => {
-                        CheckIfSkullcrusherPressed(
-                            state.Skullcrusher == 0 ? 1 : 0,
-                            state.SkullcrusherLine == 'black' ? 'gold' : 'black'
+                        CheckIfSkullCrusherPressed(
+                            state.SkullCrusher == 0 ? 1 : 0,
+                            state.SkullCrusherLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.SkullcrusherText}>
-                <Text style={styles.PerkText}>Skull Crusher</Text>
+            <View style={styles.SkullCrusherText}>
+                <Text style={styles.PerkText}>Skull Crusher({SkullCrusherLevel}/3)</Text>
             </View>
 
             <View title='Critical Charge Blue' style={{
@@ -730,7 +855,7 @@ const TwoHandedTree = () => {
                     y1="63%"
                     x2="48.2%"
                     y2="85%"
-                    stroke={state.SkullcrusherLine}
+                    stroke={state.SkullCrusherLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
@@ -807,9 +932,9 @@ const styles = StyleSheet.create({
         top: "68%",
         zIndex: 10,
     },
-    SkullcrusherText: {
+    SkullCrusherText: {
         position: 'absolute',
-        left: "81%",
+        left: "75%",
         top: "66%",
         zIndex: 10,
     },
