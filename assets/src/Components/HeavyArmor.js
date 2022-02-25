@@ -34,19 +34,19 @@ const HeavyArmor = () => {
     const [state, setState] = useSetState({
         juggernaut: 0,
         fistsOfSteel: 0,
-        fistsOfSteelLine: 'black',
+        fistsOfSteelLine: 'white',
         cushioned: 0,
-        cushionedLine: 'black',
+        cushionedLine: 'white',
         conditioning: 0,
-        conditioningLine: 'black',
+        conditioningLine: 'white',
         wellFitted: 0,
-        wellFittedLine: 'black',
+        wellFittedLine: 'white',
         towerOfStrength: 0,
-        towerOfStrengthLine: 'black',
+        towerOfStrengthLine: 'white',
         matchingSet: 0,
-        matchingSetLine: 'black',
+        matchingSetLine: 'white',
         reflectBlows: 0,
-        reflectBlowsLine: 'black',
+        reflectBlowsLine: 'white',
         
     });
 

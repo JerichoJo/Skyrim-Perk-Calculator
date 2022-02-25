@@ -34,21 +34,21 @@ const Enchanting = () => {
     const [state, setState] = useSetState({
         enchanter: 0,
         fireEnchanter: 0,
-        fireEnchanterLine: 'black',
+        fireEnchanterLine: 'white',
         frostEnchanter: 0,
-        frostEnchanterLine: 'black',
+        frostEnchanterLine: 'white',
         stormEnchanting: 0,
-        stormEnchantingLine: 'black',
+        stormEnchantingLine: 'white',
         extraEffect: 0,
-        extraEffectLine: 'black',
+        extraEffectLine: 'white',
         insightfulEnchanter: 0,
-        insightfulEnchanterLine: 'black',
+        insightfulEnchanterLine: 'white',
         corpusEnchanter: 0,
-        corpusEnchanterLine: 'black',
+        corpusEnchanterLine: 'white',
         soulSqueezer: 0,
-        soulSqueezerLine: 'black',
+        soulSqueezerLine: 'white',
         soulSiphon: 0,
-        soulSiphonLine: 'black'
+        soulSiphonLine: 'white'
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
