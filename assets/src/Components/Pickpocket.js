@@ -57,6 +57,48 @@ const PickpocketTree = () => {
     const [LightFingersLevel, SetLightFingersLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
+
+    let resetAllTrees;
+    const resetPickpocketPerks = () => {
+        setState({ LightFingers: 0 });
+        setState({ NightThief: 0 });
+        setState({ NightThiefLine: 'black' });
+        setState({ Poisoned: 0 });
+        setState({ PoisonedLine: 'black' });
+        setState({ Cutpurse: 0 });
+        setState({ CutpurseLine: 'black' });
+        setState({ Keymaster: 0 });
+        setState({ KeymasterLine: 'black' });
+        setState({ ExtraPockets: 0 });
+        setState({ ExtraPocketsLine: 'black' });
+        setState({ Misdirection: 0 });
+        setState({ MisdirectionLine: 'black' });
+        setState({ PerfectTouch: 0 });
+        setState({ PerfectTouchLine: 'black' });
+        SetRequiredLevel(0);
+        SetLightFingersLevel(0);
+    }
+
+    const resetActivePerks = () => {
+        resetPickpocketPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetPickpocketPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
+
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
         SetAllActivePerks(AllActivePerks + numActivePerks);
@@ -78,18 +120,20 @@ const PickpocketTree = () => {
     const CheckLevel = useCallback(() => {
         if (state.PerfectTouch == 1) {
             TrackLevel(100);
-        } else if (state.Misdirection == 1) {
-            TrackLevel(90);
-        } else if (state.Cutpurse == 1) {
+        } else if (state.LightFingers == 1 && LightFingersLevel == 5) {
             TrackLevel(80);
-        } else if (state.NightThief == 1) {
+        } else if (state.Misdirection == 1) {
             TrackLevel(70);
-        } else if (state.Keymaster == 1) {
+        } else if (state.LightFingers == 1 && LightFingersLevel == 4 || state.Keymaster == 1) {
             TrackLevel(60);
-        } else if (state.Poisoned == 1) {
-            TrackLevel(30);
         } else if (state.ExtraPockets == 1) {
-            TrackLevel(0);
+            TrackLevel(50);
+        } else if (state.LightFingers == 1 && LightFingersLevel == 3 || state.Cutpurse == 1 || state.Poisoned == 1) {
+            TrackLevel(40);
+        }else if (state.NightThief == 1) {
+            TrackLevel(30);
+        }else if (state.LightFingers == 1 && LightFingersLevel == 2) {
+            TrackLevel(20);
         }
     }, [TrackLevel, state]);
 
@@ -234,11 +278,11 @@ const PickpocketTree = () => {
             if (state.LightFingers == 0){
                 SetLightFingersLevel(1);
             }
-            if (state.Misdirection == 1) {
+            if (state.Cutpurse == 1) {
                 IncrementCounter(2);
-            } else if (state.Cutpurse == 1) {
-                IncrementCounter(3);
             } else if (state.NightThief == 1) {
+                IncrementCounter(3);
+            } else if (state.LightFingers == 1) {
                 IncrementCounter(4);
             } else {
                 IncrementCounter(5);
@@ -334,6 +378,11 @@ const PickpocketTree = () => {
     };
     return (
         <View style={{ zIndex: 2 }}>
+            <View style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Pickpocket Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -730,6 +779,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

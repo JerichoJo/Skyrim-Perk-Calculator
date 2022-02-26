@@ -12,6 +12,7 @@ import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
+import { State } from 'react-native-gesture-handler';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -62,6 +63,53 @@ const ArcheryTree = () => {
     const [CriticalShotLevel, SetCriticalShotLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
+   
+    let resetAllTrees;
+    const resetArcheryPerks = () => {
+        setState({ Overdraw: 0 });
+        setState({ EagleEye: 0 });
+        setState({ EagleEyeLine: 'black' });
+        setState({ SteadyHand: 0 });
+        setState({ SteadyHandLine: 'black' });
+        setState({ PowerShot: 0 });
+        setState({ PowerShotLine: 'black' });
+        setState({ QuickShot: 0 });
+        setState({ QuickShotLine: 'black' });
+        setState({ Bullseye: 0 });
+        setState({ BullseyeLine: 'black' });
+        setState({ BullseyeDevLine: 'black' });
+        setState({ Ranger: 0 });
+        setState({ RangerLine: 'black' });
+        setState({ HuntersDiscipline: 0 });
+        setState({ HuntersDisciplineLine: 'black' });
+        setState({ CriticalShot: 0 });
+        setState({ CriticalShotLine: 'black' });
+        SetCriticalShotLevel(0);
+        SetOverdrawLevel(0);
+        SetSteadyHandLevel(0);
+        SetRequiredLevel(0);
+    }
+
+    const resetActivePerks = () => {
+        resetArcheryPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetArcheryPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
+
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
         SetAllActivePerks(AllActivePerks + numActivePerks);
@@ -77,26 +125,31 @@ const ArcheryTree = () => {
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
     }, []);
+ 
 
     const lineStrokeWidth = '2';
-
     const CheckLevel = useCallback(() => {
-        if (state.PowerShot == 1) {
+        if (state.Bullseye == 1) {
             TrackLevel(100);
-        } else if (state.QuickShot == 1) {
+        }
+        else if (state.CriticalShot == 1 && CriticalShotLevel == 3) {
             TrackLevel(90);
-        } else if (state.Bullseye == 1) {
-            TrackLevel(75);
-        }  else if (state.EagleEye == 1) {
+        } else if (state.Overdraw == 1 && OverdrawLevel == 5) {
+            TrackLevel(80);
+        } else if (state.QuickShot == 1) {
+            TrackLevel(70);
+        } else if (state.SteadyHand == 1 && SteadyHandLevel == 2 || state.Overdraw == 1 && OverdrawLevel ==4 || state.CriticalShot ==1 || CriticalShotLevel == 2 || state.Ranger == 1) {
             TrackLevel(60);
-        } else if (state.Ranger == 1) {
+        }  else if (state.HuntersDiscipline == 1  || state.PowerShot == 1 ) {
             TrackLevel(50);
-        } else if (state.SteadyHand == 1) {
+        } else if (state.SteadyHand == 1 || state.Overdraw == 1 && OverdrawLevel == 3) {
             TrackLevel(40);
-        } else if (state.HuntersDiscipline == 1) {
+        } else if (state.EagleEye == 1 || state.CriticalShot == 1) {
+            TrackLevel(30);
+        } else if (state.Overdraw == 1) {
             TrackLevel(25);
-        } else if (state.CriticalShot == 1) {
-            TrackLevel(20);
+        } else {
+            TrackLevel(0);
         }
     }, [TrackLevel, state]);
     const IncCriticalShotCounter = (numActiveCriticalShot) => {
@@ -119,7 +172,7 @@ const ArcheryTree = () => {
             setState({ CriticalShot: buttonColor }); // Change the pressed button color back and forth
             setState({ CriticalShotLine: line}) // Change the line color back and forth
             IncCriticalShotCounter(1); // Increment by one so that it goes back to 0 
-            DecrementCounter(2); // decrease active perks back down 3 because it is set back to 0
+            DecrementCounter(3); // decrease active perks back down 3 because it is set back to 0
 
         } else {
             IncrementCounter(1);
@@ -418,7 +471,7 @@ const ArcheryTree = () => {
                 IncrementCounter(2);
             }
             else{
-                IncrementCounter(3);
+                IncrementCounter(4);
             }
         }
 
@@ -502,6 +555,11 @@ const ArcheryTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+                <View style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Archery Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -957,6 +1015,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '67%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

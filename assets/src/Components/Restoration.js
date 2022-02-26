@@ -88,6 +88,7 @@ const RestorationTree = () => {
         setState({ AvoidDeath: 0 });
         setState({ AvoidDeathLine: 'black' });
         SetRequiredLevel(0);
+        SetRecoveryLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -139,7 +140,7 @@ const RestorationTree = () => {
             TrackLevel(75);
         } else if (state.Necromage == 1) {
             TrackLevel(70);
-        } else if (state.WardAbsorb == 1) {
+        } else if (state.WardAbsorb == 1 || state.Recovery == 1 && RecoveryLevel == 2) {
             TrackLevel(60);
         } else if (state.AdeptRestoration == 1) {
             TrackLevel(50);
@@ -149,11 +150,9 @@ const RestorationTree = () => {
             TrackLevel(30);
         } else if (state.ApprenticeRestoration == 1) {
             TrackLevel(25);
-        } else if (state.Regeneration == 1) {
+        } else if (state.Regeneration == 1 || state.RestoDualCast == 1) {
             TrackLevel(20);
-        } else if (state.RestoDualCast == 1) {
-            TrackLevel(20);
-        }
+        } 
     }, [TrackLevel, state]);
     const IncRecoveryCounter = (numActiveRecovery) => {
         if (RecoveryLevel < 2) {
@@ -435,8 +434,7 @@ const RestorationTree = () => {
     };
     return (
         <View style={{ zIndex: 2 }}>
-            <View
-                style={styles.resetButtonContainer}>
+            <View style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
                     <Text style={{ color: "black", fontWeight: "bold", }}> Reset Restoration Perks</Text>
                 </TouchableOpacity>
