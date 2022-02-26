@@ -322,7 +322,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("Other Stuff")}
+                    onLongPress={() => navigation.navigate("NoviceLocksModal")}
                     onPress={() => {
                         checkIfNoviceLocksPressed(
                             state.noviceLocks == 0 ? 1 : 0,
@@ -330,6 +330,9 @@ const LockpickingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.NoviceLocksText}>
+                <Text style={styles.PerkText}>Novice Locks</Text>
             </View>
             <View title='Apprentice Locks Blue' style={{
                 position: 'absolute',
@@ -350,9 +353,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ApprenticeLocksModal")}
                     onPress={() => {
                         checkIfApprenticeLockpickingPressed(
                             state.apprenticeLocks == 0 ? 1 : 0,
@@ -361,6 +362,9 @@ const LockpickingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.ApprenticeLocksText}>
+                <Text style={styles.PerkText}>Apprentice Locks</Text>
             </View>
             <View title='Quick Hands Blue' style={{
                 position: 'absolute',
@@ -380,9 +384,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("QuickHandsModal")}
                     onPress={() => {
                         checkIfQuickHandsPressed(
                             state.quickHands == 0 ? 1 : 0,
@@ -391,6 +393,9 @@ const LockpickingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.QuickHandsText}>
+                <Text style={styles.PerkText}>Quick Hands</Text>
             </View>
             <View title='Wax Key Blue' style={{
                 position: 'absolute',
@@ -410,9 +415,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("WaxKeyModal")}
                     onPress={() => {
                         CheckIfWaxKeyPressed(
                             state.waxKey == 0 ? 1 : 0,
@@ -421,6 +424,9 @@ const LockpickingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.WaxKeyText}>
+                <Text style={styles.PerkText}>Wax Key</Text>
             </View>
             <View title='Adept Locks Blue' style={{
                 position: 'absolute',
@@ -440,9 +446,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdeptLocksModal")}
                     onPress={() => {
                         checkIfAdeptLocksPressed(
                             state.adeptLocks == 0 ? 1 : 0,
@@ -451,6 +455,9 @@ const LockpickingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.AdeptLocksText}>
+                <Text style={styles.PerkText}>Adept Locks</Text>
             </View>
             <View title='Golden Touch Blue' style={{
                 position: 'absolute',
@@ -470,9 +477,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("GoldenTouchModal")}
                     onPress={() => {
                         CheckIfGoldenTouchPressed(
                             state.goldenTouch == 0 ? 1 : 0,
@@ -481,6 +486,9 @@ const LockpickingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.GoldenTouchText}>
+                <Text style={styles.PerkText}>Golden Touch</Text>
             </View>
             <View title='Treasure Hunter Blue' style={{
                 position: 'absolute',
@@ -500,9 +508,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("TreasureHunterModal")}
                     onPress={() => {
                         CheckIfTreasureHunterPressed(
                             state.treasureHunter == 0 ? 1 : 0,
@@ -511,6 +517,9 @@ const LockpickingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.TreasureHunterText}>
+                <Text style={styles.PerkText}>Treasure Hunter</Text>
             </View>
             <View title='Expert Locks Blue' style={{
                 position: 'absolute',
@@ -530,9 +539,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExpertLocksModal")}
                     onPress={() => {
                         CheckIfExpertLocksPressed(
                             state.expertLocks == 0 ? 1 : 0,
@@ -541,6 +548,9 @@ const LockpickingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.ExpertLocksText}>
+                <Text style={styles.PerkText}>Expert Locks</Text>
             </View>
             <View title='Locksmith Blue' style={{
                 position: 'absolute',
@@ -560,9 +570,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("LocksmithModal")}
                     onPress={() => {
                         CheckIfLocksmithPressed(
                             state.locksmith == 0 ? 1 : 0,
@@ -571,6 +579,9 @@ const LockpickingTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.LocksmithText}>
+                <Text style={styles.PerkText}>Locksmith</Text>
             </View>
                       <View title='Unbreakable Blue' style={{
                 position: 'absolute',
@@ -590,9 +601,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("UnbreakableModal")}
                     onPress={() => {
                         CheckIfUnbreakablePressed(
                             state.unbreakable == 0 ? 1 : 0,
@@ -602,7 +611,9 @@ const LockpickingTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-
+            <View style={styles.UnbreakableText}>
+                <Text style={styles.PerkText}>Unbreakable</Text>
+            </View>
           <View title='Master Locks Blue' style={{
                 position: 'absolute',
                 left: "57%",
@@ -621,9 +632,7 @@ const LockpickingTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterLocksModal")}
                     onPress={() => {
                         CheckMasterLocksPressed(
                             state.masterLocks == 0 ? 1 : 0,
@@ -633,8 +642,8 @@ const LockpickingTree = () => {
                     <StarIconGold />
                 </TouchableOpacity>
             </View>
-            <View style={styles.LockpickingTree}>
-                <Text style={styles.PerkText}>Lockpicking Tree</Text>
+            <View style={styles.MasterLocksText}>
+                <Text style={styles.PerkText}>Master Locks</Text>
             </View>
       <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
         <Line // Novice Locks to Apprentice Locks
@@ -742,69 +751,76 @@ const styles = StyleSheet.create({
     },
     NoviceLocksText: {
         position: 'absolute',
-        left: "25%",
-        top: "83%",
+        left: "55%",
+        top: "81%",
         zIndex: 10,
     },
     ApprenticeLocksText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
+        left: "59%",
+        top: "72%",
         zIndex: 10,
     },
     QuickHandsText: {
         position: 'absolute',
-        left: "13%",
-        top: "53%",
+        left: "31%",
+        top: "68%",
         zIndex: 10,
     },
     WaxKeyText: {
         position: 'absolute',
-        left: "20%",
-        top: "46%",
+        left: "10%",
+        top: "65%",
         zIndex: 10,
     },
     AdeptLocksText: {
         position: 'absolute',
-        left: "24%",
-        top: "34%",
+        left: "72%",
+        top: "59%",
         zIndex: 10,
     },
     GoldenTouchText: {
         position: 'absolute',
-        left: "44%",
-        top: "34%",
+        left: "37%",
+        top: "50%",
         zIndex: 10,
     },
     TreasureHunterText: {
         position: 'absolute',
-        left: "64%",
-        top: "40%",
+        left: "10%",
+        top: "49%",
         zIndex: 10,
     },
     ExpertLocksText: {
         position: 'absolute',
-        left: "82%",
-        top: "50%",
+        left: "77%",
+        top: "43%",
         zIndex: 10,
     },
     LocksmithText: {
         position: 'absolute',
-        left: "70%",
-        top: "50%",
+        left: "37%",
+        top: "38%",
         zIndex: 10,
     },
     UnbreakableText: {
         position: 'absolute',
-        left: "50%",
-        top: "60%",
+        left: "10%",
+        top: "37%",
         zIndex: 10,
     },
 
     MasterLocksText: {
-        color: 'white',
-        fontSize: 12,
-    }
+      position: 'absolute',
+      left: "60%",
+      top: "28%",
+      zIndex: 10,
+    },
+
+    PerkText: {
+      color: 'white',
+      fontSize: 12,
+  }
 });
 
 export default LockpickingTree;

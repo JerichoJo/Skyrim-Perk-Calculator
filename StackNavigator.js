@@ -159,7 +159,66 @@ function Modal() {
                 <ModalNav.Screen name="SilentRollModal" component={modals.SilentRollModal} />
                 <ModalNav.Screen name="StealthModal" component={modals.StealthModal} />
             </ModalNav.Group>
-            
+
+            {/* Block Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="BlockRunnerModal" component={modals.BlockRunnerModal} />
+                <ModalNav.Screen name="DeadlyBashModal" component={modals.DeadlyBashModal} />
+                <ModalNav.Screen name="DeflectArrowsModal" component={modals.DeflectArrowsModal} />
+                <ModalNav.Screen name="DisarmingBashModal" component={modals.DisarmingBashModal} />
+                <ModalNav.Screen name="ElementalProtectionModal" component={modals.ElementalProtectionModal} />
+                <ModalNav.Screen name="PowerBashModal" component={modals.PowerBashModal} />
+                <ModalNav.Screen name="QuickReflexesModal" component={modals.QuickReflexesModal} />
+                <ModalNav.Screen name="ShieldChargeModal" component={modals.ShieldChargeModal} />
+                <ModalNav.Screen name="ShieldWallModal" component={modals.ShieldWallModal} />
+            </ModalNav.Group>
+
+            {/* Destruction Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="AdeptDestructionModal" component={modals.AdeptDestructionModal} />
+                <ModalNav.Screen name="ApprenticeDestructionModal" component={modals.ApprenticeDestructionModal} />
+                <ModalNav.Screen name="AugmentedFlamesModal" component={modals.AugmentedFlamesModal} />
+                <ModalNav.Screen name="AugmentedFrostModal" component={modals.AugmentedFrostModal} />
+                <ModalNav.Screen name="AugmentedShockModal" component={modals.AugmentedShockModal} />
+                <ModalNav.Screen name="DeepFreezeModal" component={modals.DeepFreezeModal} />
+                <ModalNav.Screen name="DestructionDualCastingModal" component={modals.DestructionDualCastingModal} />
+                <ModalNav.Screen name="DisintegrateModal" component={modals.DisintegrateModal} />
+                <ModalNav.Screen name="ExpertDestructionModal" component={modals.ExpertDestructionModal} />
+                <ModalNav.Screen name="ImpactModal" component={modals.ImpactModal} />
+                <ModalNav.Screen name="IntenseFlamesModal" component={modals.IntenseFlamesModal} />
+                <ModalNav.Screen name="MasterDestructionModal" component={modals.MasterDestructionModal} />
+                <ModalNav.Screen name="NoviceDestructionModal" component={modals.NoviceDestructionModal} />
+                <ModalNav.Screen name="RuneMasterModal" component={modals.RuneMasterModal} />
+            </ModalNav.Group>      
+
+            {/* One Handed Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="ArmsmanModal" component={modals.ArmsmanModal} />
+                <ModalNav.Screen name="BladesmanModal" component={modals.BladesmanModal} />
+                <ModalNav.Screen name="BoneBreakerModal" component={modals.BoneBreakerModal} />
+                <ModalNav.Screen name="CriticalChargeModal" component={modals.CriticalChargeModal} />
+                <ModalNav.Screen name="DualFlurryModal" component={modals.DualFlurryModal} />
+                <ModalNav.Screen name="DualSavageryModal" component={modals.DualSavageryModal} />
+                <ModalNav.Screen name="FightingStanceModal" component={modals.FightingStanceModal} />
+                <ModalNav.Screen name="HackAndSlashModal" component={modals.HackAndSlashModal} />
+                <ModalNav.Screen name="ParalyzingStrikeModal" component={modals.ParalyzingStrikeModal} />
+                <ModalNav.Screen name="SavageStrikeModal" component={modals.SavageStrikeModal} />
+            </ModalNav.Group>        
+
+            {/* Lockpicking Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="AdeptLocksModal" component={modals.AdeptLocksModal} />
+                <ModalNav.Screen name="ApprenticeLocksModal" component={modals.ApprenticeLocksModal} />
+                <ModalNav.Screen name="ExpertLocksModal" component={modals.ExpertLocksModal} />
+                <ModalNav.Screen name="GoldenTouchModal" component={modals.GoldenTouchModal} />
+                <ModalNav.Screen name="LocksmithModal" component={modals.LocksmithModal} />
+                <ModalNav.Screen name="MasterLocksModal" component={modals.MasterLocksModal} />
+                <ModalNav.Screen name="NoviceLocksModal" component={modals.NoviceLocksModal} />
+                <ModalNav.Screen name="QuickHandsModal" component={modals.QuickHandsModal} />
+                <ModalNav.Screen name="TreasureHunterModal" component={modals.TreasureHunterModal} />
+                <ModalNav.Screen name="UnbreakableModal" component={modals.UnbreakableModal} />
+                <ModalNav.Screen name="WaxKeyModal" component={modals.WaxKeyModal} />
+            </ModalNav.Group>              
             
         </ModalNav.Navigator>
     );

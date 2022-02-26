@@ -385,7 +385,7 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => navigation.navigate("Other Stuff")}
+          onLongPress={() => navigation.navigate("NoviceDestructionModal")}
           onPress={() => {
             checkIfNoviceDestructionPressed(
               state.noviceDestruction == 0 ? 1 : 0,
@@ -394,6 +394,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.NoviceDestructionText}>
+                <Text style={styles.PerkText}>Novice Destruction</Text>
+            </View>  
       <View title='Apprentice Destruction Blue' style={{
         position: 'absolute',
         left: "48%",
@@ -413,9 +416,7 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("ApprenticeDestructionModal")}
           onPress={() => {
             checkIfApprenticeDestructionPressed(
               state.apprenticeDestruction == 0 ? 1 : 0,
@@ -425,6 +426,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.ApprenticeDestructionText}>
+                <Text style={styles.PerkText}>Apprentice Destruction</Text>
+            </View>
       <View title='Adept Destruction Blue' style={{
         position: 'absolute',
         left: "46%",
@@ -443,9 +447,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("AdeptDestructionModal")}
+
           onPress={() => {
             checkIfAdeptDestructionPressed(
               state.adeptDestruction == 0 ? 1 : 0,
@@ -455,6 +458,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.AdeptDestructionText}>
+                <Text style={styles.PerkText}>Adept Destruction</Text>
+            </View>
       <View title='Expert Destruction Blue' style={{
         position: 'absolute',
         left: "51%",
@@ -473,9 +479,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("ExpertDestructionModal")}
+
           onPress={() => {
             checkIfExpertDestructionPressed(
               state.expertDestruction == 0 ? 1 : 0,
@@ -485,6 +490,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.ExpertDestructionText}>
+                <Text style={styles.PerkText}>Expert Destruction</Text>
+            </View>
       <View title='Master Destruction Blue' style={{
         position: 'absolute',
         left: "50%",
@@ -503,9 +511,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("MasterDestructionModal")}
+
           onPress={() => {
             checkIfMasterDestructionPressed(
               state.masterDestruction == 0 ? 1 : 0,
@@ -515,6 +522,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.MasterDestructionText}>
+                <Text style={styles.PerkText}>Master Destruction</Text>
+            </View>
       <View title='Rune Master Blue' style={{
         position: 'absolute',
         left: "62%",
@@ -533,9 +543,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("RuneMasterModal")}
+
           onPress={() => {
             checkIfRuneMasterPressed(
               state.runeMaster == 0 ? 1 : 0,
@@ -545,6 +554,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.RuneMasterText}>
+                <Text style={styles.PerkText}>Rune Master</Text>
+            </View>
       <View title='Augmented Flames Blue' style={{
         position: 'absolute',
         left: "-1%",
@@ -563,9 +575,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("AugmentedFlamesModal")}
+
           onPress={() => {
             checkIfAugmentedFlamesPressed(
               state.augmentedFlames == 0 ? 1 : 0,
@@ -575,6 +586,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.AugmentedFlamesText}>
+                <Text style={styles.PerkText}>Augmented{"\n"}Flames</Text>
+            </View>
       <View title='Intense Flames Blue' style={{
         position: 'absolute',
         left: "-2%",
@@ -593,9 +607,7 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("IntenseFlamesModal")}
           onPress={() => {
             checkIntenseFlamesPressed(
               state.intenseFlames == 0 ? 1 : 0,
@@ -605,6 +617,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.IntenseFlamesText}>
+                <Text style={styles.PerkText}>Intense{"\n"}Flames</Text>
+            </View>
       <View title='Augmented Frost Blue' style={{
         position: 'absolute',
         left: "13%",
@@ -623,9 +638,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("AugmentedFrostModal")}
+
           onPress={() => {
             checkIfAugmentedFrostPressed(
               state.augmentedFrost == 0 ? 1 : 0,
@@ -635,7 +649,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
-
+      <View style={styles.AugmentedFrostText}>
+                <Text style={styles.PerkText}>Augmented Frost</Text>
+            </View>
       <View title='Augmented Shock Blue' style={{
         position: 'absolute',
         left: "29%",
@@ -654,9 +670,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("AugmentedShockModal")}
+
           onPress={() => {
             checkIfAugmentedShockPressed(
               state.augmentedShock == 0 ? 1 : 0,
@@ -666,6 +681,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.AugmentedShockText}>
+                <Text style={styles.PerkText}>Augmented Shock</Text>
+            </View>
       <View title='Disintegrate Blue' style={{
         position: 'absolute',
         left: "29%",
@@ -684,9 +702,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("DisintegrateModal")}
+
           onPress={() => {
             checkIfDisintegratePressed(
               state.disintegrate == 0 ? 1 : 0,
@@ -696,6 +713,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.DisintegrateText}>
+                <Text style={styles.PerkText}>Disintegrate</Text>
+            </View>
       <View title='Destruction Dual Casting Blue' style={{
         position: 'absolute',
         left: "59%",
@@ -714,9 +734,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("DestructionDualCastingModal")}
+
           onPress={() => {
             checkIfDestructionDualPressed(
               state.destructionDualCasting == 0 ? 1 : 0,
@@ -726,6 +745,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.DestructionDualCastingText}>
+                <Text style={styles.PerkText}>Destruction{"\n"}Dual Casting</Text>
+            </View>
       <View title='Impact Blue' style={{
         position: 'absolute',
         left: "69%",
@@ -744,9 +766,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("ImpactModal")}
+
           onPress={() => {
             checkIfImpactPressed(
               state.impact == 0 ? 1 : 0,
@@ -756,6 +777,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.ImpactText}>
+                <Text style={styles.PerkText}>Impact</Text>
+            </View>
       <View title='Deep Freeze Blue' style={{
         position: 'absolute',
         left: "14%",
@@ -774,9 +798,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("DeepFreezeModal")}
+
           onPress={() => {
             checkIfDeepFreezePressed(
               state.deepFreeze == 0 ? 1 : 0,
@@ -786,6 +809,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.DeepFreezeText}>
+                <Text style={styles.PerkText}>Deep Freeze</Text>
+            </View>
       <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
         <Line // Novice Destruction to Apprentice Destruction
@@ -921,80 +947,80 @@ const styles = StyleSheet.create({
   },
   ApprenticeDestructionText: {
     position: 'absolute',
-    left: "33%",
-    top: "55%",
+    left: "40%",
+    top: "63%",
     zIndex: 10,
   },
   AdeptDestructionText: {
     position: 'absolute',
-    left: "13%",
-    top: "53%",
+    left: "48%",
+    top: "42%",
     zIndex: 10,
   },
   ExpertDestructionText: {
     position: 'absolute',
-    left: "20%",
-    top: "46%",
+    left: "51%",
+    top: "31%",
     zIndex: 10,
   },
   MasterDestructionText: {
     position: 'absolute',
-    left: "24%",
-    top: "34%",
+    left: "48%",
+    top: "20%",
     zIndex: 10,
   },
   RuneMasterText: {
     position: 'absolute',
-    left: "44%",
-    top: "34%",
+    left: "74%",
+    top: "45%",
     zIndex: 10,
   },
   AugmentedFlamesText: {
     position: 'absolute',
-    left: "64%",
-    top: "40%",
+    left: "2%",
+    top: "63%",
     zIndex: 10,
   },
   IntenseFlamesText: {
     position: 'absolute',
-    left: "82%",
-    top: "50%",
+    left: "3%",
+    top: "43%",
     zIndex: 10,
   },
   AugmentedFrostText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "13%",
+    top: "56%",
     zIndex: 10,
   },
   DeepFreezeText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "10%",
+    top: "35%",
     zIndex: 10,
   },
   AugmentedShockText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "28%",
+    top: "52%",
     zIndex: 10,
   },
   DisintegrateText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "30%",
+    top: "30%",
     zIndex: 10,
   },
   DestructionDualCastingText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "68%",
+    top: "72%",
     zIndex: 10,
   },
   ImpactText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "79%",
+    top: "55%",
     zIndex: 10,
   },
   PerkText: {

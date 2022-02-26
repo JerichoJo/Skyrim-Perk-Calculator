@@ -119,6 +119,28 @@ import ShadowWarriorModal from "./SneakModals.js/ShadowWarriorModal";
 import SilenceModal from "./SneakModals.js/SilenceModal";
 import SilentRollModal from "./SneakModals.js/SilentRollModal";
 import StealthModal from "./SneakModals.js/StealthModal";
+import ArmsmanModal from "./OneHandedModals/ArmsmanModal";
+import BladesmanModal from "./OneHandedModals/BladesmanModal";
+import BoneBreakerModal from "./OneHandedModals/BoneBreakerModal";
+import CriticalChargeModal from "./OneHandedModals/CriticalChargeModal";
+import DualFlurryModal from "./OneHandedModals/DualFlurryModal";
+import DualSavageryModal from "./OneHandedModals/DualSavageryModal";
+import FightingStanceModal from "./OneHandedModals/FightingStanceModal";
+import HackAndSlashModal from "./OneHandedModals/HackAndSlashModal";
+import ParalyzingStrikeModal from "./OneHandedModals/ParalyzingStrikeModal";
+import SavageStrikeModal from "./OneHandedModals/SavageStrikeModal";
+import AdeptLocksModal from "./LockpickingModals/AdeptLocksModal";
+import ApprenticeLocksModal from "./LockpickingModals/ApprenticeLocksModal";
+import ExpertLocksModal from "./LockpickingModals/ExpertLocksModal";
+import GoldenTouchModal from "./LockpickingModals/GoldenTouchModal";
+import LocksmithModal from "./LockpickingModals/LocksmithModal";
+import MasterLocksModal from "./LockpickingModals/MasterLocksModal";
+import NoviceLocksModal from "./LockpickingModals/NoviceLocksModal";
+import QuickHandsModal from "./LockpickingModals/QuickHandsModal";
+import TreasureHunterModal from "./LockpickingModals/TreasureHunterModal";
+import UnbreakableModal from "./LockpickingModals/UnbreakableModal";
+import WaxKeyModal from "./LockpickingModals/WaxKeyModal";
+
 
 
 const modals = {
@@ -266,6 +288,31 @@ const modals = {
     SilenceModal,
     SilentRollModal,
     StealthModal,
+
+    // One Handed Modals
+    ArmsmanModal,
+    BladesmanModal,
+    BoneBreakerModal,
+    CriticalChargeModal,
+    DualFlurryModal,
+    DualSavageryModal,
+    FightingStanceModal,
+    HackAndSlashModal,
+    ParalyzingStrikeModal,
+    SavageStrikeModal,
+
+    // Lockpicking Modals
+    AdeptLocksModal,
+    ApprenticeLocksModal,
+    ExpertLocksModal,
+    GoldenTouchModal,
+    LocksmithModal,
+    MasterLocksModal,
+    NoviceLocksModal,
+    QuickHandsModal,
+    TreasureHunterModal,
+    UnbreakableModal,
+    WaxKeyModal,
     
 }
 

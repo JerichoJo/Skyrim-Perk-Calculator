@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
-const ShieldWallModal = ({ navigation }) => {
+const NoviceLocksModal = ({ navigation }) => {
 
     return (
         <View
@@ -17,21 +17,16 @@ const ShieldWallModal = ({ navigation }) => {
             <View
                 style={styles.TextBox}
                 onPress={navigation.goBack}>
-                <Text style={styles.Title}>Shield Wall{"\n"}</Text>
+                <Text style={styles.Title}>Novice Locks{"\n"}</Text>
 
-                <Text style={styles.Text}>1: Blocking is 10% more effective{"\n"}
-                2: Blocking is 20% more effective{"\n"} 
-                3: Blocking is 30% more effective{"\n"}
-                4: Blocking is 40% more effective{"\n"}
-                5: Blocking is 50% more effective{"\n"}
-                 </Text>
+                <Text style={styles.Text}>Novice locks are much easier to pick</Text>
 
             </View>
 
         </View>
     );
 }
-export default ShieldWallModal;
+export default NoviceLocksModal;
 
 const styles = StyleSheet.create({
     Container: {

@@ -310,7 +310,7 @@ const BlockTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => navigation.navigate("Other Stuff")}
+          onLongPress={() => navigation.navigate("ShieldWallModal")}
           onPress={() => {
             CheckIfShieldWallPressed(
               state.shieldWall == 0 ? 1 : 0,
@@ -319,6 +319,9 @@ const BlockTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.ShieldWallText}>
+                <Text style={styles.PerkText}>Shield Wall</Text>
+        </View>
       <View title='Quick Reflexes Blue' style={{
         position: 'absolute',
         left: "34%",
@@ -338,9 +341,7 @@ const BlockTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("QuickReflexesModal")}
           onPress={() => {
             CheckIfQuickReflexesPressed(
               state.quickReflexes == 0 ? 1 : 0,
@@ -350,6 +351,9 @@ const BlockTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.QuickReflexesText}>
+                <Text style={styles.PerkText}>Quick Reflexes</Text>
+            </View>
       <View title='Deflect Arrows Blue' style={{
         position: 'absolute',
         left: "9%",
@@ -368,9 +372,7 @@ const BlockTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("DeflectArrows")}
           onPress={() => {
             CheckIfDeflectArrowsPressed(
               state.deflectArrows == 0 ? 1 : 0,
@@ -380,6 +382,9 @@ const BlockTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.DeflectArrowsText}>
+                <Text style={styles.PerkText}>Deflect Arrows</Text>
+            </View>
       <View title='Elemental Protection Blue' style={{
         position: 'absolute',
         left: "11%",
@@ -398,9 +403,7 @@ const BlockTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("ElementalProtectionModal")}
           onPress={() => {
             CheckIfElementalProtectionPressed(
               state.elementalProtection == 0 ? 1 : 0,
@@ -410,6 +413,9 @@ const BlockTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.ElementalProtectionText}>
+                <Text style={styles.PerkText}>Elemental Protection</Text>
+            </View>
       <View title='Block Runner Blue' style={{
         position: 'absolute',
         left: "20%",
@@ -428,9 +434,7 @@ const BlockTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("BlockRunnerModal")}
           onPress={() => {
             CheckIfBlockRunnerPressed(
               state.blockRunner == 0 ? 1 : 0,
@@ -440,6 +444,9 @@ const BlockTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.BlockRunnerText}>
+                <Text style={styles.PerkText}>Block Runner</Text>
+            </View>
       <View title='Shield Charge Blue' style={{
         position: 'absolute',
         left: "43%",
@@ -458,9 +465,7 @@ const BlockTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("ShieldChargeModal")}
           onPress={() => {
             checkIfShieldChargePressed(
               state.shieldCharge == 0 ? 1 : 0,
@@ -471,6 +476,9 @@ const BlockTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.ShieldChargeText}>
+                <Text style={styles.PerkText}>Shield Charge</Text>
+            </View>
       <View title='Disarming Bash Blue' style={{
         position: 'absolute',
         left: "68%",
@@ -489,9 +497,7 @@ const BlockTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("DisarmingBashModal")}
           onPress={() => {
             CheckIfDisarmingBashPressed(
               state.disarmingBash == 0 ? 1 : 0,
@@ -501,6 +507,9 @@ const BlockTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.DisarmingBashText}>
+                <Text style={styles.PerkText}>Disarming Bash</Text>
+            </View>
       <View title='Deadly Bash Blue' style={{
         position: 'absolute',
         left: "74%",
@@ -519,9 +528,7 @@ const BlockTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("DeadlyBashModal")}
           onPress={() => {
             CheckIfDeadlyBashPressed(
               state.deadlyBash == 0 ? 1 : 0,
@@ -531,6 +538,9 @@ const BlockTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.DeadlyBashText}>
+                <Text style={styles.PerkText}>Deadly Bash</Text>
+            </View>
       <View title='Power Bash Blue' style={{
         position: 'absolute',
         left: "74%",
@@ -549,9 +559,8 @@ const BlockTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("PowerBashModal")}
+
           onPress={() => {
             CheckIfPowerBashPressed(
               state.powerBash == 0 ? 1 : 0,
@@ -561,6 +570,9 @@ const BlockTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
+      <View style={styles.PowerBashText}>
+                <Text style={styles.PerkText}>Power Bash</Text>
+            </View>
       <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
         <Line // Shield Wall to Deflect Arrows
@@ -659,56 +671,56 @@ const styles = StyleSheet.create({
   },
   ShieldWallText: {
     position: 'absolute',
-    left: "25%",
-    top: "83%",
+    left: "41%",
+    top: "82%",
     zIndex: 10,
   },
   DeflectArrowsText: {
     position: 'absolute',
-    left: "33%",
-    top: "55%",
+    left: "5%",
+    top: "73%",
     zIndex: 10,
   },
   ElementalProtectionText: {
     position: 'absolute',
-    left: "13%",
-    top: "53%",
+    left: "7%",
+    top: "57%",
     zIndex: 10,
   },
   BlockRunnerText: {
     position: 'absolute',
-    left: "20%",
-    top: "46%",
+    left: "7%",
+    top: "43%",
     zIndex: 10,
   },
   PowerBashText: {
     position: 'absolute',
-    left: "24%",
-    top: "34%",
+    left: "73%",
+    top: "73%",
     zIndex: 10,
   },
   DeadlyBashText: {
     position: 'absolute',
-    left: "44%",
-    top: "34%",
+    left: "75%",
+    top: "57%",
     zIndex: 10,
   },
   DisarmingBashText: {
     position: 'absolute',
-    left: "64%",
-    top: "40%",
+    left: "70%",
+    top: "47%",
     zIndex: 10,
   },
   ShieldChargeText: {
     position: 'absolute',
-    left: "82%",
-    top: "50%",
+    left: "45%",
+    top: "37%",
     zIndex: 10,
   },
   QuickReflexesText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "40%",
+    top: "60%",
     zIndex: 10,
   },
   PerkText: {

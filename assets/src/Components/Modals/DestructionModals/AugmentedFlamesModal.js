@@ -19,7 +19,9 @@ const AugmentedFlamesModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Augmented Flames{"\n"}</Text>
 
-                <Text style={styles.Text}>2 incremements </Text>
+                <Text style={styles.Text}>1: Fire spells do 25% more damage {"\n"}
+                2: Fire spells do 50% more damage
+                </Text>
 
             </View>
 

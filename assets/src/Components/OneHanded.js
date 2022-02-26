@@ -276,7 +276,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("Other Stuff")}
+                    onLongPress={() => navigation.navigate("ArmsmanModal")}
                     onPress={() => {
                         CheckIfArmsmanPressed(
                             state.armsman == 0 ? 1 : 0,
@@ -284,6 +284,9 @@ const OneHandedTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.ArmsmanText}>
+                <Text style={styles.PerkText}>Armsman</Text>
             </View>
             <View title='Hack and Slash Blue' style={{
                 position: 'absolute',
@@ -304,9 +307,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("HackAndSlashModal")}
                     onPress={() => {
                         checkIfHackAndSlashPressed(
                             state.hackAndSlash == 0 ? 1 : 0,
@@ -315,6 +316,9 @@ const OneHandedTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.HackAndSlashText}>
+                <Text style={styles.PerkText}>Hack and Slash</Text>
             </View>
             <View title='Bladesman Blue' style={{
                 position: 'absolute',
@@ -334,9 +338,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("BladesmanModal")}
                     onPress={() => {
                         CheckIfBladesmanPressed(
                             state.bladesman == 0 ? 1 : 0,
@@ -345,6 +347,9 @@ const OneHandedTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.BladesmanText}>
+                <Text style={styles.PerkText}>Bladesman</Text>
             </View>
             <View title='Bone Breaker Blue' style={{
                 position: 'absolute',
@@ -364,9 +369,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("BoneBreakerModal")}
                     onPress={() => {
                         CheckIfBoneBreakerPressed(
                             state.bonebreaker == 0 ? 1 : 0,
@@ -375,6 +378,9 @@ const OneHandedTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.BoneBreakerText}>
+                <Text style={styles.PerkText}>Bone Breaker</Text>
             </View>
             <View title='Fighting Stance Blue' style={{
                 position: 'absolute',
@@ -394,9 +400,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("FightingStanceModal")}
                     onPress={() => {
                         checkIfFightingStancePressed(
                             state.fightingStance == 0 ? 1 : 0,
@@ -405,6 +409,9 @@ const OneHandedTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.FightingStanceText}>
+                <Text style={styles.PerkText}>Fighting Stance</Text>
             </View>
             <View title='Critical Charge Blue' style={{
                 position: 'absolute',
@@ -424,9 +431,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("CriticalChargeModal")}
                     onPress={() => {
                         checkIfCriticalChargePressed(
                             state.criticalCharge == 0 ? 1 : 0,
@@ -435,6 +440,9 @@ const OneHandedTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.CriticalChargeText}>
+                <Text style={styles.PerkText}>Critical Charge</Text>
             </View>
             <View title='Savage Strike Blue' style={{
                 position: 'absolute',
@@ -454,9 +462,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SavageStrikeModal")}
                     onPress={() => {
                         checkIfSavageStrikePressed(
                             state.savageStrike == 0 ? 1 : 0,
@@ -465,6 +471,9 @@ const OneHandedTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.SavageStrikeText}>
+                <Text style={styles.PerkText}>Savage Strike</Text>
             </View>
             <View title='Paralyzing Strike Blue' style={{
                 position: 'absolute',
@@ -484,9 +493,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ParalyzingStrikeModal")}
                     onPress={() => {
                         checkIfParalyzingStrikePressed(
                             state.paralyzingStrike == 0 ? 1 : 0,
@@ -495,6 +502,9 @@ const OneHandedTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.ParalyzingStrikeText}>
+                <Text style={styles.PerkText}>Paralyzing Strike</Text>
             </View>
             <View title='Dual Flurry Blue' style={{
                 position: 'absolute',
@@ -514,9 +524,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DualFlurryModal")}
                     onPress={() => {
                         checkIfDualFlurryPressed(
                             state.dualFlurry == 0 ? 1 : 0,
@@ -525,6 +533,9 @@ const OneHandedTree = () => {
                     }}>
                     <StarIconGold />
                 </TouchableOpacity>
+            </View>
+            <View style={styles.DualFlurryText}>
+                <Text style={styles.PerkText}>Dual Flurry</Text>
             </View>
                       <View title='Dual Savagery Blue' style={{
                 position: 'absolute',
@@ -544,9 +555,7 @@ const OneHandedTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DualSavageryModal")}
                     onPress={() => {
                         checkIfDualSavageryChecked(
                             state.dualSavagery == 0 ? 1 : 0,
@@ -663,62 +672,62 @@ const styles = StyleSheet.create({
     },
     ArmsmanText: {
         position: 'absolute',
-        left: "25%",
+        left: "24%",
         top: "83%",
         zIndex: 10,
     },
     BladesmanText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
+        left: "60%",
+        top: "65%",
         zIndex: 10,
     },
     BoneBreakerText: {
         position: 'absolute',
-        left: "13%",
-        top: "53%",
+        left: "40%",
+        top: "57%",
         zIndex: 10,
     },
     DualFlurryText: {
         position: 'absolute',
-        left: "20%",
-        top: "46%",
+        left: "70%",
+        top: "74%",
         zIndex: 10,
     },
     DualSavageryText: {
         position: 'absolute',
-        left: "24%",
-        top: "34%",
+        left: "59%",
+        top: "39%",
         zIndex: 10,
     },
     FightingStanceText: {
         position: 'absolute',
-        left: "44%",
-        top: "34%",
+        left: "2%",
+        top: "57.2%",
         zIndex: 10,
     },
     CriticalChargeText: {
         position: 'absolute',
-        left: "64%",
-        top: "40%",
+        left: "47%",
+        top: "48%",
         zIndex: 10,
     },
     SavageStrikeText: {
         position: 'absolute',
-        left: "82%",
-        top: "50%",
+        left: "7%",
+        top: "40%",
         zIndex: 10,
     },
     ParalyzingStrikeText: {
         position: 'absolute',
-        left: "70%",
-        top: "50%",
+        left: "17%",
+        top: "25%",
         zIndex: 10,
     },
     HackAndSlashText: {
         position: 'absolute',
-        left: "50%",
-        top: "60%",
+        left: "2%",
+        top: "70%",
         zIndex: 10,
     },
 
