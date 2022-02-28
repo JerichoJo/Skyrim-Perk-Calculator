@@ -238,13 +238,15 @@ const Enchanting = () => {
         } else {
             setState({ frostEnchanterLine: lineColor });
             setState({ frostEnchanter: buttonColor }); // Change button color back and forth
+            setState({ fireEnchanterLine: lineColor });
+            setState({ fireEnchanter: buttonColor });
             state.frostEnchanter == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
 
         }
     };
-    const CheckIfStormEnchantingPressed = (buttonColor, lineColor) => {
+    const CheckIfStormEnchantingPressed = (buttonColor, lineColor, lineColor2) => {
         if (state.frostEnchanter == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ enchanter: buttonColor });
@@ -263,10 +265,17 @@ const Enchanting = () => {
                 IncrementCounter(3);
             }
             if (state.extraEffect == 1){
-                setState({stormExtraLine: lineColor})
+                setState({stormExtraLine: lineColor2})
             }
-        } else if (state.extraEffect == 1) {
+        } else if (state.extraEffect == 1 && state.corpusEnchanter == 0) {
             // Do nothing....must un-select nodes above it first
+        } else if (state.extraEffect == 1 && state.corpusEnchanter == 1){
+            setState({ stormExtraLine: lineColor2 });
+            setState({ stormEnchanting: buttonColor });
+            setState({ stormEnchantingLine: lineColor }); // Change the pressed button color back and forth
+            state.stormEnchanting == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else {
             setState({ stormEnchantingLine: lineColor });
             setState({ stormEnchanting: buttonColor }); // Change the pressed button color back and forth
@@ -276,19 +285,12 @@ const Enchanting = () => {
 
         }
     };
-    const CheckIfExtraEffectPressed = (buttonColor, lineColor) => {
+    const CheckIfExtraEffectPressed = (buttonColor, lineColor, lineColor2) => {
 
-        if (state.corpusEnchanter == 0 && state.stormEnchanting == 0 && state.insightfulEnchanter == 0) {
+        if (state.corpusEnchanter == 1 && state.stormEnchanting == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ extraEffect: buttonColor });
-            setState({ stormEnchanting: buttonColor });
-            setState({ frostEnchanter: buttonColor });
-            setState({ fireEnchanter: buttonColor });
-            setState({ enchanter: buttonColor });
-            setState({ stormExtraLine: lineColor });
-            setState({ stormEnchantingLine: lineColor });
-            setState({ frostEnchanterLine: lineColor });
-            setState({ fireEnchanterLine: lineColor });
+            setState({ extraEffectLine: lineColor});
             
             if (state.enchanter == 0) {
                 SetEnchanterLevel(1);
@@ -301,26 +303,31 @@ const Enchanting = () => {
                 IncrementCounter(4);
             }
 
+        } else if (state.corpusEnchanter == 0 && state.stormEnchanting == 1){
+            setState({ extraEffect : buttonColor });
+            setState({ stormExtraLine: lineColor2 });
+
         } else if (state.corpusEnchanter == 1 && state.stormEnchanting == 1){
             setState({ extraEffect : buttonColor });
             setState({ extraEffectLine : lineColor });
-            setState({ stormExtraLine : lineColor });
+            setState({ stormExtraLine : lineColor2 });
 
-        } else if (state.corpusEnchanter == 1){
+        }else if (state.insightfulEnchanter == 1){
             setState({ extraEffect: buttonColor });
             setState({ extraEffectLine: lineColor });
+            setState({ corpusEnchanter: buttonColor });
+            setState({ corpusEnchanterLine: lineColor });
 
-        } else if(state.stormEnchanting == 1){
+        } else {
             setState({ extraEffect : buttonColor });
-            setState({ stormExtraLine : lineColor });
+            setState({ stormExtraLine : lineColor2 });
+            setState({ stormEnchanting : buttonColor });
+            setState({ stormEnchantingLine : lineColor });
+            setState({ frostEnchanter : buttonColor });
+            setState({ frostEnchanterLine : lineColor });
+            setState({ fireEnchanter : buttonColor });
+            setState({ fireEnchanterLine : lineColor });
         }        
-        else {          
-            setState({ extraEffect: buttonColor})
-            setState({ stormExtraLine: lineColor})
-            state.extraEffect == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-        }
 
         
 };
@@ -345,9 +352,6 @@ const Enchanting = () => {
         }
     };
     const CheckIfCorpusEnchanterPressed = (buttonColor, lineColor) => {
-        if (state.extraEffect == 1){
-            setState({ extraEffectLine: lineColor});
-        } 
         if (state.insightfulEnchanter == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ corpusEnchanter: buttonColor });
@@ -363,9 +367,19 @@ const Enchanting = () => {
             } else {
                 IncrementCounter(3);
             }
-            
+            if (state.extraEffect == 1){
+                setState({ extraEffectLine: lineColor});
+            } 
+        } else if (state.extraEffect == 1 && state.stormEnchanting == 0) {
+            // Do nothing....must un-select nodes above it first
+        } else if (state.extraEffect == 1 && state.stormEnchanting == 1){
+            setState({ extraEffectLine: lineColor });
+            setState({ corpusEnchanterLine: lineColor });
+            setState({ corpusEnchanter: buttonColor }); // Change the pressed button color back and forth
+            state.corpusEnchanter == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } 
-        
         else {
             setState({ corpusEnchanterLine: lineColor });
             setState({ corpusEnchanter: buttonColor }); // Change the pressed button color back and forth
@@ -589,7 +603,8 @@ const Enchanting = () => {
                     onPress={() => {
                         CheckIfStormEnchantingPressed(
                             state.stormEnchanting == 0 ? 1 : 0,
-                            state.stormEnchantingLine == 'white' ? 'gold' : 'white'
+                            state.stormEnchantingLine == 'white' ? 'gold' : 'white',
+                            state.stormExtraLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />
@@ -652,6 +667,7 @@ const Enchanting = () => {
                         CheckIfExtraEffectPressed(
                             state.extraEffect == 0 ? 1 : 0,
                             state.extraEffectLine == 'white' ? 'gold' : 'white',
+                            state.stormExtraLine == 'white' ? 'gold' : 'white',
                             
                         );
                     }}>
