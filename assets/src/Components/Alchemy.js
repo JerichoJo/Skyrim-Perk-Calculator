@@ -34,22 +34,22 @@ const AlchemyTree = () => {
     const [state, setState] = useSetState({
         alchemist: 0,
         physician: 0,
-        physicianLine: 'black',
+        physicianLine: 'white',
         prisoner: 0,
-        prisonerLine: 'black',
+        prisonerLine: 'white',
         concentratedPoison: 0,
-        concentratedPoisonLine: 'black',
+        concentratedPoisonLine: 'white',
         benefactor: 0,
-        benefactorLine: 'black',
+        benefactorLine: 'white',
         experimenter: 0,
-        experimenterLine: 'black',
+        experimenterLine: 'white',
         snakeblood: 0,
-        snakebloodLine: 'black',
+        snakebloodLine: 'white',
         purity: 0,
-        purityLine: 'black',
+        purityLine: 'white',
         greenThumb: 0,
-        greenThumbLine: 'black',
-        greenThumbLineLight: 'black',
+        greenThumbLine: 'white',
+        experimenterSnakeLine: 'white',
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -58,6 +58,7 @@ const AlchemyTree = () => {
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const [AlchemyLevel, SetAlchemyLevel] = useState(0);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -70,6 +71,32 @@ const AlchemyTree = () => {
         SetActivePerks(ActivePerks - numActivePerks);
         SetAllActivePerks(AllActivePerks - numActivePerks);
     };
+
+    const IncAlchemyCounter = (numActiveAlchemy, buttonColor) => {
+        if (AlchemyLevel < 5) {
+            SetAlchemyLevel(AlchemyLevel + numActiveAlchemy)
+        }
+        else {
+            SetAlchemyLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    const IncAlchemyCountCall = (buttonColor) => {
+        if (AlchemyLevel == 0) {
+            setState({ alchemy: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncAlchemyCounter(1); // increment basic smith by 1 on first click
+        } else if (AlchemyLevel == 5) {
+            setState({ alchemy: buttonColor }); // Change the pressed button color back and forth
+            IncAlchemyCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncAlchemyCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
 
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
@@ -107,13 +134,16 @@ const AlchemyTree = () => {
             state.arcaneSmithing == 1 ||
             state.benefactor == 1
         ) {
-            // Do nothing....must un-select nodes above it first
+            if (AlchemyLevel == 5){
+                DecrementCounter(4);
+                SetAlchemyLevel(1)
+            } else {
+                IncrementCounter(1);
+                IncAlchemyCounter(1);
+            }
         }
         else {
-            setState({ alchemist: button }); // Change button color back and forth
-            state.alchemist == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncAlchemyCountCall(button);
         }
     };
 
@@ -126,6 +156,9 @@ const AlchemyTree = () => {
             setState({ physicianLine: lineColor });
 
             IncrementCounter(2);
+            if (state.alchemist == 0) {
+                SetAlchemyLevel(1);
+            }
         } else if (state.prisoner == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -145,6 +178,9 @@ const AlchemyTree = () => {
             setState({ physician: buttonColor });
             setState({ prisonerLine: lineColor });
             setState({ physicianLine: lineColor });
+            if (state.alchemist == 0) {
+                SetAlchemyLevel(1);
+            }
             if (state.alchemist == 1) {
                 IncrementCounter(2);
             } else {
@@ -171,8 +207,11 @@ const AlchemyTree = () => {
             setState({ concentratedPoisonLine: lineColor });
             setState({ prisonerLine: lineColor });
             setState({ physicianLine: lineColor });
+            if (state.alchemist == 0) {
+                SetAlchemyLevel(1);
+            }
             if (state.greenThumb == 1) {
-                setState({ greenThumbLineLight: lineColor });
+                setState({ experimenterSnakeLine: lineColor });
             }
             if (state.physician == 1) {
                 IncrementCounter(2);
@@ -188,7 +227,7 @@ const AlchemyTree = () => {
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
             if (state.greenThumb == 1) {
-                setState({ greenThumbLineLight: lineColor });
+                setState({ experimenterSnakeLine: lineColor });
             }
 
         }
@@ -200,6 +239,9 @@ const AlchemyTree = () => {
             setState({ alchemist: buttonColor });
             setState({ benefactorLine: lineColor });
             IncrementCounter(2);
+            if (state.alchemist == 0) {
+                SetAlchemyLevel(1);
+            }
         } else if (state.experimenter == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -219,6 +261,9 @@ const AlchemyTree = () => {
             setState({ alchemist: buttonColor });
             setState({ experimenterLine: lineColor });
             setState({ benefactorLine: lineColor });
+            if (state.alchemist == 0) {
+                SetAlchemyLevel(1);
+            }
             if (state.alchemist == 1) {
                 IncrementCounter(2);
             } else {
@@ -242,9 +287,12 @@ const AlchemyTree = () => {
             setState({ experimenter: buttonColor });
             setState({ benefactor: buttonColor });
             setState({ alchemist: buttonColor });
-            setState({ snakebloodLine: lineColor });
+            setState({ experimenterSnakeLine: lineColor });
             setState({ experimenterLine: lineColor });
             setState({ benefactorLine: lineColor });
+            if (state.alchemist == 0) {
+                SetAlchemyLevel(1);
+            }
             if (state.benefactor == 1) {
                 IncrementCounter(2);
             } else if (state.alchemist == 1) {
@@ -274,6 +322,9 @@ const AlchemyTree = () => {
             setState({ snakebloodLine: lineColor });
             setState({ experimenterLine: lineColor });
             setState({ benefactorLine: lineColor });
+            if (state.alchemist == 0) {
+                SetAlchemyLevel(1);
+            }
             if (state.experimenter == 1) {
                 IncrementCounter(2);
             } else if (state.benefactor == 1) {
@@ -294,26 +345,27 @@ const AlchemyTree = () => {
         }
     };
     const CheckIfGreenThumbPressed = (buttonColor, lineColor) => {
-        if (state.purity == 0) {
+        if (state.concentratedPoison == 0) {
             setState({ greenThumb: buttonColor });
-            setState({ purity: buttonColor });
-            setState({ snakeblood: buttonColor });
-            setState({ experimenter: buttonColor });
-            setState({ benefactor: buttonColor });
+            setState({ concentratedPoison: buttonColor });
+            setState({ prisoner: buttonColor });
+            setState({ physician: buttonColor });
             setState({ alchemist: buttonColor });
             setState({ greenThumbLine: lineColor });
-            setState({ purityLine: lineColor });
-            setState({ snakebloodLine: lineColor });
-            setState({ experimenterLine: lineColor });
-            setState({ benefactorLine: lineColor });
-            if (state.concentratedPoison == 1) {
-                setState({ greenThumbLineLight: lineColor });
+            setState({ concentratedPoisonLine: lineColor });
+            setState({ prisonerLine: lineColor });
+            setState({ physicianLine: lineColor });
+            if (state.alchemist == 0) {
+                SetAlchemyLevel(1);
             }
-            if (state.snakeblood == 1) {
+            if (state.concentratedPoison == 1) {
+                setState({ experimenterSnakeLine: lineColor });
+            }
+            if (state.concentratedPoison == 1) {
                 IncrementCounter(2);
-            } else if (state.experimenter == 1) {
+            } else if (state.prisoner == 1) {
                 IncrementCounter(3);
-            } else if (state.benefactor == 1) {
+            } else if (state.physician == 1) {
                 IncrementCounter(4);
             } else if (state.alchemist == 1) {
                 IncrementCounter(5);
@@ -326,9 +378,6 @@ const AlchemyTree = () => {
             state.greenThumb == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-            if (state.concentratedPoison == 1) {
-                setState({ greenThumbLineLight: lineColor });
-            }
         }
     };
 
@@ -356,7 +405,7 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("alchemistModal")}
+                    onLongPress={() => navigation.navigate("AlchemistModal")}
                     onPress={() => {
                         CheckIfAlchemistPressed(
                             state.alchemist == 0 ? 1 : 0,
@@ -366,7 +415,7 @@ const AlchemyTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AlchemistText}>
-                <Text style={styles.PerkText}>Alchemist</Text>
+                <Text style={styles.PerkText}>Alchemist({AlchemyLevel}/5)</Text>
             </View>
             
             <View title='Physician Blue' style={{
@@ -387,13 +436,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PhysicianModal")}
                     onPress={() => {
                         CheckIfPhysicianPressed(
                             state.physician == 0 ? 1 : 0,
-                            state.physicianLine == 'black' ? 'gold' : 'black'
+                            state.physicianLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -420,13 +467,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PrisonerModal")}
                     onPress={() => {
                         CheckIfPrisonerPressed(
                             state.prisoner == 0 ? 1 : 0,
-                            state.prisonerLine == 'black' ? 'gold' : 'black'
+                            state.prisonerLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -453,13 +498,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ConcentratedPoisonModal")}
                     onPress={() => {
                         CheckIfConcentratedPoisonPressed(
                             state.concentratedPoison == 0 ? 1 : 0,
-                            state.concentratedPoisonLine == 'black' ? 'gold' : 'black'
+                            state.concentratedPoisonLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -486,14 +529,12 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("GreenThumbModal")}
                     onPress={() => {
                         CheckIfGreenThumbPressed(
                             state.greenThumb == 0 ? 1 : 0,
-                            state.greenThumbLine == 'black' ? 'gold' : 'black',
-                            state.greenThumbLineLight == 'black' ? 'gold' : 'black'
+                            state.greenThumbLine == 'white' ? 'gold' : 'white',
+                            state.experimenterSnakeLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -520,13 +561,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PurityModal")}
                     onPress={() => {
                         CheckIfPurityPressed(
                             state.purity == 0 ? 1 : 0,
-                            state.purityLine == 'black' ? 'gold' : 'black'
+                            state.purityLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -553,13 +592,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SnakebloodModal")}
                     onPress={() => {
                         CheckIfSnakebloodPressed(
                             state.snakeblood == 0 ? 1 : 0,
-                            state.snakebloodLine == 'black' ? 'gold' : 'black'
+                            state.snakebloodLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -586,13 +623,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExperimenterModal")}
                     onPress={() => {
                         CheckIfExperimenterPressed(
                             state.experimenter == 0 ? 1 : 0,
-                            state.experimenterLine == 'black' ? 'gold' : 'black'
+                            state.experimenterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -619,13 +654,11 @@ const AlchemyTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("BenefactorModal")}
                     onPress={() => {
                         CheckIfBenefactorPressed(
                             state.benefactor == 0 ? 1 : 0,
-                            state.benefactorLine == 'black' ? 'gold' : 'black'
+                            state.benefactorLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -670,7 +703,7 @@ const AlchemyTree = () => {
                     y1="39%"
                     x2="55%"
                     y2="55%"
-                    stroke={state.greenThumbLineLight}
+                    stroke={state.experimenterSnakeLine}
                     strokeWidth={lineStrokeWidth}
 
                 />

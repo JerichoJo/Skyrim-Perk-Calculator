@@ -34,8 +34,11 @@ export function DrawerContent(props) {
             label="Reset ALL Perks"
             labelStyle={styles.ItemLabel}
             onPress={() => {
-              SetAllActivePerks(0);
-              navigation.dispatch(DrawerActions.closeDrawer());
+              setTimeout(() => {
+                SetAllActivePerks(0);
+                navigation.dispatch(DrawerActions.closeDrawer());
+              }, 100)
+              
             }}
           >
           </DrawerItem>
@@ -43,8 +46,11 @@ export function DrawerContent(props) {
             label="Illusion"
             labelStyle={styles.ItemLabel}
             onPress={() => {
-              moveIT(0);
-              navigation.dispatch(DrawerActions.closeDrawer());
+              setTimeout(() => {
+                moveIT(0);
+                navigation.dispatch(DrawerActions.closeDrawer());
+              })
+              
             }}
           >
           </DrawerItem>
@@ -53,8 +59,11 @@ export function DrawerContent(props) {
             label="Conjuration"
             labelStyle={styles.ItemLabel}
             onPress={() => {
-              moveIT(1);
-              navigation.dispatch(DrawerActions.closeDrawer());
+              setTimeout(() => {
+                moveIT(1);
+                navigation.dispatch(DrawerActions.closeDrawer());
+              })
+              
 
             }}
           >
@@ -64,8 +73,11 @@ export function DrawerContent(props) {
             label="Destruction"
             labelStyle={styles.ItemLabel}
             onPress={() => {
-              moveIT(2);
-              navigation.dispatch(DrawerActions.closeDrawer());
+              setTimeout(() => {
+                moveIT(2);
+                navigation.dispatch(DrawerActions.closeDrawer());
+              })
+              
             }}
           >
           </DrawerItem>
@@ -74,8 +86,11 @@ export function DrawerContent(props) {
             label="Restoration"
             labelStyle={styles.ItemLabel}
             onPress={() => {
-              moveIT(3);
-              navigation.dispatch(DrawerActions.closeDrawer());
+              setTimeout(() => {
+                moveIT(3);
+                navigation.dispatch(DrawerActions.closeDrawer());
+              })
+              
             }}
           >
           </DrawerItem>
@@ -84,8 +99,11 @@ export function DrawerContent(props) {
             label="Alteration"
             labelStyle={styles.ItemLabel}
             onPress={() => {
-              moveIT(4);
-              navigation.dispatch(DrawerActions.closeDrawer());
+              setTimeout(() => {
+                moveIT(4);
+                navigation.dispatch(DrawerActions.closeDrawer());
+              })
+              
             }}
           >
           </DrawerItem>
@@ -94,8 +112,11 @@ export function DrawerContent(props) {
             label="Enchanting"
             labelStyle={styles.ItemLabel}
             onPress={() => {
-              moveIT(5);
-              navigation.dispatch(DrawerActions.closeDrawer());
+              setTimeout(() => {
+                moveIT(5);
+                navigation.dispatch(DrawerActions.closeDrawer());
+              })
+              
             }}
           >
           </DrawerItem>

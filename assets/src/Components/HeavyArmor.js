@@ -36,42 +36,45 @@ const HeavyArmor = () => {
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const [JuggernautLevel, SetJuggernautLevel] = useState(0);
+
+
     const [state, setState] = useSetState({
         juggernaut: 0,
         fistsOfSteel: 0,
-        fistsOfSteelLine: 'black',
+        fistsOfSteelLine: 'white',
         cushioned: 0,
-        cushionedLine: 'black',
+        cushionedLine: 'white',
         conditioning: 0,
-        conditioningLine: 'black',
+        conditioningLine: 'white',
         wellFitted: 0,
-        wellFittedLine: 'black',
+        wellFittedLine: 'white',
         towerOfStrength: 0,
-        towerOfStrengthLine: 'black',
+        towerOfStrengthLine: 'white',
         matchingSet: 0,
-        matchingSetLine: 'black',
+        matchingSetLine: 'white',
         reflectBlows: 0,
-        reflectBlowsLine: 'black',
-
+        reflectBlowsLine: 'white',
+        
     });
 
     let resetAllTrees;
     const resetHeavyArmorPerks = () => {
         setState({ juggernaut: 0 });
         setState({ fistsOfSteel: 0 });
-        setState({ fistsOfSteelLine: 'black' });
+        setState({ fistsOfSteelLine: 'white' });
         setState({ cushioned: 0 });
-        setState({ cushionedLine: 'black' });
+        setState({ cushionedLine: 'white' });
         setState({ conditioning: 0 });
-        setState({ conditioningLine: 'black' });
+        setState({ conditioningLine: 'white' });
         setState({ wellFitted: 0 });
-        setState({ wellFittedLine: 'black' });
+        setState({ wellFittedLine: 'white' });
         setState({ towerOfStrength: 0 });
-        setState({ towerOfStrengthLine: 'black' });
+        setState({ towerOfStrengthLine: 'white' });
         setState({ matchingSet: 0 });
-        setState({ matchingSetLine: 'black' });
+        setState({ matchingSetLine: 'white' });
         setState({ reflectBlows: 0 });
-        setState({ reflectBlowsLine: 'black' });
+        setState({ reflectBlowsLine: 'white' });
         SetRequiredLevel(0);
     }
 
@@ -106,6 +109,31 @@ const HeavyArmor = () => {
         SetActivePerks(ActivePerks - numActivePerks);
         SetAllActivePerks(AllActivePerks - numActivePerks);
     };
+    const IncJuggernautCounter = (numActiveJuggernaut) => {
+        if (JuggernautLevel < 5) {
+            SetJuggernautLevel(JuggernautLevel + numActiveJuggernaut)
+        }
+        else {
+            SetJuggernautLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    const IncJuggernautCountCall = (buttonColor) => {
+        if (JuggernautLevel == 0) {
+            setState({ juggernaut: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncJuggernautCounter(1); // increment basic smith by 1 on first click
+        } else if (JuggernautLevel == 5) {
+            setState({ juggernaut: buttonColor }); // Change the pressed button color back and forth
+            IncJuggernautCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncJuggernautCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
 
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
@@ -143,14 +171,18 @@ const HeavyArmor = () => {
             state.arcaneSmithing == 1 ||
             state.wellFitted == 1
         ) {
-            // Do nothing....must un-select nodes above it first
+           // Do nothing....must un-select nodes above it first
+           if (JuggernautLevel == 5){
+            DecrementCounter(4);
+            SetJuggernautLevel(1)
+        } else {
+            IncrementCounter(1);
+            IncJuggernautCounter(1);
         }
-        else {
-            setState({ juggernaut: button }); // Change button color back and forth
-            state.juggernaut == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-        }
+    }
+    else {
+        IncJuggernautCountCall(button);
+    }
     };
 
     const CheckIfArcaneSmithPressed = (button, line) => {
@@ -390,7 +422,7 @@ const HeavyArmor = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Heavy Armor Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Heavy Armor Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -415,7 +447,7 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("juggernautModal")}
+                    onLongPress={() => navigation.navigate("JuggernautModal")}
                     onPress={() => {
                         CheckIfJuggernautPressed(
                             state.juggernaut == 0 ? 1 : 0,
@@ -425,7 +457,7 @@ const HeavyArmor = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.JuggernautText}>
-                <Text style={styles.PerkText}>Juggernaut</Text>
+                <Text style={styles.PerkText}>Juggernaut({JuggernautLevel}/5)</Text>
             </View>
 
             <View title='Fists Blue' style={{
@@ -446,13 +478,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("FistsOfSteelModal")}
                     onPress={() => {
                         CheckIfFistsPressed(
                             state.fistsOfSteel == 0 ? 1 : 0,
-                            state.fistsOfSteelLine == 'black' ? 'gold' : 'black'
+                            state.fistsOfSteelLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -479,13 +509,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("CushionedModal")}
                     onPress={() => {
                         CheckIfCushionedPressed(
                             state.cushioned == 0 ? 1 : 0,
-                            state.cushionedLine == 'black' ? 'gold' : 'black'
+                            state.cushionedLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -512,13 +540,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ConditioningModal")}
                     onPress={() => {
                         CheckIfConditioningPressed(
                             state.conditioning == 0 ? 1 : 0,
-                            state.conditioningLine == 'black' ? 'gold' : 'black'
+                            state.conditioningLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -546,13 +572,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ReflectBlowsModal")}
                     onPress={() => {
                         CheckIfReflectBlowsPressed(
                             state.reflectBlows == 0 ? 1 : 0,
-                            state.reflectBlowsLine == 'black' ? 'gold' : 'black'
+                            state.reflectBlowsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -579,13 +603,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("HeavyMatchingSetModal")}
                     onPress={() => {
                         CheckIfMatchingSetPressed(
                             state.matchingSet == 0 ? 1 : 0,
-                            state.matchingSetLine == 'black' ? 'gold' : 'black'
+                            state.matchingSetLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -612,13 +634,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("TowerOfStrengthModal")}
                     onPress={() => {
                         CheckIfTowerOfStrengthPressed(
                             state.towerOfStrength == 0 ? 1 : 0,
-                            state.towerOfStrengthLine == 'black' ? 'gold' : 'black'
+                            state.towerOfStrengthLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -645,13 +665,11 @@ const HeavyArmor = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("WellFittedModal")}
                     onPress={() => {
                         CheckIfWellFittedPressed(
                             state.wellFitted == 0 ? 1 : 0,
-                            state.wellFittedLine == 'black' ? 'gold' : 'black'
+                            state.wellFittedLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

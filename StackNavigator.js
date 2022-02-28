@@ -90,6 +90,7 @@ function Modal() {
                 <ModalNav.Screen name="MasterAlterationModal" component={modals.MasterAlterationModal} />
             </ModalNav.Group>
 
+<<<<<<< HEAD
                 {/* Archery Tree Modals */}
             <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
                 <ModalNav.Screen name="BullseyeModal" component={modals.BullseyeModal} />
@@ -143,6 +144,79 @@ function Modal() {
                 <ModalNav.Screen name="PerfectTouchModal" component={modals.PerfectTouchModal} />
                 <ModalNav.Screen name="PoisonedModal" component={modals.PoisonedModal} />
             </ModalNav.Group>                              
+=======
+            {/* Heavy Armor Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="JuggernautModal" component={modals.JuggernautModal} />
+                <ModalNav.Screen name="FistsOfSteelModal" component={modals.FistsOfSteelModal} />
+                <ModalNav.Screen name="CushionedModal" component={modals.CushionedModal} />
+                <ModalNav.Screen name="ConditioningModal" component={modals.ConditioningModal} />
+                <ModalNav.Screen name="WellFittedModal" component={modals.WellFittedModal} />
+                <ModalNav.Screen name="TowerOfStrengthModal" component={modals.TowerOfStrengthModal} />
+                <ModalNav.Screen name="HeavyMatchingSetModal" component={modals.HeavyMatchingSetModal} />
+                <ModalNav.Screen name="ReflectBlowsModal" component={modals.ReflectBlowsModal} />
+            </ModalNav.Group>
+
+            {/* Conjuration Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="NoviceConjurationModal" component={modals.NoviceConjurationModal} />
+                <ModalNav.Screen name="ConjurationDualCastingModal" component={modals.ConjurationDualCastingModal} />
+                <ModalNav.Screen name="SummonerModal" component={modals.SummonerModal} />
+                <ModalNav.Screen name="AtromancyModal" component={modals.AtromancyModal} />
+                <ModalNav.Screen name="ElementalPotencyModal" component={modals.ElementalPotencyModal} />
+                <ModalNav.Screen name="TwinSoulsModal" component={modals.TwinSoulsModal} />
+                <ModalNav.Screen name="NecromancyModal" component={modals.NecromancyModal} />
+                <ModalNav.Screen name="MysticBindingModal" component={modals.MysticBindingModal} />
+                <ModalNav.Screen name="SoulStealerModal" component={modals.SoulStealerModal} />
+                <ModalNav.Screen name="OblivionBindingModal" component={modals.OblivionBindingModal} />
+                <ModalNav.Screen name="ApprenticeConjurationModal" component={modals.ApprenticeConjurationModal} />
+                <ModalNav.Screen name="AdeptConjurationModal" component={modals.AdeptConjurationModal} />
+                <ModalNav.Screen name="ExpertConjurationModal" component={modals.ExpertConjurationModal} />
+                <ModalNav.Screen name="MasterConjurationModal" component={modals.MasterConjurationModal} />
+                <ModalNav.Screen name="DarkSoulsModal" component={modals.DarkSoulsModal} />
+            </ModalNav.Group>
+
+            {/* Enchanting Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="CorpusEnchanterModal" component={modals.CorpusEnchanterModal} />
+                <ModalNav.Screen name="EnchanterModal" component={modals.EnchanterModal} />
+                <ModalNav.Screen name="ExtraEffectModal" component={modals.ExtraEffectModal} />
+                <ModalNav.Screen name="FireEnchanterModal" component={modals.FireEnchanterModal} />
+                <ModalNav.Screen name="FrostEnchanterModal" component={modals.FrostEnchanterModal} />
+                <ModalNav.Screen name="InsightfulEnchanterModal" component={modals.InsightfulEnchanterModal} />
+                <ModalNav.Screen name="SoulSiphonModal" component={modals.SoulSiphonModal} />
+                <ModalNav.Screen name="SoulSqueezerModal" component={modals.SoulSqueezerModal} />
+                <ModalNav.Screen name="StormEnchanterModal" component={modals.StormEnchanterModal} />
+            </ModalNav.Group>
+
+            {/* Alchemist Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="AlchemistModal" component={modals.AlchemistModal} />
+                <ModalNav.Screen name="BenefactorModal" component={modals.BenefactorModal} />
+                <ModalNav.Screen name="ConcentratedPoisonModal" component={modals.ConcentratedPoisonModal} />
+                <ModalNav.Screen name="ExperimenterModal" component={modals.ExperimenterModal} />
+                <ModalNav.Screen name="GreenThumbModal" component={modals.GreenThumbModal} />
+                <ModalNav.Screen name="PhysicianModal" component={modals.PhysicianModal} />
+                <ModalNav.Screen name="PrisonerModal" component={modals.PrisonerModal} />
+                <ModalNav.Screen name="PurityModal" component={modals.PurityModal} />
+                <ModalNav.Screen name="SnakebloodModal" component={modals.SnakebloodModal} />
+            </ModalNav.Group>
+
+            {/* Sneak Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="AssasinsBladeModal" component={modals.AssasinsBladeModal} />
+                <ModalNav.Screen name="BackstabModal" component={modals.BackstabModal} />
+                <ModalNav.Screen name="DeadlyAimModal" component={modals.DeadlyAimModal} />
+                <ModalNav.Screen name="LightFootModal" component={modals.LightFootModal} />
+                <ModalNav.Screen name="MuffledMovementModal" component={modals.MuffledMovementModal} />
+                <ModalNav.Screen name="ShadowWarriorModal" component={modals.ShadowWarriorModal} />
+                <ModalNav.Screen name="SilenceModal" component={modals.SilenceModal} />
+                <ModalNav.Screen name="SilentRollModal" component={modals.SilentRollModal} />
+                <ModalNav.Screen name="StealthModal" component={modals.StealthModal} />
+            </ModalNav.Group>
+            
+            
+>>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
         </ModalNav.Navigator>
     );
 }

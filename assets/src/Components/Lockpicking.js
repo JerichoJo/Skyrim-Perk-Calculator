@@ -35,25 +35,25 @@ const LockpickingTree = () => {
   const [state, setState] = useSetState({
     noviceLocks: 0,
     apprenticeLocks: 0,
-    apprenticeLocksLine: 'black',
+    apprenticeLocksLine: 'white',
     quickHands: 0,
-    quickHandsLine: 'black',
+    quickHandsLine: 'white',
     waxKey: 0,
-    waxKeyLine: 'black',
+    waxKeyLine: 'white',
     adeptlocks: 0,
-    adeptLocksLine: 'black',
+    adeptLocksLine: 'white',
     expertLocks: 0,
-    expertLocksLine: 'black',
+    expertLocksLine: 'white',
     goldenTouch: 0,
-    goldenTouchLine: 'black',
+    goldenTouchLine: 'white',
     treasureHunter: 0,
-    treasureHunterLine: 'black',
+    treasureHunterLine: 'white',
     locksmith: 0,
-    locksmithLine: 'black',
+    locksmithLine: 'white',
     unbreakable: 0,
-    unbreakableLine: 'black',
+    unbreakableLine: 'white',
     masterLocks: 0,
-    masterLocksLine: 'black',
+    masterLocksLine: 'white',
   });
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [count, setCount] = useState(0);
@@ -356,7 +356,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         checkIfApprenticeLockpickingPressed(
                             state.apprenticeLocks == 0 ? 1 : 0,
-                            state.apprenticeLocksLine == 'black' ? 'gold' : 'black'
+                            state.apprenticeLocksLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -386,7 +386,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         checkIfQuickHandsPressed(
                             state.quickHands == 0 ? 1 : 0,
-                            state.quickHandsLine == 'black' ? 'gold' : 'black'
+                            state.quickHandsLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -416,7 +416,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         CheckIfWaxKeyPressed(
                             state.waxKey == 0 ? 1 : 0,
-                            state.waxKeyLine == 'black' ? 'gold' : 'black'
+                            state.waxKeyLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -446,7 +446,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         checkIfAdeptLocksPressed(
                             state.adeptLocks == 0 ? 1 : 0,
-                            state.adeptLocksLine == 'black' ? 'gold' : 'black'
+                            state.adeptLocksLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -476,7 +476,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         CheckIfGoldenTouchPressed(
                             state.goldenTouch == 0 ? 1 : 0,
-                            state.goldenTouchLine == 'black' ? 'gold' : 'black',
+                            state.goldenTouchLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />
@@ -506,7 +506,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         CheckIfTreasureHunterPressed(
                             state.treasureHunter == 0 ? 1 : 0,
-                            state.treasureHunterLine == 'black' ? 'gold' : 'black'
+                            state.treasureHunterLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -536,7 +536,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         CheckIfExpertLocksPressed(
                             state.expertLocks == 0 ? 1 : 0,
-                            state.expertLocksLine == 'black' ? 'gold' : 'black'
+                            state.expertLocksLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -566,7 +566,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         CheckIfLocksmithPressed(
                             state.locksmith == 0 ? 1 : 0,
-                            state.locksmithLine == 'black' ? 'gold' : 'black'
+                            state.locksmithLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -596,7 +596,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         CheckIfUnbreakablePressed(
                             state.unbreakable == 0 ? 1 : 0,
-                            state.unbreakableLine == 'black' ? 'gold' : 'black'
+                            state.unbreakableLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -627,7 +627,7 @@ const LockpickingTree = () => {
                     onPress={() => {
                         CheckMasterLocksPressed(
                             state.masterLocks == 0 ? 1 : 0,
-                            state.masterLocksLine == 'black' ? 'gold' : 'black'
+                            state.masterLocksLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

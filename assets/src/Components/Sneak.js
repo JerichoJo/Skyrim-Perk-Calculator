@@ -34,22 +34,22 @@ const SneakTree = () => {
     const [state, setState] = useSetState({
         stealth: 0,
         muffledMovement: 0,
-        muffledMovementLine: 'black',
+        muffledMovementLine: 'white',
         lightFoot: 0,
-        lightFootLine: 'black',
+        lightFootLine: 'white',
         silentRoll: 0,
-        silentRollLine: 'black',
+        silentRollLine: 'white',
         backstab: 0,
-        backstabLine: 'black',
+        backstabLine: 'white',
         deadlyAim: 0,
-        deadlyAimLine: 'black',
+        deadlyAimLine: 'white',
         assassinsBlade: 0,
-        assassinsBladeLine: 'black',
+        assassinsBladeLine: 'white',
         silence: 0,
-        silenceLine: 'black',
+        silenceLine: 'white',
         shadowWarrior: 0,
-        shadowWarriorLine: 'black',
-        shadowWarriorLineLight: 'black',
+        shadowWarriorLine: 'white',
+        shadowWarriorLineLight: 'white',
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -58,7 +58,7 @@ const SneakTree = () => {
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
-
+    const [StealthLevel, SetStealthLevel] = useState(0);
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
         SetAllActivePerks(AllActivePerks + numActivePerks);
@@ -70,6 +70,32 @@ const SneakTree = () => {
         SetActivePerks(ActivePerks - numActivePerks);
         SetAllActivePerks(AllActivePerks - numActivePerks);
     };
+
+    const IncStealthCounter = (numActiveStealth) => {
+        if (StealthLevel < 5) {
+            SetStealthLevel(StealthLevel + numActiveStealth)
+        }
+        else {
+            SetStealthLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    const IncStealthCountCall = (buttonColor) => {
+        if (StealthLevel == 0) {
+            setState({ stealth: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncStealthCounter(1); // increment basic smith by 1 on first click
+        } else if (StealthLevel == 5) {
+            setState({ stealth: buttonColor }); // Change the pressed button color back and forth
+            IncStealthCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncStealthCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
 
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
@@ -108,12 +134,16 @@ const SneakTree = () => {
             state.backstab == 1
         ) {
             // Do nothing....must un-select nodes above it first
+            if (StealthLevel == 5){
+                DecrementCounter(4);
+                SetStealthLevel(1)
+            } else {
+                IncrementCounter(1);
+                IncStealthCounter(1);
+            }
         }
         else {
-            setState({ stealth: button }); // Change button color back and forth
-            state.stealth == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncStealthCountCall(button);
         }
     };
 
@@ -124,8 +154,10 @@ const SneakTree = () => {
             setState({ stealthLine: lineColor });
             setState({ muffledMovement: buttonColor });
             setState({ muffledMovementLine: lineColor });
-
             IncrementCounter(2);
+            if (state.stealth == 0) {
+                SetStealthLevel(1);
+            }
         } else if (state.lightFoot == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -145,6 +177,9 @@ const SneakTree = () => {
             setState({ muffledMovement: buttonColor });
             setState({ lightFootLine: lineColor });
             setState({ muffledMovementLine: lineColor });
+            if (state.stealth == 0) {
+                SetStealthLevel(1);
+            }
             if (state.stealth == 1) {
                 IncrementCounter(2);
             } else {
@@ -171,6 +206,9 @@ const SneakTree = () => {
             setState({ silentRollLine: lineColor });
             setState({ lightFootLine: lineColor });
             setState({ muffledMovementLine: lineColor });
+            if (state.stealth == 0) {
+                SetStealthLevel(1);
+            }
             if (state.shadowWarrior == 1) {
                 setState({ shadowWarriorLineLight: lineColor });
             }
@@ -181,7 +219,10 @@ const SneakTree = () => {
             } else {
                 IncrementCounter(4);
             }
-        } else {
+        }else if (state.silence == 1) {
+            // Do nothing....must un-select nodes above it first
+        }
+        else {
             setState({ silentRollLine: lineColor });
             setState({ silentRoll: buttonColor }); // Change the pressed button color back and forth
             state.silentRoll == 0
@@ -190,8 +231,7 @@ const SneakTree = () => {
             if (state.shadowWarrior == 1) {
                 setState({ shadowWarriorLineLight: lineColor });
             }
-
-        }
+        } 
     };
     const CheckIfBackstabPressed = (buttonColor, lineColor) => {
         if (state.stealth == 0) {
@@ -200,6 +240,9 @@ const SneakTree = () => {
             setState({ stealth: buttonColor });
             setState({ backstabLine: lineColor });
             IncrementCounter(2);
+            if (state.stealth == 0) {
+                SetStealthLevel(1);
+            }
         } else if (state.deadlyAim == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -219,6 +262,9 @@ const SneakTree = () => {
             setState({ stealth: buttonColor });
             setState({ deadlyAimLine: lineColor });
             setState({ backstabLine: lineColor });
+            if (state.stealth == 0) {
+                SetStealthLevel(1);
+            }
             if (state.stealth == 1) {
                 IncrementCounter(2);
             } else {
@@ -245,6 +291,10 @@ const SneakTree = () => {
             setState({ assassinsBladeLine: lineColor });
             setState({ deadlyAimLine: lineColor });
             setState({ backstabLine: lineColor });
+            if (state.stealth == 0) {
+                SetStealthLevel(1);
+            }
+
             if (state.backstab == 1) {
                 IncrementCounter(2);
             } else if (state.stealth == 1) {
@@ -252,8 +302,6 @@ const SneakTree = () => {
             } else {
                 IncrementCounter(4);
             }
-        } else if (state.silence == 1) {
-            // Do nothing....must un-select nodes above it first
         } else {
             setState({ assassinsBladeLine: lineColor });
             setState({ assassinsBlade: buttonColor }); // Change the pressed button color back and forth
@@ -274,6 +322,10 @@ const SneakTree = () => {
             setState({ muffledMovementLine: lineColor });
             setState({ lightFootLine: lineColor });
             setState({ silentRollLine: lineColor });
+            if (state.stealth == 0) {
+                SetStealthLevel(1);
+            }
+
             if (state.silentRoll == 1) {
                 IncrementCounter(2);
             } else if (state.lightFoot == 1) {
@@ -306,7 +358,10 @@ const SneakTree = () => {
             setState({ silentRollLine: lineColor });
             setState({ lightFootLine: lineColor });
             setState({ muffledMovementLine: lineColor });
-            if (state.silentRoll == 1) {
+            if (state.stealth == 0) {
+                SetStealthLevel(1);
+            }
+            if (state.silence == 1) {
                 setState({ shadowWarriorLineLight: lineColor });
             }
             if (state.assassinsBlade == 1) {
@@ -356,7 +411,7 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("stealthModal")}
+                    onLongPress={() => navigation.navigate("StealthModal")}
                     onPress={() => {
                         CheckIfStealthPressed(
                             state.stealth == 0 ? 1 : 0,
@@ -366,7 +421,7 @@ const SneakTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.StealthText}>
-                <Text style={styles.PerkText}>Stealth</Text>
+                <Text style={styles.PerkText}>Stealth ({StealthLevel}/5)</Text>
             </View>
             
             <View title='Muffled Movement Blue' style={{
@@ -387,13 +442,11 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MuffledMovementModal")}
                     onPress={() => {
                         CheckIfMuffledMovementPressed(
                             state.muffledMovement == 0 ? 1 : 0,
-                            state.muffledMovementLine == 'black' ? 'gold' : 'black'
+                            state.muffledMovementLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -420,13 +473,11 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("LightFootModal")}
                     onPress={() => {
                         CheckIfLightFootPressed(
                             state.lightFoot == 0 ? 1 : 0,
-                            state.lightFootLine == 'black' ? 'gold' : 'black'
+                            state.lightFootLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -453,13 +504,11 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SilentRollModal")}
                     onPress={() => {
                         CheckIfSilentRollPressed(
                             state.silentRoll == 0 ? 1 : 0,
-                            state.silentRollLine == 'black' ? 'gold' : 'black'
+                            state.silentRollLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -486,14 +535,12 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ShadowWarriorModal")}
                     onPress={() => {
                         CheckIfShadowWarriorPressed(
                             state.shadowWarrior == 0 ? 1 : 0,
-                            state.shadowWarriorLine == 'black' ? 'gold' : 'black',
-                            state.shadowWarriorLineLight == 'black' ? 'gold' : 'black'
+                            state.shadowWarriorLine == 'white' ? 'gold' : 'white',
+                            state.shadowWarriorLineLight == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -520,13 +567,11 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("SilenceModal")}
                     onPress={() => {
                         CheckIfSilencePressed(
                             state.silence == 0 ? 1 : 0,
-                            state.silenceLine == 'black' ? 'gold' : 'black'
+                            state.silenceLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -553,13 +598,11 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AssasinsBladeModal")}
                     onPress={() => {
                         CheckIfAssassinsBladePressed(
                             state.assassinsBlade == 0 ? 1 : 0,
-                            state.assassinsBladeLine == 'black' ? 'gold' : 'black'
+                            state.assassinsBladeLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -586,13 +629,11 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DeadlyAimModal")}
                     onPress={() => {
                         CheckIfDeadlyAimPressed(
                             state.deadlyAim == 0 ? 1 : 0,
-                            state.deadlyAimLine == 'black' ? 'gold' : 'black'
+                            state.deadlyAimLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -619,13 +660,11 @@ const SneakTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("BackstabModal")}
                     onPress={() => {
                         CheckIfBackstabPressed(
                             state.backstab == 0 ? 1 : 0,
-                            state.backstabLine == 'black' ? 'gold' : 'black'
+                            state.backstabLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -663,15 +702,7 @@ const SneakTree = () => {
                     strokeWidth={lineStrokeWidth}
 
                 />
-                <Line
-                    x1="35.3%"
-                    y1="39%"
-                    x2="53%"
-                    y2="39%"
-                    stroke={state.shadowWarriorLineLight}
-                    strokeWidth={lineStrokeWidth}
-
-                />
+                
                 <Line
                     x1="76.5%"
                     y1="35.3%"
