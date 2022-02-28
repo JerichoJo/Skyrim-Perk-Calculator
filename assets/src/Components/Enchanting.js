@@ -278,7 +278,7 @@ const Enchanting = () => {
     };
     const CheckIfExtraEffectPressed = (buttonColor, lineColor) => {
 
-        if (state.corpusEnchanter == 0 && state.stormEnchanting == 0) {
+        if (state.corpusEnchanter == 0 && state.stormEnchanting == 0 && state.insightfulEnchanter == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ extraEffect: buttonColor });
             setState({ stormEnchanting: buttonColor });
