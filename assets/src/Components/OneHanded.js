@@ -39,6 +39,10 @@ const useSetState = (initialState = {}) => {
 
 const OneHandedTree = () => {
   const navigation = useNavigation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [ActivePerks, SetActivePerks] = useState(0);
+  const [RequiredLevel, SetRequiredLevel] = useState(0);
+  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
   const [state, setState] = useSetState({
     armsman: 0,
     bladesman: 0,
@@ -60,29 +64,74 @@ const OneHandedTree = () => {
     hackAndSlash: 0,
     hackAndSlashLine: 'white',
   });
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [count, setCount] = useState(0);
+  let resetAllTrees;
+  const resetOneHandedPerks = () => {
+    setState({ noviceDestruction: 0 });
+    setState({ apprenticeDestruction: 0 });
+    setState({ apprenticeDestructionLine: 'white' });
+    setState({ adeptDestruction: 0 });
+    setState({ adeptDestructionLine: 'white' });
+    setState({ expertDestruction: 0 });
+    setState({ expertDestructionLine: 'white' });
+    setState({ masterDestruction: 0 });
+    setState({ masterDestructionLine: 'white' });
+    setState({ runeMaster: 0 });
+    setState({ runeMasterLine: 'white' });
+    setState({ augmentedFlames: 0 });
+    setState({ augmentedFlamesLine: 'white' });
+    setState({ intenseFlames: 0 });
+    setState({ intenseFlamesLine: 'white' });
+    setState({ augmentedFrost: 0 });
+    setState({ augmentedFrostLine: 'white' });
+    setState({ deepFreeze: 0 });
+    setState({ deepFreezeLine: 'white' });
+    setState({ augmentedShock: 0 });
+    setState({ augmentedShockLine: 'white' });
+    setState({ disintegrate: 0 });
+    setState({ disintegrateLine: 'white' });
+    setState({ destructionDualCasting: 0 });
+    setState({ destructionDualCastingLine: 'white' });
+    setState({ impact: 0 });
+    setState({ impactLine: 'white' });
+    SetRequiredLevel(0);
+  }
 
-  const [ActivePerks, SetActivePerks] = useState(0);
-  const [RequiredLevel, SetRequiredLevel] = useState(0);
-  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+  const resetActivePerks = () => {
+    resetOneHandedPerks();
+    DecrementCounter(ActivePerks);
+};
 
-  const IncrementCounter = (numActivePerks = 0) => {
+
+// Use this to control Re-renders for resetting AllActivePerks with useEffect();
+if (AllActivePerks == 0) {
+    resetAllTrees = 1;
+} else {
+    resetAllTrees = 0;
+}
+
+// Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+useEffect(() => {
+    if (resetAllTrees == 1) {
+        resetOneHandedPerks();
+        SetActivePerks(0);
+    }
+}, [resetAllTrees]);
+
+const IncrementCounter = (numActivePerks = 0) => {
     SetActivePerks(ActivePerks + numActivePerks);
     SetAllActivePerks(AllActivePerks + numActivePerks);
-  };
-  const DecrementCounter = (numActivePerks = 0) => {
+};
+const DecrementCounter = (numActivePerks = 0) => {
     if (ActivePerks === 0) {
-      return;
+        return;
     }
     SetActivePerks(ActivePerks - numActivePerks);
     SetAllActivePerks(AllActivePerks - numActivePerks);
-  };
+};
 
-  const TrackLevel = useCallback((level) => {
+const TrackLevel = useCallback((level) => {
     SetRequiredLevel(level);
-  }, []);
-
+}, []);
   const lineStrokeWidth = '2';
 
   const CheckLevel = useCallback(() => {
@@ -254,6 +303,12 @@ const OneHandedTree = () => {
   };
       return (
         <View style={{ zIndex: 2 }}>
+                      <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset One Handed Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>

@@ -99,40 +99,38 @@ const DestructionTree = () => {
   const resetActivePerks = () => {
     resetDestructionPerks();
     DecrementCounter(ActivePerks);
-  };
+};
 
-  // Use this to control Re-renders for resetting AllActivePerks with useEffect();
-  if (AllActivePerks == 0) {
+// Use this to control Re-renders for resetting AllActivePerks with useEffect();
+if (AllActivePerks == 0) {
     resetAllTrees = 1;
-  } else {
+} else {
     resetAllTrees = 0;
-  }
+}
 
-  // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
-  useEffect(() => {
+// Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+useEffect(() => {
     if (resetAllTrees == 1) {
-      resetDestructionPerks();
-      SetActivePerks(0);
+        resetDestructionPerks();
+        SetActivePerks(0);
     }
-  }, [resetAllTrees]);
+}, [resetAllTrees]);
 
-
-
-  const IncrementCounter = (numActivePerks = 0) => {
+const IncrementCounter = (numActivePerks = 0) => {
     SetActivePerks(ActivePerks + numActivePerks);
     SetAllActivePerks(AllActivePerks + numActivePerks);
-  };
-  const DecrementCounter = (numActivePerks = 0) => {
+};
+const DecrementCounter = (numActivePerks = 0) => {
     if (ActivePerks === 0) {
-      return;
+        return;
     }
     SetActivePerks(ActivePerks - numActivePerks);
     SetAllActivePerks(AllActivePerks - numActivePerks);
-  };
+};
 
-  const TrackLevel = useCallback((level) => {
+const TrackLevel = useCallback((level) => {
     SetRequiredLevel(level);
-  }, []);
+}, []);
 
   const lineStrokeWidth = '2';
 
@@ -253,7 +251,7 @@ const DestructionTree = () => {
     }
   };
   const checkIfDisintegratePressed = (buttonColor, lineColor) => {
-    if (state.augmentedShockLine == 0) {
+    if (state.augmentedShock == 0) {
       // Change the colors of the buttons below it if they have not been pressed
       setState({ noviceDestruction: buttonColor });
       setState({ augmentedShock: buttonColor });
@@ -346,6 +344,8 @@ const DestructionTree = () => {
       setState({ noviceDestruction: buttonColor });
       setState({ apprenticeDestruction: buttonColor });
       setState({ apprenticeDestructionLine: lineColor });
+      setState({ adeptDestruction: buttonColor });
+      setState({ adeptDestructionLine: lineColor });
       setState({ expertDestruction: buttonColor });
       setState({ expertDestructionLine: lineColor });
       setState({ masterDestruction: buttonColor });
@@ -365,7 +365,7 @@ const DestructionTree = () => {
       </View>
       <View style={styles.topText}>
         <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-        <Text style={styles.HomeScreenText}>All Active Perks: {RequiredLevel}</Text>
+        <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel}</Text>
       </View>
       <View title='Novice Destruction Blue' style={{
         position: 'absolute',
@@ -899,7 +899,7 @@ const DestructionTree = () => {
           y1="35%"
           x2="40%"
           y2="48%"
-          stroke={state.augmentedShockLine}
+          stroke={state.disintegrateLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Novice Destruction to Destruction Dual Casting

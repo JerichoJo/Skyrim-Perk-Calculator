@@ -32,6 +32,10 @@ const useSetState = (initialState = {}) => {
 
 const LockpickingTree = () => {
   const navigation = useNavigation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [ActivePerks, SetActivePerks] = useState(0);
+  const [RequiredLevel, SetRequiredLevel] = useState(0);
+  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
   const [state, setState] = useSetState({
     noviceLocks: 0,
     apprenticeLocks: 0,
@@ -55,28 +59,62 @@ const LockpickingTree = () => {
     masterLocks: 0,
     masterLocksLine: 'white',
   });
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [count, setCount] = useState(0);
 
-  const [ActivePerks, SetActivePerks] = useState(0);
-  const [RequiredLevel, SetRequiredLevel] = useState(0);
-  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+  let resetAllTrees;
+  const resetLockpickingPerks = () => {
+    setState({ shieldWall: 0 });
+    setState({ deflectArrows: 0 });
+    setState({ delectArrowsLine: 'white' });
+    setState({ elementalProtection: 0 });
+    setState({ elementalProtectionLine: 'white' });
+    setState({ blockRunner: 0 });
+    setState({ blockRunnerLine: 'white' });
+    setState({ powerBash: 0 });
+    setState({ powerBashLine: 'white' });
+    setState({ disarmingBash: 0 });
+    setState({ disarmingBashLine: 'white' });
+    setState({ shieldCharge: 0 });
+    setState({ shieldChargeLine: 'white' });
+    setState({ quickReflexes: 0 });
+    setState({ quickReflexesLine: 'white' });
+    SetRequiredLevel(0);
+  }
 
-  const IncrementCounter = (numActivePerks = 0) => {
+  const resetActivePerks = () => {
+    resetLockpickingPerks();
+    DecrementCounter(ActivePerks);
+};
+
+// Use this to control Re-renders for resetting AllActivePerks with useEffect();
+if (AllActivePerks == 0) {
+    resetAllTrees = 1;
+} else {
+    resetAllTrees = 0;
+}
+
+// Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+useEffect(() => {
+    if (resetAllTrees == 1) {
+        resetLockpickingPerks();
+        SetActivePerks(0);
+    }
+}, [resetAllTrees]);
+
+const IncrementCounter = (numActivePerks = 0) => {
     SetActivePerks(ActivePerks + numActivePerks);
     SetAllActivePerks(AllActivePerks + numActivePerks);
-  };
-  const DecrementCounter = (numActivePerks = 0) => {
+};
+const DecrementCounter = (numActivePerks = 0) => {
     if (ActivePerks === 0) {
-      return;
+        return;
     }
     SetActivePerks(ActivePerks - numActivePerks);
     SetAllActivePerks(AllActivePerks - numActivePerks);
-  };
+};
 
-  const TrackLevel = useCallback((level) => {
+const TrackLevel = useCallback((level) => {
     SetRequiredLevel(level);
-  }, []);
+}, []);
 
   const lineStrokeWidth = '2';
 
@@ -300,9 +338,15 @@ const LockpickingTree = () => {
 
       return (
         <View style={{ zIndex: 2 }}>
-            <View style={styles.bottomText}>
+                      <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Lockpicking Perks</Text>
+                </TouchableOpacity> 
+            </View> 
+            <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-                <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+                <Text style={styles.HomeScreenText}>Required Level: { RequiredLevel}</Text>
             </View>
             <View title='Novice Locks Blue' style={{
                 position: 'absolute',
@@ -349,7 +393,7 @@ const LockpickingTree = () => {
                 left: "49%",
                 top: "64%",
                 zIndex: 8,
-                opacity: state.apprenticeLocks
+               opacity: state.apprenticeLocks
 
             }}>
                 <TouchableOpacity
@@ -647,9 +691,9 @@ const LockpickingTree = () => {
             </View>
       <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
         <Line // Novice Locks to Apprentice Locks
-          x1="60%"
+          x1="61%"
           y1="68%"
-          x2="51%"
+          x2="52%"
           y2="79%"
           stroke={state.apprenticeLocksLine}
           strokeWidth={lineStrokeWidth}
@@ -657,74 +701,74 @@ const LockpickingTree = () => {
 
         <Line // Apprentice Locks to Quick Hands
           x1="38%"
-          y1="62%"
-          x2="57%"
-          y2="67%"
-          stroke={state.apprenticeLocksLine}
+          y1="63.5%"
+          x2="60%"
+          y2="68.3%"
+          stroke={state.quickHandsLine}
           strokeWidth={lineStrokeWidth}
         />
 
         <Line // Quick Hands to Wax Key
-          x1="20%"
-          y1="58%"
-          x2="33.5%"
-          y2="60.5%"
+          x1="19%"
+          y1="59.5%"
+          x2="36%"
+          y2="63%"
           stroke={state.waxKeyLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Apprentice Locks to Adept Locks
-          x1="70%"
-          y1="55%"
-          x2="60%"
-          y2="67%"
+          x1="70.5%"
+          y1="56%"
+          x2="61%"
+          y2="68.5%"
           stroke={state.adeptLocksLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Adept Locks to Golden Touch
-          x1="45%"
-          y1="52%"
-          x2="68%"
-          y2="54%"
+          x1="44%"
+          y1="54.2%"
+          x2="69%"
+          y2="56%"
           stroke={state.goldenTouchLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Golden Touch to Treasure Hunter
           x1="20%"
-          y1="51%"
-          x2="40%"
-          y2="52%"
+          y1="53%"
+          x2="43%"
+          y2="54%"
           stroke={state.treasureHunterLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Adept Locks to Expert Locks
           x1="68%"
-          y1="40%"
+          y1="41%"
           x2="70%"
-          y2="53%"
+          y2="56%"
           stroke={state.adeptLocksLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Expert Locks to Locksmith
           x1="44%"
-          y1="40%"
-          x2="66%"
-          y2="40%"
+          y1="42.7%"
+          x2="67%"
+          y2="42%"
           stroke={state.locksmithLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Locksmith to Unbreakable
-          x1="24%"
-          y1="39%"
-          x2="40%"
-          y2="40%"
+          x1="23%"
+          y1="41.9%"
+          x2="42%"
+          y2="42.5%"
           stroke={state.unbreakableLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Expert Locks to Master Locks
           x1="68%"
-          y1="30%"
+          y1="32%"
           x2="68%"
-          y2="39%"
+          y2="41%"
           stroke={state.masterLocksLine}
           strokeWidth={lineStrokeWidth}
         />

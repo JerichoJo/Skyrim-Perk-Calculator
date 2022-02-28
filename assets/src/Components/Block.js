@@ -49,6 +49,8 @@ const BlockTree = () => {
     shieldChargeLine: 'white',
     quickReflexes: 0,
     quickReflexesLine: 'white',
+    disarmingBashtoShieldChargeLine: 'white',
+    blockRunnerToShieldChargeLine: 'white',
   });
 
   let resetAllTrees;
@@ -74,38 +76,38 @@ const BlockTree = () => {
   const resetActivePerks = () => {
     resetBlockPerks();
     DecrementCounter(ActivePerks);
-  };
+};
 
-  // Use this to control Re-renders for resetting AllActivePerks with useEffect();
-  if (AllActivePerks == 0) {
+// Use this to control Re-renders for resetting AllActivePerks with useEffect();
+if (AllActivePerks == 0) {
     resetAllTrees = 1;
-  } else {
+} else {
     resetAllTrees = 0;
-  }
+}
 
-  // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
-  useEffect(() => {
+// Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+useEffect(() => {
     if (resetAllTrees == 1) {
-      resetBlockPerks();
-      SetActivePerks(0);
+        resetBlockPerks();
+        SetActivePerks(0);
     }
-  }, [resetAllTrees]);
+}, [resetAllTrees]);
 
-  const IncrementCounter = (numActivePerks = 0) => {
+const IncrementCounter = (numActivePerks = 0) => {
     SetActivePerks(ActivePerks + numActivePerks);
     SetAllActivePerks(AllActivePerks + numActivePerks);
-  };
-  const DecrementCounter = (numActivePerks = 0) => {
+};
+const DecrementCounter = (numActivePerks = 0) => {
     if (ActivePerks === 0) {
-      return;
+        return;
     }
     SetActivePerks(ActivePerks - numActivePerks);
     SetAllActivePerks(AllActivePerks - numActivePerks);
-  };
+};
 
-  const TrackLevel = useCallback((level) => {
+const TrackLevel = useCallback((level) => {
     SetRequiredLevel(level);
-  }, []);
+}, []);
 
   const lineStrokeWidth = '2';
 
@@ -120,13 +122,13 @@ const BlockTree = () => {
       TrackLevel(50);
     } else if (state.powerBash == 1) {
       TrackLevel(30);
-    } else if (state.blockRunner == 'red') {
+    } else if (state.blockRunner == 1) {
       TrackLevel(70);
-    } else if (state.elementalProtection == 'red') {
+    } else if (state.elementalProtection == 1) {
       TrackLevel(50);
-    } else if (state.deflectArrows == 'red') {
+    } else if (state.deflectArrows == 1) {
       TrackLevel(30);
-    } else if (state.shieldWall == 'red') {
+    } else if (state.shieldWall == 1) {
       TrackLevel(80);
     }
   }, [TrackLevel, state]);
@@ -163,7 +165,7 @@ const BlockTree = () => {
     }
   };
 
-  const CheckIfPowerBashPressed = (buttonColor, lineColor) => {
+  const CheckIfPowerBashPressed = (buttonColor, lineColor) => { // HERE
     if (state.shieldWall == 0) {
       setState({ shieldWall: buttonColor });
       setState({ powerBash: buttonColor });
@@ -198,11 +200,13 @@ const BlockTree = () => {
       setState({ deflectArrowsLine: lineColor });
       setState({ elementalProtection: buttonColor });
       setState({ elementalProtectionLine: lineColor });
+      IncrementCounter(1);
     } else if (state.blockRunner == 1) {
       // Do Nothing
     } else {
       setState({ elementalProtection: buttonColor });
       setState({ elementalProtectionLine: lineColor });
+      state.elementalProtection == 0 ? IncrementCounter(1) : DecrementCounter(1);
     }
   };
 
@@ -257,17 +261,9 @@ const BlockTree = () => {
   };
 
   const checkIfShieldChargePressed = (buttonColor, lineColor) => {
-    if (state.blockRunner || state.disarmingBash == 0) {
+    if (state.disarmingBash == 0) {
       // Base
       setState({ shieldWall: buttonColor });
-      // Left Side
-      setState({ deflectArrows: buttonColor });
-      setState({ deflectArrowsLine: lineColor });
-      setState({ elementalProtection: buttonColor });
-      setState({ elementalProtectionLine: lineColor });
-      setState({ blockRunner: buttonColor });
-      setState({ blockRunnerLine: lineColor });
-      // Right Side
       setState({ powerBash: buttonColor });
       setState({ powerBashLine: lineColor });
       setState({ deadlyBash: buttonColor });
@@ -275,6 +271,7 @@ const BlockTree = () => {
       setState({ disarmingBash: buttonColor });
       setState({ disarmingBashLine: lineColor });
       setState({ shieldCharge: buttonColor });
+      setState({disarmingBashtoShieldChargeLine: lineColor});
       // Shield Charge lines are block runner and disarming bash
     } else {
       setState({ shieldCharge: buttonColor });
@@ -290,7 +287,7 @@ const BlockTree = () => {
       </View>
       <View style={styles.topText}>
         <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-        <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+        <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel }</Text>
       </View>
       <View title='Shield Wall Blue' style={{
         position: 'absolute',
@@ -469,7 +466,7 @@ const BlockTree = () => {
           onPress={() => {
             checkIfShieldChargePressed(
               state.shieldCharge == 0 ? 1 : 0,
-              state.shieldChargeLine == 'white' ? 'gold' : 'white',
+              state.disarmingBashtoShieldChargeLine == 'white' ? 'gold' : 'white',
               state.shieldChargeLineLight == 'white' ? 'gold' : 'white'
             );
           }}>
@@ -552,8 +549,8 @@ const BlockTree = () => {
       </View>
       <View title='Power Bash Gold' style={{
         position: 'absolute',
-        left: "86%",
-        top: "67%",
+        left: "74%",
+        top: "63%",
         zIndex: 8,
         opacity: state.powerBash
 
@@ -604,31 +601,31 @@ const BlockTree = () => {
           y1="43%"
           x2="32%"
           y2="43.5%"
-          stroke={state.shieldChargeLine}
+          stroke={state.blockRunnerToShieldChargeLine}
           strokeWidth={lineStrokeWidth}
         />
-        <Line // Shield Charge to Disarming Bash
+        <Line // disarming bash to shield charge
           x1="78%"
           y1="44%"
           x2="56%"
           y2="43%"
-          stroke={state.disarmingBashLine}
+          stroke={state.disarmingBashtoShieldChargeLine}
           strokeWidth={lineStrokeWidth}
         />
-        <Line // Disarming Bash to Deadly Bash
+        <Line // deadly bash to disarming bash
           x1="85%"
           y1="53%"
           x2="81%"
           y2="45%"
-          stroke={state.deadlyBashLine}
+          stroke={state.disarmingBashLine}
           strokeWidth={lineStrokeWidth}
         />
-        <Line // Deadly Bash to Power Bash
+        <Line // power bash to deadly bash
           x1="86%"
           y1="67%"
           x2="85%"
           y2="54%"
-          stroke={state.powerBashLine}
+          stroke={state.deadlyBashLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Shield wall to power bash
