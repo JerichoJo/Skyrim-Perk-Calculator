@@ -194,6 +194,7 @@ const Enchanting = () => {
     };
 
     const CheckIfFireEnchanterPressed = (button, line) => {
+        
         if (state.enchanter == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ enchanter: button });
@@ -204,7 +205,12 @@ const Enchanting = () => {
             if (state.enchanter == 0) {
                 SetEnchanterLevel(1);
             }
-        } else {
+            
+        } else if (state.frostEnchanter == 1){
+
+        }
+        
+        else {
             setState({ fireEnchanterLine: line });
             setState({ fireEnchanter: button }); // Change the pressed button color back and forth
             state.fireEnchanter == 0
@@ -256,6 +262,9 @@ const Enchanting = () => {
             } else {
                 IncrementCounter(3);
             }
+            if (state.extraEffect == 1){
+                setState({stormExtraLine: lineColor})
+            }
         } else if (state.extraEffect == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -269,10 +278,7 @@ const Enchanting = () => {
     };
     const CheckIfExtraEffectPressed = (buttonColor, lineColor) => {
 
-        if (state.corpusEnchanter == 1){
-            setState({ extraEffect: buttonColor });
-            setState({ extraEffectLine: lineColor });
-        } else if (state.corpusEnchanter != 1 && state.stormEnchanting == 0) {
+        if (state.corpusEnchanter == 0 && state.stormEnchanting == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ extraEffect: buttonColor });
             setState({ stormEnchanting: buttonColor });
@@ -295,10 +301,20 @@ const Enchanting = () => {
                 IncrementCounter(4);
             }
 
-        
-        } else {
+        } else if (state.corpusEnchanter == 1 && state.stormEnchanting == 1){
+            setState({ extraEffect : buttonColor });
+            setState({ extraEffectLine : lineColor });
+            setState({ stormExtraLine : lineColor });
+
+        } else if (state.corpusEnchanter == 1){
             setState({ extraEffect: buttonColor });
-            setState({ stormExtraLine: lineColor }); 
+            setState({ extraEffectLine: lineColor });
+
+        } else if(state.stormEnchanting == 1){
+            setState({ extraEffect : buttonColor });
+            setState({ stormExtraLine : lineColor });
+        }        
+        else {          
             state.extraEffect == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
@@ -342,9 +358,14 @@ const Enchanting = () => {
             } else {
                 IncrementCounter(3);
             }
-        } else if (state.soulSqueezer == 1) {
+            if (state.extraEffect == 1){
+                setState({ extraEffectLine: lineColor});
+            } 
+        } else if (state.extraEffect == 1) {
             // Do nothing....must un-select nodes above it first
-        } else {
+        }
+        
+        else {
             setState({ corpusEnchanterLine: lineColor });
             setState({ corpusEnchanter: buttonColor }); // Change the pressed button color back and forth
             state.corpusEnchanter == 0
@@ -630,7 +651,7 @@ const Enchanting = () => {
                         CheckIfExtraEffectPressed(
                             state.extraEffect == 0 ? 1 : 0,
                             state.extraEffectLine == 'white' ? 'gold' : 'white',
-                            state.stormExtraLine == 'white' ? 'gold' : 'white'
+                            
                         );
                     }}>
                     <StarIconGold />
@@ -814,8 +835,8 @@ const styles = StyleSheet.create({
     },
     FireEnchanterText: {
         position: 'absolute',
-        left: "33%",
-        top: "55%",
+        left: "35%",
+        top: "63%",
         zIndex: 10,
     },
     ElvenSmithText: {
@@ -836,12 +857,6 @@ const styles = StyleSheet.create({
         top: "40%",
         zIndex: 10,
     },
-    DragonArmorText: {
-        position: 'absolute',
-        left: "44%",
-        top: "34%",
-        zIndex: 10,
-    },
     SoulSiphonText: {
         position: 'absolute',
         left: "64%",
@@ -856,8 +871,8 @@ const styles = StyleSheet.create({
     },
     CorpusEnchanterText: {
         position: 'absolute',
-        left: "50%",
-        top: "50%",
+        left: "49%",
+        top: "53%",
         zIndex: 10,
     },
     InsightfulEnchanterText: {
