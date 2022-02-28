@@ -149,7 +149,7 @@ const Enchanting = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.dragonSmithing == 1) {
+        if (state.extraEffect == 1) {
             TrackLevel(100);
         } else if (state.soulSiphon == 1) {
             TrackLevel(90);
