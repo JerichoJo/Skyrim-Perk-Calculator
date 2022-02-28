@@ -35,22 +35,22 @@ const ArcheryTree = () => {
     const [state, setState] = useSetState({
         Overdraw: 0,
         SteadyHand: 0,
-        SteadyHandLine: 'black',
+        SteadyHandLine: 'white',
         HuntersDiscipline: 0,
-        HuntersDisciplineLine: 'black',
+        HuntersDisciplineLine: 'white',
         Ranger: 0,
-        RangerLine: 'black',
+        RangerLine: 'white',
         QuickShot: 0,
-        QuickShotLine: 'black',        
+        QuickShotLine: 'white',        
         Bullseye: 0,
-        BullseyeLine: 'black',
-        BullseyeDevLine: 'black',
+        BullseyeLine: 'white',
+        BullseyeDevLine: 'white',
         PowerShot: 0,
-        PowerShotLine: 'black',
+        PowerShotLine: 'white',
         EagleEye: 0,
-        EagleEyeLine: 'black',
+        EagleEyeLine: 'white',
         CriticalShot: 0,
-        CriticalShotLine: 'black',
+        CriticalShotLine: 'white',
     });
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -617,7 +617,7 @@ const ArcheryTree = () => {
                     onPress={() => {
                         CheckIfSteadyHandPressed(
                             state.SteadyHand == 0 ? 1 : 0,
-                            state.SteadyHandLine == 'black' ? 'gold' : 'black'
+                            state.SteadyHandLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -648,7 +648,7 @@ const ArcheryTree = () => {
                     onPress={() => {
                         CheckIfHuntersDisciplinePressed(
                             state.HuntersDiscipline == 0 ? 1 : 0,
-                            state.HuntersDisciplineLine == 'black' ? 'gold' : 'black'
+                            state.HuntersDisciplineLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -679,8 +679,12 @@ const ArcheryTree = () => {
                     onPress={() => {
                         CheckIfRangerPressed(
                             state.Ranger == 0 ? 1 : 0,
+<<<<<<< HEAD
                             state.RangerLine == 'black' ? 'gold' : 'black',
                             state.BullseyeDevLine == 'black' ? 'gold' : 'black'
+=======
+                            state.RangerLine == 'white' ? 'gold' : 'white'
+>>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
                         );
                     }}>
                     <StarIconGold />
@@ -711,8 +715,8 @@ const ArcheryTree = () => {
                     onPress={() => {
                         CheckIfBullseyePressed(
                             state.Bullseye == 0 ? 1 : 0,
-                            state.BullseyeLine == 'black' ? 'gold' : 'black',
-                            state.BullseyeDevLine == 'black' ? 'gold' : 'black'
+                            state.BullseyeLine == 'white' ? 'gold' : 'white',
+                            state.BullseyeDevLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -743,7 +747,7 @@ const ArcheryTree = () => {
                     onPress={() => {
                         CheckIfPowerShotPressed(
                             state.PowerShot == 0 ? 1 : 0,
-                            state.PowerShotLine == 'black' ? 'gold' : 'black'
+                            state.PowerShotLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -775,7 +779,7 @@ const ArcheryTree = () => {
                     onPress={() => {
                         CheckIfEagleEyePressed(
                             state.EagleEye == 0 ? 1 : 0,
-                            state.EagleEyeLine == 'black' ? 'gold' : 'black'
+                            state.EagleEyeLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -806,7 +810,7 @@ const ArcheryTree = () => {
                     onPress={() => {
                         CheckIfCriticalShotPressed(
                             state.CriticalShot == 0 ? 1 : 0,
-                            state.CriticalShotLine == 'black' ? 'gold' : 'black'
+                            state.CriticalShotLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -838,7 +842,7 @@ const ArcheryTree = () => {
                     onPress={() => {
                         CheckIfQuickShotPressed(
                             state.QuickShot == 0 ? 1 : 0,
-                            state.QuickShotLine == 'black' ? 'gold' : 'black'
+                            state.QuickShotLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

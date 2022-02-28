@@ -69,6 +69,7 @@ import IntenseFlamesModal from "./DestructionModals/IntenseFlamesModal";
 import MasterDestructionModal from "./DestructionModals/MasterDestructionModal";
 import NoviceDestructionModal from "./DestructionModals/NoviceDestructionModal";
 import RuneMasterModal from "./DestructionModals/RuneMasterModal";
+<<<<<<< HEAD
 import BullseyeModal from "./ArcheryModals/BullseyeModal";
 import CriticalShotModal from "./ArcheryModals/CriticalShotModal";
 import EagleEyeModal from "./ArcheryModals/EagleEyeModal";
@@ -107,6 +108,59 @@ import LimbsplitterModal from "./TwoHandedModals/LimbsplitterModal";
 import SkullCrusherModal from "./TwoHandedModals/SkullCrusherModal";
 import SweepModal from "./TwoHandedModals/SweepModal";
 import WarmasterModal from "./TwoHandedModals/WarmasterModal";
+=======
+import JuggernautModal from "./HeavyArmorModals/JuggernautModal";
+import FistsOfSteelModal from "./HeavyArmorModals/FistsOfSteelModal";
+import CushionedModal from "./HeavyArmorModals/CushionedModal";
+import ConditioningModal from "./HeavyArmorModals/ConditioningModal";
+import HeavyMatchingSetModal from "./HeavyArmorModals/HeavyMatchingSetModal";
+import TowerOfStrengthModal from "./HeavyArmorModals/TowerOfStrengthModal";
+import WellFittedModal from "./HeavyArmorModals/WellFittedModal";
+import ReflectBlowsModal from "./HeavyArmorModals/ReflectBlowsModal";
+import NoviceConjurationModal from "./ConjurationModals.js/NoviceConjurationModal";
+import ConjurationDualCastingModal from "./ConjurationModals.js/ConjurationDualCastingModal";
+import SummonerModal from "./ConjurationModals.js/SummonerModal";
+import AtromancyModal from "./ConjurationModals.js/AtromancyModal";
+import ElementalPotencyModal from "./ConjurationModals.js/ElementalPotencyModal";
+import NecromancyModal from "./ConjurationModals.js/NecromancyModal";
+import DarkSoulsModal from "./ConjurationModals.js/DarkSoulsModal";
+import TwinSoulsModal from "./ConjurationModals.js/TwinSoulsModal";
+import MysticBindingModal from "./ConjurationModals.js/MysticBindingModal";
+import SoulStealerModal from "./ConjurationModals.js/SoulStealerModal";
+import OblivionBindingModal from "./ConjurationModals.js/OblivionBindingModal";
+import ApprenticeConjurationModal from "./ConjurationModals.js/ApprenticeConjuration";
+import AdeptConjurationModal from "./ConjurationModals.js/AdeptConjurationModal";
+import ExpertConjurationModal from "./ConjurationModals.js/ExpertConjurationModal";
+import MasterConjurationModal from "./ConjurationModals.js/MasterConjurationModal";
+import CorpusEnchanterModal from "./EnchantingModals.js/CorpusEnchanterModal";
+import EnchanterModal from "./EnchantingModals.js/EnchanterModal";
+import ExtraEffectModal from "./EnchantingModals.js/ExtraEffectModal";
+import FireEnchanterModal from "./EnchantingModals.js/FireEnchanterModal";
+import FrostEnchanterModal from "./EnchantingModals.js/FrostEnchanterModal";
+import InsightfulEnchanterModal from "./EnchantingModals.js/InsightfulEnchanterModal";
+import SoulSiphonModal from "./EnchantingModals.js/SoulSiphonModal";
+import SoulSqueezerModal from "./EnchantingModals.js/SoulSiphonModal";
+import StormEnchanterModal from "./EnchantingModals.js/StormEnchanterModal";
+import AlchemistModal from "./AlchemyModals/AlchemistModal";
+import BenefactorModal from "./AlchemyModals/BenefactorModal";
+import ConcentratedPoisonModal from "./AlchemyModals/ConcentratedPoisonModal";
+import ExperimenterModal from "./AlchemyModals/ExperimenterModal";
+import GreenThumbModal from "./AlchemyModals/GreenThumbModal";
+import PhysicianModal from "./AlchemyModals/PhysicianModal";
+import PrisonerModal from "./AlchemyModals/PrisonerModal";
+import PurityModal from "./AlchemyModals/PurityModal";
+import SnakebloodModal from "./AlchemyModals/SnakebloodModal";
+import AssasinsBladeModal from "./SneakModals.js/AssasinsBladeModal";
+import BackstabModal from "./SneakModals.js/BackstabModal";
+import DeadlyAimModal from "./SneakModals.js/DeadlyAimModal";
+import LightFootModal from "./SneakModals.js/LightFootModal";
+import MuffledMovementModal from "./SneakModals.js/MuffledMovementModal";
+import ShadowWarriorModal from "./SneakModals.js/ShadowWarriorModal";
+import SilenceModal from "./SneakModals.js/SilenceModal";
+import SilentRollModal from "./SneakModals.js/SilentRollModal";
+import StealthModal from "./SneakModals.js/StealthModal";
+
+>>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
 
 const modals = {
     //Alteration Tree
@@ -194,6 +248,7 @@ const modals = {
     NoviceDestructionModal,
     RuneMasterModal,
 
+<<<<<<< HEAD
     // Archery Modals
     BullseyeModal,
     CriticalShotModal,
@@ -240,6 +295,68 @@ const modals = {
     SweepModal,
     WarmasterModal,
 
+=======
+    // Heavy Armor Modals
+    JuggernautModal,
+    FistsOfSteelModal,
+    CushionedModal,
+    ConditioningModal,
+    HeavyMatchingSetModal,
+    ReflectBlowsModal,
+    TowerOfStrengthModal,
+    WellFittedModal,
+    
+    // Conjuration Modals
+    NoviceConjurationModal,
+    ConjurationDualCastingModal,
+    SummonerModal,
+    AtromancyModal,
+    ElementalPotencyModal,
+    DarkSoulsModal,
+    TwinSoulsModal,
+    NecromancyModal,
+    MysticBindingModal,
+    SoulStealerModal,
+    OblivionBindingModal,
+    MasterConjurationModal,
+    ExpertConjurationModal,
+    AdeptConjurationModal,
+    ApprenticeConjurationModal,
+
+    // Enchanting Tree Modals
+    CorpusEnchanterModal,
+    EnchanterModal,
+    ExtraEffectModal,
+    FireEnchanterModal,
+    FrostEnchanterModal,
+    InsightfulEnchanterModal,
+    SoulSiphonModal,
+    SoulSqueezerModal,
+    StormEnchanterModal,
+
+    // Alchemy Tree Modals
+    AlchemistModal,
+    BenefactorModal,
+    ConcentratedPoisonModal,
+    ExperimenterModal, 
+    GreenThumbModal,
+    PhysicianModal,
+    PrisonerModal,
+    PurityModal,
+    SnakebloodModal,
+
+    // Sneak Tree Modals
+    AssasinsBladeModal,
+    BackstabModal,
+    DeadlyAimModal,
+    LightFootModal,
+    MuffledMovementModal,
+    ShadowWarriorModal,
+    SilenceModal,
+    SilentRollModal,
+    StealthModal,
+    
+>>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
 }
 
 export default modals;

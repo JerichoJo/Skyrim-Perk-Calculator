@@ -42,23 +42,23 @@ const OneHandedTree = () => {
   const [state, setState] = useSetState({
     armsman: 0,
     bladesman: 0,
-    bladesmanLine: 'black',
+    bladesmanLine: 'white',
     bonebreaker: 0,
-    bonebreakerLine: 'black',
+    bonebreakerLine: 'white',
     dualFlurry: 0,
-    dualFlurryLine: 'black',
+    dualFlurryLine: 'white',
     dualSavagery: 0,
-    dualSavageryLine: 'black',
+    dualSavageryLine: 'white',
     fightingStance: 0,
-    fightingStanceLine: 'black',
+    fightingStanceLine: 'white',
     criticalCharge: 0,
-    criticalChargeLine: 'black',
+    criticalChargeLine: 'white',
     savageStrike: 0,
-    savageStrikeLine: 'black',
+    savageStrikeLine: 'white',
     paralyzingStrike: 0,
-    paralyzingStrikeLine: 'black',
+    paralyzingStrikeLine: 'white',
     hackAndSlash: 0,
-    hackAndSlashLine: 'black',
+    hackAndSlashLine: 'white',
   });
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [count, setCount] = useState(0);
@@ -310,7 +310,7 @@ const OneHandedTree = () => {
                     onPress={() => {
                         checkIfHackAndSlashPressed(
                             state.hackAndSlash == 0 ? 1 : 0,
-                            state.hackAndSlashLine == 'black' ? 'gold' : 'black'
+                            state.hackAndSlashLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -340,7 +340,7 @@ const OneHandedTree = () => {
                     onPress={() => {
                         CheckIfBladesmanPressed(
                             state.bladesman == 0 ? 1 : 0,
-                            state.bladesmanLine == 'black' ? 'gold' : 'black'
+                            state.bladesmanLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -370,7 +370,7 @@ const OneHandedTree = () => {
                     onPress={() => {
                         CheckIfBoneBreakerPressed(
                             state.bonebreaker == 0 ? 1 : 0,
-                            state.bonebreaker == 'black' ? 'gold' : 'black'
+                            state.bonebreaker == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -400,7 +400,7 @@ const OneHandedTree = () => {
                     onPress={() => {
                         checkIfFightingStancePressed(
                             state.fightingStance == 0 ? 1 : 0,
-                            state.fightingStanceLine == 'black' ? 'gold' : 'black'
+                            state.fightingStanceLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -430,7 +430,7 @@ const OneHandedTree = () => {
                     onPress={() => {
                         checkIfCriticalChargePressed(
                             state.criticalCharge == 0 ? 1 : 0,
-                            state.criticalChargeLine == 'black' ? 'gold' : 'black',
+                            state.criticalChargeLine == 'white' ? 'gold' : 'white',
                         );
                     }}>
                     <StarIconGold />
@@ -460,7 +460,7 @@ const OneHandedTree = () => {
                     onPress={() => {
                         checkIfSavageStrikePressed(
                             state.savageStrike == 0 ? 1 : 0,
-                            state.savageStrikeLine == 'black' ? 'gold' : 'black'
+                            state.savageStrikeLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -490,7 +490,7 @@ const OneHandedTree = () => {
                     onPress={() => {
                         checkIfParalyzingStrikePressed(
                             state.paralyzingStrike == 0 ? 1 : 0,
-                            state.paralyzingStrikeLine == 'black' ? 'gold' : 'black'
+                            state.paralyzingStrikeLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -520,7 +520,7 @@ const OneHandedTree = () => {
                     onPress={() => {
                         checkIfDualFlurryPressed(
                             state.dualFlurry == 0 ? 1 : 0,
-                            state.dualFlurry == 'black' ? 'gold' : 'black'
+                            state.dualFlurry == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -550,7 +550,7 @@ const OneHandedTree = () => {
                     onPress={() => {
                         checkIfDualSavageryChecked(
                             state.dualSavagery == 0 ? 1 : 0,
-                            state.dualSavagery == 'black' ? 'gold' : 'black'
+                            state.dualSavagery == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
