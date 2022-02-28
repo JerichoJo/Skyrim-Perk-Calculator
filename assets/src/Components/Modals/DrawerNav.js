@@ -27,11 +27,11 @@ export function DrawerContent(props) {
         <Drawer.Section
           Title="Skills"
           style={{
-            padding: 20
+            padding: 15
           }}
         >
           <DrawerItem
-            label="Reset ALL Perks"
+            label="Reset All Perks"
             labelStyle={styles.ItemLabel}
             onPress={() => {
               setTimeout(() => {
@@ -287,7 +287,7 @@ export function DrawerContent(props) {
 const styles = StyleSheet.create({
 
   ItemLabel: {
-    fontWeight: 'bold',
+    fontWeight: 'normal',
     borderColor: 'white',
 
   }
