@@ -315,6 +315,8 @@ const Enchanting = () => {
             setState({ stormExtraLine : lineColor });
         }        
         else {          
+            setState({ extraEffect: buttonColor})
+            setState({ stormExtraLine: lineColor})
             state.extraEffect == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
@@ -343,6 +345,9 @@ const Enchanting = () => {
         }
     };
     const CheckIfCorpusEnchanterPressed = (buttonColor, lineColor) => {
+        if (state.extraEffect == 1){
+            setState({ extraEffectLine: lineColor});
+        } 
         if (state.insightfulEnchanter == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ corpusEnchanter: buttonColor });
@@ -358,12 +363,8 @@ const Enchanting = () => {
             } else {
                 IncrementCounter(3);
             }
-            if (state.extraEffect == 1){
-                setState({ extraEffectLine: lineColor});
-            } 
-        } else if (state.extraEffect == 1) {
-            // Do nothing....must un-select nodes above it first
-        }
+            
+        } 
         
         else {
             setState({ corpusEnchanterLine: lineColor });
