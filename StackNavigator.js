@@ -190,7 +190,7 @@ function Drawers() {
                     drawerStyle: {
                         borderColor: 'white',
                         borderWidth: 1,
-                        backgroundColor: 'slateblue',
+                        backgroundColor: 'lightsteelblue',
                         width: 225,
                         shadowColor: 'black',
                         borderRadius: 5,

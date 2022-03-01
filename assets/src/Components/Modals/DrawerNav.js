@@ -3,7 +3,7 @@ import { useContext, useCallback } from 'react';
 import { View, StyleSheet, Dimensions } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
-import { Drawer } from 'react-native-paper';
+import { Drawer, Divider } from 'react-native-paper';
 import { AllActivePerkss } from '../../../../StackNavigator';
 
 const moveIT = (dest) => {
@@ -27,9 +27,11 @@ export function DrawerContent(props) {
         <Drawer.Section
           Title="Skills"
           style={{
-            padding: 20
+            padding: 20,
+            
           }}
         >
+          <Divider style={{borderWidth:.5}}/>
           <DrawerItem
             label="Reset ALL Perks"
             labelStyle={styles.ItemLabel}
@@ -42,6 +44,9 @@ export function DrawerContent(props) {
             }}
           >
           </DrawerItem>
+
+          <Divider style={{borderWidth:.5}}/>
+
           <DrawerItem
             label="Illusion"
             labelStyle={styles.ItemLabel}
@@ -54,6 +59,8 @@ export function DrawerContent(props) {
             }}
           >
           </DrawerItem>
+          
+          <Divider style={{borderWidth:.5}}/>
 
           <DrawerItem
             label="Conjuration"
@@ -69,6 +76,8 @@ export function DrawerContent(props) {
           >
           </DrawerItem>
 
+          <Divider style={{borderWidth:.5}}/>
+
           <DrawerItem
             label="Destruction"
             labelStyle={styles.ItemLabel}
@@ -81,6 +90,8 @@ export function DrawerContent(props) {
             }}
           >
           </DrawerItem>
+
+          <Divider style={{borderWidth:.5}}/>
 
           <DrawerItem
             label="Restoration"
@@ -95,6 +106,8 @@ export function DrawerContent(props) {
           >
           </DrawerItem>
 
+          <Divider style={{borderWidth:.5}}/>
+
           <DrawerItem
             label="Alteration"
             labelStyle={styles.ItemLabel}
@@ -107,6 +120,8 @@ export function DrawerContent(props) {
             }}
           >
           </DrawerItem>
+
+          <Divider style={{borderWidth:.5}}/>
 
           <DrawerItem
             label="Enchanting"
@@ -121,6 +136,8 @@ export function DrawerContent(props) {
           >
           </DrawerItem>
 
+          <Divider style={{borderWidth:.5}}/>
+
         <DrawerItem
           label="Smithing"
           labelStyle={styles.ItemLabel}
@@ -133,6 +150,8 @@ export function DrawerContent(props) {
             }}
         >
         </DrawerItem>
+        
+        <Divider style={{borderWidth:.5}}/>
 
         <DrawerItem
           label="Heavy Armor"
@@ -147,6 +166,8 @@ export function DrawerContent(props) {
         >
         </DrawerItem>
 
+        <Divider style={{borderWidth:.5}}/>
+
         <DrawerItem
           label="Block"
           labelStyle={styles.ItemLabel}
@@ -159,6 +180,8 @@ export function DrawerContent(props) {
           }}
         >
         </DrawerItem>
+
+        <Divider style={{borderWidth:.5}}/>
 
         <DrawerItem
           label="Two-Handed"
@@ -173,6 +196,8 @@ export function DrawerContent(props) {
         >
         </DrawerItem>
 
+        <Divider style={{borderWidth:.5}}/>
+
         <DrawerItem
           label="One-Handed"
           labelStyle={styles.ItemLabel}
@@ -185,6 +210,8 @@ export function DrawerContent(props) {
           }}
         >
         </DrawerItem>
+
+        <Divider style={{borderWidth:.5}}/>
 
         <DrawerItem
           label="Archery"
@@ -199,6 +226,8 @@ export function DrawerContent(props) {
         >
         </DrawerItem>
 
+        <Divider style={{borderWidth:.5}}/>
+
         <DrawerItem
           label="Light Armor"
           labelStyle={styles.ItemLabel}
@@ -211,6 +240,8 @@ export function DrawerContent(props) {
           }}
         >
         </DrawerItem>
+
+        <Divider style={{borderWidth:.5}}/>
 
         <DrawerItem
           label="Sneak"
@@ -225,6 +256,8 @@ export function DrawerContent(props) {
         >
         </DrawerItem>
 
+        <Divider style={{borderWidth:.5}}/>
+
         <DrawerItem
           label="Lockpicking"
           labelStyle={styles.ItemLabel}
@@ -238,6 +271,8 @@ export function DrawerContent(props) {
         >
         </DrawerItem>
 
+        <Divider style={{borderWidth:.5}}/>
+
         <DrawerItem
           label="Pickpocket"
           labelStyle={styles.ItemLabel}
@@ -250,6 +285,8 @@ export function DrawerContent(props) {
           }}
         >
         </DrawerItem>
+
+        <Divider style={{borderWidth:.5}}/>
         
         <DrawerItem
           label="Speech"
@@ -263,6 +300,9 @@ export function DrawerContent(props) {
           }}
         >
         </DrawerItem>
+
+        <Divider style={{borderWidth:.5}}/>
+
         <DrawerItem
           label="Alchemy"
           labelStyle={styles.ItemLabel}
@@ -275,6 +315,7 @@ export function DrawerContent(props) {
           }}
         >
         </DrawerItem>
+        <Divider style={{borderWidth:.5}}/>
 
         </Drawer.Section>
       </DrawerContentScrollView>
