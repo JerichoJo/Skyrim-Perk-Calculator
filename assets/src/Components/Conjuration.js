@@ -343,7 +343,7 @@ const ConjurationTree = () => {
             setState({ twinSouls: buttonColor });
             setState({ twinSoulsLine: lineColor});
 
-            if (state.summoner == 0 ) {
+            if (SummonerLevel == 0 ) {
                 SetSummonerLevel(1);
             }
             if (state.summoner == 1) {
@@ -410,7 +410,7 @@ const ConjurationTree = () => {
             setState({ summoner: buttonColor });
             setState({ atromancyLine: lineColor });
             setState({ summonerLine: lineColor });
-            if (summoner == 0){
+            if (SummonerLevel == 0){
                 SetSummonerLevel(1);
             }
             if (state.noviceConjuration == 1) {
