@@ -302,7 +302,7 @@ function Drawers() {
                     drawerStyle: {
                         borderColor: 'white',
                         borderWidth: 1,
-                        backgroundColor: 'slateblue',
+                        backgroundColor: '#f4f6f5',
                         width: 225,
                         shadowColor: 'black',
                         borderRadius: 5,
