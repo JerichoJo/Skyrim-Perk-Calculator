@@ -55,9 +55,9 @@ const TwoHandedTree = () => {
         Warmaster: 0,
         WarmasterLine: 'white',
         DeepWounds: 0,
-        DeepWoundsLine: 'black',
+        DeepWoundsLine: 'white',
         SkullCrusher: 0,
-        SkullCrusherLine: 'black',
+        SkullCrusherLine: 'white',
     });
 
     let resetAllTrees;
@@ -77,9 +77,9 @@ const TwoHandedTree = () => {
         setState({ Warmaster: 0 });
         setState({ WarmasterLine: 'white' });
         setState({ DeepWounds: 0 });
-        setState({ DeepWoundsLine: 'black' });
+        setState({ DeepWoundsLine: 'white' });
         setState({ SkullCrusher: 0 });
-        setState({ SkullCrusherLine: 'black' });
+        setState({ SkullCrusherLine: 'white' });
         SetRequiredLevel(0);
         SetBarbarianLevel(0);
         SetLimbsplitterLevel(0);
@@ -639,8 +639,8 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfDevastatingBlowPressed(
                             state.DevastatingBlow == 0 ? 1 : 0,
-                            state.DevastatingBlowLine == 'black' ? 'gold' : 'black',
-                            state.SweepDevLine == 'black' ? 'gold' : 'black'
+                            state.DevastatingBlowLine == 'white' ? 'gold' : 'white',
+                            state.SweepDevLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -703,8 +703,8 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfWarmasterPressed(
                             state.Warmaster == 0 ? 1 : 0,
-                            state.WarmasterLine == 'black' ? 'gold' : 'black',
-                            state.SweepDevLine == 'black' ? 'gold' : 'black'
+                            state.WarmasterLine == 'white' ? 'gold' : 'white',
+                            state.SweepDevLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -767,7 +767,7 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfSkullCrusherPressed(
                             state.SkullCrusher == 0 ? 1 : 0,
-                            state.SkullCrusherLine == 'black' ? 'gold' : 'black'
+                            state.SkullCrusherLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />

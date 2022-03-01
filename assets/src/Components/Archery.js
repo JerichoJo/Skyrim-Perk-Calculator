@@ -68,22 +68,22 @@ const ArcheryTree = () => {
     const resetArcheryPerks = () => {
         setState({ Overdraw: 0 });
         setState({ EagleEye: 0 });
-        setState({ EagleEyeLine: 'black' });
+        setState({ EagleEyeLine: 'white' });
         setState({ SteadyHand: 0 });
-        setState({ SteadyHandLine: 'black' });
+        setState({ SteadyHandLine: 'white' });
         setState({ PowerShot: 0 });
-        setState({ PowerShotLine: 'black' });
+        setState({ PowerShotLine: 'white' });
         setState({ QuickShot: 0 });
-        setState({ QuickShotLine: 'black' });
+        setState({ QuickShotLine: 'white' });
         setState({ Bullseye: 0 });
-        setState({ BullseyeLine: 'black' });
-        setState({ BullseyeDevLine: 'black' });
+        setState({ BullseyeLine: 'white' });
+        setState({ BullseyeDevLine: 'white' });
         setState({ Ranger: 0 });
-        setState({ RangerLine: 'black' });
+        setState({ RangerLine: 'white' });
         setState({ HuntersDiscipline: 0 });
-        setState({ HuntersDisciplineLine: 'black' });
+        setState({ HuntersDisciplineLine: 'white' });
         setState({ CriticalShot: 0 });
-        setState({ CriticalShotLine: 'black' });
+        setState({ CriticalShotLine: 'white' });
         SetCriticalShotLevel(0);
         SetOverdrawLevel(0);
         SetSteadyHandLevel(0);
@@ -557,7 +557,7 @@ const ArcheryTree = () => {
         <View style={{ zIndex: 2 }}>
             <View style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Archery Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Archery Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -679,8 +679,8 @@ const ArcheryTree = () => {
                     onPress={() => {
                         CheckIfRangerPressed(
                             state.Ranger == 0 ? 1 : 0,
-                            state.RangerLine == 'black' ? 'gold' : 'black',
-                            state.BullseyeDevLine == 'black' ? 'gold' : 'black'
+                            state.RangerLine == 'white' ? 'gold' : 'white',
+                            state.BullseyeDevLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
