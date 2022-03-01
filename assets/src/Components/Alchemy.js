@@ -341,7 +341,7 @@ const AlchemyTree = () => {
     }
 };
     const CheckIfPurityPressed = (buttonColor, lineColor) => {
-        if (state.snakeblood == 0) {
+        if (state.snakeblood == 0 && state.prisoner == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ purity: buttonColor });
             setState({ experimenter: buttonColor });
@@ -354,6 +354,7 @@ const AlchemyTree = () => {
             setState({ experimenterLine: lineColor });
             setState({ benefactorLine: lineColor });
             setState({ physicianLine: lineColor });
+            
             if (state.alchemist == 0) {
                 SetAlchemyLevel(1);
             }
@@ -366,7 +367,17 @@ const AlchemyTree = () => {
             } else {
                 IncrementCounter(5);
             }
-        } else {
+
+        } else if (state.snakeblood == 0 && state.concentratedPoison == 0){
+            setState({ purity: buttonColor});
+            setState({ purityLine: lineColor});
+            setState({ concentratedPoison: buttonColor});
+            setState({ concentratedPoisonLine: lineColor});
+            setState({ snakebloodLine: lineColor});
+            setState({ snakeblood: buttonColor});
+        }
+
+        else {
             setState({ purityLine: lineColor });
             setState({ purity: buttonColor }); // Change the pressed button color back and forth
             state.purity == 0
