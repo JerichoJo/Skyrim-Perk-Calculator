@@ -69,7 +69,6 @@ import IntenseFlamesModal from "./DestructionModals/IntenseFlamesModal";
 import MasterDestructionModal from "./DestructionModals/MasterDestructionModal";
 import NoviceDestructionModal from "./DestructionModals/NoviceDestructionModal";
 import RuneMasterModal from "./DestructionModals/RuneMasterModal";
-<<<<<<< HEAD
 import BullseyeModal from "./ArcheryModals/BullseyeModal";
 import CriticalShotModal from "./ArcheryModals/CriticalShotModal";
 import EagleEyeModal from "./ArcheryModals/EagleEyeModal";
@@ -101,14 +100,14 @@ import RespiteModal from "./RestorationModals/RespiteModal";
 import WardAbsorbModal from "./RestorationModals/WardAbsorbModal";
 import BarbarianModal from "./TwoHandedModals/BarbarianModal";
 import ChampionsStanceModal from "./TwoHandedModals/ChampionsStanceModal";
-import CriticalChargeModal from "./TwoHandedModals/CriticalChargeModal";
+//import CriticalChargeModal from "./TwoHandedModals/CriticalChargeModal";
 import DeepWoundsModal from "./TwoHandedModals/DeepWoundsModal";
 import DevastatingBlowModal from "./TwoHandedModals/DevastatingBlowModal";
 import LimbsplitterModal from "./TwoHandedModals/LimbsplitterModal";
 import SkullCrusherModal from "./TwoHandedModals/SkullCrusherModal";
 import SweepModal from "./TwoHandedModals/SweepModal";
 import WarmasterModal from "./TwoHandedModals/WarmasterModal";
-=======
+
 import JuggernautModal from "./HeavyArmorModals/JuggernautModal";
 import FistsOfSteelModal from "./HeavyArmorModals/FistsOfSteelModal";
 import CushionedModal from "./HeavyArmorModals/CushionedModal";
@@ -180,9 +179,6 @@ import QuickHandsModal from "./LockpickingModals/QuickHandsModal";
 import TreasureHunterModal from "./LockpickingModals/TreasureHunterModal";
 import UnbreakableModal from "./LockpickingModals/UnbreakableModal";
 import WaxKeyModal from "./LockpickingModals/WaxKeyModal";
-
-
->>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
 
 const modals = {
     //Alteration Tree
@@ -270,7 +266,6 @@ const modals = {
     NoviceDestructionModal,
     RuneMasterModal,
 
-<<<<<<< HEAD
     // Archery Modals
     BullseyeModal,
     CriticalShotModal,
@@ -309,7 +304,7 @@ const modals = {
     // Two Handed Modals
     BarbarianModal,
     ChampionsStanceModal,
-    CriticalChargeModal,
+    //CriticalChargeModal,
     DeepWoundsModal,
     DevastatingBlowModal,
     LimbsplitterModal,
@@ -317,7 +312,6 @@ const modals = {
     SweepModal,
     WarmasterModal,
 
-=======
     // Heavy Armor Modals
     JuggernautModal,
     FistsOfSteelModal,
@@ -327,7 +321,7 @@ const modals = {
     ReflectBlowsModal,
     TowerOfStrengthModal,
     WellFittedModal,
-    
+
     // Conjuration Modals
     NoviceConjurationModal,
     ConjurationDualCastingModal,
@@ -360,7 +354,7 @@ const modals = {
     AlchemistModal,
     BenefactorModal,
     ConcentratedPoisonModal,
-    ExperimenterModal, 
+    ExperimenterModal,
     GreenThumbModal,
     PhysicianModal,
     PrisonerModal,
@@ -402,8 +396,7 @@ const modals = {
     TreasureHunterModal,
     UnbreakableModal,
     WaxKeyModal,
-    
->>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
+
 }
 
 export default modals;

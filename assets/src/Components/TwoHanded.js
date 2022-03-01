@@ -55,15 +55,9 @@ const TwoHandedTree = () => {
         Warmaster: 0,
         WarmasterLine: 'white',
         DeepWounds: 0,
-<<<<<<< HEAD
         DeepWoundsLine: 'black',
         SkullCrusher: 0,
         SkullCrusherLine: 'black',
-=======
-        DeepWoundsLine: 'white',
-        Skullcrusher: 0,
-        SkullcrusherLine: 'white',
->>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
     });
 
     let resetAllTrees;
@@ -83,15 +77,9 @@ const TwoHandedTree = () => {
         setState({ Warmaster: 0 });
         setState({ WarmasterLine: 'white' });
         setState({ DeepWounds: 0 });
-<<<<<<< HEAD
         setState({ DeepWoundsLine: 'black' });
         setState({ SkullCrusher: 0 });
         setState({ SkullCrusherLine: 'black' });
-=======
-        setState({ DeepWoundsLine: 'white' });
-        setState({ Skullcrusher: 0 });
-        setState({ SkullcrusherLine: 'white' });
->>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
         SetRequiredLevel(0);
         SetBarbarianLevel(0);
         SetLimbsplitterLevel(0);
@@ -152,9 +140,9 @@ const TwoHandedTree = () => {
             TrackLevel(50);
         } else if (state.Barbarian == 1 && BarbarianLevel == 3) {
             TrackLevel(40);
-        } else if (state.SkullCrusher == 1 || state.Limbsplitter == 1 || state.DeepWounds == 1 ) {
+        } else if (state.SkullCrusher == 1 || state.Limbsplitter == 1 || state.DeepWounds == 1) {
             TrackLevel(30);
-        }else if (state.Barbarian == 1 || state.ChampionsStance == 1) {
+        } else if (state.Barbarian == 1 || state.ChampionsStance == 1) {
             TrackLevel(20);
         }
     }, [TrackLevel, state]);
@@ -299,7 +287,7 @@ const TwoHandedTree = () => {
             setState({ ChampionsStance: button });
             setState({ ChampionsStanceLine: line });
             IncrementCounter(2);
-            if (state.Barbarian == 0){
+            if (state.Barbarian == 0) {
                 SetBarbarianLevel(1);
             }
         } else if (state.DevastatingBlow == 1) {
@@ -321,7 +309,7 @@ const TwoHandedTree = () => {
             setState({ ChampionsStance: button });
             setState({ DevastatingBlowLine: line });
             setState({ ChampionsStanceLine: line });
-            if (state.Barbarian == 0){
+            if (state.Barbarian == 0) {
                 SetBarbarianLevel(1);
             }
             if (state.Barbarian == 1) {
@@ -338,7 +326,7 @@ const TwoHandedTree = () => {
             state.DevastatingBlow == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-        }else {
+        } else {
             setState({ DevastatingBlowLine: line });
             setState({ DevastatingBlow: button }); // Change the pressed button color back and forth
             state.DevastatingBlow == 0
@@ -355,7 +343,7 @@ const TwoHandedTree = () => {
             setState({ ChampionsStance: button });
             setState({ CriticalChargeLine: line });
             setState({ ChampionsStanceLine: line });
-            if (state.Barbarian == 0){
+            if (state.Barbarian == 0) {
                 SetBarbarianLevel(1);
             }
             if (state.Barbarian == 1) {
@@ -365,7 +353,7 @@ const TwoHandedTree = () => {
             }
         } else if (state.Sweep == 1 && state.DevastatingBlow == 0) {
             // Do nothing....must un-select nodes above it first
-        } else if (state.Sweep == 1 && state.DevastatingBlow == 1){
+        } else if (state.Sweep == 1 && state.DevastatingBlow == 1) {
             setState({ CriticalChargeLine: line });
             setState({ CriticalCharge: button }); // Change the pressed button color back and forth
             setState({ SweepLine: line }); // Change the pressed button color back and forth
@@ -394,7 +382,7 @@ const TwoHandedTree = () => {
             setState({ SweepDevLine: line });
             setState({ DevastatingBlowLine: line });
             setState({ ChampionsStanceLine: line });
-            if (state.Barbarian == 0){
+            if (state.Barbarian == 0) {
                 SetBarbarianLevel(1);
             }
             if (state.ChampionsStance == 1) {
@@ -441,7 +429,7 @@ const TwoHandedTree = () => {
             setState({ DevastatingBlow: button });
             setState({ DevastatingBlowLine: line });
             setState({ SweepDevLine: line });
-            if (state.Barbarian == 0){
+            if (state.Barbarian == 0) {
                 SetBarbarianLevel(1);
             }
             if (state.DevastatingBlow == 1) {
@@ -457,11 +445,11 @@ const TwoHandedTree = () => {
         else if (state.Sweep == 0 && state.CriticalCharge == 1 && state.DevastatingBlow == 1) {
             setState({ Sweep: button });
             setState({ SweepLine: line });
-            setState({ SweepDevLine: line });            
+            setState({ SweepDevLine: line });
             setState({ Warmaster: button });
             setState({ WarmasterLine: line });
             IncrementCounter(2);
-            if (state.Barbarian == 0){
+            if (state.Barbarian == 0) {
                 SetBarbarianLevel(1);
             }
         }
@@ -471,7 +459,7 @@ const TwoHandedTree = () => {
             setState({ Warmaster: button });
             setState({ WarmasterLine: line });
             IncrementCounter(2);
-            if (state.Barbarian == 0){
+            if (state.Barbarian == 0) {
                 SetBarbarianLevel(1);
             }
         }
@@ -651,12 +639,8 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfDevastatingBlowPressed(
                             state.DevastatingBlow == 0 ? 1 : 0,
-<<<<<<< HEAD
                             state.DevastatingBlowLine == 'black' ? 'gold' : 'black',
                             state.SweepDevLine == 'black' ? 'gold' : 'black'
-=======
-                            state.DevastatingBlowLine == 'white' ? 'gold' : 'white'
->>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
                         );
                     }}>
                     <StarIconGold />
@@ -719,12 +703,8 @@ const TwoHandedTree = () => {
                     onPress={() => {
                         CheckIfWarmasterPressed(
                             state.Warmaster == 0 ? 1 : 0,
-<<<<<<< HEAD
                             state.WarmasterLine == 'black' ? 'gold' : 'black',
                             state.SweepDevLine == 'black' ? 'gold' : 'black'
-=======
-                            state.WarmasterLine == 'white' ? 'gold' : 'white'
->>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
                         );
                     }}>
                     <StarIconGold />
@@ -785,15 +765,9 @@ const TwoHandedTree = () => {
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("SkullCrusherModal")}
                     onPress={() => {
-<<<<<<< HEAD
                         CheckIfSkullCrusherPressed(
                             state.SkullCrusher == 0 ? 1 : 0,
                             state.SkullCrusherLine == 'black' ? 'gold' : 'black'
-=======
-                        CheckIfSkullcrusherPressed(
-                            state.Skullcrusher == 0 ? 1 : 0,
-                            state.SkullcrusherLine == 'white' ? 'gold' : 'white'
->>>>>>> bd37c704d4e4734bff677d775ff6e9f6ee3634dc
                         );
                     }}>
                     <StarIconGold />
