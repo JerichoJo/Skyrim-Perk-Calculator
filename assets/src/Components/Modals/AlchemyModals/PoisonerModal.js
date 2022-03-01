@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 
-const PrisonerModal = ({ navigation }) => {
+const PoisonerModal = ({ navigation }) => {
 
     return (
         <View
@@ -17,7 +17,7 @@ const PrisonerModal = ({ navigation }) => {
             <View
                 style={styles.TextBox}
                 onPress={navigation.goBack}>
-                <Text style={styles.Title}>Prisoner{"\n"}</Text>
+                <Text style={styles.Title}>Poisoner{"\n"}</Text>
 
                 <Text style={styles.Text}>
                     Poisons made are 25% more effective{"\n"}{"\n"}
@@ -31,7 +31,7 @@ const PrisonerModal = ({ navigation }) => {
         </View>
     );
 }
-export default PrisonerModal;
+export default PoisonerModal;
 
 const styles = StyleSheet.create({
     Container: {

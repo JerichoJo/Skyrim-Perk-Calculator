@@ -107,7 +107,7 @@ import ConcentratedPoisonModal from "./AlchemyModals/ConcentratedPoisonModal";
 import ExperimenterModal from "./AlchemyModals/ExperimenterModal";
 import GreenThumbModal from "./AlchemyModals/GreenThumbModal";
 import PhysicianModal from "./AlchemyModals/PhysicianModal";
-import PrisonerModal from "./AlchemyModals/PrisonerModal";
+import PoisonerModal from "./AlchemyModals/PoisonerModal";
 import PurityModal from "./AlchemyModals/PurityModal";
 import SnakebloodModal from "./AlchemyModals/SnakebloodModal";
 import AssasinsBladeModal from "./SneakModals.js/AssasinsBladeModal";
@@ -252,7 +252,7 @@ const modals = {
     ExperimenterModal, 
     GreenThumbModal,
     PhysicianModal,
-    PrisonerModal,
+    PoisonerModal,
     PurityModal,
     SnakebloodModal,
 

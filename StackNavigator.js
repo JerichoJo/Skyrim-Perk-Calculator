@@ -142,7 +142,7 @@ function Modal() {
                 <ModalNav.Screen name="ExperimenterModal" component={modals.ExperimenterModal} />
                 <ModalNav.Screen name="GreenThumbModal" component={modals.GreenThumbModal} />
                 <ModalNav.Screen name="PhysicianModal" component={modals.PhysicianModal} />
-                <ModalNav.Screen name="PrisonerModal" component={modals.PrisonerModal} />
+                <ModalNav.Screen name="PoisonerModal" component={modals.PoisonerModal} />
                 <ModalNav.Screen name="PurityModal" component={modals.PurityModal} />
                 <ModalNav.Screen name="SnakebloodModal" component={modals.SnakebloodModal} />
             </ModalNav.Group>
