@@ -34,6 +34,7 @@ const RestorationTree = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [RecoveryLevel, SetRecoveryLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         noviceRestoration: 0,
@@ -87,6 +88,7 @@ const RestorationTree = () => {
         setState({ AvoidDeath: 0 });
         setState({ AvoidDeathLine: 'white' });
         SetRequiredLevel(0);
+        SetRecoveryLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -138,7 +140,7 @@ const RestorationTree = () => {
             TrackLevel(75);
         } else if (state.Necromage == 1) {
             TrackLevel(70);
-        } else if (state.WardAbsorb == 1) {
+        } else if (state.WardAbsorb == 1 || state.Recovery == 1 && RecoveryLevel == 2) {
             TrackLevel(60);
         } else if (state.AdeptRestoration == 1) {
             TrackLevel(50);
@@ -148,13 +150,38 @@ const RestorationTree = () => {
             TrackLevel(30);
         } else if (state.ApprenticeRestoration == 1) {
             TrackLevel(25);
-        } else if (state.Regeneration == 1) {
+        } else if (state.Regeneration == 1 || state.RestoDualCast == 1) {
             TrackLevel(20);
-        } else if (state.RestoDualCast == 1) {
-            TrackLevel(20);
-        }
+        } 
     }, [TrackLevel, state]);
+    const IncRecoveryCounter = (numActiveRecovery) => {
+        if (RecoveryLevel < 2) {
+            SetRecoveryLevel(RecoveryLevel + numActiveRecovery)
+        }
+        else {
+            SetRecoveryLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
 
+    // function to control the Renew perk count (0/2)
+    const IncRecoveryCountCall = (buttonColor, line) => {
+        if (RecoveryLevel == 0) {
+            setState({ Recovery: buttonColor });  // Change the pressed button color back and forth
+            setState ({RecoveryLine: line}); // Change the line color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncRecoveryCounter(1); // increment basic smith by 1 on first click
+        } else if (RecoveryLevel == 2) {
+            setState({ Recovery: buttonColor }); // Change the pressed button color back and forth
+            setState({ RecoveryLine: line}) // Change the line color back and forth
+            IncRecoveryCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(2); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncRecoveryCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
     const CheckIfNoviceRestorationPressed = (button) => {
         if (
             state.ApprenticeRestoration == 1 ||
@@ -194,7 +221,6 @@ const RestorationTree = () => {
             setState({ noviceRestorationLine: lineColor });
             setState({ ApprenticeRestoration: buttonColor });
             setState({ ApprenticeRestorationLine: lineColor });
-
             IncrementCounter(2);
         } else if (state.AdeptRestoration == 1) {
             // Do nothing....must un-select nodes above it first
@@ -366,12 +392,20 @@ const RestorationTree = () => {
             setState({ Recovery: button });
             setState({ RecoveryLine: line });
             IncrementCounter(2);
-        } else {
-            setState({ RecoveryLine: line });
-            setState({ Recovery: button }); // Change the pressed button color back and forth
-            state.Recovery == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncRecoveryCounter(1);
+        }
+        else if (state.AvoidDeath == 1){
+            if (RecoveryLevel == 2) {
+                DecrementCounter(1); // decrease active perks back down 4 because it is set back to 1
+                SetRecoveryLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncRecoveryCounter(1) // increment by 1 after it perk is active
+            }
+        }
+        else {
+                IncRecoveryCountCall(button, line);
         }
     };
     const CheckIfAvoidDeathPressed = (button, line) => {
@@ -383,6 +417,7 @@ const RestorationTree = () => {
             setState({ noviceRestorationLine: line });
             setState({ RecoveryLine: line });
             setState({ AvoidDeathLine: line });
+            SetRecoveryLevel(1);
             if (state.noviceRestoration == 1) {
                 IncrementCounter(2);
             } else {
@@ -399,8 +434,7 @@ const RestorationTree = () => {
     };
     return (
         <View style={{ zIndex: 2 }}>
-            <View
-                style={styles.resetButtonContainer}>
+            <View style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
                     <Text style={{ color: "white", fontWeight: "bold", }}> Reset Restoration Perks</Text>
                 </TouchableOpacity>
@@ -427,7 +461,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("NoviceModal")}
                     onPress={() => {
                         CheckIfNoviceRestorationPressed(
                             state.noviceRestoration == 0 ? 1 : 0,
@@ -458,7 +492,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("RespiteModal")}
                     onPress={() => {
                         CheckIfRespitePressed(
                             state.Respite == 0 ? 1 : 0,
@@ -489,9 +523,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ApprenticeModal")}
                     onPress={() => {
                         CheckIfApprenticeRestorationPressed(
                             state.ApprenticeRestoration == 0 ? 1 : 0,
@@ -522,9 +554,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AdeptModal")}
                     onPress={() => {
                         CheckIfAdeptRestorationPressed(
                             state.AdeptRestoration == 0 ? 1 : 0,
@@ -555,9 +585,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("ExpertModal")}
                     onPress={() => {
                         CheckIfExpertRestorationPressed(
                             state.ExpertRestoration == 0 ? 1 : 0,
@@ -588,9 +616,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("MasterModal")}
                     onPress={() => {
                         CheckIfMasterRestorationPressed(
                             state.MasterRestoration == 0 ? 1 : 0,
@@ -621,9 +647,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("RegenerationModal")}
                     onPress={() => {
                         CheckIfRegenerationPressed(
                             state.Regeneration == 0 ? 1 : 0,
@@ -654,9 +678,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("NecromageModal")}
                     onPress={() => {
                         CheckIfNecromagePressed(
                             state.Necromage == 0 ? 1 : 0,
@@ -687,9 +709,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("WardAbsorbModal")}
                     onPress={() => {
                         CheckIfWardAbsorbPressed(
                             state.WardAbsorb == 0 ? 1 : 0,
@@ -720,9 +740,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("DualCastingModal")}
                     onPress={() => {
                         CheckIfRestoDualCastPressed(
                             state.RestoDualCast == 0 ? 1 : 0,
@@ -753,9 +771,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("RecoveryModal")}
                     onPress={() => {
                         CheckIfRecoveryPressed(
                             state.Recovery == 0 ? 1 : 0,
@@ -766,7 +782,7 @@ const RestorationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.RecoveryText}>
-                <Text style={styles.PerkText}>Recovery</Text>
+                <Text style={styles.PerkText}>Recovery({RecoveryLevel}/2)</Text>
             </View>
             <View title='Avoid Death Blue' style={{
                 position: 'absolute',
@@ -786,9 +802,7 @@ const RestorationTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("AvoidDeathModal")}
                     onPress={() => {
                         CheckIfAvoidDeathPressed(
                             state.AvoidDeath == 0 ? 1 : 0,
@@ -933,7 +947,7 @@ const styles = StyleSheet.create({
     RespiteText: {
         position: 'absolute',
         left: "6%",
-        top: "84%",
+        top: "77.5%",
         zIndex: 10,
     },
     ApprenticeRestorationText: {

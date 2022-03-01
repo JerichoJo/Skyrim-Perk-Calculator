@@ -38,21 +38,21 @@ const Enchanting = () => {
     const [state, setState] = useSetState({
         enchanter: 0,
         fireEnchanter: 0,
-        fireEnchanterLine: 'white',
+        fireEnchanterLine: 'black',
         frostEnchanter: 0,
-        frostEnchanterLine: 'white',
+        frostEnchanterLine: 'black',
         stormEnchanting: 0,
-        stormEnchantingLine: 'white',
+        stormEnchantingLine: 'black',
         extraEffect: 0,
-        extraEffectLine: 'white',
+        extraEffectLine: 'black',
         insightfulEnchanter: 0,
-        insightfulEnchanterLine: 'white',
+        insightfulEnchanterLine: 'black',
         corpusEnchanter: 0,
-        corpusEnchanterLine: 'white',
+        corpusEnchanterLine: 'black',
         soulSqueezer: 0,
-        soulSqueezerLine: 'white',
+        soulSqueezerLine: 'black',
         soulSiphon: 0,
-        soulSiphonLine: 'white'
+        soulSiphonLine: 'black'
     });
 
     let resetAllTrees;
@@ -60,21 +60,21 @@ const Enchanting = () => {
 
         setState({ enchanter: 0 });
         setState({ fireEnchanter: 0 });
-        setState({ fireEnchanterLine: 'white' });
+        setState({ fireEnchanterLine: 'black' });
         setState({ frostEnchanter: 0 });
-        setState({ frostEnchanterLine: 'white' });
+        setState({ frostEnchanterLine: 'black' });
         setState({ stormEnchanting: 0 });
-        setState({ stormEnchantingLine: 'white' });
+        setState({ stormEnchantingLine: 'black' });
         setState({ extraEffect: 0 });
-        setState({ extraEffectLine: 'white' });
+        setState({ extraEffectLine: 'black' });
         setState({ insightfulEnchanter: 0 });
-        setState({ insightfulEnchanterLine: 'white' });
+        setState({ insightfulEnchanterLine: 'black' });
         setState({ corpusEnchanter: 0 });
-        setState({ corpusEnchanterLine: 'white' });
+        setState({ corpusEnchanterLine: 'black' });
         setState({ soulSqueezer: 0 });
-        setState({ soulSqueezerLine: 'white' });
+        setState({ soulSqueezerLine: 'black' });
         setState({ soulSiphon: 0 });
-        setState({ soulSiphonLine: 'white' });
+        setState({ soulSiphonLine: 'black' });
         SetRequiredLevel(0);
     }
 
@@ -387,7 +387,7 @@ const Enchanting = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Enchanting Perks</Text>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Enchanting Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -412,7 +412,7 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("EnchanterModal")}
+                    onLongPress={() => navigation.navigate("enchanterModal")}
                     onPress={() => {
                         CheckIfEnchanterPressed(
                             state.enchanter == 0 ? 1 : 0,
@@ -443,11 +443,11 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("InsightfulEnchanterModal")}
+                    onLongPress={() => navigation.navigate("fireEnchanterModal")}
                     onPress={() => {
                         CheckIfFireEnchanterPressed(
                             state.fireEnchanter == 0 ? 1 : 0,
-                            state.fireEnchanterLine == 'white' ? 'gold' : 'white'
+                            state.fireEnchanterLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
@@ -474,11 +474,13 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("FireEnchanterModal")}
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
                     onPress={() => {
                         CheckIfFrostEnchanterPressed(
                             state.frostEnchanter == 0 ? 1 : 0,
-                            state.frostEnchanterLine == 'white' ? 'gold' : 'white'
+                            state.frostEnchanterLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
@@ -505,11 +507,13 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("FrostEnchanterModal")}
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
                     onPress={() => {
                         CheckIfStormEnchantingPressed(
                             state.stormEnchanting == 0 ? 1 : 0,
-                            state.stormEnchantingLine == 'white' ? 'gold' : 'white'
+                            state.stormEnchantingLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
@@ -536,11 +540,13 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("StormEnchanterModal")}
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
                     onPress={() => {
                         CheckIfExtraEffectPressed(
                             state.extraEffect == 0 ? 1 : 0,
-                            state.extraEffectLine == 'white' ? 'gold' : 'white'
+                            state.extraEffectLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
@@ -567,11 +573,13 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("SoulSiphonModal")}
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
                     onPress={() => {
                         CheckIfSoulSiphonPressed(
                             state.soulSiphon == 0 ? 1 : 0,
-                            state.soulSiphonLine == 'white' ? 'gold' : 'white'
+                            state.soulSiphonLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
@@ -594,15 +602,17 @@ const Enchanting = () => {
                 left: "42%",
                 top: "32%",
                 zIndex: 8,
-                opacity: state.extraEffect
+                opacity: state.soulSqueezer
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ExtraEffectModal")}
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
                     onPress={() => {
                         CheckIfSoulSqueezerPressed(
                             state.soulSqueezer == 0 ? 1 : 0,
-                            state.soulSqueezerLine == 'white' ? 'gold' : 'white'
+                            state.soulSqueezerLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
@@ -629,11 +639,13 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("CorpusEnchanterModal")}
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
                     onPress={() => {
                         CheckIfCorpusEnchanterPressed(
                             state.corpusEnchanter == 0 ? 1 : 0,
-                            state.corpusEnchanterLine == 'white' ? 'gold' : 'white'
+                            state.corpusEnchanterLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />
@@ -660,11 +672,13 @@ const Enchanting = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("SoulSqueezerModal")}
+                    onLongPress={() => {
+                        setIsModalVisible(true);
+                    }}
                     onPress={() => {
                         CheckIfInsightfulEnchanterPressed(
                             state.insightfulEnchanter == 0 ? 1 : 0,
-                            state.insightfulEnchanterLine == 'white' ? 'gold' : 'white'
+                            state.insightfulEnchanterLine == 'black' ? 'gold' : 'black'
                         );
                     }}>
                     <StarIconGold />

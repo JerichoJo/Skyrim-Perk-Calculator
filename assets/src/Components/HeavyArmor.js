@@ -36,6 +36,9 @@ const HeavyArmor = () => {
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const [JuggernautLevel, SetJuggernautLevel] = useState(0);
+
+
     const [state, setState] = useSetState({
         juggernaut: 0,
         fistsOfSteel: 0,
@@ -106,6 +109,31 @@ const HeavyArmor = () => {
         SetActivePerks(ActivePerks - numActivePerks);
         SetAllActivePerks(AllActivePerks - numActivePerks);
     };
+    const IncJuggernautCounter = (numActiveJuggernaut) => {
+        if (JuggernautLevel < 5) {
+            SetJuggernautLevel(JuggernautLevel + numActiveJuggernaut)
+        }
+        else {
+            SetJuggernautLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    const IncJuggernautCountCall = (buttonColor) => {
+        if (JuggernautLevel == 0) {
+            setState({ juggernaut: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncJuggernautCounter(1); // increment basic smith by 1 on first click
+        } else if (JuggernautLevel == 5) {
+            setState({ juggernaut: buttonColor }); // Change the pressed button color back and forth
+            IncJuggernautCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncJuggernautCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
 
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
@@ -143,14 +171,18 @@ const HeavyArmor = () => {
             state.arcaneSmithing == 1 ||
             state.wellFitted == 1
         ) {
-            // Do nothing....must un-select nodes above it first
+           // Do nothing....must un-select nodes above it first
+           if (JuggernautLevel == 5){
+            DecrementCounter(4);
+            SetJuggernautLevel(1)
+        } else {
+            IncrementCounter(1);
+            IncJuggernautCounter(1);
         }
-        else {
-            setState({ juggernaut: button }); // Change button color back and forth
-            state.juggernaut == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-        }
+    }
+    else {
+        IncJuggernautCountCall(button);
+    }
     };
 
     const CheckIfArcaneSmithPressed = (button, line) => {
@@ -425,7 +457,7 @@ const HeavyArmor = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.JuggernautText}>
-                <Text style={styles.PerkText}>Juggernaut</Text>
+                <Text style={styles.PerkText}>Juggernaut({JuggernautLevel}/5)</Text>
             </View>
 
             <View title='Fists Blue' style={{
