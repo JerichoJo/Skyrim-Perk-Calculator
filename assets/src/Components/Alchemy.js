@@ -12,6 +12,7 @@ import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
+import StealthModal from './Modals/SneakModals.js/StealthModal';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -368,16 +369,34 @@ const AlchemyTree = () => {
                 IncrementCounter(5);
             }
 
-        } else if (state.snakeblood == 0 && state.concentratedPoison == 0){
+        } else if(state.purity == 1){
+            setState({ purity: buttonColor});
+            setState({ purityLine: lineColor});
+            
+        } else if (state.concentratedPoison == 1 && state.experimenter == 1){
+            setState({ purity: buttonColor});
+            setState({ purityLine: lineColor});
+            setState({ snakebloodLine: lineColor});
+            setState({ snakeblood: buttonColor});
+            setState({ experimenterSnakeLine: lineColor});
+            
+        }
+        
+        else if (state.snakeblood == 0 && state.concentratedPoison == 0){
             setState({ purity: buttonColor});
             setState({ purityLine: lineColor});
             setState({ concentratedPoison: buttonColor});
             setState({ concentratedPoisonLine: lineColor});
             setState({ snakebloodLine: lineColor});
             setState({ snakeblood: buttonColor});
-        }
 
-        else {
+        } else if (state.snakeblood == 0 && state.concentratedPoison == 1){
+            setState({ snakebloodLine: lineColor});
+            setState({ snakeblood: buttonColor});
+            setState({ purity: buttonColor});
+            setState({ purityLine: lineColor});
+
+        } else {
             setState({ purityLine: lineColor });
             setState({ purity: buttonColor }); // Change the pressed button color back and forth
             state.purity == 0
