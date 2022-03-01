@@ -62,19 +62,19 @@ const PickpocketTree = () => {
     const resetPickpocketPerks = () => {
         setState({ LightFingers: 0 });
         setState({ NightThief: 0 });
-        setState({ NightThiefLine: 'black' });
+        setState({ NightThiefLine: 'white' });
         setState({ Poisoned: 0 });
-        setState({ PoisonedLine: 'black' });
+        setState({ PoisonedLine: 'white' });
         setState({ Cutpurse: 0 });
-        setState({ CutpurseLine: 'black' });
+        setState({ CutpurseLine: 'white' });
         setState({ Keymaster: 0 });
-        setState({ KeymasterLine: 'black' });
+        setState({ KeymasterLine: 'white' });
         setState({ ExtraPockets: 0 });
-        setState({ ExtraPocketsLine: 'black' });
+        setState({ ExtraPocketsLine: 'white' });
         setState({ Misdirection: 0 });
-        setState({ MisdirectionLine: 'black' });
+        setState({ MisdirectionLine: 'white' });
         setState({ PerfectTouch: 0 });
-        setState({ PerfectTouchLine: 'black' });
+        setState({ PerfectTouchLine: 'white' });
         SetRequiredLevel(0);
         SetLightFingersLevel(0);
     }
@@ -380,7 +380,7 @@ const PickpocketTree = () => {
         <View style={{ zIndex: 2 }}>
             <View style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Pickpocket Perks</Text>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Pickpocket Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
