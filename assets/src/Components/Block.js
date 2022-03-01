@@ -41,6 +41,8 @@ const BlockTree = () => {
     elementalProtectionLine: 'white',
     blockRunner: 0,
     blockRunnerLine: 'white',
+    deadlyBash: 0,
+    deadlyBashLine: 'white',
     powerBash: 0,
     powerBashLine: 'white',
     disarmingBash: 0,
