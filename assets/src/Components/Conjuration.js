@@ -613,7 +613,7 @@ const ConjurationTree = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Conjuration Perks</Text>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Conjuration Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -1364,7 +1364,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     resetButton: {
-        backgroundColor: "#565656",
+        backgroundColor: "lightsteelblue",
         borderRadius: 12,
         paddingVertical: 8,
         paddingHorizontal: 10

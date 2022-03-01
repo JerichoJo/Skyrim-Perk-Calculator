@@ -42,19 +42,21 @@ const styles = StyleSheet.create({
         padding: '5%'
     },
     TextBox: {
-        backgroundColor: 'black',
+        backgroundColor: 'lightsteelblue',
         padding: '7%',
-        borderRadius: 25
+        borderRadius: 25,
+        borderColor: 'black',
+        borderWidth: 2
     },
     Title: {
         fontSize: 22,
-        color: 'white',
+        color: 'black',
         textAlign: 'center',
         textDecorationLine: 'underline',
     },
     Text: {
         fontSize: 18,
-        color: 'white',
+        color: 'black',
         textAlign: 'center',
     },
 });

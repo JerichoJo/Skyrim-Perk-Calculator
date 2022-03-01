@@ -12,7 +12,7 @@ import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
-import StealthModal from './Modals/SneakModals.js/StealthModal';
+
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;

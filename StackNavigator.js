@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Text, Dimensions, LogBox, View } from 'react-native';
+import { Text, LogBox } from 'react-native';
 import { useState } from 'react';
 LogBox.ignoreLogs(["Require cycle:"]);
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -191,7 +191,7 @@ function Drawers() {
                         borderColor: 'white',
                         borderWidth: 1,
                         backgroundColor: 'lightsteelblue',
-                        width: 225,
+                        width: 275,
                         shadowColor: 'black',
                         borderRadius: 5,
 
