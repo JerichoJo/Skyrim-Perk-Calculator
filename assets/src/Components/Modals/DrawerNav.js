@@ -26,13 +26,15 @@ export function DrawerContent(props) {
         <Drawer.Section
           Title="Skills"
           style={{
-            padding: 20            
+            padding: 20,          
           }}
         >
-          <Divider style={{borderWidth:.5}}/>
+          
           <DrawerItem
-            label="Reset ALL Perks"
+            label="Reset All Perks"
             labelStyle={styles.ResetLabel}
+            borderWidth={3}
+            borderColor='grey'
             onPress={() => {
               setTimeout(() => {
                 SetAllActivePerks(0);
@@ -43,7 +45,7 @@ export function DrawerContent(props) {
           >
           </DrawerItem>
 
-          <Divider style={{borderWidth:.5}}/>
+          
 
           <DrawerItem
             label="Illusion"
@@ -327,12 +329,13 @@ export function DrawerContent(props) {
 const styles = StyleSheet.create({
 
   ItemLabel: {
-    borderColor: 'white',
+    
+    
   },
   ResetLabel: {
     fontWeight: 'bold',
     fontSize: 15,
-    alignContent: 'center',
-    alignSelf:'center'
+    alignSelf: 'center',
+    color: 'black'
   }
 });
