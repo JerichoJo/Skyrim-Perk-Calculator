@@ -36,6 +36,9 @@ const ConjurationTree = () => {
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const [SummonerLevel, SetSummonerLevel] = useState(0);
+
+
     const [state, setState] = useSetState({
         noviceConjuration: 0,
         conjurationDualCasting: 0,
@@ -136,6 +139,32 @@ const ConjurationTree = () => {
         SetActivePerks(ActivePerks - numActivePerks);
         SetAllActivePerks(AllActivePerks - numActivePerks);
     };
+
+    const IncSummonerCounter = (numActiveSummoner) => {
+        if (SummonerLevel < 2) {
+            SetSummonerLevel(SummonerLevel + numActiveSummoner)
+        }
+        else {
+            SetSummonerLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    const IncSummonerCountCall = (buttonColor) => {
+        if (SummonerLevel == 0) {
+            setState({ summoner: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncSummonerCounter(1); // increment basic smith by 1 on first click
+        } else if (SummonerLevel == 2) {
+            setState({ summoner: buttonColor }); // Change the pressed button color back and forth
+            IncSummonerCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(2); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncSummonerCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
 
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
@@ -319,7 +348,7 @@ const ConjurationTree = () => {
         }
     };
 
-    const CheckIfSummonerPressed = (buttonColor, lineColor) => {
+    const CheckIfSummonerPressed = (button ,buttonColor, lineColor) => {
         if (state.noviceConjuration == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceConjuration: buttonColor });
@@ -327,16 +356,17 @@ const ConjurationTree = () => {
             setState({ summoner: buttonColor });
             setState({ summonerLine: lineColor });
 
-            IncrementCounter(2);
+            if (SummonerLevel == 2){
+                DecrementCounter(2);
+                SetSummonerLevel(1);
+            } else {
+                IncrementCounter(1);
+                IncSummonerCounter(1);
+            }
         } else if (state.atromancy == 1) {
-            // Do nothing....must un-select nodes above it first
+            
         } else {
-            setState({ summonerLine: lineColor });
-            setState({ summoner: buttonColor }); // Change button color back and forth
-            state.summoner == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-
+            IncSummonerCountCall(button);            
         }
     };
     const CheckIfAtromancyPressed = (buttonColor, lineColor) => {
@@ -791,7 +821,7 @@ const ConjurationTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.SummonerText}>
-                <Text style={styles.PerkText}>Summoner</Text>
+                <Text style={styles.PerkText}>Summoner ({SummonerLevel}, 2)</Text>
             </View>
 
             <View title='Atromancy Blue' style={{
