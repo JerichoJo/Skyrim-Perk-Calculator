@@ -32,7 +32,6 @@ const useSetState = (initialState = {}) => {
 
 const ConjurationTree = () => {
     const navigation = useNavigation();
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
@@ -106,6 +105,7 @@ const ConjurationTree = () => {
         setState({ masterConjuration: 0 });
         setState({ masterConjurationLine: 'white' });
         SetRequiredLevel(0);
+        SetSummonerLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -190,7 +190,7 @@ const ConjurationTree = () => {
         } else if (state.noviceConjuration == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     useEffect(() => {
         CheckLevel();

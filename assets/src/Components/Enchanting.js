@@ -31,7 +31,6 @@ const useSetState = (initialState = {}) => {
 
 const Enchanting = () => {
     const navigation = useNavigation();
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
@@ -81,6 +80,7 @@ const Enchanting = () => {
         setState({ soulSiphonLine: 'white' });
         setState({ stormExtraLine: 'white' });
         SetRequiredLevel(0);
+        SetEnchanterLevel(0);
     }
 
     const resetActivePerks = () => {

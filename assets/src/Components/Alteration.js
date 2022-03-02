@@ -181,31 +181,28 @@ const AlterationTree = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.masterAlt == 1) {
+        if (state.atronach == 1 || state.masterAlt) {
             TrackLevel(100);
-        } else if (state.atronach == 1) {
-            TrackLevel(90);
         } else if (state.expertAlt == 1) {
-            TrackLevel(80);
-        } else if (state.magicResis == 1) {
+            TrackLevel(75);
+        } else if (MageArmorLevel == 3 || MagicResisLevel == 3 || state.stability == 1) {
             TrackLevel(70);
-        } else if (state.altDualCasting == 1) {
-            TrackLevel(60);
-        } else if (state.mageArmor == 1) {
+        } else if (MageArmorLevel == 2 || MagicResisLevel == 2 || state.adeptAlt == 1) {
             TrackLevel(50);
-        } else if (state.masterAlt == 1) {
+        } else if (MageArmorLevel == 1 || MagicResisLevel == 1) {
+            TrackLevel(30);
+        } else if (state.apprenticeAlt == 1) {
+            TrackLevel(25);
+        } else if (state.altDualCasting == 1) {
             TrackLevel(20);
         } else if (state.noviceAlt == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state, MageArmorLevel, MagicResisLevel]);
 
     useEffect(() => {
         CheckLevel();
     }, [CheckLevel]);
-
-
-
 
     const CheckIfNoviceAltPressed = (button) => {
         if (

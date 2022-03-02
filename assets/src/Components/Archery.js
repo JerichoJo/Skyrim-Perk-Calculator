@@ -151,7 +151,7 @@ const ArcheryTree = () => {
         } else {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
     const IncCriticalShotCounter = (numActiveCriticalShot) => {
         if (CriticalShotLevel < 3) {
             SetCriticalShotLevel(CriticalShotLevel + numActiveCriticalShot)

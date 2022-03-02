@@ -49,9 +49,6 @@ const PickpocketTree = () => {
         ExtraPocketsLine: 'white',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
-
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [LightFingersLevel, SetLightFingersLevel] = useState(0);
@@ -135,7 +132,7 @@ const PickpocketTree = () => {
         } else if (state.LightFingers == 1 && LightFingersLevel == 2) {
             TrackLevel(20);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     const CheckIfLightFingersPressed = (button) => {
         if (

@@ -166,7 +166,7 @@ const DestructionTree = () => {
     } else if (state.impact == 1) {
       TrackLevel(40);
     }
-  }, [TrackLevel, state]);
+  }, [state]);
 
   useEffect(() => {
     CheckLevel();

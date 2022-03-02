@@ -33,6 +33,7 @@ const LightArmorTree = () => {
     const navigation = useNavigation();
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AgileDefenderLevel, SetAgileDefenderLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         agileDefender: 0,
@@ -65,6 +66,7 @@ const LightArmorTree = () => {
         setState({ deftMovementLine: 'white' });
         setState({ deftMovementLine2: 'white' });
         SetRequiredLevel(0);
+        SetAgileDefenderLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -100,6 +102,32 @@ const LightArmorTree = () => {
         SetAllActivePerks(AllActivePerks - numActivePerks);
     };
 
+    const IncAgileDefenderCounter = (numActiveAgileDefender) => {
+        if (AgileDefenderLevel < 5) {
+            SetAgileDefenderLevel(AgileDefenderLevel + numActiveAgileDefender)
+        }
+        else {
+            SetAgileDefenderLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    // function to control the AgileDefender perk count (0/5)
+    const IncAgileDefenderCall = (buttonColor) => {
+        if (AgileDefenderLevel == 0) {
+            setState({ agileDefender: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncAgileDefenderCounter(1); // increment AgileDefender by 1 on first click
+        } else if (AgileDefenderLevel == 5) {
+            setState({ agileDefender: buttonColor }); // Change the pressed button color back and forth
+            IncAgileDefenderCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+        } else {
+            IncrementCounter(1);
+            IncAgileDefenderCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
+
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
     }, []);
@@ -107,24 +135,26 @@ const LightArmorTree = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.animage == 1) {
+        if (state.deftMovement == 1) {
             TrackLevel(100);
-        } else if (state.rage == 1) {
-            TrackLevel(90);
-        } else if (state.aspectOfTerror == 1) {
+        } else if (AgileDefenderLevel == 5) {
             TrackLevel(80);
         } else if (state.matchingSet == 1) {
             TrackLevel(70);
-        } else if (state.customeFit == 1) {
+        } else if (state.windWalker == 1 || AgileDefenderLevel == 4) {
             TrackLevel(60);
-        } else if (state.windWalker == 1) {
+        } else if (state.unhindered == 1) {
             TrackLevel(50);
-        } else if (state.animage == 1) {
+        } else if (AgileDefenderLevel == 3) {
+            TrackLevel(40);
+        } else if (state.customeFit == 1) {
+            TrackLevel(30);
+        } else if (AgileDefenderLevel == 2) {
             TrackLevel(20);
-        } else if (state.agileDefender == 1) {
+        } else if (AgileDefenderLevel == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state, AgileDefenderLevel]);
 
     useEffect(() => {
         CheckLevel();
@@ -135,12 +165,17 @@ const LightArmorTree = () => {
             state.customeFit == 1
         ) {
             // Do nothing....must un-select nodes above it first
+            if (AgileDefenderLevel == 5) {
+                DecrementCounter(4); // decrease active perks back down 4 because it is set back to 1
+                SetAgileDefenderLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncAgileDefenderCounter(1) // increment by 1 after it perk is active
+            }
         }
         else {
-            setState({ agileDefender: buttonColor }); // Change button color back and forth
-            state.agileDefender == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncAgileDefenderCall(buttonColor);
         }
     };
 
@@ -150,6 +185,9 @@ const LightArmorTree = () => {
             setState({ agileDefender: buttonColor });
             setState({ customeFit: buttonColor });
             setState({ customeFitLine: lineColor });
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
             IncrementCounter(2);
         } else if (state.unhindered == 1 || state.matchingSet == 1) {
             // Do nothing....must un-select nodes above it first
@@ -170,6 +208,10 @@ const LightArmorTree = () => {
             setState({ unhindered: buttonColor });
             setState({ customeFitLine: lineColor });
             setState({ unhinderedLine: lineColor });
+
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
             if (state.agileDefender == 1) {
                 IncrementCounter(2);
             } else {
@@ -196,6 +238,9 @@ const LightArmorTree = () => {
             setState({ unhinderedLine: lineColor });
             setState({ windWalkerLine: lineColor });
 
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
             if (state.customeFit == 1) {
                 IncrementCounter(2);
             } else if (state.agileDefender == 1) {
@@ -226,6 +271,9 @@ const LightArmorTree = () => {
             setState({ windWalkerLine: lineColor });
             setState({ deftMovementLine: lineColor });
 
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
             if (state.unhindered == 1) {
                 IncrementCounter(2);
             } else if (state.customeFit == 1) {
@@ -252,6 +300,10 @@ const LightArmorTree = () => {
             setState({ matchingSet: buttonColor });
             setState({ customeFitLine: lineColor });
             setState({ matchingSetLine: lineColor });
+
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
             if (state.agileDefender == 1) {
                 IncrementCounter(2);
             } else {
@@ -306,7 +358,7 @@ const LightArmorTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AgileDefenderText}>
-                <Text style={styles.PerkText}>Agile Defender ({ }/5)</Text>
+                <Text style={styles.PerkText}>Agile Defender ({AgileDefenderLevel}/5)</Text>
             </View>
             <View title='Custom Fit Blue' style={{
                 position: 'absolute',
@@ -539,7 +591,7 @@ const styles = StyleSheet.create({
     },
     AgileDefenderText: {
         position: 'absolute',
-        left: "33%",
+        left: "30%",
         top: "83%",
         zIndex: 10,
     },

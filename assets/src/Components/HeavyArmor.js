@@ -31,7 +31,6 @@ const useSetState = (initialState = {}) => {
 
 const HeavyArmor = () => {
     const navigation = useNavigation();
-    const [isModalVisible, setIsModalVisible] = useState(false);
 
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
@@ -76,6 +75,7 @@ const HeavyArmor = () => {
         setState({ reflectBlows: 0 });
         setState({ reflectBlowsLine: 'white' });
         SetRequiredLevel(0);
+        SetJuggernautLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -159,7 +159,7 @@ const HeavyArmor = () => {
         } else if (state.juggernaut == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     useEffect(() => {
         CheckLevel();

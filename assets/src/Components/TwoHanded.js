@@ -145,7 +145,7 @@ const TwoHandedTree = () => {
         } else if (state.Barbarian == 1 || state.ChampionsStance == 1) {
             TrackLevel(20);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
     const IncBarbarianCounter = (numActiveBarbarian) => {
         if (BarbarianLevel < 5) {
             SetBarbarianLevel(BarbarianLevel + numActiveBarbarian)

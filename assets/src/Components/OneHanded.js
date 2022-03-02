@@ -146,7 +146,7 @@ const OneHandedTree = () => {
     } else if (state.hackAndSlash == 1) {
       TrackLevel(90);
     }
-  }, [TrackLevel, state]);
+  }, [state]);
 
   useEffect(() => {
     CheckLevel();
