@@ -45,7 +45,7 @@ const ConjurationTree = () => {
         conjurationDualCastingLine: 'white',
         noviceConjurationLine: 'white',
         necromancy: 0,
-        necromancyLine:'white',
+        necromancyLine: 'white',
         darkSouls: 0,
         darkSoulsLine: 'white',
         twinSouls: 0,
@@ -348,7 +348,7 @@ const ConjurationTree = () => {
         }
     };
 
-    const CheckIfSummonerPressed = (button ,buttonColor, lineColor) => {
+    const CheckIfSummonerPressed = (button, buttonColor, lineColor) => {
         if (state.noviceConjuration == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceConjuration: buttonColor });
@@ -356,7 +356,7 @@ const ConjurationTree = () => {
             setState({ summoner: buttonColor });
             setState({ summonerLine: lineColor });
 
-            if (SummonerLevel == 2){
+            if (SummonerLevel == 2) {
                 DecrementCounter(2);
                 SetSummonerLevel(1);
             } else {
@@ -364,9 +364,9 @@ const ConjurationTree = () => {
                 IncSummonerCounter(1);
             }
         } else if (state.atromancy == 1) {
-            
+
         } else {
-            IncSummonerCountCall(button);            
+            IncSummonerCountCall(button);
         }
     };
     const CheckIfAtromancyPressed = (buttonColor, lineColor) => {
@@ -1188,15 +1188,16 @@ const ConjurationTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "78%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -1302,7 +1303,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: '67%',
+        bottom: '66.5%',
         justifyContent: 'center',
         alignItems: 'center',
     },

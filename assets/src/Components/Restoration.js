@@ -152,7 +152,7 @@ const RestorationTree = () => {
             TrackLevel(25);
         } else if (state.Regeneration == 1 || state.RestoDualCast == 1) {
             TrackLevel(20);
-        } 
+        }
     }, [TrackLevel, state]);
     const IncRecoveryCounter = (numActiveRecovery) => {
         if (RecoveryLevel < 2) {
@@ -167,12 +167,12 @@ const RestorationTree = () => {
     const IncRecoveryCountCall = (buttonColor, line) => {
         if (RecoveryLevel == 0) {
             setState({ Recovery: buttonColor });  // Change the pressed button color back and forth
-            setState ({RecoveryLine: line}); // Change the line color back and forth
+            setState({ RecoveryLine: line }); // Change the line color back and forth
             IncrementCounter(1); // increment active perks by 1 on first click
             IncRecoveryCounter(1); // increment basic smith by 1 on first click
         } else if (RecoveryLevel == 2) {
             setState({ Recovery: buttonColor }); // Change the pressed button color back and forth
-            setState({ RecoveryLine: line}) // Change the line color back and forth
+            setState({ RecoveryLine: line }) // Change the line color back and forth
             IncRecoveryCounter(1); // Increment by one so that it goes back to 0 
             DecrementCounter(2); // decrease active perks back down 3 because it is set back to 0
 
@@ -394,7 +394,7 @@ const RestorationTree = () => {
             IncrementCounter(2);
             IncRecoveryCounter(1);
         }
-        else if (state.AvoidDeath == 1){
+        else if (state.AvoidDeath == 1) {
             if (RecoveryLevel == 2) {
                 DecrementCounter(1); // decrease active perks back down 4 because it is set back to 1
                 SetRecoveryLevel(1);
@@ -405,7 +405,7 @@ const RestorationTree = () => {
             }
         }
         else {
-                IncRecoveryCountCall(button, line);
+            IncRecoveryCountCall(button, line);
         }
     };
     const CheckIfAvoidDeathPressed = (button, line) => {
@@ -925,15 +925,16 @@ const RestorationTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "78%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -1020,7 +1021,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: '67%',
+        bottom: '66.5%',
         justifyContent: 'center',
         alignItems: 'center',
     },

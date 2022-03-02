@@ -55,7 +55,7 @@ const HeavyArmor = () => {
         matchingSetLine: 'white',
         reflectBlows: 0,
         reflectBlowsLine: 'white',
-        
+
     });
 
     let resetAllTrees;
@@ -171,18 +171,18 @@ const HeavyArmor = () => {
             state.arcaneSmithing == 1 ||
             state.wellFitted == 1
         ) {
-           // Do nothing....must un-select nodes above it first
-           if (JuggernautLevel == 5){
-            DecrementCounter(4);
-            SetJuggernautLevel(1)
-        } else {
-            IncrementCounter(1);
-            IncJuggernautCounter(1);
+            // Do nothing....must un-select nodes above it first
+            if (JuggernautLevel == 5) {
+                DecrementCounter(4);
+                SetJuggernautLevel(1)
+            } else {
+                IncrementCounter(1);
+                IncJuggernautCounter(1);
+            }
         }
-    }
-    else {
-        IncJuggernautCountCall(button);
-    }
+        else {
+            IncJuggernautCountCall(button);
+        }
     };
 
     const CheckIfArcaneSmithPressed = (button, line) => {
@@ -752,15 +752,16 @@ const HeavyArmor = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "75%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -836,7 +837,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: '64%',
+        bottom: '66.5%',
         justifyContent: 'center',
         alignItems: 'center',
     },

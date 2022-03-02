@@ -320,8 +320,8 @@ const BlockTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.ShieldWallText}>
-                <Text style={styles.PerkText}>Shield Wall</Text>
-        </View>
+        <Text style={styles.PerkText}>Shield Wall</Text>
+      </View>
       <View title='Quick Reflexes Blue' style={{
         position: 'absolute',
         left: "34%",
@@ -352,8 +352,8 @@ const BlockTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.QuickReflexesText}>
-                <Text style={styles.PerkText}>Quick Reflexes</Text>
-            </View>
+        <Text style={styles.PerkText}>Quick Reflexes</Text>
+      </View>
       <View title='Deflect Arrows Blue' style={{
         position: 'absolute',
         left: "9%",
@@ -383,8 +383,8 @@ const BlockTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.DeflectArrowsText}>
-                <Text style={styles.PerkText}>Deflect Arrows</Text>
-            </View>
+        <Text style={styles.PerkText}>Deflect Arrows</Text>
+      </View>
       <View title='Elemental Protection Blue' style={{
         position: 'absolute',
         left: "11%",
@@ -414,8 +414,8 @@ const BlockTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.ElementalProtectionText}>
-                <Text style={styles.PerkText}>Elemental Protection</Text>
-            </View>
+        <Text style={styles.PerkText}>Elemental Protection</Text>
+      </View>
       <View title='Block Runner Blue' style={{
         position: 'absolute',
         left: "20%",
@@ -445,8 +445,8 @@ const BlockTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.BlockRunnerText}>
-                <Text style={styles.PerkText}>Block Runner</Text>
-            </View>
+        <Text style={styles.PerkText}>Block Runner</Text>
+      </View>
       <View title='Shield Charge Blue' style={{
         position: 'absolute',
         left: "43%",
@@ -477,8 +477,8 @@ const BlockTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.ShieldChargeText}>
-                <Text style={styles.PerkText}>Shield Charge</Text>
-            </View>
+        <Text style={styles.PerkText}>Shield Charge</Text>
+      </View>
       <View title='Disarming Bash Blue' style={{
         position: 'absolute',
         left: "68%",
@@ -508,8 +508,8 @@ const BlockTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.DisarmingBashText}>
-                <Text style={styles.PerkText}>Disarming Bash</Text>
-            </View>
+        <Text style={styles.PerkText}>Disarming Bash</Text>
+      </View>
       <View title='Deadly Bash Blue' style={{
         position: 'absolute',
         left: "74%",
@@ -539,8 +539,8 @@ const BlockTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.DeadlyBashText}>
-                <Text style={styles.PerkText}>Deadly Bash</Text>
-            </View>
+        <Text style={styles.PerkText}>Deadly Bash</Text>
+      </View>
       <View title='Power Bash Blue' style={{
         position: 'absolute',
         left: "74%",
@@ -571,8 +571,8 @@ const BlockTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.PowerBashText}>
-                <Text style={styles.PerkText}>Power Bash</Text>
-            </View>
+        <Text style={styles.PerkText}>Power Bash</Text>
+      </View>
       <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
         <Line // Shield Wall to Deflect Arrows
@@ -656,15 +656,16 @@ const BlockTree = () => {
 const styles = StyleSheet.create({
   HomeScreenText: {
     color: 'white',
+    fontWeight: '600',
+    fontSize: 18,
   },
   topText: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: "78%",
+    top: '8.5%',
+    left: '32%',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 10,
   },
   Icon: {
     position: 'absolute',
@@ -733,7 +734,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: '67%',
+    bottom: '66.5%',
     justifyContent: 'center',
     alignItems: 'center',
   },
