@@ -5,6 +5,7 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { Drawer } from 'react-native-paper';
 import { AllActivePerkss } from '../../../../StackNavigator';
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const moveIT = (dest) => {
   const x = (dest - ref.current.state.index)
@@ -30,6 +31,7 @@ export function DrawerContent(props) {
             padding: 15
           }}
         >
+          
           <DrawerItem
             label="Reset All Perks"
             labelStyle={styles.ItemLabel}
@@ -37,7 +39,7 @@ export function DrawerContent(props) {
               setTimeout(() => {
                 SetAllActivePerks(0);
                 navigation.dispatch(DrawerActions.closeDrawer());
-              }, 100)
+              }, 100) 
               
             }}
           >
