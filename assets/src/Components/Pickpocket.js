@@ -130,16 +130,16 @@ const PickpocketTree = () => {
             TrackLevel(50);
         } else if (state.LightFingers == 1 && LightFingersLevel == 3 || state.Cutpurse == 1 || state.Poisoned == 1) {
             TrackLevel(40);
-        }else if (state.NightThief == 1) {
+        } else if (state.NightThief == 1) {
             TrackLevel(30);
-        }else if (state.LightFingers == 1 && LightFingersLevel == 2) {
+        } else if (state.LightFingers == 1 && LightFingersLevel == 2) {
             TrackLevel(20);
         }
     }, [TrackLevel, state]);
 
     const CheckIfLightFingersPressed = (button) => {
         if (
-            state.NightThief == 1 
+            state.NightThief == 1
         ) {
             // Do nothing....must un-select nodes above it first
             if (LightFingersLevel == 5) {
@@ -211,7 +211,7 @@ const PickpocketTree = () => {
             setState({ NightThief: buttonColor });
             setState({ CutpurseLine: lineColor });
             setState({ NightThiefLine: lineColor });
-            if (state.LightFingers == 0){
+            if (state.LightFingers == 0) {
                 SetLightFingersLevel(1);
             }
             if (state.LightFingers == 1) {
@@ -240,7 +240,7 @@ const PickpocketTree = () => {
             setState({ MisdirectionLine: lineColor });
             setState({ CutpurseLine: lineColor });
             setState({ NightThiefLine: lineColor });
-            if (state.LightFingers == 0){
+            if (state.LightFingers == 0) {
                 SetLightFingersLevel(1);
             }
             if (state.Cutpurse == 1) {
@@ -252,8 +252,8 @@ const PickpocketTree = () => {
             }
         }
         else if (state.PerfectTouch == 1) {
-                // Do nothing....must un-select nodes above it first
-        
+            // Do nothing....must un-select nodes above it first
+
         } else {
             setState({ MisdirectionLine: lineColor });
             setState({ Misdirection: buttonColor }); // Change the pressed button color back and forth
@@ -275,7 +275,7 @@ const PickpocketTree = () => {
             setState({ MisdirectionLine: line });
             setState({ CutpurseLine: line });
             setState({ NightThiefLine: line });
-            if (state.LightFingers == 0){
+            if (state.LightFingers == 0) {
                 SetLightFingersLevel(1);
             }
             if (state.Cutpurse == 1) {
@@ -304,7 +304,7 @@ const PickpocketTree = () => {
             setState({ Poisoned: button });
             setState({ NightThiefLine: line });
             setState({ PoisonedLine: line });
-            if (state.LightFingers == 0){
+            if (state.LightFingers == 0) {
                 SetLightFingersLevel(1);
             }
             if (state.LightFingers == 1) {
@@ -327,12 +327,12 @@ const PickpocketTree = () => {
             setState({ LightFingers: button });
             setState({ LightFingersLine: line });
             setState({ NightThief: button });
-            setState({ NightThiefLine: line }); 
+            setState({ NightThiefLine: line });
             setState({ Cutpurse: button });
-            setState({ CutpurseLine: line });                       
+            setState({ CutpurseLine: line });
             setState({ Keymaster: button });
             setState({ KeymasterLine: line });
-            if (state.LightFingers == 0){
+            if (state.LightFingers == 0) {
                 SetLightFingersLevel(1);
             }
             if (state.NightThief == 1) {
@@ -359,7 +359,7 @@ const PickpocketTree = () => {
             setState({ LightFingersLine: line });
             setState({ NightThiefLine: line });
             setState({ ExtraPocketsLine: line });
-            if (state.LightFingers == 0){
+            if (state.LightFingers == 0) {
                 SetLightFingersLevel(1);
             }
             if (state.LightFingers == 1) {
@@ -786,7 +786,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: '67%',
+        bottom: '66.5%',
         justifyContent: 'center',
         alignItems: 'center',
     },

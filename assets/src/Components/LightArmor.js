@@ -31,6 +31,9 @@ const useSetState = (initialState = {}) => {
 
 const LightArmorTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         agileDefender: 0,
         customeFit: 0,
@@ -47,11 +50,43 @@ const LightArmorTree = () => {
 
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    let resetAllTrees;
+    const resetLightArmorPerks = () => {
+        setState({ agileDefender: 0 });
+        setState({ customeFit: 0 });
+        setState({ customeFitLine: 'white' });
+        setState({ unhindered: 0 });
+        setState({ unhinderedLine: 'white' });
+        setState({ windWalker: 0 });
+        setState({ windWalkerLine: 'white' });
+        setState({ matchingSet: 0 });
+        setState({ matchingSetLine: 'white' });
+        setState({ deftMovement: 0 });
+        setState({ deftMovementLine: 'white' });
+        setState({ deftMovementLine2: 'white' });
+        SetRequiredLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetLightArmorPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetLightArmorPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
+
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -233,6 +268,12 @@ const LightArmorTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Light Armor Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -482,15 +523,16 @@ const LightArmorTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "70%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -534,6 +576,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '66.5%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

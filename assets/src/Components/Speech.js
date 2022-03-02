@@ -31,6 +31,10 @@ const useSetState = (initialState = {}) => {
 
 const SpeechTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [HagglingLevel, SetHagglingLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         haggling: 0,
         allure: 0,
@@ -51,10 +55,49 @@ const SpeechTree = () => {
         intimidationLine: 'white',
     });
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [HagglingLevel, SetHagglingLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    let resetAllTrees;
+    const resetSpeechPerks = () => {
+        setState({ haggling: 0 });
+        setState({ allure: 0 });
+        setState({ allureLine: 'white' });
+        setState({ merchant: 0 });
+        setState({ merchantLine: 'white' });
+        setState({ investor: 0 });
+        setState({ investorLine: 'white' });
+        setState({ fence: 0 });
+        setState({ fenceLine: 'white' });
+        setState({ masterTrader: 0 });
+        setState({ masterTraderLine: 'white' });
+        setState({ bribery: 0 });
+        setState({ briberyLine: 'white' });
+        setState({ persuasion: 0 });
+        setState({ persuasionLine: 'white' });
+        setState({ intimidation: 0 });
+        setState({ intimidationLine: 'white' });
+        SetRequiredLevel(0);
+    }
+
+    const resetActivePerks = () => {
+        resetSpeechPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetSpeechPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
+
+
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -371,6 +414,12 @@ const SpeechTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Speech Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -749,15 +798,16 @@ const SpeechTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "70%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -819,6 +869,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '66.5%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

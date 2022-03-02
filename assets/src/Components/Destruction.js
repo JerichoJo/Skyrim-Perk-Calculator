@@ -395,8 +395,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.NoviceDestructionText}>
-                <Text style={styles.PerkText}>Novice Destruction</Text>
-            </View>  
+        <Text style={styles.PerkText}>Novice Destruction</Text>
+      </View>
       <View title='Apprentice Destruction Blue' style={{
         position: 'absolute',
         left: "48%",
@@ -427,8 +427,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.ApprenticeDestructionText}>
-                <Text style={styles.PerkText}>Apprentice Destruction</Text>
-            </View>
+        <Text style={styles.PerkText}>Apprentice Destruction</Text>
+      </View>
       <View title='Adept Destruction Blue' style={{
         position: 'absolute',
         left: "46%",
@@ -459,8 +459,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.AdeptDestructionText}>
-                <Text style={styles.PerkText}>Adept Destruction</Text>
-            </View>
+        <Text style={styles.PerkText}>Adept Destruction</Text>
+      </View>
       <View title='Expert Destruction Blue' style={{
         position: 'absolute',
         left: "51%",
@@ -491,8 +491,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.ExpertDestructionText}>
-                <Text style={styles.PerkText}>Expert Destruction</Text>
-            </View>
+        <Text style={styles.PerkText}>Expert Destruction</Text>
+      </View>
       <View title='Master Destruction Blue' style={{
         position: 'absolute',
         left: "50%",
@@ -523,8 +523,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.MasterDestructionText}>
-                <Text style={styles.PerkText}>Master Destruction</Text>
-            </View>
+        <Text style={styles.PerkText}>Master Destruction</Text>
+      </View>
       <View title='Rune Master Blue' style={{
         position: 'absolute',
         left: "62%",
@@ -555,8 +555,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.RuneMasterText}>
-                <Text style={styles.PerkText}>Rune Master</Text>
-            </View>
+        <Text style={styles.PerkText}>Rune Master</Text>
+      </View>
       <View title='Augmented Flames Blue' style={{
         position: 'absolute',
         left: "-1%",
@@ -587,8 +587,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.AugmentedFlamesText}>
-                <Text style={styles.PerkText}>Augmented{"\n"}Flames</Text>
-            </View>
+        <Text style={styles.PerkText}>Augmented{"\n"}Flames</Text>
+      </View>
       <View title='Intense Flames Blue' style={{
         position: 'absolute',
         left: "-2%",
@@ -618,8 +618,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.IntenseFlamesText}>
-                <Text style={styles.PerkText}>Intense{"\n"}Flames</Text>
-            </View>
+        <Text style={styles.PerkText}>Intense{"\n"}Flames</Text>
+      </View>
       <View title='Augmented Frost Blue' style={{
         position: 'absolute',
         left: "13%",
@@ -650,8 +650,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.AugmentedFrostText}>
-                <Text style={styles.PerkText}>Augmented Frost</Text>
-            </View>
+        <Text style={styles.PerkText}>Augmented Frost</Text>
+      </View>
       <View title='Augmented Shock Blue' style={{
         position: 'absolute',
         left: "29%",
@@ -682,8 +682,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.AugmentedShockText}>
-                <Text style={styles.PerkText}>Augmented Shock</Text>
-            </View>
+        <Text style={styles.PerkText}>Augmented Shock</Text>
+      </View>
       <View title='Disintegrate Blue' style={{
         position: 'absolute',
         left: "29%",
@@ -714,8 +714,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.DisintegrateText}>
-                <Text style={styles.PerkText}>Disintegrate</Text>
-            </View>
+        <Text style={styles.PerkText}>Disintegrate</Text>
+      </View>
       <View title='Destruction Dual Casting Blue' style={{
         position: 'absolute',
         left: "59%",
@@ -746,8 +746,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.DestructionDualCastingText}>
-                <Text style={styles.PerkText}>Destruction{"\n"}Dual Casting</Text>
-            </View>
+        <Text style={styles.PerkText}>Destruction{"\n"}Dual Casting</Text>
+      </View>
       <View title='Impact Blue' style={{
         position: 'absolute',
         left: "69%",
@@ -778,8 +778,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.ImpactText}>
-                <Text style={styles.PerkText}>Impact</Text>
-            </View>
+        <Text style={styles.PerkText}>Impact</Text>
+      </View>
       <View title='Deep Freeze Blue' style={{
         position: 'absolute',
         left: "14%",
@@ -810,8 +810,8 @@ const DestructionTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.DeepFreezeText}>
-                <Text style={styles.PerkText}>Deep Freeze</Text>
-            </View>
+        <Text style={styles.PerkText}>Deep Freeze</Text>
+      </View>
       <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
         <Line // Novice Destruction to Apprentice Destruction
@@ -926,15 +926,16 @@ const DestructionTree = () => {
 const styles = StyleSheet.create({
   HomeScreenText: {
     color: 'white',
+    fontWeight: '600',
+    fontSize: 18,
   },
   topText: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: "78%",
+    top: '8.5%',
+    left: '32%',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 10,
   },
   Icon: {
     position: 'absolute',
@@ -1033,7 +1034,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: '67%',
+    bottom: '66.5%',
     justifyContent: 'center',
     alignItems: 'center',
   },
