@@ -77,6 +77,7 @@ const AlchemyTree = () => {
         setState({ greenThumbLine: 'white' });
         setState({ experimenterSnakeLine: 'white' });
         SetRequiredLevel(0);
+        SetAlchemyLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -161,7 +162,7 @@ const AlchemyTree = () => {
         } else if (state.alchemist == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     useEffect(() => {
         CheckLevel();

@@ -77,6 +77,7 @@ const SneakTree = () => {
         setState({ shadowWarriorLine: 'white' });
         setState({ shadowWarriorLineLight: 'white' });
         SetRequiredLevel(0);
+        SetStealthLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -161,7 +162,7 @@ const SneakTree = () => {
         } else if (state.stealth == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     useEffect(() => {
         CheckLevel();

@@ -129,7 +129,7 @@ const BlockTree = () => {
     } else if (state.shieldWall == 'red') {
       TrackLevel(80);
     }
-  }, [TrackLevel, state]);
+  }, [state]);
 
   useEffect(() => {
     CheckLevel();

@@ -75,6 +75,7 @@ const SpeechTree = () => {
         setState({ intimidation: 0 });
         setState({ intimidationLine: 'white' });
         SetRequiredLevel(0);
+        SetHagglingLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -125,7 +126,7 @@ const SpeechTree = () => {
         if (HagglingLevel == 0) {
             setState({ haggling: buttonColor }); // Change the pressed button color back and forth
             IncrementCounter(1); // increment active perks by 1 on first click
-            IncHagglingCounter(1); // increment basic smith by 1 on first click
+            IncHagglingCounter(1); // increment haggling by 1 on first click
         } else if (HagglingLevel == 5) {
             setState({ haggling: buttonColor }); // Change the pressed button color back and forth
             IncHagglingCounter(1); // Increment by one so that it goes back to 0 
@@ -145,24 +146,28 @@ const SpeechTree = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.bribery == 1) {
+        if (state.masterTrader == 1) {
             TrackLevel(100);
-        } else if (state.rage == 1) {
-            TrackLevel(90);
-        } else if (state.aspectOfTerror == 1) {
-            TrackLevel(80);
         } else if (state.fence == 1) {
+            TrackLevel(90);
+        } else if (HagglingLevel == 5) {
+            TrackLevel(80);
+        } else if (state.intimidation == 1 || state.investor == 1) {
             TrackLevel(70);
-        } else if (state.allure == 1) {
+        } else if (HagglingLevel == 4) {
             TrackLevel(60);
-        } else if (state.investor == 1) {
+        } else if (state.merchant == 1 || state.persuasion == 1) {
             TrackLevel(50);
-        } else if (state.bribery == 1) {
+        } else if (HagglingLevel == 3) {
+            TrackLevel(40);
+        } else if (state.bribery == 1 || state.allure == 1) {
+            TrackLevel(30);
+        } else if (HagglingLevel == 2) {
             TrackLevel(20);
-        } else if (state.haggling == 1) {
+        } else if (HagglingLevel == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state, HagglingLevel]);
 
     useEffect(() => {
         CheckLevel();

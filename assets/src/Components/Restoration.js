@@ -31,7 +31,6 @@ const useSetState = (initialState = {}) => {
 
 const RestorationTree = () => {
     const navigation = useNavigation();
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [RecoveryLevel, SetRecoveryLevel] = useState(0);
@@ -153,7 +152,7 @@ const RestorationTree = () => {
         } else if (state.Regeneration == 1 || state.RestoDualCast == 1) {
             TrackLevel(20);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
     const IncRecoveryCounter = (numActiveRecovery) => {
         if (RecoveryLevel < 2) {
             SetRecoveryLevel(RecoveryLevel + numActiveRecovery)

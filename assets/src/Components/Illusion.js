@@ -117,14 +117,14 @@ const IllusionTree = () => {
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
-        //SetAllActivePerks(AllActivePerks + numActivePerks);
+        SetAllActivePerks(AllActivePerks + numActivePerks);
     };
     const DecrementCounter = (numActivePerks = 0) => {
         if (ActivePerks === 0) {
             return;
         }
         SetActivePerks(ActivePerks - numActivePerks);
-        //SetAllActivePerks(AllActivePerks - numActivePerks);
+        SetAllActivePerks(AllActivePerks - numActivePerks);
     };
 
     const TrackLevel = useCallback((level) => {
@@ -132,24 +132,28 @@ const IllusionTree = () => {
     }, []);
 
     const CheckLevel = useCallback(() => {
-        if (state.animage == 1) {
+        if (state.masterIllus == 1) {
             TrackLevel(100);
-        } else if (state.rage == 1) {
+        } else if (state.masterOfMind == 1) {
             TrackLevel(90);
-        } else if (state.aspectOfTerror == 1) {
-            TrackLevel(80);
         } else if (state.expertIllus == 1) {
+            TrackLevel(75);
+        } else if (state.rage == 1) {
             TrackLevel(70);
-        } else if (state.illusionDual == 1) {
-            TrackLevel(60);
-        } else if (state.adeptIllus == 1) {
+        } else if (state.adeptIllus == 1 || state.quietCasting == 1 || state.aspectOfTerror == 1) {
             TrackLevel(50);
-        } else if (state.animage == 1) {
+        } else if (state.kindredMage == 1) {
+            TrackLevel(40);
+        } else if (state.hypnoticGaze == 1) {
+            TrackLevel(30);
+        } else if (state.apprenticeIllus == 1) {
+            TrackLevel(25);
+        } else if (state.animage == 1 || state.illusionDual == 1) {
             TrackLevel(20);
         } else if (state.noviceIllus == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     useEffect(() => {
         CheckLevel();
