@@ -241,6 +241,9 @@ const LightArmorTree = () => {
             if (state.agileDefender == 0) {
                 SetAgileDefenderLevel(1);
             }
+            if (state.deftMovement == 1) {
+                setState({ deftMovementLine: lineColor })
+            }
             if (state.customeFit == 1) {
                 IncrementCounter(2);
             } else if (state.agileDefender == 1) {
@@ -248,8 +251,15 @@ const LightArmorTree = () => {
             } else {
                 IncrementCounter(4);
             }
-        } else if (state.deftMovement == 1) {
+        } else if (state.deftMovement == 1 && state.matchingSet == 0) {
             // Do nothing....must un-select nodes above it first
+        } else if (state.deftMovement == 1 && state.matchingSet == 1) {
+            setState({ windWalkerLine: lineColor });
+            setState({ windWalker: buttonColor }); // Change the pressed button color back and forth
+            setState({ deftMovementLine: lineColor }); // Change the pressed button color back and forth
+            state.windWalker == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else {
             setState({ windWalkerLine: lineColor });
             setState({ windWalker: buttonColor }); // Change the pressed button color back and forth
@@ -258,8 +268,8 @@ const LightArmorTree = () => {
                 : DecrementCounter(1);
         }
     };
-    const CheckIfDeftMovementPressed = (buttonColor, lineColor) => {
-        if (state.windWalker == 0) {
+    const CheckIfDeftMovementPressed = (buttonColor, lineColor, lineColor2) => {
+        if (state.windWalker == 0 && state.matchingSet == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ agileDefender: buttonColor });
             setState({ customeFit: buttonColor });
@@ -283,16 +293,28 @@ const LightArmorTree = () => {
             } else {
                 IncrementCounter(5);
             }
-        } else {
+        } else if (state.windWalker == 1 && state.matchingSet == 0) {
+            setState({ deftMovement: buttonColor });
             setState({ deftMovementLine: lineColor });
-            setState({ deftMovement: buttonColor }); // Change the pressed button color back and forth
             state.deftMovement == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-
+        } else if (state.windWalker == 0 && state.matchingSet == 1) {
+            setState({ deftMovement: buttonColor });
+            setState({ deftMovementLine2: lineColor2 });
+            state.deftMovement == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        } else if (state.windWalker == 1 && state.matchingSet == 1) {
+            setState({ deftMovement: buttonColor });
+            setState({ deftMovementLine: lineColor });
+            setState({ deftMovementLine2: lineColor2 });
+            state.deftMovement == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
-    const CheckIfMatchingSetPressed = (buttonColor, lineColor) => {
+    const CheckIfMatchingSetPressed = (buttonColor, lineColor, lineColor2) => {
         if (state.customeFit == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ agileDefender: buttonColor });
@@ -309,6 +331,15 @@ const LightArmorTree = () => {
             } else {
                 IncrementCounter(3);
             }
+        } else if (state.deftMovement == 1 && state.windWalker == 0) {
+            // Do nothing....must un-select nodes above it first
+        } else if (state.deftMovement == 1 && state.windWalker == 1) {
+            setState({ matchingSetLine: lineColor });
+            setState({ matchingSet: buttonColor }); // Change the pressed button color back and forth
+            setState({ deftMovementLine2: lineColor2 });
+            state.matchingSet == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else {
             setState({ matchingSetLine: lineColor });
             setState({ matchingSet: buttonColor }); // Change the pressed button color back and forth
@@ -476,7 +507,8 @@ const LightArmorTree = () => {
                     onPress={() => {
                         CheckIfMatchingSetPressed(
                             state.matchingSet == 0 ? 1 : 0,
-                            state.matchingSetLine == 'white' ? 'gold' : 'white'
+                            state.matchingSetLine == 'white' ? 'gold' : 'white',
+                            state.deftMovementLine2 == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -508,7 +540,8 @@ const LightArmorTree = () => {
                     onPress={() => {
                         CheckIfDeftMovementPressed(
                             state.deftMovement == 0 ? 1 : 0,
-                            state.deftMovementLine == 'white' ? 'gold' : 'white'
+                            state.deftMovementLine == 'white' ? 'gold' : 'white',
+                            state.deftMovementLine2 == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
