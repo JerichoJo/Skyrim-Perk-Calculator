@@ -13,7 +13,7 @@ import AlchemyTree from "./Alchemy";
 import SpeechTree from "./Speech";
 import LightArmorTree from "./LightArmor";
 import DestructionTree from "./Destruction";
-import Block2Tree from "./Block2";
+import BlockTree from "./Block";
 import LockpickingTree from "./Lockpicking";
 import OneHandedTree from "./OneHanded";
 
@@ -34,7 +34,7 @@ const tree = {
     SpeechTree,
     LightArmorTree,
     DestructionTree,
-    Block2Tree,
+    BlockTree,
     LockpickingTree,
     OneHandedTree
 }

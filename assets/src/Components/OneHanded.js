@@ -56,7 +56,8 @@ const OneHandedTree = () => {
     savageStrike: 0,
     savageStrikeLine: 'white',
     paralyzingStrike: 0,
-    paralyzingStrikeLine: 'white',
+    paralyzingStrikeLineLeft: 'white',
+    paralyzingStrikeLineRight: 'white',
     hackAndSlash: 0,
     hackAndSlashLine: 'white',
   });
@@ -80,7 +81,8 @@ const OneHandedTree = () => {
     setState({ savageStrike: 0 });
     setState({ savageStrikeLine: 'white' });
     setState({ paralyzingStrike: 0 });
-    setState({ paralyzingStrikeLine: 'white' });
+    setState({ paralyzingStrikeLineLeft: 'white' });
+    setState({ paralyzingStrikeLineRight: 'white' });
     setState({ hackAndSlash: 0 });
     setState({ hackAndSlashLine: 'white' });
     SetRequiredLevel(0);
@@ -106,22 +108,36 @@ const OneHandedTree = () => {
     }
   }, [resetAllTrees]);
 
-  const IncrementCounter = (numActivePerks = 0) => {
+// Use this to control Re-renders for resetting AllActivePerks with useEffect();
+if (AllActivePerks == 0) {
+    resetAllTrees = 1;
+} else {
+    resetAllTrees = 0;
+}
+
+// Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+useEffect(() => {
+    if (resetAllTrees == 1) {
+        resetOneHandedPerks();
+        SetActivePerks(0);
+    }
+}, [resetAllTrees]);
+
+const IncrementCounter = (numActivePerks = 0) => {
     SetActivePerks(ActivePerks + numActivePerks);
     SetAllActivePerks(AllActivePerks + numActivePerks);
-  };
-  const DecrementCounter = (numActivePerks = 0) => {
+};
+const DecrementCounter = (numActivePerks = 0) => {
     if (ActivePerks === 0) {
-      return;
+        return;
     }
     SetActivePerks(ActivePerks - numActivePerks);
     SetAllActivePerks(AllActivePerks - numActivePerks);
-  };
+};
 
-  const TrackLevel = useCallback((level) => {
+const TrackLevel = useCallback((level) => {
     SetRequiredLevel(level);
-  }, []);
-
+}, []);
   const lineStrokeWidth = '2';
 
   const CheckLevel = useCallback(() => {
@@ -188,6 +204,7 @@ const OneHandedTree = () => {
     } else {
       setState({ bonebreaker: buttonColor }); // Change button color back and forth
       setState({ bonebreakerLine: lineColor });
+      state.bonebreaker == 0 ? IncrementCounter(1) : DecrementCounter(1)
     }
   };
 
@@ -200,6 +217,7 @@ const OneHandedTree = () => {
     } else {
       setState({ bladesman: buttonColor }); // Change the pressed button color back and forth
       setState({ bladesmanLine: lineColor });
+      state.bladesman == 0? IncrementCounter(1) : DecrementCounter(1)
     }
   };
   const checkIfDualFlurryPressed = (buttonColor, lineColor) => {
@@ -260,7 +278,7 @@ const OneHandedTree = () => {
     }
   };
 
-  const checkIfCriticalChargePressed = (buttonColor, lineColor) => {
+  const checkIfCriticalChargePressed = (buttonColor, lineColor, lineColor2) => {
     if (state.criticalCharge == 0) {
       // Change the colors of the buttons below it if they have not been pressed
       setState({ armsman: buttonColor });
@@ -268,29 +286,66 @@ const OneHandedTree = () => {
       setState({ fightingStanceLine: lineColor });
       setState({ criticalCharge: buttonColor });
       setState({ criticalChargeLine: lineColor });
-    } else if (state.paralyzingStrike == 1) {
+      if (state.paralyzingStrike == 1) {
+        setState({ paralyzingStrikeLineLeft: lineColor });
+      } 
+      if (state.fightingStance == 1) {
+        IncrementCounter(2);
+      } else if (state.armsman == 1) {
+        IncrementCounter(3);
+      } else {
+        IncrementCounter(4);
+        // Set Armsman level
+      }
+    } else if (state.paralyzingStrike == 1 && state.savageStrike == 0 ) {
       // Do nothing....must un-select nodes above it first
-    } else {
+    } else if (state.paralyzingStrike == 1 && state.savageStrike == 1) {
+      setState({ criticalChargeLine: lineColor });
+      setState({ critcal: lineColor });
+
+    } else if (state.paralyzingStrike && state.criticalCharge == 1) {
       setState({ criticalCharge: buttonColor }); // Change the pressed button color back and forth
       setState({ criticalChargeLine: lineColor });
-    }
-  };
-  const checkIfParalyzingStrikePressed = (buttonColor, lineColor) => {
-    if (state.savageStrike == 0 || state.criticalCharge == 0) {
-      setState({ armsman: buttonColor });
-      setState({ fightingStance: buttonColor });
-      setState({ fightingStanceLine: lineColor });
-      setState({ savageStrike: buttonColor });
-      setState({ savageStrikeLine: lineColor });
+      setState({ paralyzingStrike: lineColor });
+      state.criticalCharge == 0 ? IncrementCounter(1) : DecrementCounter(1);
+    } else {
       setState({ criticalCharge: buttonColor });
       setState({ criticalChargeLine: lineColor });
-      setState({ paralyzingStrike: buttonColor });
-      setState({ paralyzingStrikeLine: lineColor });
-    } else {
-      setState({ paralyzingStrike: buttonColor });
-      setState({ paralyzingStrikeLine: lineColor });
+      state.criticalCharge == 0 ? IncrementCounter(1) : DecrementCounter(1);
     }
   };
+  const checkIfParalyzingStrikePressed = (buttonColor, lineColor, lineColor2) => {
+    if (state.savageStrike == 1 && state.criticalCharge == 0) {
+      setState({ paralyzingStrike: buttonColor });
+      setState({ paralyzingStrikeLineLeft: lineColor });
+      setState({ savageStrike: buttonColor });
+      setState({ savageStrikeLine: lineColor });
+      setState({ fightingStance: buttonColor });
+      setState({ fightingStanceLine: lineColor });
+      setState({ armsman: buttonColor });
+    } else if (state.savageStrike == 0 && state.criticalCharge == 1) {
+      setState({ paralyzingStrike: buttonColor });
+      setState({ paralyzingStrikeLineRight: lineColor2 });
+      setState({ criticalCharge: buttonColor });
+      setState({ criticalChargeLine: lineColor });
+      setState({ fightingStance: buttonColor });
+      setState({ fightingStanceLine: lineColor });
+      setState({ armsman: buttonColor });
+    } else if (state.savageStrike == 1 && state.criticalCharge == 1) {
+      setState({ paralyzingStrike: buttonColor });
+      setState({ paralyzingStrikeLineLeft: lineColor });
+      setState({ paralyzingStrikeLineRight: lineColor2 });
+    } else {
+      setState({ paralyzingStrike: buttonColor });
+      setState({ paralyzingStrikeLineRight: lineColor2 });
+      setState({ criticalCharge: buttonColor });
+      setState({ criticalChargeLine: lineColor });
+      setState({ fightingStance: buttonColor });
+      setState({ fightingStanceLine: lineColor });
+      setState({ armsman: buttonColor });
+    }
+  }
+
   return (
     <View style={{ zIndex: 2 }}>
       <View
@@ -418,7 +473,7 @@ const OneHandedTree = () => {
           onPress={() => {
             CheckIfBoneBreakerPressed(
               state.bonebreaker == 0 ? 1 : 0,
-              state.bonebreaker == 'white' ? 'gold' : 'white'
+              state.bonebreakerLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -522,7 +577,7 @@ const OneHandedTree = () => {
       </View>
       <View title='Paralyzing Strike Blue' style={{
         position: 'absolute',
-        left: "16%",
+        left: "20%",
         top: "25%",
         zIndex: 8,
 
@@ -531,7 +586,7 @@ const OneHandedTree = () => {
       </View>
       <View title='Paralyzing Strike Gold' style={{
         position: 'absolute',
-        left: "16%",
+        left: "20%",
         top: "25%",
         zIndex: 8,
         opacity: state.paralyzingStrike
@@ -542,7 +597,8 @@ const OneHandedTree = () => {
           onPress={() => {
             checkIfParalyzingStrikePressed(
               state.paralyzingStrike == 0 ? 1 : 0,
-              state.paralyzingStrikeLine == 'white' ? 'gold' : 'white'
+              state.paralyzingStrikeLineLeft == 'white' ? 'gold' : 'white',
+              state.paralyzingStrikeLineRight == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -573,7 +629,7 @@ const OneHandedTree = () => {
           onPress={() => {
             checkIfDualFlurryPressed(
               state.dualFlurry == 0 ? 1 : 0,
-              state.dualFlurry == 'white' ? 'gold' : 'white'
+              state.dualFlurryLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -604,7 +660,7 @@ const OneHandedTree = () => {
           onPress={() => {
             checkIfDualSavageryChecked(
               state.dualSavagery == 0 ? 1 : 0,
-              state.dualSavagery == 'white' ? 'gold' : 'white'
+              state.dualSavageryLine == 'white' ? 'gold' : 'white'
             );
           }}>
           <StarIconGold />
@@ -615,41 +671,41 @@ const OneHandedTree = () => {
       </View>
       <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
         <Line // Armsman to Hack and Slash
-          x1="15%"
+          x1="16%"
           y1="65%"
-          x2="27%"
-          y2="79%"
+          x2="30%"
+          y2="80%"
           stroke={state.hackAndSlashLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Armsmen to Bladesman
           x1="62%"
           y1="63%"
-          x2="33.3%"
-          y2="79%"
+          x2="31%"
+          y2="80%"
           stroke={state.bladesmanLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Armsman to Bone Breaker
           x1="45%"
           y1="63%"
-          x2="33%"
-          y2="79%"
+          x2="31.5%"
+          y2="80%"
           stroke={state.bonebreakerLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Armsman to Fighting Stance
           x1="30%"
           y1="60%"
-          x2="30%"
-          y2="79%"
+          x2="31%"
+          y2="80%"
           stroke={state.fightingStanceLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Fighting Stance to Critical Charge
           x1="45%"
           y1="46%"
-          x2="33%"
+          x2="31%"
           y2="59%"
           stroke={state.criticalChargeLine}
           strokeWidth={lineStrokeWidth}
@@ -657,25 +713,25 @@ const OneHandedTree = () => {
         <Line // Fighting Stance to Savage Strike
           x1="15%"
           y1="45%"
-          x2="27%"
+          x2="29%"
           y2="59%"
           stroke={state.savageStrikeLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Savage Strike to Paralyzing Strike
-          x1="27%"
+          x1="31%"
           y1="30%"
           x2="15%"
           y2="44%"
-          stroke={state.paralyzingStrikeLine}
+          stroke={state.paralyzingStrikeLineLeft}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Critical Charge to Paralyzing Strike
-          x1="27%"
+          x1="31%"
           y1="30%"
           x2="45%"
           y2="44%"
-          stroke={state.paralyzingStrikeLine}
+          stroke={state.paralyzingStrikeLineRight}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Armsman to Dual Flurry
