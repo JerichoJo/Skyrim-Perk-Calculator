@@ -266,7 +266,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Block.png')}
                         />
                         <Text style={styles.title}>Block</Text>
-                        <tree.BlockTree style={styles.tree} />
+                        <tree.Block2Tree style={styles.tree} />
                         
                     </View>
                     <View
