@@ -172,7 +172,7 @@ const DestructionTree = () => {
       TrackLevel(75);
     } else if (state.masterDestruction == 1) {
       TrackLevel(100);
-    }
+    } 
 
   }, [state]);
 
