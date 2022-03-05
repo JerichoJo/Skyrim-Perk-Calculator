@@ -341,7 +341,7 @@ export default class extends Component {
                             source={require('../images/background/BG_Lockpicking.png')}
                         />
                         <Text style={styles.title}>Lockpicking</Text>
-                        <tree.LockpickingRebuild style={styles.tree} />
+                        <tree.LockpickingTree style={styles.tree} />
 
                     </View>
                     <View
