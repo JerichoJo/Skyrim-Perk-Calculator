@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useCallback, useEffect, useContext, useRef, Button } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import Svg, { Line } from 'react-native-svg';
 import {
     View,
@@ -8,15 +8,16 @@ import {
     Text,
     StyleSheet,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import Modal from 'react-native-modal';
 import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
+import { StackViewTransitionConfigs } from 'react-navigation-stack';
+import { keyboardProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+
 const useSetState = (initialState = {}) => {
     const [state, regularSetState] = useState(initialState);
 
@@ -30,313 +31,386 @@ const useSetState = (initialState = {}) => {
     return [state, setState];
 };
 
-const LockpickingTree = () => {
-  const navigation = useNavigation();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [ActivePerks, SetActivePerks] = useState(0);
-  const [RequiredLevel, SetRequiredLevel] = useState(0);
-  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
-  const [state, setState] = useSetState({
-    noviceLocks: 0,
-    apprenticeLocks: 0,
-    apprenticeLocksLine: 'white',
-    quickHands: 0,
-    quickHandsLine: 'white',
-    waxKey: 0,
-    waxKeyLine: 'white',
-    adeptlocks: 0,
-    adeptLocksLine: 'white',
-    expertLocks: 0,
-    expertLocksLine: 'white',
-    goldenTouch: 0,
-    goldenTouchLine: 'white',
-    treasureHunter: 0,
-    treasureHunterLine: 'white',
-    locksmith: 0,
-    locksmithLine: 'white',
-    unbreakable: 0,
-    unbreakableLine: 'white',
-    masterLocks: 0,
-    masterLocksLine: 'white',
-  });
+const LockpickingRebuild = () => {
+    const navigation = useNavigation();
+    const [state, setState] = useSetState({
+        noviceLocks: 0,
+        apprenticeLocks: 0,
+        apprenticeLocksLine: 'white',
+        quickHands: 0,
+        quickHandsLine: 'white',
+        waxKey: 0,
+        waxKeyLine: 'white',
+        adeptLocks: 0,
+        adeptLocksLine: 'white',
+        expertLocks: 0,
+        expertLocksLine: 'white',
+        goldenTouch: 0,
+        goldenTouchLine: 'white',
+        treasureHunter: 0,
+        treasureHunterLine: 'white',
+        locksmith: 0,
+        locksmithLine: 'white',
+        unbreakable: 0,
+        unbreakableLine: 'white',
+        masterLocks: 0,
+        masterLocksLine: 'white'
+    });
 
-  let resetAllTrees;
-  const resetLockpickingPerks = () => {
-    setState({ shieldWall: 0 });
-    setState({ deflectArrows: 0 });
-    setState({ delectArrowsLine: 'white' });
-    setState({ elementalProtection: 0 });
-    setState({ elementalProtectionLine: 'white' });
-    setState({ blockRunner: 0 });
-    setState({ blockRunnerLine: 'white' });
-    setState({ powerBash: 0 });
-    setState({ powerBashLine: 'white' });
-    setState({ disarmingBash: 0 });
-    setState({ disarmingBashLine: 'white' });
-    setState({ shieldCharge: 0 });
-    setState({ shieldChargeLine: 'white' });
-    setState({ quickReflexes: 0 });
-    setState({ quickReflexesLine: 'white' });
-    SetRequiredLevel(0);
-  }
-  const resetActivePerks = () => {
-    resetLockpickingPerks();
-    DecrementCounter(ActivePerks);
-};
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [LightFingersLevel, SetLightFingersLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
-// Use this to control Re-renders for resetting AllActivePerks with useEffect();
-if (AllActivePerks == 0) {
-    resetAllTrees = 1;
-} else {
-    resetAllTrees = 0;
-}
 
-// Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
-useEffect(() => {
-    if (resetAllTrees == 1) {
+    let resetAllTrees;
+    const resetLockpickingPerks = () => {
+        setState({ noviceLocks: 0 });
+        setState({ apprenticeLocks: 0 });
+        setState({ apprenticeLocksLine: 'white' });
+        setState({ quickHands: 0 });
+        setState({ quickHandsLine: 'white' });
+        setState({ waxKey: 0 });
+        setState({ waxKeyLine: 'white' });
+        setState({ adeptLocks: 0 });
+        setState({ adeptLocksLine: 'white' });
+        setState({ expertLocks: 0 });
+        setState({ expertLocksLine: 'white' });
+        setState({ goldenTouch: 0 });
+        setState({ goldenTouchLine: 'white' });
+        setState({ treasureHunter: 0 });
+        setState({ treasureHunterLine: 'white' });
+        setState({ locksmith: 0 });
+        setState({ locksmithLine: 'white' });
+        setState({ unbreakable: 0 });
+        setState({ unbreakableLine: 'white' });
+        setState({ masterLocks: 0 });
+        setState({ masterLocksLine: 'white' });
+        SetRequiredLevel(0);
+    }
+
+    const resetActivePerks = () => {
         resetLockpickingPerks();
-        SetActivePerks(0);
-    }
-}, [resetAllTrees]);
+        DecrementCounter(ActivePerks);
+    };
 
-const IncrementCounter = (numActivePerks = 0) => {
-    SetActivePerks(ActivePerks + numActivePerks);
-    SetAllActivePerks(AllActivePerks + numActivePerks);
-};
-const DecrementCounter = (numActivePerks = 0) => {
-    if (ActivePerks === 0) {
-        return;
-    }
-    SetActivePerks(ActivePerks - numActivePerks);
-    SetAllActivePerks(AllActivePerks - numActivePerks);
-};
-
-const TrackLevel = useCallback((level) => {
-    SetRequiredLevel(level);
-}, []);
-
-  const lineStrokeWidth = '2';
-
-  const CheckLevel = useCallback(() => {
-    if (state.masterLocks == 1) {
-      TrackLevel(100);
-    } else if (state.unbreakable == 1) {
-      TrackLevel(100);
-    } else if (state.locksmith == 1) {
-      TrackLevel(80);
-    } else if (state.expertLocks == 1) {
-      TrackLevel(75);
-    } else if (state.treasureHunter == 1) {
-      TrackLevel(70);
-    } else if (state.goldenTouch == 1) {
-      TrackLevel(60);
-    } else if (state.adeptLocks == 1) {
-      TrackLevel(50);
-    } else if (state.waxKey == 1) {
-      TrackLevel(50);
-    } else if (state.quickHands == 1) {
-      TrackLevel(40);
-    } else if (state.apprenticeLocks == 1) {
-      TrackLevel(25);
-    } else if (state.noviceLocks == 1) {
-      TrackLevel(0);
-    } }, 
-    [TrackLevel, state]);
-
-  useEffect(() => {
-    CheckLevel();
-  }, [CheckLevel]);
-
-
-  const checkIfNoviceLocksPressed = (buttonColor) => {
-    if (
-      state.apprenticeLocks ==  1
-    ) {
-      // Do nothing....must un-select nodes above it first
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
     } else {
-      setState({ noviceLocks: buttonColor }); // Change button color back and forth
+        resetAllTrees = 0;
+    }
 
-      state.noviceLocks == 0
-        ? IncrementCounter(1)
-        : DecrementCounter(1);
-    }
-  };
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetLockpickingPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
-  const checkIfApprenticeLockpickingPressed = (buttonColor, lineColor) => {
-    if (state.noviceLocks == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      IncrementCounter(2);
-    } else {
-      setState({ apprenticeLocks: buttonColor }); // Change the pressed button color back and forth
-      setState({ apprenticeLocksLine: lineColor });
-      state.apprenticeLocks == 0
-        ? IncrementCounter(1)
-        : DecrementCounter(1);
-    }
-  };
+    const IncrementCounter = (numActivePerks = 0) => {
+        SetActivePerks(ActivePerks + numActivePerks);
+        SetAllActivePerks(AllActivePerks + numActivePerks);
+    };
+    const DecrementCounter = (numActivePerks = 0) => {
+        if (ActivePerks === 0) {
+            return;
+        }
+        SetActivePerks(ActivePerks - numActivePerks);
+        SetAllActivePerks(AllActivePerks - numActivePerks);
+    };
 
-  const checkIfQuickHandsPressed = (buttonColor, lineColor) => {
-    if (state.apprenticeLocks == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      setState({ quickHands: buttonColor });
-      setState({ quickHandsLine: lineColor });
-      IncrementCounter(3);
-    } else if (state.waxKey == 1) {
-      // Do nothing....must un-select nodes above it first
-    } else {
-      setState({ quickHands: buttonColor }); // Change button color back and forth
-      setState({ quickHandsLine: lineColor });
-      state.quickHands == 0
-        ? IncrementCounter(1)
-        : DecrementCounter(1);
-    }
-  };
-  const CheckIfWaxKeyPressed = (buttonColor, lineColor) => {
-    if (state.quickHands == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      setState({ quickHands: buttonColor });
-      setState({ quickHandsLine: lineColor });
-      setState({ waxKey: buttonColor });
-      setState({ waxKeyLine: lineColor });
-    } else {
-      setState({ waxKey: buttonColor }); // Change the pressed button color back and forth
-      setState({ waxKeyLine: lineColor });
-      state.advancedSmithing == 0
-        ? IncrementCounter(1)
-        : DecrementCounter(1);
-    }
-  };
-  const checkIfAdeptLocksPressed = (buttonColor, lineColor) => {
-    if (state.apprenticeLocks == 0) {
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      setState({ adeptLocks: buttonColor });
-      setState({ adeptLocksLine: lineColor });
-      IncrementCounter(3);
-    } else {
-      setState({ adeptLocks: buttonColor });
-      setState({ adeptLocksLine: lineColor });
-      state.adeptLocks == 0 ? IncrementCounter(1) : DecrementCounter(1)
-    }
-  }
-  const CheckIfGoldenTouchPressed = (buttonColor, lineColor) => {
-    if (state.adeptLocks == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      setState({ adeptLocks: buttonColor });
-      setState({ adeptLocksLine: lineColor });
-      setState({ goldenTouch: buttonColor });
-      setState({ goldenTouchLine: lineColor });
-    } else if (state.treasureHunter == 1) {
-      // Do nothing....must un-select nodes above it first
-    } else {
-      setState({ goldenTouch: lineColor });
-      setState({ goldenTouchLine: lineColor }); // Change the pressed button color back and forth
-    }
-  };
+    const TrackLevel = useCallback((level) => {
+        SetRequiredLevel(level);
+    }, []);
 
-  const CheckIfTreasureHunterPressed = (buttonColor, lineColor) => {
-    if (state.goldenTouch == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      setState({ adeptlocks: buttonColor });
-      setState({ adeptLocksLine: lineColor });
-      setState({ goldenTouch: buttonColor });
-      setState({ goldenTouchLine: lineColor });
-      setState({ treasureHunter: buttonColor });
-      setState({ treasureHunterLine: lineColor });
-    } else {
-      setState({ treasureHunterLine: lineColor });
-      setState({ treasureHunter: buttonColor }); // Change the pressed button color back and forth
-    }
-  };
-  const CheckIfExpertLocksPressed = (buttonColor, lineColor) => {
-    if (state.adeptLocks == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      setState({ adeptLocks: buttonColor });
-      setState({ adeptLocksLine: lineColor });
-      setState({ expertLocks: buttonColor });
-      setState({ expertLocksLine: lineColor });
-    } else if (state.locksmith == 1) {
-      // Do nothing....must un-select nodes above it first
-    } else {
-      setState({ expertLocks: buttonColor });
-      setState({ expertLocksLine: lineColor }); // Change the pressed button color back and forth
-    }
-  };
-  const CheckIfLocksmithPressed = (buttonColor, lineColor) => {
-    if (state.expertLocks == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      setState({ adeptLocks: buttonColor });
-      setState({ adeptLocksLine: lineColor });
-      setState({ expertLocks: buttonColor });
-      setState({ expertLocksLine: lineColor });
-      setState({ locksmith: buttonColor });
-      setState({ locksmithLine: lineColor });
-    } else if (state.dragonSmithing == 1) {
-      // Do nothing....must un-select nodes above it first
-    } else {
-      setState({ locksmith: buttonColor });
-      setState({ locksmithLine: lineColor }); // Change the pressed button color back and forth
-    }
-  };
-  const CheckIfUnbreakablePressed = (buttonColor, lineColor) => {
-    if (state.locksmith == 0) {
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      setState({ adeptLocks: buttonColor });
-      setState({ adeptLocksLine: lineColor });
-      setState({ expertLocks: buttonColor });
-      setState({ expertLocksLine: lineColor });
-      setState({ locksmith: buttonColor });
-      setState({ locksmithLine: lineColor });
-      setState({ unbreakable: buttonColor });
-      setState({ unbreakableLine: lineColor });
-    } else {
-      setState({ unbreakable: buttonColor });
-      setState({ unbreakableLine: lineColor });
-    }
-  };
+    const lineStrokeWidth = '2';
 
-  const CheckMasterLocksPressed = (buttonColor, lineColor) => {
-    if (state.expertLocks == 0) {
-      setState({ noviceLocks: buttonColor });
-      setState({ apprenticeLocks: buttonColor });
-      setState({ apprenticeLocksLine: lineColor });
-      setState({ adeptlocks: buttonColor });
-      setState({ adeptLocksLine: lineColor });
-      setState({ expertLocks: buttonColor });
-      setState({ expertLocksLine: lineColor });
-      setState({ masterLocks: buttonColor });
-      setState({ masterLocksLine: lineColor });
-    } else {
-      setState({ masterLocks: buttonColor });
-      setState({ masterLocksLine: lineColor });
-    }
-  };
+    const CheckLevel = useCallback(() => {
+        if (state.unbreakable == 1 || state.masterLocks) {
+            TrackLevel(100);
+        } else if (state.locksmith == 1) {
+            TrackLevel(80);
+        } else if (state.expertLocks == 1) {
+            TrackLevel(75);
+        } else if (state.treasureHunter == 1) {
+            TrackLevel(70);
+        } else if (state.goldenTouch == 1) {
+            TrackLevel(60);
+        } else if (state.waxKey == 1 || state.adeptLocks == 1) {
+            TrackLevel(50);
+        } else if (state.quickHands == 1) {
+            TrackLevel(40);
+        } else if (state.apprenticeLocks == 1) {
+            TrackLevel(25);
+        } else if (state.noviceLocks == 1) {
+            TrackLevel(0);
+        }
+        else {
+            TrackLevel(0)
+        }
+    }, [state]);
 
-      return (
+    const checkIfNoviceLocksPressed = (button) => {
+        if (state.apprenticeLocks == 1) {
+            // DO nOTHING
+        } else {
+            setState({ noviceLocks: button });
+            state.novice == 0 ? IncrementCounter(1) : DecrementCounter (1);
+        }
+    };
+
+    const checkIfApprenticeLockpickingPressed = (buttonColor, lineColor) => {
+        if (state.apprenticeLocks == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceLocks: buttonColor });
+            setState({ apprenticeLocksLine: lineColor });
+            setState({ apprenticeLocks: buttonColor });
+            IncrementCounter(2);
+        } else if (state.quickHands == 1 || state.adeptLocks == 1 ) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ apprenticeLocksLine: lineColor });
+            setState({ apprenticeLocks: buttonColor }); // Change button color back and forth
+            state.apprenticeLocks == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const checkIfQuickHandsPressed = (buttonColor, lineColor) => {
+        if (state.apprenticeLocks == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceLocks: buttonColor });
+            setState({ apprenticeLocks: buttonColor });
+            setState({ quickHands: buttonColor });
+            setState({ apprenticeLocksLine: lineColor });
+            setState({ quickHandsLine: lineColor });
+            if (state.noviceLocks == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.waxKey == 1) {
+            // Do nothing....must un-select nodes above it first
+        } else {
+            setState({ quickHandsLine: lineColor });
+            setState({ quickHands: buttonColor }); // Change the pressed button color back and forth
+            state.quickHands == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfWaxKeyPressed = (buttonColor, lineColor) => {
+        if (state.quickHands == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceLocks: buttonColor });
+            setState({ apprenticeLocks: buttonColor });
+            setState({ quickHands: buttonColor });
+            setState({ waxKey: buttonColor });
+            setState({ apprenticeLocksLine: lineColor });
+            setState({ quickHandsLine: lineColor });
+            setState({ waxKeyLine: lineColor });
+            if (state.apprenticeLocks == 1) {
+                IncrementCounter(2);
+            } else if (state.noviceLocks == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+        } else {
+            setState({ waxKeyLine: lineColor });
+            setState({ waxKey: buttonColor }); // Change the pressed button color back and forth
+            state.waxKey == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const checkIfAdeptLocksPressed = (button, line) => {
+        if (state.apprenticeLocks == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceLocks: button });
+            setState({ apprenticeLocks: button });
+            setState({ adeptLocks: button });
+            setState({ apprenticeLocksLine: line });
+            setState({ adeptLocksLine: line });
+            if (state.noviceLocks == 1) {
+                IncrementCounter(2);
+            }
+        } else if (state.goldenTouch == 1 || state.expertLocks == 1) {
+            // do nothing
+        } else {
+            setState({ adeptLocksLine: line });
+            setState({ adeptLocks: button }); // Change the pressed button color back and forth
+            state.adeptLocks == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfGoldenTouchPressed = (button, line) => {
+        if (state.adeptLocks == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceLocks: button });
+            setState({ apprenticeLocks: button });
+            setState({ adeptLocks: button });
+            setState({ goldenTouch: button });
+            setState({ apprenticeLocksLine: line });
+            setState({ adeptLocksLine: line });
+            setState({ goldenTouchLine: line });
+            if (state.noviceLocks = 1) {
+                IncrementCounter(3);
+            } else if (state.apprenticeLocks == 1)  {
+                IncrementCounter(2);
+            }
+        } else if (state.treasureHunter == 1) {
+            // nothing
+        } else {
+            setState({ goldenTouchLine: line });
+            setState({ goldenTouch: button }); // Change the pressed button color back and forth
+            state.goldenTouch == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+
+    const CheckIfTreasureHunterPressed = (button, line) => {
+        if (state.goldenTouch == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceLocks: button });
+            setState({ apprenticeLocksLine: line });
+            setState({ apprenticeLocks: button });
+            setState({ adeptLocksLine: line });
+            setState({ adeptLocks: button });
+            setState({ goldenTouchLine: line });
+            setState({ goldenTouch: button });
+            setState({ treasureHunterLine: line });
+            setState({ treasureHunter: button });
+            if (state.noviceLocks == 1) {
+                IncrementCounter(4);
+            } else if (state.apprenticeLocks == 1) {
+                IncrementCounter(3);
+            } else if (adeptLocks == 1) {
+                IncrementCounter(2);
+            }
+        } else {
+            setState({ treasureHunterLine: line });
+            setState({ treasureHunter: button }); // Change the pressed button color back and forth
+            state.treasureHunter == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+    };
+
+    const CheckIfExpertLocksPressed = (button, line) => {
+        if (state.adeptLocks == 0) {
+            // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceLocks: button });
+            setState({ apprenticeLocks: button });
+            setState({ adeptLocks: button });
+            setState({ apprenticeLocksLine: line });
+            setState({ adeptLocksLine: line });
+            setState({ expertLocksLine: line });
+            if (state.novice == 1) {
+                IncrementCounter(3);
+            } else if (state.apprenticeLocks == 1) {
+                IncrementCounter(2);
+            }
+        } else if (state.locksmith == 1 || state.masterLocks == 1) {
+            // nothing 
+        } else {
+            setState({ expertLocksLine: line });
+            setState({ expertLocks: button }); // Change the pressed button color back and forth
+            state.expertLocks == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+
+        }
+    };
+    const CheckIfLocksmithPressed = (button, line) => {
+        if(state.expertLocks == 0) {
+            setState({ noviceLocks: button });
+            setState({ apprenticeLocks: button });
+            setState({ apprenticeLocksLine: line });
+            setState({ adeptLocks: button });
+            setState({ adeptLocksLine: line });
+            setState({ expertLocks: button });
+            setState({ expertLocksLine: line });
+            setState({ locksmith: button });
+            setState({ locksmithLine: line });
+            if (noviceLocks == 1) {
+                IncrementCounter(4);
+            } else if (apprenticeLocks == 1) {
+                IncrementCounter(3);
+            } else if (adeptLocks == 1) {
+                IncrementCounter(2);
+            }
+        } else if (state.unbreakable == 1) {
+            // do nothing
+        } else {
+            setState({ locksmith: button });
+            setState({ locksmithLine: line });
+            state.locksmith == 0 ? IncrementCounter(1) : DecrementCounter (1)
+        }
+    }
+    const CheckIfUnbreakablePressed = (button, line) => {
+        if (state.locksmith == 0) {
+            setState({ noviceLocks: button });
+            setState({ apprenticeLocks: button });
+            setState({ apprenticeLocksLine: line });
+            setState({ adeptLocks: button });
+            setState({ adeptLocksLine: line });
+            setState({ expertLocks: button });
+            setState({ expertLocksLine: line });
+            setState({ locksmith: button });
+            setState({ locksmithLine: line });
+            setState({ unbreakable: button });
+            setState({ unbreakableLine: line });
+            if (state.noviceLocks == 1) {
+                IncrementCounter(5);
+            } else if (state.apprenticeLocks == 1) {
+                IncrementCounter(4);
+            } else if (state.adeptLocks == 1) {
+                IncrementCounter(3);
+            } else if (state.expertLocks == 1) {
+                IncrementCounter(2);
+            }
+        } else {
+            setState({ unbreakable: button });
+            setState({ unbreakableLine: line });
+            state.unbreakable == 0 ? IncrementCounter(1) : DecrementCounter(1);
+        }
+    }
+    const CheckIMasterLocksPressed = (button, line) => {
+        if (state.expertLocks == 0) {
+            setState({ noviceLocks: button });
+            setState({ apprenticeLocks: button });
+            setState({ apprenticeLocksLine: line });
+            setState({ adeptLocks: button });
+            setState({ adeptLocksLine: line });
+            setState({ expertLocks: button });
+            setState({ expertLocksLine: line });
+            setState({ masterLocks: button });
+            setState({ masterLocksLine: line });
+            if (state.noviceLocks == 1) {
+                IncrementCounter(4);
+            } else if (state.apprenticeLocks == 1) {
+                IncrementCounter(3);
+            } else if (state.adeptLocks == 1) {
+                IncrementCounter(2);
+            }
+        } else {
+            setState({ masterLocks: button });
+            setState({ masterLocksLine: line });
+            state.masterLocks == 0 ? IncrementCounter(1) : DecrementCounter(1);
+        }
+    }
+
+    return (
         <View style={{ zIndex: 2 }}>
         <View
           style={styles.resetButtonContainer}>
@@ -381,7 +455,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Apprentice Locks Blue' style={{
                 position: 'absolute',
                 left: "48.5%",
-                top: "63.5%",
+                top: "63%",
                 zIndex: 8,
 
             }}>
@@ -391,7 +465,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Apprentice Locks Gold' style={{
                 position: 'absolute',
                 left: "48.5%",
-                top: "63.5%",
+                top: "63%",
                 zIndex: 8,
                opacity: state.apprenticeLocks
 
@@ -443,8 +517,8 @@ const TrackLevel = useCallback((level) => {
             </View>
             <View title='Wax Key Blue' style={{
                 position: 'absolute',
-                left: "6%",
-                top: "55%",
+                left: "7%",
+                top: "54%",
                 zIndex: 8,
 
             }}>
@@ -452,8 +526,8 @@ const TrackLevel = useCallback((level) => {
             </View>
             <View title='Wax Key Gold' style={{
                 position: 'absolute',
-                left: "6%",
-                top: "55%",
+                left: "7%",
+                top: "54%",
                 zIndex: 8,
                 opacity: state.waxKey
 
@@ -474,8 +548,8 @@ const TrackLevel = useCallback((level) => {
             </View>
             <View title='Adept Locks Blue' style={{
                 position: 'absolute',
-                left: "59%",
-                top: "52%",
+                left: "58%",
+                top: "51%",
                 zIndex: 8,
 
             }}>
@@ -483,8 +557,8 @@ const TrackLevel = useCallback((level) => {
             </View>
             <View title='Adept Locks Gold' style={{
                 position: 'absolute',
-                left: "59%",
-                top: "52%",
+                left: "58%",
+                top: "51%",
                 zIndex: 8,
                 opacity: state.adeptLocks
 
@@ -506,7 +580,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Golden Touch Blue' style={{
                 position: 'absolute',
                 left: "33%",
-                top: "50%",
+                top: "49%",
                 zIndex: 8,
 
             }}>
@@ -515,7 +589,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Golden Touch Gold' style={{
                 position: 'absolute',
                 left: "33%",
-                top: "50%",
+                top: "49%",
                 zIndex: 8,
                 opacity: state.goldenTouch
 
@@ -537,7 +611,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Treasure Hunter Blue' style={{
                 position: 'absolute',
                 left: "10%",
-                top: "49%",
+                top: "47.8%",
                 zIndex: 8,
 
             }}>
@@ -546,7 +620,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Treasure Hunter Gold' style={{
                 position: 'absolute',
                 left: "10%",
-                top: "49%",
+                top: "47.8%",
                 zIndex: 8,
                 opacity: state.treasureHunter
 
@@ -568,7 +642,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Expert Locks Blue' style={{
                 position: 'absolute',
                 left: "57%",
-                top: "38%",
+                top: "37%",
                 zIndex: 8,
 
             }}>
@@ -577,7 +651,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Expert Locks Gold' style={{
                 position: 'absolute',
                 left: "57%",
-                top: "38%",
+                top: "37%",
                 zIndex: 8,
                 opacity: state.expertLocks
 
@@ -599,7 +673,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Locksmith Blue' style={{
                 position: 'absolute',
                 left: "31.5%",
-                top: "39%",
+                top: "37.5%",
                 zIndex: 8,
 
             }}>
@@ -608,7 +682,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Locksmith Gold' style={{
                 position: 'absolute',
                 left: "31.5%",
-                top: "39%",
+                top: "37.5%",
                 zIndex: 8,
                 opacity: state.locksmith
 
@@ -630,7 +704,7 @@ const TrackLevel = useCallback((level) => {
                       <View title='Unbreakable Blue' style={{
                 position: 'absolute',
                 left: "11%",
-                top: "38%",
+                top: "37%",
                 zIndex: 8,
 
             }}>
@@ -639,7 +713,7 @@ const TrackLevel = useCallback((level) => {
             <View title='Unbreakable Gold' style={{
                 position: 'absolute',
                 left: "11%",
-                top: "38%",
+                top: "37%",
                 zIndex: 8,
                 opacity: state.unbreakable
 
@@ -660,8 +734,8 @@ const TrackLevel = useCallback((level) => {
             </View>
           <View title='Master Locks Blue' style={{
                 position: 'absolute',
-                left: "57%",
-                top: "29%",
+                left: "56.5%",
+                top: "27.5%",
                 zIndex: 8,
 
             }}>
@@ -669,8 +743,8 @@ const TrackLevel = useCallback((level) => {
             </View>
             <View title='Master Locks Gold' style={{
                 position: 'absolute',
-                left: "57%",
-                top: "29%",
+                left: "56.5%",
+                top: "27.5%",
                 zIndex: 8,
                 opacity: state.masterLocks
 
@@ -678,7 +752,7 @@ const TrackLevel = useCallback((level) => {
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("MasterLocksModal")}
                     onPress={() => {
-                        CheckMasterLocksPressed(
+                        CheckIMasterLocksPressed(
                             state.masterLocks == 0 ? 1 : 0,
                             state.masterLocksLine == 'white' ? 'gold' : 'white'
                         );
@@ -884,4 +958,4 @@ resetButton: {
 }
 });
 
-export default LockpickingTree;
+export default LockpickingRebuild;
