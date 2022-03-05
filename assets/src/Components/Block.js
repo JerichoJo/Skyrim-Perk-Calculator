@@ -163,10 +163,10 @@ const BlockTree = () => {
                 setShieldWallLevel(1);
             } else {
                 IncrementCounter(1);
-                IncShieldWallCounter(1);
+                IncShieldWallCountCall(1);
             } 
         } else {
-           IncShieldWallCounter(button);
+           IncShieldWallCountCall(button);
         }
     };
     const IncShieldWallCounter = (numActiveShieldWall) => {
@@ -454,7 +454,7 @@ const BlockTree = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.ShieldWallText}>
-            <Text style={styles.PerkText}>Shield Wall</Text>
+            <Text style={styles.PerkText}>Shield Wall ({shieldWallLevel}/5)</Text>
           </View>
           <View title='Quick Reflexes Blue' style={{
             position: 'absolute',
