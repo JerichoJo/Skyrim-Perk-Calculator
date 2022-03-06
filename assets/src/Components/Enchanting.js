@@ -12,6 +12,7 @@ import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
+import { transform } from 'react-native-svg-transformer';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -151,19 +152,21 @@ const Enchanting = () => {
     const CheckLevel = useCallback(() => {
         if (state.extraEffect == 1) {
             TrackLevel(100);
-        } else if (state.soulSiphon == 1) {
-            TrackLevel(90);
-        } else if (state.soulSqueezer == 1) {
+        } else if(state.enchanter == 5){
             TrackLevel(80);
-        } else if (state.extraEffect == 1) {
+        } else if(state.corpusEnchanter == 1){
             TrackLevel(70);
-        } else if (state.fireEnchanter == 1) {
+        } else if(state.enchanter == 4){
             TrackLevel(60);
-        } else if (state.stormEnchanting == 1) {
+        } else if(state.insightfulEnchanter == 1 || state.stormEnchanting == 1){
             TrackLevel(50);
-        } else if (state.frostEnchanter == 1) {
-            TrackLevel(30);
-        } else if (state.enchanter == 1) {
+        } else if(state.soulSiphon == 1 || state.frostEnchanter == 1 || state.enchanter == 3){
+            TrackLevel(40);
+        } else if(state.fireEnchanter == 1){
+            TrackLevel(30)
+        } else if(state.enchanter == 1 || state.soulSqueezer == 1){
+            TrackLevel(20);
+        } else {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);

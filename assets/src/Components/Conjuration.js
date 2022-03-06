@@ -175,29 +175,26 @@ const ConjurationTree = () => {
 
 
     const CheckLevel = useCallback(() => {
-        if (state.twinSouls == 1) {
+        if (state.twinSouls == 1 || state.masterConjuration) {
             TrackLevel(100);
-        } else if (state.masterConjuration == 1) {
-            TrackLevel(100);
-        } else if (state.expertConjuration == 1) {
-            TrackLevel(75);
-        } else if(state.adeptConjuration == 1){
-            TrackLevel(50);
-        } else if (state.aprenticeConjuration == 1){
-            TrackLevel(50);
-        }
-         else if (state.elementalPotency == 1) {
+        } else if(state.elementalPotency == 1){
             TrackLevel(80);
-        } else if (state.conjurationDualCasting == 1) {
-            TrackLevel(20);
-        } else if (state.atromancy == 1) {
-            TrackLevel(40);
-        } else if (SummonerLevel == 1) {
-            TrackLevel(30);
-        } else if(SummonerLevel == 2){
+        } else if(state.expertConjuration == 1){
+            TrackLevel(75)
+        } else if(state.summoner == 2 || state.darkSouls == 1){
             TrackLevel(70);
-        }
-         else if (state.noviceConjuration == 1) {
+        } else if(state.oblivionBinding == 1 || state.adeptConjuration == 1){
+            TrackLevel(50);
+        } else if(state.necromancy == 1 || state.atromancy == 1){
+            TrackLevel(40);
+        } else if(state.soulStealer == 1 || state.summoner == 2){
+            TrackLevel(30);
+        } else if(state.apprenticeConjuration == 1){
+            TrackLevel(25);
+        } else if(state.conjurationDualCasting == 1 || state.mysticBinding == 1){
+            TrackLevel(20);
+        } 
+         else {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);
