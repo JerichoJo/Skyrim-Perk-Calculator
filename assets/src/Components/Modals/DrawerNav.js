@@ -11,7 +11,6 @@ const moveIT = (dest) => {
   ref.current.scrollBy(x)
 };
 
-
 export function DrawerContent(props) {
   const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
 
@@ -29,7 +28,6 @@ export function DrawerContent(props) {
             padding: 20,          
           }}
         >
-          
           <DrawerItem
             label="Reset All Perks"
             labelStyle={styles.ResetLabel}
@@ -40,13 +38,10 @@ export function DrawerContent(props) {
                 SetAllActivePerks(0);
                 navigation.dispatch(DrawerActions.closeDrawer());
               }, 100)
-              
             }}
           >
           </DrawerItem>
-
           
-
           <DrawerItem
             label="Illusion"
             labelStyle={styles.ItemLabel}

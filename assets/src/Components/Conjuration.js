@@ -175,21 +175,29 @@ const ConjurationTree = () => {
 
 
     const CheckLevel = useCallback(() => {
-        if (state.oblivionBinding == 1) {
+        if (state.twinSouls == 1) {
             TrackLevel(100);
         } else if (state.masterConjuration == 1) {
-            TrackLevel(90);
+            TrackLevel(100);
         } else if (state.expertConjuration == 1) {
-            TrackLevel(80);
-        } else if (state.elementalPotency == 1) {
-            TrackLevel(70);
-        } else if (state.conjurationDualCasting == 1) {
-            TrackLevel(60);
-        } else if (state.atromancy == 1) {
+            TrackLevel(75);
+        } else if(state.adeptConjuration == 1){
             TrackLevel(50);
-        } else if (state.summoner == 1) {
+        } else if (state.aprenticeConjuration == 1){
+            TrackLevel(50);
+        }
+         else if (state.elementalPotency == 1) {
+            TrackLevel(80);
+        } else if (state.conjurationDualCasting == 1) {
+            TrackLevel(20);
+        } else if (state.atromancy == 1) {
+            TrackLevel(40);
+        } else if (SummonerLevel == 1) {
             TrackLevel(30);
-        } else if (state.noviceConjuration == 1) {
+        } else if(SummonerLevel == 2){
+            TrackLevel(70);
+        }
+         else if (state.noviceConjuration == 1) {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);
@@ -397,7 +405,8 @@ const ConjurationTree = () => {
                 IncrementCounter(1);
                 IncSummonerCounter(1);
             }
-        } else {
+        }        
+        else {
             IncSummonerCountCall(button);            
         }
     };
@@ -441,9 +450,6 @@ const ConjurationTree = () => {
             setState({ summonerLine: lineColor });
             if (summoner == 0){
                 SetSummonerLevel(1);
-            }
-            if (state.noviceConjuration == 0) {
-                SetEnchanterLevel(1);
             }
             if (state.noviceConjuration == 1) {
                 IncrementCounter(2);
