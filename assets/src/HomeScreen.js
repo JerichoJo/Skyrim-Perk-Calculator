@@ -1,10 +1,8 @@
 import React, { Component, useRef, useState } from 'react';
 import { Text, View, Image, Dimensions, Button } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { AntDesign } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import tree from './Components/index';
-import { useNavigation } from '@react-navigation/native';
+
 
 const { width } = Dimensions.get('window')
 const { height } = Dimensions.get('window')

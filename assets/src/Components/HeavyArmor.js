@@ -142,21 +142,23 @@ const HeavyArmor = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.dragonSmithing == 1) {
+        if (state.reflectBlows == 1) {
             TrackLevel(100);
-        } else if (state.reflectBlows == 1) {
-            TrackLevel(90);
-        } else if (state.matchingSet == 1) {
+        } else if (JuggernautLevel == 5) {
             TrackLevel(80);
-        } else if (state.conditioning == 1) {
+        } else if (state.matchingSet == 1 || state.conditioning == 1) {
             TrackLevel(70);
-        } else if (state.arcaneSmithing == 1) {
+        } else if (JuggernautLevel == 4) {
             TrackLevel(60);
-        } else if (state.cushioned == 1) {
+        } else if (state.towerOfStrength == 1 || state.cushioned == 1) {
             TrackLevel(50);
-        } else if (state.fistsOfSteel == 1) {
+        } else if (JuggernautLevel == 3) {
+            TrackLevel(40);
+        } else if (state.wellFitted == 1 || state.fistsOfSteel == 1) {
             TrackLevel(30);
-        } else if (state.juggernaut == 1) {
+        } else if (JuggernautLevel == 2) {
+            TrackLevel(20);
+        } else {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);
