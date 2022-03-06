@@ -589,7 +589,7 @@ const SpeechTree = () => {
             <View title='Master Trader Blue' style={{
                 position: 'absolute',
                 left: "50%",
-                top: "20%",
+                top: "19.5%",
                 zIndex: 8,
 
             }}>
@@ -598,7 +598,7 @@ const SpeechTree = () => {
             <View title='Master Trader Gold' style={{
                 position: 'absolute',
                 left: "50%",
-                top: "20%",
+                top: "19.5%",
                 zIndex: 8,
                 opacity: state.masterTrader
 

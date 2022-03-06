@@ -571,14 +571,14 @@ const LightArmorTree = () => {
                 <Line
                     x1="23%"
                     y1="50%"
-                    x2="29%"
+                    x2="28.5%"
                     y2="38%"
                     stroke={state.windWalkerLine}
                     strokeWidth={lineStrokeWidth}
                 />
                 <Line
-                    x1="28%"
-                    y1="38%"
+                    x1="29%"
+                    y1="37%"
                     x2="47%"
                     y2="25%"
                     stroke={state.deftMovementLine}

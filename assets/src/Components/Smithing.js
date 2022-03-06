@@ -497,7 +497,7 @@ const SmithingTree = () => {
             </View>
             <View title='Arcane Smithing Blue' style={{
                 position: 'absolute',
-                left: "30%",
+                left: "29%",
                 top: "55%",
                 zIndex: 8,
 
@@ -507,7 +507,7 @@ const SmithingTree = () => {
             </View>
             <View title='Arcane Smithing Gold' style={{
                 position: 'absolute',
-                left: "30%",
+                left: "29%",
                 top: "55%",
                 zIndex: 8,
                 opacity: state.arcaneSmithing
@@ -529,7 +529,7 @@ const SmithingTree = () => {
             </View>
             <View title='Elvin Smithing Blue' style={{
                 position: 'absolute',
-                left: "-2%",
+                left: "-3%",
                 top: "50%",
                 zIndex: 8,
 
@@ -538,7 +538,7 @@ const SmithingTree = () => {
             </View>
             <View title='Elvin Smithing Gold' style={{
                 position: 'absolute',
-                left: "-2%",
+                left: "-3%",
                 top: "50%",
                 zIndex: 8,
                 opacity: state.elvinSmithing
@@ -560,7 +560,7 @@ const SmithingTree = () => {
             </View>
             <View title='Advanced Smithing Blue' style={{
                 position: 'absolute',
-                left: "4%",
+                left: "3%",
                 top: "43%",
                 zIndex: 8,
 
@@ -569,7 +569,7 @@ const SmithingTree = () => {
             </View>
             <View title='Advanced Smithing Gold' style={{
                 position: 'absolute',
-                left: "4%",
+                left: "3%",
                 top: "43%",
                 zIndex: 8,
                 opacity: state.advancedSmithing
@@ -591,7 +591,7 @@ const SmithingTree = () => {
             </View>
             <View title='Glass Smithing Blue' style={{
                 position: 'absolute',
-                left: "24%",
+                left: "23%",
                 top: "34.2%",
                 zIndex: 8,
 
@@ -600,7 +600,7 @@ const SmithingTree = () => {
             </View>
             <View title='Glass Smithing Gold' style={{
                 position: 'absolute',
-                left: "24%",
+                left: "23%",
                 top: "34.2%",
                 zIndex: 8,
                 opacity: state.glassSmithing
@@ -748,7 +748,7 @@ const SmithingTree = () => {
             </View>
             <View title='Dwarven Smithing Blue' style={{
                 position: 'absolute',
-                left: "50%",
+                left: "49%",
                 top: "60%",
                 zIndex: 8,
 
@@ -757,7 +757,7 @@ const SmithingTree = () => {
             </View>
             <View title='Dwarven Smithing Gold' style={{
                 position: 'absolute',
-                left: "50%",
+                left: "49%",
                 top: "60%",
                 zIndex: 8,
                 opacity: state.dwarvenSmithing

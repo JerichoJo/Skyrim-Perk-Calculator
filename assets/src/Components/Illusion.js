@@ -512,7 +512,7 @@ const IllusionTree = () => {
             <View title='Illusion Dual Casting Blue' style={{
                 position: 'absolute',
                 left: "-1%",
-                top: "75%",
+                top: "74.5%",
                 zIndex: 8,
 
             }}>
@@ -522,7 +522,7 @@ const IllusionTree = () => {
             <View title='Illusion Dual Casting Gold' style={{
                 position: 'absolute',
                 left: "-1%",
-                top: "75%",
+                top: "74.5%",
                 zIndex: 8,
                 opacity: state.illusionDual
 
@@ -543,7 +543,7 @@ const IllusionTree = () => {
             </View>
             <View title='Apprentice Illusion Blue' style={{
                 position: 'absolute',
-                left: "5%",
+                left: "6%",
                 top: "60%",
                 zIndex: 8,
 
@@ -552,7 +552,7 @@ const IllusionTree = () => {
             </View>
             <View title='Apprentice Illusion Gold' style={{
                 position: 'absolute',
-                left: "5%",
+                left: "6%",
                 top: "60%",
                 zIndex: 8,
                 opacity: state.apprenticeIllus
@@ -734,7 +734,7 @@ const IllusionTree = () => {
 
             <View title='Rage Blue' style={{
                 position: 'absolute',
-                left: "44%",
+                left: "43%",
                 top: "34%",
                 zIndex: 8,
 
@@ -743,7 +743,7 @@ const IllusionTree = () => {
             </View>
             <View title='Rage Gold' style={{
                 position: 'absolute',
-                left: "44%",
+                left: "43%",
                 top: "34%",
                 zIndex: 8,
                 opacity: state.rage
@@ -895,7 +895,7 @@ const IllusionTree = () => {
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
                 <Line
-                    x1="48%"
+                    x1="49%"
                     y1="85%"
                     x2="11%"
                     y2="80%"
@@ -906,7 +906,7 @@ const IllusionTree = () => {
                 <Line
                     x1="50%"
                     y1="85%"
-                    x2="17%"
+                    x2="18%"
                     y2="66%"
                     stroke={state.apprenticeIllusLine}
                     strokeWidth={lineStrokeWidth}
@@ -932,7 +932,7 @@ const IllusionTree = () => {
                 <Line
                     x1="17%"
                     y1="37%"
-                    x2="32%"
+                    x2="31.5%"
                     y2="25%"
                     stroke={state.masterIllusLine}
                     strokeWidth={lineStrokeWidth}
@@ -948,8 +948,8 @@ const IllusionTree = () => {
 
                 />
                 <Line
-                    x1="50%"
-                    y1="65%"
+                    x1="49%"
+                    y1="64.5%"
                     x2="40%"
                     y2="45%"
                     stroke={state.aspectOfTerrorLine}
