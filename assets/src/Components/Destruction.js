@@ -58,7 +58,6 @@ const DestructionTree = () => {
     impactLine: 'white',
   });
   const navigation = useNavigation();
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [ActivePerks, SetActivePerks] = useState(0);
   const [RequiredLevel, SetRequiredLevel] = useState(0);
   const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
@@ -146,7 +145,7 @@ const DestructionTree = () => {
       TrackLevel(0);
     } else if (state.destructionDualCasting == 1) {
       TrackLevel(20);
-    }else if (state.apprenticeDestruction == 1) {
+    } else if (state.apprenticeDestruction == 1) {
       TrackLevel(25);
     } else if (state.augmentedFlames == 1 && augmentedFlamesLevel == 1) {
       TrackLevel(30);
@@ -172,7 +171,7 @@ const DestructionTree = () => {
       TrackLevel(75);
     } else if (state.masterDestruction == 1) {
       TrackLevel(100);
-    } 
+    }
 
   }, [state]);
 
@@ -250,47 +249,69 @@ const DestructionTree = () => {
       setState({ intenseFlamesLine: line }); // Change button color back and forth
     }
   };
+
   const checkIfAugmentedFrostPressed = (button, line) => {
     if (state.noviceDestruction == 0) {
       // Change the colors of the buttons below it if they have not been pressed
       setState({ noviceDestruction: button });
       setState({ augmentedFrostLine: line });
+      setState({ augmentedFrost: button });
+
+
+      if (augmentedFrostLevel == 2) {
+        DecrementCounter(1);
+        SetAugmentedFrostLevel(1);
+      } else {
+        if (state.noviceDestruction == 0) {
+          IncrementCounter(2);
+          IncAugmentedFrostCounter(1);
+
+        } else {
+          IncrementCounter(1);
+          IncAugmentedFrostCounter(1);
+        }
+      }
+      // Button handled in the perk function
+    } else if (state.deepFreeze == 1) {
+      // Nothing
       if (augmentedFrostLevel == 2) {
         DecrementCounter(1);
         SetAugmentedFrostLevel(1);
       } else {
         IncrementCounter(1);
-        IncAugmentedFrostCountCall(1);
-      }
-      // Button handled in the perk function
-    } else if (state.deepFreeze == 1) {
-      // Nothing
-    } else {
-      setState({ augmentedFrostLine: line });
-      IncAugmentedFrostCountCall(button);
-    }
-  };
-    // Control augmented flames increments
-    const IncAugmentedFrostCounter = (numActiveAugmentedFrost) => {
-      if (augmentedFrostLevel < 2) {
-        SetAugmentedFrostLevel(augmentedFrostLevel + numActiveAugmentedFrost)
-      } else {
-        SetAugmentedFrostLevel(0);
-      }
-    }
-    const IncAugmentedFrostCountCall = (button) => {
-      if (augmentedFrostLevel == 0) {
-        setState({ augmentedFrost: button });
-        IncAugmentedFrostCounter(1); // Increment up
-      } else if (augmentedFrostLevel == 2) {
-        setState({ augmentedFrost: button });
-        IncAugmentedFlamesCounter(1);
-        DecrementCounter(2);
-      } else {
-        IncrementCounter(1);
         IncAugmentedFrostCounter(1);
       }
+    } else {
+
+      IncAugmentedFrostCountCall(button, line);
     }
+  };
+
+  // Control augmented flames increments
+  const IncAugmentedFrostCounter = (numActiveAugmentedFrost) => {
+    if (augmentedFrostLevel < 2) {
+      SetAugmentedFrostLevel(augmentedFrostLevel + numActiveAugmentedFrost)
+    } else {
+      SetAugmentedFrostLevel(0);
+    }
+  }
+
+  const IncAugmentedFrostCountCall = (button, line) => {
+    if (augmentedFrostLevel == 0) {
+      setState({ augmentedFrost: button });
+      setState({ augmentedFrostLine: line });
+
+      IncAugmentedFrostCounter(1); // Increment up
+    } else if (augmentedFrostLevel == 2) {
+      setState({ augmentedFrost: button });
+      setState({ augmentedFrostLine: line });
+      IncAugmentedFrostCounter(1);
+      DecrementCounter(2);
+    } else {
+      IncrementCounter(1);
+      IncAugmentedFrostCounter(1);
+    }
+  }
   const checkIfDeepFreezePressed = (button, line) => {
     if (state.augmentedFrost == 0) {
       // Change the colors of the buttons below it if they have not been pressed
@@ -324,27 +345,27 @@ const DestructionTree = () => {
       setState({ augmentedShockLine: line });
     }
   };
-    // Control augmented flames increments
-    const IncAugmentedShockCounter = (numActiveAugmentedShock) => {
-      if (augmentedShockLevel < 2) {
-        SetAugmentedShockLevel(augmentedShockLevel + numActiveAugmentedShock)
-      } else {
-        SetAugmentedShockLevel(0);
-      }
+  // Control augmented flames increments
+  const IncAugmentedShockCounter = (numActiveAugmentedShock) => {
+    if (augmentedShockLevel < 2) {
+      SetAugmentedShockLevel(augmentedShockLevel + numActiveAugmentedShock)
+    } else {
+      SetAugmentedShockLevel(0);
     }
-    const IncAugmentedShockCountCall = (button) => {
-      if (augmentedShockLevel == 0) {
-        setState({ augmentedShock: button });
-        IncAugmentedShockCounter(1); // Increment up
-      } else if (augmentedShockLevel == 2) {
-        setState({ augmentedShock: button });
-        IncAugmentedShockCounter(1);
-        DecrementCounter(2);
-      } else {
-        IncrementCounter(1);
-        IncAugmentedShockCounter(1);
-      }
+  }
+  const IncAugmentedShockCountCall = (button) => {
+    if (augmentedShockLevel == 0) {
+      setState({ augmentedShock: button });
+      IncAugmentedShockCounter(1); // Increment up
+    } else if (augmentedShockLevel == 2) {
+      setState({ augmentedShock: button });
+      IncAugmentedShockCounter(1);
+      DecrementCounter(2);
+    } else {
+      IncrementCounter(1);
+      IncAugmentedShockCounter(1);
     }
+  }
   const checkIfDisintegratePressed = (buttonColor, lineColor) => {
     if (state.augmentedShockLine == 0) {
       // Change the colors of the buttons below it if they have not been pressed
