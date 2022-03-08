@@ -139,40 +139,36 @@ const DestructionTree = () => {
   }, []);
 
   const lineStrokeWidth = '2';
-
   const CheckLevel = useCallback(() => {
-    if (state.noviceDestruction == 1) {
-      TrackLevel(0);
-    } else if (state.destructionDualCasting == 1) {
-      TrackLevel(20);
-    } else if (state.apprenticeDestruction == 1) {
-      TrackLevel(25);
-    } else if (state.augmentedFlames == 1 && augmentedFlamesLevel == 1) {
-      TrackLevel(30);
-    } else if (state.augmentedFrost == 1 && augmentedFrostLevel == 1) {
-      TrackLevel(30);
-    } else if (state.augmentedShock == 1 && augmentedShockLevel == 1) {
-      TrackLevel(30);
-    } else if (state.runeMaster == 1 || state.impact == 1) {
-      TrackLevel(40);
-    } else if (state.adeptDestruction == 1 || state.intenseFlames == 1) {
-      TrackLevel(50);
-    } else if (state.augmentedFlames == 1 && augmentedFlamesLevel == 2) {
-      TrackLevel(60);
-    } else if (state.augmentedFrost == 1 && augmentedFrostLevel == 2) {
+    if (state.masterDestruction == 1) {
+      TrackLevel(100);
+    } else if (state.expertDestruction == 1) {
+      TrackLevel(75);
+    } else if (state.disintegrate == 1) {
+      TrackLevel(70);
+    } else if (state.deepFreeze == 1) {
       TrackLevel(60);
     } else if (state.augmentedShock == 1 && augmentedShockLevel == 2) {
       TrackLevel(60);
-    } else if (state.deepFreeze == 1) {
+    } else if (state.augmentedFlames == 1 && augmentedFlamesLevel == 2) {
       TrackLevel(60);
-    } else if (state.disintegrate == 1) {
-      TrackLevel(70);
-    } else if (state.expertDestruction == 1) {
-      TrackLevel(75);
-    } else if (state.masterDestruction == 1) {
-      TrackLevel(100);
+    } else if (state.adeptDestruction == 1 || state.intenseFlames == 1) {
+      TrackLevel(50);
+    } else if (state.runeMaster == 1 || state.impact == 1) {
+      TrackLevel(40);
+    } else if (state.augmentedShock == 1 && augmentedShockLevel == 1) {
+      TrackLevel(30);
+    } else if (state.augmentedFrost == 1 && augmentedFrostLevel == 1) {
+      TrackLevel(30);
+    } else if (state.augmentedFlames == 1 && augmentedFlamesLevel == 1) {
+      TrackLevel(30);
+    } else if (state.apprenticeDestruction == 1) {
+      TrackLevel(25);
+    } else if (state.destructionDualCasting == 1) {
+      TrackLevel(20);
+    } else {
+      TrackLevel(0);
     }
-
   }, [state]);
 
   useEffect(() => {

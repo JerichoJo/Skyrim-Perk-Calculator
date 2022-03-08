@@ -146,11 +146,15 @@ const LockpickingTree = () => {
             TrackLevel(25);
         } else if (state.noviceLocks == 1) {
             TrackLevel(0);
-        }
-        else {
+        } else {
             TrackLevel(0)
         }
     }, [state]);
+
+    useEffect(() => {
+        CheckLevel();
+      }, [CheckLevel]);
+    
     const checkIfNoviceLocksPressed = (button) => {
         if (state.apprenticeLocks == 1) {
             // do nothing

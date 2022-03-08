@@ -151,6 +151,9 @@ const TrackLevel = useCallback((level) => {
   const lineStrokeWidth = '2';
 
   const CheckLevel = useCallback(() => {
+    if (state.paralyzingStrike == 1) {
+      TrackLevel(100);
+    }
     if (state.armsman == 1 && armsmanLevel == 1) {
       TrackLevel(0);
     } else if (state.fightingStance == 1) {
@@ -185,11 +188,7 @@ const TrackLevel = useCallback((level) => {
       TrackLevel(90);
     } else if (state.bladesman == 1 && bladesmanLevel == 3) {
       TrackLevel(90);
-    } else if (state.paralyzingStrike == 1) {
-      TrackLevel(100);
-    } else {
-      TrackLevel(0);
-    }
+    } 
 
   }, [state]);
 
