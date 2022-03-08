@@ -49,6 +49,7 @@ const ConjurationTree = () => {
         darkSoulsLine: 'white',
         twinSouls: 0,
         twinSoulsLine: 'white',
+        twinSoulsLine2: 'white',
         mysticBinding: 0,
         mysticBindingLine: 'white',
         soulStealer: 0,
@@ -84,6 +85,7 @@ const ConjurationTree = () => {
         setState({ darkSoulsLine: 'white' });
         setState({ twinSouls: 0 });
         setState({ twinSoulsLine: 'white' });
+        setState({ twinSoulsLine2: 'white' });
         setState({ mysticBinding: 0 });
         setState({ mysticBindingLine: 'white' });
         setState({ soulStealer: 0 });
@@ -173,21 +175,26 @@ const ConjurationTree = () => {
 
 
     const CheckLevel = useCallback(() => {
-        if (state.oblivionBinding == 1) {
+        if (state.twinSouls == 1 || state.masterConjuration) {
             TrackLevel(100);
-        } else if (state.masterConjuration == 1) {
-            TrackLevel(90);
-        } else if (state.expertConjuration == 1) {
+        } else if(state.elementalPotency == 1){
             TrackLevel(80);
-        } else if (state.elementalPotency == 1) {
+        } else if(state.expertConjuration == 1){
+            TrackLevel(75)
+        } else if(state.summoner == 2 || state.darkSouls == 1){
             TrackLevel(70);
-        } else if (state.conjurationDualCasting == 1) {
-            TrackLevel(60);
-        } else if (state.atromancy == 1) {
+        } else if(state.oblivionBinding == 1 || state.adeptConjuration == 1){
             TrackLevel(50);
-        } else if (state.summoner == 1) {
+        } else if(state.necromancy == 1 || state.atromancy == 1){
+            TrackLevel(40);
+        } else if(state.soulStealer == 1 || state.summoner == 2){
             TrackLevel(30);
-        } else if (state.noviceConjuration == 1) {
+        } else if(state.apprenticeConjuration == 1){
+            TrackLevel(25);
+        } else if(state.conjurationDualCasting == 1 || state.mysticBinding == 1){
+            TrackLevel(20);
+        } 
+         else {
             TrackLevel(0);
         }
     }, [state]);
@@ -275,19 +282,33 @@ const ConjurationTree = () => {
     const CheckIfDarkSoulsPressed = (buttonColor, lineColor) => {
         if (state.necromancy == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ noviceConjuration: buttonColor });
             setState({ darkSouls: buttonColor });
             setState({ necromancy: buttonColor });
+            setState({ noviceConjuration: buttonColor });
             setState({ darkSoulsLine: lineColor });
             setState({ necromancyLine: lineColor });
+            if (state.noviceConjuration == 0) {
+                SetEnchanterLevel(1);
+            }
             if (state.noviceConjuration == 1) {
                 IncrementCounter(2);
             } else {
                 IncrementCounter(3);
             }
-        } else if (state.twinSouls == 1) {
+            if (state.twinSouls == 1){
+                setState({ twinSoulsLine: lineColor});
+            } 
+        } else if (state.twinSouls == 1 && state.elementalPotency == 0) {
             // Do nothing....must un-select nodes above it first
-        } else {
+        } else if (state.twinSouls == 1 && state.elementalPotency == 1){
+            setState({ twinSoulsLine: lineColor });
+            setState({ darkSoulsLine: lineColor });
+            setState({ darkSouls: buttonColor }); // Change the pressed button color back and forth
+            state.darkSouls == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        } 
+        else {
             setState({ darkSoulsLine: lineColor });
             setState({ darkSouls: buttonColor }); // Change the pressed button color back and forth
             state.darkSouls == 0
@@ -321,34 +342,52 @@ const ConjurationTree = () => {
         }
     };
 
-    const CheckIfTwinSoulsPressed = (buttonColor, lineColor) => {
-        if (state.darkSouls == 0) {
+    const CheckIfTwinSoulsPressed = (buttonColor, lineColor, lineColor2) => {
+        if (state.darkSouls == 1 && state.elementalPotency == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ noviceConjuration: buttonColor });
-            setState({ darkSouls: buttonColor });
-            setState({ necromancy: buttonColor });
             setState({ twinSouls: buttonColor });
-            setState({ darkSoulsLine: lineColor });
-            setState({ necromancyLine: lineColor });
-            setState({ twinSouls: lineColor });
-            if (state.noviceConjuration == 1) {
-                IncrementCounter(2);
-            } else {
-                IncrementCounter(3);
-            }
-        } else if (state.elementalPotency == 1) {
-            // Do nothing....must un-select nodes above it first
-        } else {
-            setState({ twinSoulsLine: lineColor });
-            setState({ twinSouls: buttonColor }); // Change the pressed button color back and forth
-            state.twinSouls == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            setState({ twinSoulsLine: lineColor});
 
+            if (SummonerLevel == 0 ) {
+                SetSummonerLevel(1);
+            }
+            if (state.summoner == 1) {
+                IncrementCounter(2);
+            } else if (state.summoner == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+
+        } else if (state.darkSouls == 0 && state.elementalPotency == 1){
+            setState({ twinSouls : buttonColor });
+            setState({ twinSoulsLine2: lineColor2 });
+
+        } else if (state.darkSouls == 1 && state.elementalPotency == 1){
+            setState({ twinSouls : buttonColor });
+            setState({ twinSoulsLine : lineColor });
+            setState({ twinSoulsLine2 : lineColor2 });
+
+        }else if (state.necromancy == 1){
+            setState({ twinSouls: buttonColor });
+            setState({ twinSoulsLine: lineColor });
+            setState({ darkSouls: buttonColor });
+            setState({ darkSoulsLine: lineColor });
+
+        } else {
+            setState({ twinSouls : buttonColor });
+            setState({ twinSoulsLine2 : lineColor2 });
+            setState({ elementalPotency : buttonColor });
+            setState({ elementalPotencyLine : lineColor });
+            setState({ atromancy : buttonColor });
+            setState({ atromancyLine : lineColor });
+            setState({ summoner : buttonColor });
+            setState({ summonerLine : lineColor });
+            setState({ noviceConjuration : buttonColor });
         }
     };
 
-    const CheckIfSummonerPressed = (button, buttonColor, lineColor) => {
+    const CheckIfSummonerPressed = (button ,buttonColor, lineColor) => {
         if (state.noviceConjuration == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceConjuration: buttonColor });
@@ -356,19 +395,21 @@ const ConjurationTree = () => {
             setState({ summoner: buttonColor });
             setState({ summonerLine: lineColor });
 
-            if (SummonerLevel == 2) {
+            if (SummonerLevel == 2){
                 DecrementCounter(2);
                 SetSummonerLevel(1);
             } else {
                 IncrementCounter(1);
                 IncSummonerCounter(1);
             }
-        } else if (state.atromancy == 1) {
-
-        } else {
-            IncSummonerCountCall(button);
+        } else if(state.atromancy == 1){
+            SetSummonerLevel(1);
+        }       
+        else {
+            IncSummonerCountCall(button);            
         }
     };
+
     const CheckIfAtromancyPressed = (buttonColor, lineColor) => {
         if (state.summoner == 0) {
             // Change the colors of the buttons below it if they have not been pressed
@@ -377,6 +418,9 @@ const ConjurationTree = () => {
             setState({ summoner: buttonColor });
             setState({ atromancyLine: lineColor });
             setState({ summonerLine: lineColor });
+            if (SummonerLevel == 0){
+                SetSummonerLevel(1);
+            }
             if (state.noviceConjuration == 1) {
                 IncrementCounter(2);
             } else {
@@ -393,35 +437,42 @@ const ConjurationTree = () => {
 
         }
     };
-    const CheckIfElementalPotencyPressed = (buttonColor, lineColor) => {
+    const CheckIfElementalPotencyPressed = (buttonColor, lineColor, lineColor2) => {
         if (state.atromancy == 0) {
             // Change the colors of the buttons below it if they have not been pressed
+            setState({ noviceConjuration: buttonColor });
             setState({ elementalPotency: buttonColor });
             setState({ atromancy: buttonColor });
             setState({ summoner: buttonColor });
-            setState({ noviceConjuration: buttonColor });
             setState({ elementalPotencyLine: lineColor });
             setState({ atromancyLine: lineColor });
             setState({ summonerLine: lineColor });
-            if (state.oblivionBinding == 1) {
-                setState({ oblivionBindingLineLight: lineColor });
+            if (summoner == 0){
+                SetSummonerLevel(1);
             }
-            if (state.summoner == 1) {
+            if (state.noviceConjuration == 1) {
                 IncrementCounter(2);
-            } else if (state.noviceConjuration == 1) {
-                IncrementCounter(3);
             } else {
-                IncrementCounter(4);
+                IncrementCounter(3);
             }
+            if (state.twinSouls == 1){
+                setState({twinSoulsLine2: lineColor2})
+            }
+        } else if (state.twinSouls == 1 && state.darkSouls == 0) {
+            // Do nothing....must un-select nodes above it first
+        } else if (state.twinSouls == 1 && state.darkSouls == 1){
+            setState({ twinSoulsLine2: lineColor2 });
+            setState({ elementalPotency: buttonColor });
+            setState({ elementalPotencyLine: lineColor }); // Change the pressed button color back and forth
+            state.elementalPotency == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else {
             setState({ elementalPotencyLine: lineColor });
             setState({ elementalPotency: buttonColor }); // Change the pressed button color back and forth
             state.elementalPotency == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-            if (state.oblivionBinding == 1) {
-                setState({ oblivionBindingLineLight: lineColor });
-            }
 
         }
     };
@@ -432,6 +483,9 @@ const ConjurationTree = () => {
             setState({ noviceConjuration: buttonColor });
             setState({ apprenticeConjurationLine: lineColor });
             IncrementCounter(2);
+            if (summoner == 0){
+                SetSummonerLevel(1);
+            }
         } else if (state.adeptConjuration == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -515,8 +569,6 @@ const ConjurationTree = () => {
             } else {
                 IncrementCounter(5);
             }
-        } else if (state.oblivionBinding == 1) {
-            // Do nothing....must un-select nodes above it first
         } else {
             setState({ masterConjurationLine: lineColor });
             setState({ masterConjuration: buttonColor }); // Change the pressed button color back and forth
@@ -566,7 +618,7 @@ const ConjurationTree = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Conjuration Perks</Text>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Conjuration Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -717,9 +769,10 @@ const ConjurationTree = () => {
                 <TouchableOpacity
                     onLongPress={() => navigation.navigate("TwinSoulsModal")}
                     onPress={() => {
-                        CheckIfDarkSoulsPressed(
-                            state.darkSouls == 0 ? 1 : 0,
-                            state.darkSoulsLine == 'white' ? 'gold' : 'white'
+                        CheckIfTwinSoulsPressed(
+                            state.twinSouls == 0 ? 1 : 0,
+                            state.twinSoulsLine == 'white' ? 'gold' : 'white',
+                            state.twinSoulsLine2 == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -878,7 +931,8 @@ const ConjurationTree = () => {
                     onPress={() => {
                         CheckIfElementalPotencyPressed(
                             state.elementalPotency == 0 ? 1 : 0,
-                            state.elementalPotencyLine == 'white' ? 'gold' : 'white'
+                            state.elementalPotencyLine == 'white' ? 'gold' : 'white',
+                            state.twinSoulsLine2 == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -1073,11 +1127,19 @@ const ConjurationTree = () => {
 
                 />
                 <Line
-                    x1="27%"
-                    y1="38.3%"
+                    x1="30%"
+                    y1="30.3%"
                     x2="27%"
                     y2="38.7%"
                     stroke={state.twinSoulsLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line
+                    x1="13%"
+                    y1="39.3%"
+                    x2="30%"
+                    y2="29.7%"
+                    stroke={state.twinSoulsLine2}
                     strokeWidth={lineStrokeWidth}
                 />
                 <Line
@@ -1308,7 +1370,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     resetButton: {
-        backgroundColor: "#565656",
+        backgroundColor: "lightsteelblue",
         borderRadius: 12,
         paddingVertical: 8,
         paddingHorizontal: 10

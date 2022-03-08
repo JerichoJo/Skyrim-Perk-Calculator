@@ -80,26 +80,6 @@ const SneakTree = () => {
         SetStealthLevel(0);
     }
 
-    const resetActivePerks = () => {
-        resetSneakPerks();
-        DecrementCounter(ActivePerks);
-    };
-
-    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
-    if (AllActivePerks == 0) {
-        resetAllTrees = 1;
-    } else {
-        resetAllTrees = 0;
-    }
-
-    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
-    useEffect(() => {
-        if (resetAllTrees == 1) {
-            resetSneakPerks();
-            SetActivePerks(0);
-        }
-    }, [resetAllTrees]);
-
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
         SetAllActivePerks(AllActivePerks + numActivePerks);
@@ -147,19 +127,21 @@ const SneakTree = () => {
     const CheckLevel = useCallback(() => {
         if (state.shadowWarrior == 1) {
             TrackLevel(100);
-        } else if (state.silence == 1) {
-            TrackLevel(90);
-        } else if (state.assassinsBlade == 1) {
+        } else if (StealthLevel == 5){
             TrackLevel(80);
-        } else if (state.silentRoll == 1) {
+        } else if (state.silence == 1) {
             TrackLevel(70);
-        } else if (state.arcaneSmithing == 1) {
+        } else if (StealthLevel == 4){
             TrackLevel(60);
-        } else if (state.lightFoot == 1) {
+        } else if (state.assassinsBlade == 1 || state.silentRoll == 1) {
             TrackLevel(50);
-        } else if (state.muffledMovement == 1) {
+        } else if (state.deadlyAim == 1 || state.lightFoot == 1 || StealthLevel == 3){
+            TrackLevel(40);
+        } else if (state.muffledMovement == 1 || state.backstab == 1) {
             TrackLevel(30);
-        } else if (state.stealth == 1) {
+        } else if (StealthLevel == 2) {
+            TrackLevel(20);
+        } else {
             TrackLevel(0);
         }
     }, [state]);
@@ -175,7 +157,7 @@ const SneakTree = () => {
             state.backstab == 1
         ) {
             // Do nothing....must un-select nodes above it first
-            if (StealthLevel == 5) {
+            if (StealthLevel == 5){
                 DecrementCounter(4);
                 SetStealthLevel(1)
             } else {
@@ -260,7 +242,7 @@ const SneakTree = () => {
             } else {
                 IncrementCounter(4);
             }
-        } else if (state.silence == 1) {
+        }else if (state.silence == 1) {
             // Do nothing....must un-select nodes above it first
         }
         else {
@@ -272,7 +254,7 @@ const SneakTree = () => {
             if (state.shadowWarrior == 1) {
                 setState({ shadowWarriorLineLight: lineColor });
             }
-        }
+        } 
     };
     const CheckIfBackstabPressed = (buttonColor, lineColor) => {
         if (state.stealth == 0) {
@@ -749,7 +731,7 @@ const SneakTree = () => {
                     strokeWidth={lineStrokeWidth}
 
                 />
-
+                
                 <Line
                     x1="76.5%"
                     y1="35.3%"

@@ -13,6 +13,7 @@ import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
 
+
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
@@ -149,21 +150,23 @@ const Enchanting = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.dragonSmithing == 1) {
+        if (state.extraEffect == 1) {
             TrackLevel(100);
-        } else if (state.soulSiphon == 1) {
-            TrackLevel(90);
-        } else if (state.soulSqueezer == 1) {
+        } else if(EnchanterLevel == 5){
             TrackLevel(80);
-        } else if (state.extraEffect == 1) {
+        } else if(state.corpusEnchanter == 1){
             TrackLevel(70);
-        } else if (state.fireEnchanter == 1) {
+        } else if(EnchanterLevel == 4){
             TrackLevel(60);
-        } else if (state.stormEnchanting == 1) {
+        } else if(state.insightfulEnchanter == 1 || state.stormEnchanting == 1){
             TrackLevel(50);
-        } else if (state.frostEnchanter == 1) {
-            TrackLevel(30);
-        } else if (state.enchanter == 1) {
+        } else if(state.soulSiphon == 1 || state.frostEnchanter == 1 || EnchanterLevel == 3){
+            TrackLevel(40);
+        } else if(state.fireEnchanter == 1){
+            TrackLevel(30)
+        } else if(EnchanterLevel == 1 || state.soulSqueezer == 1){
+            TrackLevel(20);
+        } else {
             TrackLevel(0);
         }
     }, [TrackLevel, state]);
@@ -187,14 +190,14 @@ const Enchanting = () => {
                 IncrementCounter(1);
                 IncEnchanterCounter(1) // increment by 1 after it perk is active
             }
-        }
+        }   
         else {
             IncEnchanterCountCall(button)
         }
     };
 
     const CheckIfFireEnchanterPressed = (button, line) => {
-
+        
         if (state.enchanter == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ enchanter: button });
@@ -205,11 +208,11 @@ const Enchanting = () => {
             if (state.enchanter == 0) {
                 SetEnchanterLevel(1);
             }
-
-        } else if (state.frostEnchanter == 1) {
+            
+        } else if (state.frostEnchanter == 1){
 
         }
-
+        
         else {
             setState({ fireEnchanterLine: line });
             setState({ fireEnchanter: button }); // Change the pressed button color back and forth
@@ -225,7 +228,7 @@ const Enchanting = () => {
             setState({ enchanter: buttonColor });
             setState({ enchanterLine: lineColor });
             setState({ fireEnchanterLine: lineColor });
-            setState({ fireEnchanter: buttonColor })
+            setState({ fireEnchanter: buttonColor})
             setState({ frostEnchanter: buttonColor });
             setState({ frostEnchanterLine: lineColor });
             IncrementCounter(2);
@@ -264,12 +267,12 @@ const Enchanting = () => {
             } else {
                 IncrementCounter(3);
             }
-            if (state.extraEffect == 1) {
-                setState({ stormExtraLine: lineColor2 })
+            if (state.extraEffect == 1){
+                setState({stormExtraLine: lineColor2})
             }
         } else if (state.extraEffect == 1 && state.corpusEnchanter == 0) {
             // Do nothing....must un-select nodes above it first
-        } else if (state.extraEffect == 1 && state.corpusEnchanter == 1) {
+        } else if (state.extraEffect == 1 && state.corpusEnchanter == 1){
             setState({ stormExtraLine: lineColor2 });
             setState({ stormEnchanting: buttonColor });
             setState({ stormEnchantingLine: lineColor }); // Change the pressed button color back and forth
@@ -290,8 +293,8 @@ const Enchanting = () => {
         if (state.corpusEnchanter == 1 && state.stormEnchanting == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ extraEffect: buttonColor });
-            setState({ extraEffectLine: lineColor });
-
+            setState({ extraEffectLine: lineColor});
+            
             if (state.enchanter == 0) {
                 SetEnchanterLevel(1);
             }
@@ -303,34 +306,34 @@ const Enchanting = () => {
                 IncrementCounter(4);
             }
 
-        } else if (state.corpusEnchanter == 0 && state.stormEnchanting == 1) {
-            setState({ extraEffect: buttonColor });
+        } else if (state.corpusEnchanter == 0 && state.stormEnchanting == 1){
+            setState({ extraEffect : buttonColor });
             setState({ stormExtraLine: lineColor2 });
 
-        } else if (state.corpusEnchanter == 1 && state.stormEnchanting == 1) {
-            setState({ extraEffect: buttonColor });
-            setState({ extraEffectLine: lineColor });
-            setState({ stormExtraLine: lineColor2 });
+        } else if (state.corpusEnchanter == 1 && state.stormEnchanting == 1){
+            setState({ extraEffect : buttonColor });
+            setState({ extraEffectLine : lineColor });
+            setState({ stormExtraLine : lineColor2 });
 
-        } else if (state.insightfulEnchanter == 1) {
+        }else if (state.insightfulEnchanter == 1){
             setState({ extraEffect: buttonColor });
             setState({ extraEffectLine: lineColor });
             setState({ corpusEnchanter: buttonColor });
             setState({ corpusEnchanterLine: lineColor });
 
         } else {
-            setState({ extraEffect: buttonColor });
-            setState({ stormExtraLine: lineColor2 });
-            setState({ stormEnchanting: buttonColor });
-            setState({ stormEnchantingLine: lineColor });
-            setState({ frostEnchanter: buttonColor });
-            setState({ frostEnchanterLine: lineColor });
-            setState({ fireEnchanter: buttonColor });
-            setState({ fireEnchanterLine: lineColor });
-        }
+            setState({ extraEffect : buttonColor });
+            setState({ stormExtraLine : lineColor2 });
+            setState({ stormEnchanting : buttonColor });
+            setState({ stormEnchantingLine : lineColor });
+            setState({ frostEnchanter : buttonColor });
+            setState({ frostEnchanterLine : lineColor });
+            setState({ fireEnchanter : buttonColor });
+            setState({ fireEnchanterLine : lineColor });
+        }        
 
-
-    };
+        
+};
     const CheckIfInsightfulEnchanterPressed = (buttonColor, lineColor) => {
         if (state.enchanter == 0) {
             // Change the colors of the buttons below it if they have not been pressed
@@ -367,19 +370,19 @@ const Enchanting = () => {
             } else {
                 IncrementCounter(3);
             }
-            if (state.extraEffect == 1) {
-                setState({ extraEffectLine: lineColor });
-            }
+            if (state.extraEffect == 1){
+                setState({ extraEffectLine: lineColor});
+            } 
         } else if (state.extraEffect == 1 && state.stormEnchanting == 0) {
             // Do nothing....must un-select nodes above it first
-        } else if (state.extraEffect == 1 && state.stormEnchanting == 1) {
+        } else if (state.extraEffect == 1 && state.stormEnchanting == 1){
             setState({ extraEffectLine: lineColor });
             setState({ corpusEnchanterLine: lineColor });
             setState({ corpusEnchanter: buttonColor }); // Change the pressed button color back and forth
             state.corpusEnchanter == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-        }
+        } 
         else {
             setState({ corpusEnchanterLine: lineColor });
             setState({ corpusEnchanter: buttonColor }); // Change the pressed button color back and forth
@@ -395,7 +398,7 @@ const Enchanting = () => {
             setState({ soulSqueezer: buttonColor });
             setState({ enchanter: buttonColor });
             setState({ soulSqueezerLine: lineColor });
-
+            
             if (state.enchanter == 0) {
                 SetEnchanterLevel(1);
             }
@@ -424,7 +427,7 @@ const Enchanting = () => {
             setState({ enchanter: buttonColor });
             setState({ soulSiphonLine: lineColor });
             setState({ soulSqueezerLine: lineColor });
-
+            
             if (state.enchanter == 0) {
                 SetEnchanterLevel(1);
             }
@@ -450,7 +453,7 @@ const Enchanting = () => {
             <View
                 style={styles.resetButtonContainer}>
                 <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Enchanting Perks</Text>
+                    <Text style={{ color: "black", fontWeight: "bold", }}> Reset Enchanting Perks</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.topText}>
@@ -668,7 +671,7 @@ const Enchanting = () => {
                             state.extraEffect == 0 ? 1 : 0,
                             state.extraEffectLine == 'white' ? 'gold' : 'white',
                             state.stormExtraLine == 'white' ? 'gold' : 'white',
-
+                            
                         );
                     }}>
                     <StarIconGold />
@@ -777,7 +780,7 @@ const Enchanting = () => {
                     strokeWidth={lineStrokeWidth}
 
                 />
-
+                
                 <Line
                     x1="74%"
                     y1="45.5%"
@@ -915,7 +918,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     resetButton: {
-        backgroundColor: "#565656",
+        backgroundColor: "lightsteelblue",
         borderRadius: 12,
         paddingVertical: 8,
         paddingHorizontal: 10
