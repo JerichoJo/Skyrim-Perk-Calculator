@@ -151,18 +151,16 @@ const LockpickingTree = () => {
             TrackLevel(0)
         }
     }, [state]);
-
     const checkIfNoviceLocksPressed = (button) => {
         if (state.apprenticeLocks == 1) {
-            // DO nOTHING
+            // do nothing
         } else {
-            setState({ noviceLocks: button });
-            state.novice == 0 ? IncrementCounter(1) : DecrementCounter (1);
+            setState({noviceLocks: button})
+            state.noviceLocks == 0 ? IncrementCounter(1) : DecrementCounter(1);
         }
-    };
-
+    }
     const checkIfApprenticeLockpickingPressed = (buttonColor, lineColor) => {
-        if (state.apprenticeLocks == 0) {
+        if (state.noviceLocks == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ noviceLocks: buttonColor });
             setState({ apprenticeLocksLine: lineColor });
@@ -173,9 +171,7 @@ const LockpickingTree = () => {
         } else {
             setState({ apprenticeLocksLine: lineColor });
             setState({ apprenticeLocks: buttonColor }); // Change button color back and forth
-            state.apprenticeLocks == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            state.apprenticeLocks == 0 ? IncrementCounter(1) : DecrementCounter(1);
 
         }
     };
@@ -239,6 +235,8 @@ const LockpickingTree = () => {
             setState({ adeptLocksLine: line });
             if (state.noviceLocks == 1) {
                 IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
             }
         } else if (state.goldenTouch == 1 || state.expertLocks == 1) {
             // do nothing
@@ -261,10 +259,12 @@ const LockpickingTree = () => {
             setState({ apprenticeLocksLine: line });
             setState({ adeptLocksLine: line });
             setState({ goldenTouchLine: line });
-            if (state.noviceLocks = 1) {
+            if (state.noviceLocks == 1) {
                 IncrementCounter(3);
-            } else if (state.apprenticeLocks == 1)  {
+            } else if (state.apprenticeLocks == 1) {
                 IncrementCounter(2);
+            } else if (state.noviceLocks == 0){
+                IncrementCounter(4);
             }
         } else if (state.treasureHunter == 1) {
             // nothing
@@ -294,8 +294,10 @@ const LockpickingTree = () => {
                 IncrementCounter(4);
             } else if (state.apprenticeLocks == 1) {
                 IncrementCounter(3);
-            } else if (adeptLocks == 1) {
+            } else if (state.adeptLocks == 1) {
                 IncrementCounter(2);
+            } else {
+                IncrementCounter(5);
             }
         } else {
             setState({ treasureHunterLine: line });
@@ -315,10 +317,13 @@ const LockpickingTree = () => {
             setState({ apprenticeLocksLine: line });
             setState({ adeptLocksLine: line });
             setState({ expertLocksLine: line });
+            setState({expertLocks: button})
             if (state.novice == 1) {
                 IncrementCounter(3);
             } else if (state.apprenticeLocks == 1) {
                 IncrementCounter(2);
+            } else { 
+                IncrementCounter(4);
             }
         } else if (state.locksmith == 1 || state.masterLocks == 1) {
             // nothing 
@@ -342,12 +347,14 @@ const LockpickingTree = () => {
             setState({ expertLocksLine: line });
             setState({ locksmith: button });
             setState({ locksmithLine: line });
-            if (noviceLocks == 1) {
+            if (state.noviceLocks == 1) {
                 IncrementCounter(4);
-            } else if (apprenticeLocks == 1) {
+            } else if (state.apprenticeLocks == 1) {
                 IncrementCounter(3);
-            } else if (adeptLocks == 1) {
+            } else if (state.adeptLocks == 1) {
                 IncrementCounter(2);
+            } else { 
+                IncrementCounter(5);
             }
         } else if (state.unbreakable == 1) {
             // do nothing
@@ -378,6 +385,8 @@ const LockpickingTree = () => {
                 IncrementCounter(3);
             } else if (state.expertLocks == 1) {
                 IncrementCounter(2);
+            } else {
+                IncrementCounter(6);
             }
         } else {
             setState({ unbreakable: button });
@@ -402,6 +411,8 @@ const LockpickingTree = () => {
                 IncrementCounter(3);
             } else if (state.adeptLocks == 1) {
                 IncrementCounter(2);
+            } else { 
+                IncrementCounter(5);
             }
         } else {
             setState({ masterLocks: button });

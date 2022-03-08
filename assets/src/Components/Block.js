@@ -35,8 +35,8 @@ const useSetState = (initialState = {}) => {
 const BlockTree = () => {
     const navigation = useNavigation();
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [shieldWallLevel, setShieldWallLevel] = useState(0);
     const [ActivePerks, SetActivePerks] = useState(0);
+    const [shieldWallLevel, setShieldWallLevel] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     let resetAllTrees;
@@ -82,6 +82,7 @@ const BlockTree = () => {
         setState({ shieldChargeLine: 'white' }); // block to shield
         setState({ shieldChargeLine2: 'white' }); // disarming to shield
         SetRequiredLevel(0);
+        setShieldWallLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -240,14 +241,14 @@ const BlockTree = () => {
                 IncrementCounter(2);
             } else {
                 IncrementCounter(3);
-                setShieldWallLevel(1);
+                //setShieldWallLevel(1);
             }
         } else if (state.blockRunner == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ elementalProtectionLine: lineColor });
             setState({ elementalProtection: buttonColor }); // Change the pressed button color back and forth
-            state.advancedSmithing == 0
+            state.elementalProtection == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
 
@@ -339,7 +340,7 @@ const BlockTree = () => {
     };
     
     const CheckIfDisarmingBashPressed = (buttonColor, lineColor, lineColor2) => {
-        if (state.elementalProtection == 0) {
+        if (state.deadlyBash == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ shieldWall: buttonColor });
             setState({ powerBash: buttonColor });
@@ -424,7 +425,7 @@ const BlockTree = () => {
           </View>
           <View style={styles.topText}>
             <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-            <Text style={styles.HomeScreenText}>All Active Perks: { }</Text>
+            <Text style={styles.HomeScreenText}>Required Level: { RequiredLevel}</Text>
           </View>
           <View title='Shield Wall Blue' style={{
             position: 'absolute',

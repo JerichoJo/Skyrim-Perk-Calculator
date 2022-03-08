@@ -207,9 +207,7 @@ const TrackLevel = useCallback((level) => {
     ) {
       // Do nothing....must un-select nodes above it first
     } else {
-      setState({ armsman: buttonColor }); // Change button color back and forth
-      state.armsman == 0 ? IncrementCounter(1) : DecrementCounter(1);
-      IncArmsmanCountCall(buttonColor)
+      IncArmsmanCountCall(buttonColor);
     }
   };
   const IncArmsmanCounter = (numActiveArmsman) => {
@@ -237,72 +235,86 @@ const IncArmsmanCountCall = (buttonColor) => {
     }
 
 }
-  const checkIfHackAndSlashPressed = (buttonColor, lineColor) => { // 3 Increments
-    if (state.armsman == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ armsman: buttonColor });
-      setState({ hackAndSlash: buttonColor });
-      setState({ hackAndSlashLine: lineColor });
-      IncrementCounter(2);
+const checkIfHackAndSlashPressed = (buttonColor, lineColor) => {
+  if (state.armsman == 0) {
+    // Change the colors of the buttons below it if they have not been pressed
+    setState({ armsman: buttonColor });
+    setState({ hackAndSlashLine: lineColor });
+    setState({ hackAndSlash: buttonColor });
+    if (hackAndSlashLevel == 2) {
+      DecrementCounter(1);
       setHackAndSlashLevel(1);
-      setArmsmanLevel(1);
     } else {
-      IncHackAndSlashCountCall(buttonColor, lineColor);
-      setState({ hackAndSlash: buttonColor }); // Change the pressed button color back and forth
-      setState({ hackAndSlashLine: lineColor });
-      state.hackAndSlash == 0 ? IncrementCounter(1) : DecrementCounter(1); 
-    }
-  };
-  const IncHackAndSlashCounter = (numActiveHackAndSlash) => {
-    if (hackAndSlashLevel < 3) {
-        setHackAndSlashLevel(hackAndSlashLevel + numActiveHackAndSlash)
-    }
-    else {
-        setHackAndSlashLevel(0) // return to 0 after the perk is maxed out
-    }
-}
+      if (state.armsman == 0) {
+        IncrementCounter(2);
+        IncHackAndSlashCounter(1);
 
-// function to control the hack and slash 0/3
-const IncHackAndSlashCountCall = (buttonColor, line) => {
-    if (hackAndSlashLevel == 0) {
-        setState({ hackAndSlash: buttonColor }); // Change the pressed button color back and forth
-        setState({ hackAndSlashLine: line }); // Change the pressed button color back and forth
-        IncrementCounter(1); // increment active perks by 1 on first click
-        IncHackAndSlashCounter(1); // increment basic smith by 1 on first click
-    } else if (hackAndSlashLevel == 3) {
-        setState({ hackAndSlash: buttonColor }); // Change the line color back and forth
-        setState({ hackAndSlashLevel: line }); // Change the line color back and forth
-        IncHackAndSlashCounter(1); // Increment by one so that it goes back to 0 
-        DecrementCounter(3); // decrease active perks back down 3 because it is set back to 0
-
-    } else {
+      } else {
         IncrementCounter(1);
-        IncHackAndSlashCounter(1) // increment by 1 after it perk is active
+        IncAugmentedFrostCounter(1);
+      }
     }
+    // Button handled in the perk function
+  } else {
 
+    IncHackAndSlashCountCall(buttonColor, lineColor);
+  }
+};
+const IncHackAndSlashCounter = (numActiveHackAndSlash) => {
+  if (hackAndSlashLevel < 3) {
+      setHackAndSlashLevel(hackAndSlashLevel + numActiveHackAndSlash)
+  }
+  else {
+      setHackAndSlashLevel(0); // return to 0 after the perk is maxed out
+  }
 }
-
-  const CheckIfBoneBreakerPressed = (buttonColor, lineColor) => { // 3 increments
-    if (state.armsman == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ armsman: buttonColor });
-      setState({ bonebreaker: buttonColor });
-      setState({ bonebreakerLine: lineColor });
+// function to control the hack and slash 0/3
+const IncHackAndSlashCountCall = (buttonColor, lineColor) => {
+  if (hackAndSlashLevel == 0) {
+    setState({ hackAndSlash: buttonColor });
+    setState({ hackAndSlashLine: lineColor });
+    IncHackAndSlashCounter(1);
+  } else if (hackAndSlashLevel == 3) {
+    setState({ hackAndSlash: buttonColor });
+    setState({ hackAndSlashLine: lineColor });
+    IncHackAndSlashCounter(1);
+    DecrementCounter(1);
+  } else {
+    IncrementCounter(1);
+    IncHackAndSlashCounter(1);
+  }
+}
+const CheckIfBoneBreakerPressed = (buttonColor, lineColor) => {
+  if (state.armsman == 0) {
+    // Change the colors of the buttons below it if they have not been pressed
+    setState({ armsman: buttonColor });
+    setState({ bonebreakerLine: lineColor });
+    setState({ bonebreaker: buttonColor });
+    if (bonebreakerLevel == 2) {
+      DecrementCounter(1);
       setBoneBreakerLevel(1);
     } else {
-      setState({ bonebreaker: buttonColor }); // Change button color back and forth
-      setState({ bonebreakerLine: lineColor });
-      state.bonebreaker == 0 ? IncrementCounter(1) : DecrementCounter(1)
-      IncBonebreakerCountCall(buttonColor, lineColor);
+      if (state.armsman == 0) {
+        IncrementCounter(2);
+        IncBonebreakerCounter(1);
+
+      } else {
+        IncrementCounter(1);
+        IncBonebreakerCounter(1);
+      }
     }
-  };
-  const IncBonebreakerCounter = (numActiveBonebreaker) => {
-    if (bonebreakerLevel < 3) {
-        setBoneBreakerLevel(bonebreakerLevel + numActiveBonebreaker)
-    }
-    else {
-        setBoneBreakerLevel(0) // return to 0 after the perk is maxed out
-    }
+    // Button handled in the perk function
+  } else {
+    IncBonebreakerCountCall(buttonColor, lineColor);
+  }
+};
+const IncBonebreakerCounter = (numActiveBoneBreaker) => {
+  if (bonebreakerLevel < 3) {
+      setBoneBreakerLevel(bonebreakerLevel + numActiveBoneBreaker)
+  }
+  else {
+      setBoneBreakerLevel(0); // return to 0 after the perk is maxed out
+  }
 }
 
 // function to control the bonebreaker 0/3
@@ -324,29 +336,39 @@ const IncBonebreakerCountCall = (buttonColor, line) => {
     }
 
 }
-  const CheckIfBladesmanPressed = (buttonColor, lineColor) => { // 3 increments
-    if (state.armsman == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ armsman: buttonColor });
-      setState({ bladesman: buttonColor });
-      setState({ bladesmanLine: lineColor });
+const CheckIfBladesmanPressed = (buttonColor, lineColor) => {
+  if (state.armsman == 0) {
+    // Change the colors of the buttons below it if they have not been pressed
+    setState({ armsman: buttonColor });
+    setState({ bladesmanLevel: lineColor });
+    setState({ bladesman: buttonColor });
+    if (bladesmanLevel == 2) {
+      DecrementCounter(1);
       setBladesmanLevel(1);
     } else {
-      setState({ bladesman: buttonColor }); // Change the pressed button color back and forth
-      setState({ bladesmanLine: lineColor });
-      state.bladesman == 0? IncrementCounter(1) : DecrementCounter(1)
-      IncBladesmanCountCall(buttonColor, lineColor);
-    }
-  };
-  const IncBladesmanCounter = (numActiveBladesman) => {
-    if (bladesmanLevel < 3) {
-        setBladesmanLevel(bladesmanLevel + numActiveBladesman)
-    }
-    else {
-        setBladesmanLevel(0) // return to 0 after the perk is maxed out
-    }
-}
+      if (state.bladesman == 0) {
+        IncrementCounter(2);
+        IncBladesmanCounter(1);
 
+      } else {
+        IncrementCounter(1);
+        IncBladesmanCounter(1);
+      }
+    }
+    // Button handled in the perk function
+  } else {
+
+    IncBladesmanCountCall(buttonColor, lineColor);
+  }
+};
+const IncBladesmanCounter = (numActiveBladesman) => {
+  if (bladesmanLevel < 3) {
+      setBladesmanLevel(bladesmanLevel + numActiveBladesman)
+  }
+  else {
+      setBladesmanLevel(0); // return to 0 after the perk is maxed out
+  }
+}
 // function to control the Bladesman 0/3
 const IncBladesmanCountCall = (buttonColor, line) => {
     if (bladesmanLevel == 0) {
@@ -365,49 +387,57 @@ const IncBladesmanCountCall = (buttonColor, line) => {
         IncBladesmanCounter(1) // increment by 1 after it perk is active
     }
 }
-
-  const checkIfDualFlurryPressed = (buttonColor, lineColor) => { // 2 increments
-    if (state.armsman == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ armsman: buttonColor });
-      setState({ dualFlurry: buttonColor });
-      setState({ dualFlurryLine: lineColor });
+const checkIfDualFlurryPressed = (buttonColor, lineColor) => {
+  if (state.armsman == 0) {
+    // Change the colors of the buttons below it if they have not been pressed
+    setState({ armsman: buttonColor });
+    setState({ dualFlurryLine: lineColor });
+    setState({ dualFlurry: buttonColor });
+    if (dualFlurryLevel == 2) {
+      DecrementCounter(1);
       setDualFlurryLevel(1);
-    } else if (state.dualSavagery == 1) {
-      // Nothing
     } else {
-      setState({ dualFlurry: buttonColor }); // Change the pressed button color back and forth
-      setState({ dualFlurryLine: lineColor });
-      state.dualFlurry == 0 ? IncrementCounter(1) : DecrementCounter(1);
-      IncDualFlurryCountCall(buttonColor, lineColor);
-    }
-  };
-  const IncDualFlurryCounter = (numActiveDualFlurry) => {
-    if (dualFlurryLevel < 2) {
-        setDualFlurryLevel(dualFlurryLevel + numActiveDualFlurry)
-    }
-    else {
-        setDualFlurryLevel(0) // return to 0 after the perk is maxed out
-    }
-}
-// function to control the Dual Flurry Perk Counter
-const IncDualFlurryCountCall = (buttonColor, line) => {
-    if (dualFlurryLevel == 0) {
-        setState({ dualFlurry: buttonColor }); // Change the pressed button color back and forth
-        setState({ dualFlurryLine: line }); // Change the pressed button color back and forth
-        IncrementCounter(1); // increment active perks by 1 on first click
-        IncDualFlurryCounter(1); // increment basic smith by 1 on first click
-    } else if (dualFlurryLevel == 2) {
-        setState({ dualFlurry: buttonColor }); // Change the line color back and forth
-        setState({ dualFlurryLine: line }); // Change the line color back and forth
-        IncDualFlurryCounter(1); // Increment by one so that it goes back to 0 
-        DecrementCounter(2); // decrease active perks back down 3 because it is set back to 0
+      if (state.armsman == 0) {
+        IncrementCounter(2);
+        IncDualFlurryCounter(1);
 
-    } else {
+      } else {
         IncrementCounter(1);
-        IncDualFlurryCounter(1) // increment by 1 after it perk is active
+        IncDualFlurryCounter(1);
+      }
     }
-
+    // Button handled in the perk function
+  } else if (state.dualSavagery == 1) {
+    // do nothing
+  }
+  else {
+    IncDualFlurryCountCall(buttonColor, lineColor);
+  }
+};
+// function to control the Dual Flurry Perk Counter
+const IncDualFlurryCounter = (numActiveDualFlurry) => {
+  if (dualFlurryLevel < 3) {
+      setDualFlurryLevel(dualFlurryLevel + numActiveDualFlurry)
+  }
+  else {
+      setDualFlurryLevel(0); // return to 0 after the perk is maxed out
+  }
+}
+// function to control the hack and slash 0/3
+const IncDualFlurryCountCall = (buttonColor, lineColor) => {
+  if (dualFlurryLevel == 0) {
+    setState({ dualFlurry: buttonColor });
+    setState({ dualFlurryLine: lineColor });
+    IncDualFlurryCounter(1);
+  } else if (dualFlurryLevel == 2) {
+    setState({ dualFlurry: buttonColor });
+    setState({ dualFlurryLine: lineColor });
+    IncDualFlurryCounter(1);
+    DecrementCounter(1);
+  } else {
+    IncrementCounter(1);
+    IncDualFlurryCounter(1);
+  }
 }
   const checkIfDualSavageryChecked = (buttonColor, lineColor) => {
     if (state.dualFlurry == 0) {
@@ -417,8 +447,11 @@ const IncDualFlurryCountCall = (buttonColor, line) => {
       setState({ dualFlurryLine: lineColor });
       setState({ dualSavagery: buttonColor });
       setState({ dualSavageryLine: lineColor });
+      setDualFlurryLevel(1);
       if (state.armsman == 1) {
         IncrementCounter(2);
+      } else {
+        IncrementCounter(3);
       }
     } else {
       setState({ dualSavagery: buttonColor }); // Change the pressed button color back and forth
@@ -432,6 +465,7 @@ const IncDualFlurryCountCall = (buttonColor, line) => {
       setState({ armsman: buttonColor });
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
+      IncrementCounter(2);
     } else if (state.savageStrike == 1 || state.criticalCharge == 1) {
       // Do nothing....must un-select nodes above it first
     } else {
@@ -462,20 +496,20 @@ const IncDualFlurryCountCall = (buttonColor, line) => {
   };
 
   const checkIfCriticalChargePressed = (buttonColor, lineColor, lineColor2) => {
-    if (state.criticalCharge == 0) {
+    if (state.fightingStance == 0) {
       // Change the colors of the buttons below it if they have not been pressed
       setState({ armsman: buttonColor });
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
       setState({ criticalCharge: buttonColor });
       setState({ criticalChargeLine: lineColor });
-      if (state.armsman == 1) {
-        IncrementCounter(2);
-      } else {
+      if (state.armsman == 0) {
         IncrementCounter(3);
+
+      } else if (state.armsman == 1) {
+        IncrementCounter(2);
       }
         // Set Armsman level
-      
     } else if (state.paralyzingStrike == 1 && state.savageStrike == 0 ) {
       // Do nothing....must un-select nodes above it first
     } else if (state.paralyzingStrike == 1 && state.savageStrike == 1) {
@@ -502,13 +536,7 @@ const IncDualFlurryCountCall = (buttonColor, line) => {
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
       setState({ armsman: buttonColor });
-      if (state.armsman == 1) {
-        IncrementCounter(3);
-      } else if (state.fightingStance == 1) {
-        IncrementCounter(2);
-      } else {
-        IncrementCounter(4);
-      }
+      state.paralyzingStrike == 0 ? IncrementCounter(1) : DecrementCounter(1);
     } else if (state.savageStrike == 0 && state.criticalCharge == 1) {
       setState({ paralyzingStrike: buttonColor });
       setState({ paralyzingStrikeLineRight: lineColor2 });
@@ -517,10 +545,12 @@ const IncDualFlurryCountCall = (buttonColor, line) => {
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
       setState({ armsman: buttonColor });
+      state.paralyzingStrike == 0 ? IncrementCounter(1) : DecrementCounter(1);
     } else if (state.savageStrike == 1 && state.criticalCharge == 1) {
       setState({ paralyzingStrike: buttonColor });
       setState({ paralyzingStrikeLineLeft: lineColor });
       setState({ paralyzingStrikeLineRight: lineColor2 });
+      state.paralyzingStrike == 0 ? IncrementCounter(1) : DecrementCounter(1);
     } else {
       setState({ paralyzingStrike: buttonColor });
       setState({ paralyzingStrikeLineRight: lineColor2 });
@@ -529,6 +559,7 @@ const IncDualFlurryCountCall = (buttonColor, line) => {
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
       setState({ armsman: buttonColor });
+      IncrementCounter(4);
     }
   }
 
