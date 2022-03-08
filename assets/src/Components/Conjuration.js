@@ -402,7 +402,9 @@ const ConjurationTree = () => {
                 IncrementCounter(1);
                 IncSummonerCounter(1);
             }
-        }        
+        } else if(state.atromancy == 1){
+            SetSummonerLevel(1);
+        }       
         else {
             IncSummonerCountCall(button);            
         }

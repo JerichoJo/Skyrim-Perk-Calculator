@@ -152,19 +152,19 @@ const Enchanting = () => {
     const CheckLevel = useCallback(() => {
         if (state.extraEffect == 1) {
             TrackLevel(100);
-        } else if(state.enchanter == 5){
+        } else if(EnchanterLevel == 5){
             TrackLevel(80);
         } else if(state.corpusEnchanter == 1){
             TrackLevel(70);
-        } else if(state.enchanter == 4){
+        } else if(EnchanterLevel == 4){
             TrackLevel(60);
         } else if(state.insightfulEnchanter == 1 || state.stormEnchanting == 1){
             TrackLevel(50);
-        } else if(state.soulSiphon == 1 || state.frostEnchanter == 1 || state.enchanter == 3){
+        } else if(state.soulSiphon == 1 || state.frostEnchanter == 1 || EnchanterLevel == 3){
             TrackLevel(40);
         } else if(state.fireEnchanter == 1){
             TrackLevel(30)
-        } else if(state.enchanter == 1 || state.soulSqueezer == 1){
+        } else if(EnchanterLevel == 1 || state.soulSqueezer == 1){
             TrackLevel(20);
         } else {
             TrackLevel(0);
