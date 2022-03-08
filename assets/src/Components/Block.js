@@ -120,8 +120,7 @@ const BlockTree = () => {
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
     }, []);
-
-
+    
     const CheckLevel = useCallback(() => {
         if (state.shieldCharge == 1) {
             TrackLevel(100);
