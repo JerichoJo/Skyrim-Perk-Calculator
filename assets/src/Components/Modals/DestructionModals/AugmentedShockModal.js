@@ -19,7 +19,8 @@ const AugmentedShockModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Augmented Shock{"\n"}</Text>
 
-                <Text style={styles.Text}>2 INCREMENTS</Text>
+                <Text style={styles.Text}>1: Shock Spells do 25% more damage{"\n"}
+                2: Shock spells do 50% more damage</Text>
 
             </View>
 

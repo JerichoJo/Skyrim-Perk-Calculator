@@ -19,7 +19,8 @@ const AugmentedFrostModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Augmented Frost{"\n"}</Text>
 
-                <Text style={styles.Text}>2 INCREMENTS </Text>
+                <Text style={styles.Text}>1: Frost Spells do 25% more damage{"\n"}
+                2: Frost spells do 50% more damage</Text>
 
             </View>
 

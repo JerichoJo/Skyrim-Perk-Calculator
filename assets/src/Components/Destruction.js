@@ -28,11 +28,6 @@ const useSetState = (initialState = {}) => {
   return [state, setState];
 };
 const DestructionTree = () => {
-  const navigation = useNavigation();
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [ActivePerks, SetActivePerks] = useState(0);
-  const [RequiredLevel, SetRequiredLevel] = useState(0);
-  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
   const [state, setState] = useSetState({
     noviceDestruction: 0,
     apprenticeDestruction: 0,
@@ -62,7 +57,13 @@ const DestructionTree = () => {
     impact: 0,
     impactLine: 'white',
   });
-
+  const navigation = useNavigation();
+  const [ActivePerks, SetActivePerks] = useState(0);
+  const [RequiredLevel, SetRequiredLevel] = useState(0);
+  const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+  const [augmentedFlamesLevel, SetAugmentedFlamesLevel] = useState(0);
+  const [augmentedFrostLevel, SetAugmentedFrostLevel] = useState(0);
+  const [augmentedShockLevel, SetAugmentedShockLevel] = useState(0);
 
   let resetAllTrees;
   const resetDestructionPerks = () => {
@@ -94,6 +95,9 @@ const DestructionTree = () => {
     setState({ impact: 0 });
     setState({ impactLine: 'white' });
     SetRequiredLevel(0);
+    SetAugmentedFlamesLevel(0);
+    SetAugmentedFrostLevel(0);
+    SetAugmentedShockLevel(0);
   }
 
   const resetActivePerks = () => {
@@ -139,40 +143,43 @@ const DestructionTree = () => {
   const CheckLevel = useCallback(() => {
     if (state.noviceDestruction == 1) {
       TrackLevel(0);
+    } else if (state.destructionDualCasting == 1) {
+      TrackLevel(20);
     } else if (state.apprenticeDestruction == 1) {
       TrackLevel(25);
-    } else if (state.adeptDestruction == 1) {
+    } else if (state.augmentedFlames == 1 && augmentedFlamesLevel == 1) {
+      TrackLevel(30);
+    } else if (state.augmentedFrost == 1 && augmentedFrostLevel == 1) {
+      TrackLevel(30);
+    } else if (state.augmentedShock == 1 && augmentedShockLevel == 1) {
+      TrackLevel(30);
+    } else if (state.runeMaster == 1 || state.impact == 1) {
+      TrackLevel(40);
+    } else if (state.adeptDestruction == 1 || state.intenseFlames == 1) {
       TrackLevel(50);
+    } else if (state.augmentedFlames == 1 && augmentedFlamesLevel == 2) {
+      TrackLevel(60);
+    } else if (state.augmentedFrost == 1 && augmentedFrostLevel == 2) {
+      TrackLevel(60);
+    } else if (state.augmentedShock == 1 && augmentedShockLevel == 2) {
+      TrackLevel(60);
+    } else if (state.deepFreeze == 1) {
+      TrackLevel(60);
+    } else if (state.disintegrate == 1) {
+      TrackLevel(70);
     } else if (state.expertDestruction == 1) {
       TrackLevel(75);
     } else if (state.masterDestruction == 1) {
       TrackLevel(100);
-    } else if (state.runeMaster == 1) {
-      TrackLevel(40);
-    } else if (state.augmentedFlames == 1) {
-      TrackLevel(60);
-    } else if (state.intenseFlames == 1) {
-      TrackLevel(50);
-    } else if (state.augmentedFrost == 1) {
-      TrackLevel(60);
-    } else if (state.deepFreeze == 1) {
-      TrackLevel(60);
-    } else if (state.augmentedShock == 1) {
-      TrackLevel(60);
-    } else if (state.disintegrate == 1) {
-      TrackLevel(70);
-    } else if (state.destructionDualCasting == 1) {
-      TrackLevel(20);
-    } else if (state.impact == 1) {
-      TrackLevel(40);
     }
-  }, [TrackLevel, state]);
+
+  }, [state]);
 
   useEffect(() => {
     CheckLevel();
   }, [CheckLevel]);
 
-  const checkIfNoviceDestructionPressed = (buttonColor) => {
+  const checkIfNoviceDestructionPressed = (button) => {
     if (
       state.augmentedFlames == 1 ||
       state.augmentedFrost == 1 ||
@@ -182,76 +189,183 @@ const DestructionTree = () => {
     ) {
       // Do nothing....must un-select nodes above it first
     } else {
-      setState({ noviceDestruction: buttonColor }); // Change button color back and forth
+      setState({ noviceDestruction: button }); // Change button color back and forth
+      state.noviceDestruction == 0 ? IncrementCounter(1) : DecrementCounter(1);
     }
   };
 
-  const checkIfAugmentedFlamesPressed = (buttonColor, lineColor) => {
+  const checkIfAugmentedFlamesPressed = (button, line) => {
     if (state.noviceDestruction == 0) {
       // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceDestruction: buttonColor });
-      setState({ augmentedFlames: buttonColor });
-      setState({ augmentedFlamesLine: lineColor });
+      setState({ noviceDestruction: button });
+      setState({ augmentedFlamesLine: line });
+      if (augmentedFlamesLevel == 2) {
+        DecrementCounter(1);
+        SetAugmentedFlamesLevel(1);
+      } else {
+        IncrementCounter(1);
+        IncAugmentedFlamesCounter(1);
+      }
+      // Button handled in the perk function
     } else if (state.intenseFlames == 1) {
       // Nothing
     } else {
-      setState({ augmentedFlames: buttonColor }); // Change the pressed button color back and forth
-      setState({ augmentedFlamesLine: buttonColor });
+      IncAugmentedFlamesCountCall(button);
+      setState({ augmentedFlamesLine: line });
+    }
+  };
+  // Control augmented flames increments
+  const IncAugmentedFlamesCounter = (numActiveAugmentedFlames) => {
+    if (augmentedFlamesLevel < 2) {
+      SetAugmentedFlamesLevel(augmentedFlamesLevel + numActiveAugmentedFlames)
+    } else {
+      SetAugmentedFlamesLevel(0);
+    }
+  }
+  const IncAugmentedFlamesCountCall = (button) => {
+    if (augmentedFlamesLevel == 0) {
+      setState({ augmentedFlames: button });
+      IncAugmentedFlamesCounter(1); // Increment up
+    } else if (augmentedFlamesLevel == 2) {
+      setState({ augmentedFlames: button });
+      IncAugmentedFlamesCounter(1);
+      DecrementCounter(2);
+    } else {
+      IncrementCounter(1);
+      IncAugmentedFlamesCounter(1);
+    }
+  }
+
+  const checkIntenseFlamesPressed = (button, line) => {
+    if (state.augmentedFlames == 0) {
+      // Change the colors of the buttons below it if they have not been pressed
+      setState({ noviceDestruction: button });
+      setState({ augmentedFlames: button });
+      setState({ augmentedFlamesLine: line });
+      setState({ intenseFlames: button });
+      setState({ intenseFlamesLine: line });
+    } else {
+      setState({ intenseFlames: button });
+      setState({ intenseFlamesLine: line }); // Change button color back and forth
     }
   };
 
-  const checkIntenseFlamesPressed = (buttonColor, lineColor) => {
-    if (state.augmentedFlames == 0) {
-      // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceDestruction: buttonColor });
-      setState({ augmentedFlames: buttonColor });
-      setState({ augmentedFlamesLine: lineColor });
-      setState({ intenseFlames: buttonColor });
-      setState({ intenseFlamesLine: lineColor });
-    } else {
-      setState({ intenseFlames: buttonColor });
-      setState({ intenseFlamesLine: lineColor }); // Change button color back and forth
-    }
-  };
-  const checkIfAugmentedFrostPressed = (buttonColor, lineColor) => {
+  const checkIfAugmentedFrostPressed = (button, line) => {
     if (state.noviceDestruction == 0) {
       // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceDestruction: buttonColor });
-      setState({ augmentedFrost: buttonColor });
-      setState({ augmentedFrostLine: lineColor });
+      setState({ noviceDestruction: button });
+      setState({ augmentedFrostLine: line });
+      setState({ augmentedFrost: button });
+
+
+      if (augmentedFrostLevel == 2) {
+        DecrementCounter(1);
+        SetAugmentedFrostLevel(1);
+      } else {
+        if (state.noviceDestruction == 0) {
+          IncrementCounter(2);
+          IncAugmentedFrostCounter(1);
+
+        } else {
+          IncrementCounter(1);
+          IncAugmentedFrostCounter(1);
+        }
+      }
+      // Button handled in the perk function
     } else if (state.deepFreeze == 1) {
-      // Do nothing....must un-select nodes above it first
+      // Nothing
+      if (augmentedFrostLevel == 2) {
+        DecrementCounter(1);
+        SetAugmentedFrostLevel(1);
+      } else {
+        IncrementCounter(1);
+        IncAugmentedFrostCounter(1);
+      }
     } else {
-      setState({ augmentedFrost: buttonColor }); // Change the pressed button color back and forth
-      setState({ augmentedFrostLine: lineColor });
+
+      IncAugmentedFrostCountCall(button, line);
     }
   };
-  const checkIfDeepFreezePressed = (buttonColor, lineColor) => {
+
+  // Control augmented flames increments
+  const IncAugmentedFrostCounter = (numActiveAugmentedFrost) => {
+    if (augmentedFrostLevel < 2) {
+      SetAugmentedFrostLevel(augmentedFrostLevel + numActiveAugmentedFrost)
+    } else {
+      SetAugmentedFrostLevel(0);
+    }
+  }
+
+  const IncAugmentedFrostCountCall = (button, line) => {
+    if (augmentedFrostLevel == 0) {
+      setState({ augmentedFrost: button });
+      setState({ augmentedFrostLine: line });
+
+      IncAugmentedFrostCounter(1); // Increment up
+    } else if (augmentedFrostLevel == 2) {
+      setState({ augmentedFrost: button });
+      setState({ augmentedFrostLine: line });
+      IncAugmentedFrostCounter(1);
+      DecrementCounter(2);
+    } else {
+      IncrementCounter(1);
+      IncAugmentedFrostCounter(1);
+    }
+  }
+  const checkIfDeepFreezePressed = (button, line) => {
     if (state.augmentedFrost == 0) {
       // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceDestruction: buttonColor });
-      setState({ augmentedFrost: buttonColor });
-      setState({ augmentedFrostLine: lineColor });
-      setState({ deepFreeze: buttonColor });
-      setState({ deepFreezeLine: lineColor });
+      setState({ noviceDestruction: button });
+      setState({ augmentedFrost: button });
+      setState({ augmentedFrostLine: line });
+      setState({ deepFreeze: button });
+      setState({ deepFreezeLine: line });
     } else {
-      setState({ deepFreeze: buttonColor }); // Change the pressed button color back and forth
-      setState({ deepFreezeLine: lineColor });
+      setState({ deepFreeze: button }); // Change the pressed button color back and forth
+      setState({ deepFreezeLine: line });
     }
   };
-  const checkIfAugmentedShockPressed = (buttonColor, lineColor) => {
-    if (state.noviceDestruction == '0') {
+  const checkIfAugmentedShockPressed = (button, line) => {
+    if (state.noviceDestruction == 0) {
       // Change the colors of the buttons below it if they have not been pressed
-      setState({ noviceDestruction: buttonColor });
-      setState({ augmentedShock: buttonColor });
-      setState({ augmentedShockLine: lineColor });
+      setState({ noviceDestruction: button });
+      setState({ augmentedShockLine: line });
+      if (augmentedShockLevel == 2) {
+        DecrementCounter(1);
+        SetAugmentedShockLevel(1);
+      } else {
+        IncrementCounter(1);
+        IncAugmentedShockCountCall(1);
+      }
+      // Button handled in the perk function
     } else if (state.disintegrate == 1) {
-      // Do nothing....must un-select nodes above it first
+      // Nothing
     } else {
-      setState({ augmentedShock: buttonColor }); // Change the pressed button color back and forth
-      setState({ augmentedShockLine: lineColor });
+      IncAugmentedShockCountCall(button);
+      setState({ augmentedShockLine: line });
     }
   };
+  // Control augmented flames increments
+  const IncAugmentedShockCounter = (numActiveAugmentedShock) => {
+    if (augmentedShockLevel < 2) {
+      SetAugmentedShockLevel(augmentedShockLevel + numActiveAugmentedShock)
+    } else {
+      SetAugmentedShockLevel(0);
+    }
+  }
+  const IncAugmentedShockCountCall = (button) => {
+    if (augmentedShockLevel == 0) {
+      setState({ augmentedShock: button });
+      IncAugmentedShockCounter(1); // Increment up
+    } else if (augmentedShockLevel == 2) {
+      setState({ augmentedShock: button });
+      IncAugmentedShockCounter(1);
+      DecrementCounter(2);
+    } else {
+      IncrementCounter(1);
+      IncAugmentedShockCounter(1);
+    }
+  }
   const checkIfDisintegratePressed = (buttonColor, lineColor) => {
     if (state.augmentedShockLine == 0) {
       // Change the colors of the buttons below it if they have not been pressed
@@ -346,6 +460,8 @@ const DestructionTree = () => {
       setState({ noviceDestruction: buttonColor });
       setState({ apprenticeDestruction: buttonColor });
       setState({ apprenticeDestructionLine: lineColor });
+      setState({ adeptDestruction: buttonColor });
+      setState({ adeptDestructionLine: lineColor });
       setState({ expertDestruction: buttonColor });
       setState({ expertDestructionLine: lineColor });
       setState({ masterDestruction: buttonColor });
@@ -385,7 +501,7 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => navigation.navigate("Other Stuff")}
+          onLongPress={() => navigation.navigate("NoviceDestructionModal")}
           onPress={() => {
             checkIfNoviceDestructionPressed(
               state.noviceDestruction == 0 ? 1 : 0,
@@ -393,6 +509,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.NoviceDestructionText}>
+        <Text style={styles.PerkText}>Novice Destruction</Text>
       </View>
       <View title='Apprentice Destruction Blue' style={{
         position: 'absolute',
@@ -413,9 +532,7 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("ApprenticeDestructionModal")}
           onPress={() => {
             checkIfApprenticeDestructionPressed(
               state.apprenticeDestruction == 0 ? 1 : 0,
@@ -424,6 +541,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.ApprenticeDestructionText}>
+        <Text style={styles.PerkText}>Apprentice Destruction</Text>
       </View>
       <View title='Adept Destruction Blue' style={{
         position: 'absolute',
@@ -443,9 +563,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("AdeptDestructionModal")}
+
           onPress={() => {
             checkIfAdeptDestructionPressed(
               state.adeptDestruction == 0 ? 1 : 0,
@@ -454,6 +573,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.AdeptDestructionText}>
+        <Text style={styles.PerkText}>Adept Destruction</Text>
       </View>
       <View title='Expert Destruction Blue' style={{
         position: 'absolute',
@@ -473,9 +595,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("ExpertDestructionModal")}
+
           onPress={() => {
             checkIfExpertDestructionPressed(
               state.expertDestruction == 0 ? 1 : 0,
@@ -484,6 +605,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.ExpertDestructionText}>
+        <Text style={styles.PerkText}>Expert Destruction</Text>
       </View>
       <View title='Master Destruction Blue' style={{
         position: 'absolute',
@@ -503,9 +627,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("MasterDestructionModal")}
+
           onPress={() => {
             checkIfMasterDestructionPressed(
               state.masterDestruction == 0 ? 1 : 0,
@@ -514,6 +637,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.MasterDestructionText}>
+        <Text style={styles.PerkText}>Master Destruction</Text>
       </View>
       <View title='Rune Master Blue' style={{
         position: 'absolute',
@@ -533,9 +659,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("RuneMasterModal")}
+
           onPress={() => {
             checkIfRuneMasterPressed(
               state.runeMaster == 0 ? 1 : 0,
@@ -544,6 +669,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.RuneMasterText}>
+        <Text style={styles.PerkText}>Rune Master</Text>
       </View>
       <View title='Augmented Flames Blue' style={{
         position: 'absolute',
@@ -563,9 +691,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("AugmentedFlamesModal")}
+
           onPress={() => {
             checkIfAugmentedFlamesPressed(
               state.augmentedFlames == 0 ? 1 : 0,
@@ -574,6 +701,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.AugmentedFlamesText}>
+        <Text style={styles.PerkText}>Augmented{"\n"}Flames{"\n"}({augmentedFlamesLevel}/2)</Text>
       </View>
       <View title='Intense Flames Blue' style={{
         position: 'absolute',
@@ -593,9 +723,7 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("IntenseFlamesModal")}
           onPress={() => {
             checkIntenseFlamesPressed(
               state.intenseFlames == 0 ? 1 : 0,
@@ -604,6 +732,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.IntenseFlamesText}>
+        <Text style={styles.PerkText}>Intense{"\n"}Flames</Text>
       </View>
       <View title='Augmented Frost Blue' style={{
         position: 'absolute',
@@ -623,9 +754,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("AugmentedFrostModal")}
+
           onPress={() => {
             checkIfAugmentedFrostPressed(
               state.augmentedFrost == 0 ? 1 : 0,
@@ -635,7 +765,9 @@ const DestructionTree = () => {
           <StarIconGold />
         </TouchableOpacity>
       </View>
-
+      <View style={styles.AugmentedFrostText}>
+        <Text style={styles.PerkText}>Augmented Frost ({augmentedFrostLevel}/2)</Text>
+      </View>
       <View title='Augmented Shock Blue' style={{
         position: 'absolute',
         left: "29%",
@@ -654,9 +786,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("AugmentedShockModal")}
+
           onPress={() => {
             checkIfAugmentedShockPressed(
               state.augmentedShock == 0 ? 1 : 0,
@@ -665,6 +796,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.AugmentedShockText}>
+        <Text style={styles.PerkText}>Augmented Shock ({augmentedShockLevel}/2)</Text>
       </View>
       <View title='Disintegrate Blue' style={{
         position: 'absolute',
@@ -684,9 +818,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("DisintegrateModal")}
+
           onPress={() => {
             checkIfDisintegratePressed(
               state.disintegrate == 0 ? 1 : 0,
@@ -695,6 +828,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.DisintegrateText}>
+        <Text style={styles.PerkText}>Disintegrate</Text>
       </View>
       <View title='Destruction Dual Casting Blue' style={{
         position: 'absolute',
@@ -714,9 +850,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("DestructionDualCastingModal")}
+
           onPress={() => {
             checkIfDestructionDualPressed(
               state.destructionDualCasting == 0 ? 1 : 0,
@@ -725,6 +860,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.DestructionDualCastingText}>
+        <Text style={styles.PerkText}>Destruction{"\n"}Dual Casting</Text>
       </View>
       <View title='Impact Blue' style={{
         position: 'absolute',
@@ -744,9 +882,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("ImpactModal")}
+
           onPress={() => {
             checkIfImpactPressed(
               state.impact == 0 ? 1 : 0,
@@ -755,6 +892,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.ImpactText}>
+        <Text style={styles.PerkText}>Impact</Text>
       </View>
       <View title='Deep Freeze Blue' style={{
         position: 'absolute',
@@ -774,9 +914,8 @@ const DestructionTree = () => {
 
       }}>
         <TouchableOpacity
-          onLongPress={() => {
-            setIsModalVisible(true);
-          }}
+          onLongPress={() => navigation.navigate("DeepFreezeModal")}
+
           onPress={() => {
             checkIfDeepFreezePressed(
               state.deepFreeze == 0 ? 1 : 0,
@@ -785,6 +924,9 @@ const DestructionTree = () => {
           }}>
           <StarIconGold />
         </TouchableOpacity>
+      </View>
+      <View style={styles.DeepFreezeText}>
+        <Text style={styles.PerkText}>Deep Freeze</Text>
       </View>
       <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
@@ -873,7 +1015,7 @@ const DestructionTree = () => {
           y1="35%"
           x2="40%"
           y2="48%"
-          stroke={state.augmentedShockLine}
+          stroke={state.disintegrateLine}
           strokeWidth={lineStrokeWidth}
         />
         <Line // Novice Destruction to Destruction Dual Casting
@@ -900,15 +1042,16 @@ const DestructionTree = () => {
 const styles = StyleSheet.create({
   HomeScreenText: {
     color: 'white',
+    fontWeight: '600',
+    fontSize: 18,
   },
   topText: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: "78%",
+    top: '8.5%',
+    left: '32%',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 10,
   },
   Icon: {
     position: 'absolute',
@@ -921,80 +1064,80 @@ const styles = StyleSheet.create({
   },
   ApprenticeDestructionText: {
     position: 'absolute',
-    left: "33%",
-    top: "55%",
+    left: "40%",
+    top: "63%",
     zIndex: 10,
   },
   AdeptDestructionText: {
     position: 'absolute',
-    left: "13%",
-    top: "53%",
+    left: "48%",
+    top: "42%",
     zIndex: 10,
   },
   ExpertDestructionText: {
     position: 'absolute',
-    left: "20%",
-    top: "46%",
+    left: "51%",
+    top: "31%",
     zIndex: 10,
   },
   MasterDestructionText: {
     position: 'absolute',
-    left: "24%",
-    top: "34%",
+    left: "48%",
+    top: "20%",
     zIndex: 10,
   },
   RuneMasterText: {
     position: 'absolute',
-    left: "44%",
-    top: "34%",
+    left: "74%",
+    top: "45%",
     zIndex: 10,
   },
   AugmentedFlamesText: {
     position: 'absolute',
-    left: "64%",
-    top: "40%",
+    left: "2%",
+    top: "63%",
     zIndex: 10,
   },
   IntenseFlamesText: {
     position: 'absolute',
-    left: "82%",
-    top: "50%",
+    left: "3%",
+    top: "43%",
     zIndex: 10,
   },
   AugmentedFrostText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "13%",
+    top: "56%",
     zIndex: 10,
   },
   DeepFreezeText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "10%",
+    top: "35%",
     zIndex: 10,
   },
   AugmentedShockText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "28%",
+    top: "52%",
     zIndex: 10,
   },
   DisintegrateText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "30%",
+    top: "30%",
     zIndex: 10,
   },
   DestructionDualCastingText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "68%",
+    top: "72%",
     zIndex: 10,
   },
   ImpactText: {
     position: 'absolute',
-    left: "70%",
-    top: "50%",
+    left: "79%",
+    top: "55%",
     zIndex: 10,
   },
   PerkText: {
@@ -1007,7 +1150,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    bottom: '67%',
+    bottom: '66.5%',
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -19,7 +19,12 @@ const ShieldWallModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Shield Wall{"\n"}</Text>
 
-                <Text style={styles.Text}>5 INCREMENTS EDIT</Text>
+                <Text style={styles.Text}>1: Blocking is 10% more effective{"\n"}
+                2: Blocking is 20% more effective{"\n"} 
+                3: Blocking is 30% more effective{"\n"}
+                4: Blocking is 40% more effective{"\n"}
+                5: Blocking is 50% more effective{"\n"}
+                 </Text>
 
             </View>
 

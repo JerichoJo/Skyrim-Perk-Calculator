@@ -31,6 +31,10 @@ const useSetState = (initialState = {}) => {
 
 const SneakTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const [StealthLevel, SetStealthLevel] = useState(0);
     const [state, setState] = useSetState({
         stealth: 0,
         muffledMovement: 0,
@@ -52,13 +56,30 @@ const SneakTree = () => {
         shadowWarriorLineLight: 'white',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
+    let resetAllTrees;
+    const resetSneakPerks = () => {
+        setState({ stealth: 0 });
+        setState({ muffledMovement: 0 });
+        setState({ muffledMovementLine: 'white' });
+        setState({ lightFoot: 0 });
+        setState({ lightFootLine: 'white' });
+        setState({ silentRoll: 0 });
+        setState({ silentRollLine: 'white' });
+        setState({ backstab: 0 });
+        setState({ backstabLine: 'white' });
+        setState({ deadlyAim: 0 });
+        setState({ deadlyAimLine: 'white' });
+        setState({ assassinsBlade: 0 });
+        setState({ assassinsBladeLine: 'white' });
+        setState({ silence: 0 });
+        setState({ silenceLine: 'white' });
+        setState({ shadowWarrior: 0 });
+        setState({ shadowWarriorLine: 'white' });
+        setState({ shadowWarriorLineLight: 'white' });
+        SetRequiredLevel(0);
+        SetStealthLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
-    const [StealthLevel, SetStealthLevel] = useState(0);
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
         SetAllActivePerks(AllActivePerks + numActivePerks);
@@ -123,7 +144,7 @@ const SneakTree = () => {
         } else {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     useEffect(() => {
         CheckLevel();
@@ -391,6 +412,12 @@ const SneakTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Sneak Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -425,7 +452,7 @@ const SneakTree = () => {
             <View style={styles.StealthText}>
                 <Text style={styles.PerkText}>Stealth ({StealthLevel}/5)</Text>
             </View>
-            
+
             <View title='Muffled Movement Blue' style={{
                 position: 'absolute',
                 left: "10%",
@@ -757,15 +784,16 @@ const SneakTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "70%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -824,10 +852,25 @@ const styles = StyleSheet.create({
         top: "60%",
         zIndex: 10,
     },
-
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '66.5%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

@@ -62,7 +62,7 @@ const SmithingTree = () => {
         daedricSmithingLine: 'white',
         dragonSmithing: 0,
         dragonSmithingLine: 'white',
-        dragonSmithingLineLight: 'white',
+        dragonSmithingLine2: 'white',
     });
 
     const resetSmithingPerks = () => {
@@ -85,7 +85,7 @@ const SmithingTree = () => {
         setState({ daedricSmithingLine: 'white' });
         setState({ dragonSmithing: 0 });
         setState({ dragonSmithingLine: 'white' });
-        setState({ dragonSmithingLineLight: 'white' });
+        setState({ dragonSmithingLine2: 'white' });
         SetRequiredLevel(0);
     }
 
@@ -143,7 +143,7 @@ const SmithingTree = () => {
         } else if (state.basicSmithing == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     useEffect(() => {
         CheckLevel();
@@ -226,7 +226,7 @@ const SmithingTree = () => {
 
         }
     };
-    const CheckIfGlassSmithingPressed = (buttonColor, lineColor) => {
+    const CheckIfGlassSmithingPressed = (buttonColor, lineColor, lineColor2) => {
         if (state.advancedSmithing == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ glassSmithing: buttonColor });
@@ -237,7 +237,7 @@ const SmithingTree = () => {
             setState({ advancedSmithingLine: lineColor });
             setState({ elvinSmithingLine: lineColor });
             if (state.dragonSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
+                setState({ dragonSmithingLine2: lineColor2 });
             }
             if (state.elvinSmithing == 1) {
                 IncrementCounter(2);
@@ -246,16 +246,21 @@ const SmithingTree = () => {
             } else {
                 IncrementCounter(4);
             }
+        } else if (state.dragonSmithing == 1 && state.daedricSmithing == 0) {
+            // Do nothing....must un-select nodes above it first
+        } else if (state.dragonSmithing == 1 && state.daedricSmithing == 1) {
+            setState({ dragonSmithingLine2: lineColor2 });
+            setState({ glassSmithingLine: lineColor });
+            setState({ glassSmithing: buttonColor }); // Change the pressed button color back and forth
+            state.glassSmithing == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else {
             setState({ glassSmithingLine: lineColor });
             setState({ glassSmithing: buttonColor }); // Change the pressed button color back and forth
             state.glassSmithing == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-            if (state.dragonSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
-            }
-
         }
     };
     const CheckIfDwarvenSmithingPressed = (buttonColor, lineColor) => {
@@ -339,6 +344,10 @@ const SmithingTree = () => {
             setState({ ebonySmithingLine: lineColor });
             setState({ orcishSmithingLine: lineColor });
             setState({ dwarvenSmithingLine: lineColor });
+            if (state.dragonSmithing == 1) {
+                setState({ dragonSmithingLine: lineColor });
+            }
+
             if (state.orcishSmithing == 1) {
                 IncrementCounter(2);
             } else if (state.dwarvenSmithing == 1) {
@@ -348,8 +357,15 @@ const SmithingTree = () => {
             } else {
                 IncrementCounter(5);
             }
-        } else if (state.dragonSmithing == 1) {
+        } else if (state.dragonSmithing == 1 && state.glassSmithing == 0) {
             // Do nothing....must un-select nodes above it first
+        } else if (state.dragonSmithing == 1 && state.glassSmithing == 1) {
+            setState({ dragonSmithingLine: lineColor });
+            setState({ daedricSmithingLine: lineColor });
+            setState({ daedricSmithing: buttonColor }); // Change the pressed button color back and forth
+            state.daedricSmithing == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else {
             setState({ daedricSmithingLine: lineColor });
             setState({ daedricSmithing: buttonColor }); // Change the pressed button color back and forth
@@ -358,41 +374,81 @@ const SmithingTree = () => {
                 : DecrementCounter(1);
         }
     };
-    const CheckIfDragonSmithingPressed = (buttonColor, lineColor) => {
-        if (state.daedricSmithing == 0) {
-            setState({ dragonSmithing: buttonColor });
-            setState({ daedricSmithing: buttonColor });
-            setState({ ebonySmithing: buttonColor });
-            setState({ orcishSmithing: buttonColor });
-            setState({ dwarvenSmithing: buttonColor });
-            setState({ basicSmithing: buttonColor });
-            setState({ dragonSmithingLine: lineColor });
-            setState({ daedricSmithingLine: lineColor });
-            setState({ ebonySmithingLine: lineColor });
-            setState({ orcishSmithingLine: lineColor });
-            setState({ dwarvenSmithingLine: lineColor });
-            if (state.glassSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
+
+    const CheckIfDragonSmithingPressed = (button, line, line2) => {
+        if (state.daedricSmithing == 1 && state.glassSmithing == 0) {
+            setState({ dragonSmithing: button });
+            setState({ dragonSmithingLine: line });
+            state.dragonSmithing == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+        else if (state.daedricSmithing == 0 && state.glassSmithing == 1) {
+            setState({ dragonSmithing: button });
+            setState({ dragonSmithingLine2: line2 });
+            state.dragonSmithing == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+        else if (state.daedricSmithing == 1 && state.glassSmithing == 1) {
+            setState({ dragonSmithing: button });
+            setState({ dragonSmithingLine: line });
+            setState({ dragonSmithingLine2: line2 });
+            state.dragonSmithing == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+        else if (state.basicSmithing == 0) {
+            setState({ dragonSmithing: button });
+            setState({ dragonSmithingLine: line });
+            setState({ daedricSmithing: button });
+            setState({ daedricSmithingLine: line });
+            setState({ ebonySmithing: button });
+            setState({ ebonySmithingLine: line });
+            setState({ orcishSmithing: button });
+            setState({ orcishSmithingLine: line });
+            setState({ dwarvenSmithing: button });
+            setState({ dwarvenSmithingLine: line });
+            setState({ basicSmithing: button });
+            IncrementCounter(6);
+
+        }
+        else if (state.elvinSmithing == 1 && state.ebonySmithing == 0) {
+            setState({ dragonSmithing: button });
+            setState({ dragonSmithingLine2: line });
+            setState({ glassSmithing: button });
+            setState({ glassSmithingLine: line });
+            setState({ advancedSmithing: button });
+            setState({ advancedSmithingLine: line });
+            setState({ elvinSmithing: button });
+            setState({ elvinSmithingLine: line });
+            setState({ basicSmithing: button });
+            if (state.advancedSmithing == 1) {
+                IncrementCounter(2);
             }
+            else {
+                IncrementCounter(3);
+            }
+        }
+        else {
+            setState({ dragonSmithing: button });
+            setState({ dragonSmithingLine: line });
+            setState({ daedricSmithing: button });
+            setState({ daedricSmithingLine: line });
+            setState({ ebonySmithing: button });
+            setState({ ebonySmithingLine: line });
+            setState({ orcishSmithing: button });
+            setState({ orcishSmithingLine: line });
+            setState({ dwarvenSmithing: button });
+            setState({ dwarvenSmithingLine: line });
+            setState({ basicSmithing: button });
             if (state.ebonySmithing == 1) {
                 IncrementCounter(2);
             } else if (state.orcishSmithing == 1) {
                 IncrementCounter(3);
-            } else if (state.dwarvenSmithing == 1) {
-                IncrementCounter(4);
-            } else if (state.basicSmithing == 1) {
-                IncrementCounter(5);
-            } else {
-                IncrementCounter(6);
             }
-        } else {
-            setState({ dragonSmithingLine: lineColor });
-            setState({ dragonSmithing: buttonColor });
-            state.dragonSmithing == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
-            if (state.glassSmithing == 1) {
-                setState({ dragonSmithingLineLight: lineColor });
+            else {
+                IncrementCounter(4);
             }
         }
     };
@@ -536,7 +592,7 @@ const SmithingTree = () => {
             <View title='Glass Smithing Blue' style={{
                 position: 'absolute',
                 left: "24%",
-                top: "34%",
+                top: "34.2%",
                 zIndex: 8,
 
             }}>
@@ -545,7 +601,7 @@ const SmithingTree = () => {
             <View title='Glass Smithing Gold' style={{
                 position: 'absolute',
                 left: "24%",
-                top: "34%",
+                top: "34.2%",
                 zIndex: 8,
                 opacity: state.glassSmithing
 
@@ -555,7 +611,8 @@ const SmithingTree = () => {
                     onPress={() => {
                         CheckIfGlassSmithingPressed(
                             state.glassSmithing == 0 ? 1 : 0,
-                            state.glassSmithingLine == 'white' ? 'gold' : 'white'
+                            state.glassSmithingLine == 'white' ? 'gold' : 'white',
+                            state.dragonSmithingLine2 == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -567,7 +624,7 @@ const SmithingTree = () => {
             <View title='Dragon Smithing Blue' style={{
                 position: 'absolute',
                 left: "44%",
-                top: "34%",
+                top: "34.2%",
                 zIndex: 8,
 
             }}>
@@ -576,7 +633,7 @@ const SmithingTree = () => {
             <View title='Dragon Smithing Gold' style={{
                 position: 'absolute',
                 left: "44%",
-                top: "34%",
+                top: "34.2%",
                 zIndex: 8,
                 opacity: state.dragonSmithing
 
@@ -587,7 +644,7 @@ const SmithingTree = () => {
                         CheckIfDragonSmithingPressed(
                             state.dragonSmithing == 0 ? 1 : 0,
                             state.dragonSmithingLine == 'white' ? 'gold' : 'white',
-                            state.dragonSmithingLineLight == 'white' ? 'gold' : 'white'
+                            state.dragonSmithingLine2 == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -763,7 +820,7 @@ const SmithingTree = () => {
                     y1="39%"
                     x2="53%"
                     y2="39%"
-                    stroke={state.dragonSmithingLineLight}
+                    stroke={state.dragonSmithingLine2}
                     strokeWidth={lineStrokeWidth}
 
                 />
@@ -819,15 +876,16 @@ const SmithingTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "75%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -902,7 +960,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: '64%',
+        bottom: '66.5%',
         justifyContent: 'center',
         alignItems: 'center',
     },

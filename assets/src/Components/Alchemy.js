@@ -34,6 +34,7 @@ const useSetState = (initialState = {}) => {
 
 const AlchemyTree = () => {
     const navigation = useNavigation();
+    
     const [state, setState] = useSetState({
         alchemist: 0,
         physician: 0,
@@ -55,14 +56,54 @@ const AlchemyTree = () => {
         experimenterSnakeLine: 'white',
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
+    let resetAllTrees;
+    const resetAlchemyPerks = () => {
+        setState({ alchemist: 0 });
+        setState({ physician: 0 });
+        setState({ physicianLine: 'white' });
+        setState({ prisoner: 0 });
+        setState({ prisonerLine: 'white' });
+        setState({ concentratedPoison: 0 });
+        setState({ concentratedPoisonLine: 'white' });
+        setState({ benefactor: 0 });
+        setState({ benefactorLine: 'white' });
+        setState({ experimenter: 0 });
+        setState({ experimenterLine: 'white' });
+        setState({ snakeblood: 0 });
+        setState({ snakebloodLine: 'white' });
+        setState({ purity: 0 });
+        setState({ purityLine: 'white' });
+        setState({ greenThumb: 0 });
+        setState({ greenThumbLine: 'white' });
+        setState({ experimenterSnakeLine: 'white' });
+        SetRequiredLevel(0);
+        SetAlchemyLevel(0);
+    }
 
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [AlchemyLevel, SetAlchemyLevel] = useState(0);
     const [ExperimenterLevel, SetExperimenterLevel] = useState(0);
+    const resetActivePerks = () => {
+        resetAlchemyPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetAlchemyPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -156,7 +197,7 @@ const AlchemyTree = () => {
         } else {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     useEffect(() => {
         CheckLevel();
@@ -533,6 +574,12 @@ const AlchemyTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Illusion Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -567,7 +614,7 @@ const AlchemyTree = () => {
             <View style={styles.AlchemistText}>
                 <Text style={styles.PerkText}>Alchemist({AlchemyLevel}/5)</Text>
             </View>
-            
+
             <View title='Physician Blue' style={{
                 position: 'absolute',
                 left: "60%",
@@ -821,7 +868,7 @@ const AlchemyTree = () => {
             </View>
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
-                
+
 
                 <Line
                     x1="25.2%"
@@ -911,15 +958,16 @@ const AlchemyTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "70%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -930,7 +978,7 @@ const styles = StyleSheet.create({
         top: "83%",
         zIndex: 10,
     },
-    
+
     PhysicianText: {
         position: 'absolute',
         left: "63%",
@@ -979,10 +1027,25 @@ const styles = StyleSheet.create({
         top: "68%",
         zIndex: 10,
     },
-
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '66.5%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

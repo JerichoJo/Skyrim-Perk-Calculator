@@ -181,31 +181,28 @@ const AlterationTree = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.masterAlt == 1) {
+        if (state.atronach == 1 || state.masterAlt) {
             TrackLevel(100);
-        } else if (state.atronach == 1) {
-            TrackLevel(90);
         } else if (state.expertAlt == 1) {
-            TrackLevel(80);
-        } else if (state.magicResis == 1) {
+            TrackLevel(75);
+        } else if (MageArmorLevel == 3 || MagicResisLevel == 3 || state.stability == 1) {
             TrackLevel(70);
-        } else if (state.altDualCasting == 1) {
-            TrackLevel(60);
-        } else if (state.mageArmor == 1) {
+        } else if (MageArmorLevel == 2 || MagicResisLevel == 2 || state.adeptAlt == 1) {
             TrackLevel(50);
-        } else if (state.masterAlt == 1) {
+        } else if (MageArmorLevel == 1 || MagicResisLevel == 1) {
+            TrackLevel(30);
+        } else if (state.apprenticeAlt == 1) {
+            TrackLevel(25);
+        } else if (state.altDualCasting == 1) {
             TrackLevel(20);
         } else if (state.noviceAlt == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state, MageArmorLevel, MagicResisLevel]);
 
     useEffect(() => {
         CheckLevel();
     }, [CheckLevel]);
-
-
-
 
     const CheckIfNoviceAltPressed = (button) => {
         if (
@@ -858,15 +855,16 @@ const AlterationTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "78%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -941,7 +939,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: '67%',
+        bottom: '66.5%',
         justifyContent: 'center',
         alignItems: 'center',
     },

@@ -12,6 +12,7 @@ import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
+import { State } from 'react-native-gesture-handler';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -40,7 +41,7 @@ const ArcheryTree = () => {
         Ranger: 0,
         RangerLine: 'white',
         QuickShot: 0,
-        QuickShotLine: 'white',        
+        QuickShotLine: 'white',
         Bullseye: 0,
         BullseyeLine: 'white',
         BullseyeDevLine: 'white',
@@ -57,7 +58,57 @@ const ArcheryTree = () => {
 
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [OverdrawLevel, SetOverdrawLevel] = useState(0);
+    const [SteadyHandLevel, SetSteadyHandLevel] = useState(0);
+    const [CriticalShotLevel, SetCriticalShotLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
+
+    let resetAllTrees;
+    const resetArcheryPerks = () => {
+        setState({ Overdraw: 0 });
+        setState({ EagleEye: 0 });
+        setState({ EagleEyeLine: 'white' });
+        setState({ SteadyHand: 0 });
+        setState({ SteadyHandLine: 'white' });
+        setState({ PowerShot: 0 });
+        setState({ PowerShotLine: 'white' });
+        setState({ QuickShot: 0 });
+        setState({ QuickShotLine: 'white' });
+        setState({ Bullseye: 0 });
+        setState({ BullseyeLine: 'white' });
+        setState({ BullseyeDevLine: 'white' });
+        setState({ Ranger: 0 });
+        setState({ RangerLine: 'white' });
+        setState({ HuntersDiscipline: 0 });
+        setState({ HuntersDisciplineLine: 'white' });
+        setState({ CriticalShot: 0 });
+        setState({ CriticalShotLine: 'white' });
+        SetCriticalShotLevel(0);
+        SetOverdrawLevel(0);
+        SetSteadyHandLevel(0);
+        SetRequiredLevel(0);
+    }
+
+    const resetActivePerks = () => {
+        resetArcheryPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetArcheryPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -75,28 +126,88 @@ const ArcheryTree = () => {
         SetRequiredLevel(level);
     }, []);
 
+
     const lineStrokeWidth = '2';
-
     const CheckLevel = useCallback(() => {
-        if (state.PowerShot == 1) {
+        if (state.Bullseye == 1) {
             TrackLevel(100);
-        } else if (state.QuickShot == 1) {
-            TrackLevel(90);
-        } else if (state.Bullseye == 1) {
-            TrackLevel(75);
-        }  else if (state.EagleEye == 1) {
-            TrackLevel(60);
-        } else if (state.Ranger == 1) {
-            TrackLevel(50);
-        } else if (state.SteadyHand == 1) {
-            TrackLevel(40);
-        } else if (state.HuntersDiscipline == 1) {
-            TrackLevel(25);
-        } else if (state.CriticalShot == 1) {
-            TrackLevel(20);
         }
-    }, [TrackLevel, state]);
+        else if (state.CriticalShot == 1 && CriticalShotLevel == 3) {
+            TrackLevel(90);
+        } else if (state.Overdraw == 1 && OverdrawLevel == 5) {
+            TrackLevel(80);
+        } else if (state.QuickShot == 1) {
+            TrackLevel(70);
+        } else if (state.SteadyHand == 1 && SteadyHandLevel == 2 || state.Overdraw == 1 && OverdrawLevel == 4 || state.CriticalShot == 1 || CriticalShotLevel == 2 || state.Ranger == 1) {
+            TrackLevel(60);
+        } else if (state.HuntersDiscipline == 1 || state.PowerShot == 1) {
+            TrackLevel(50);
+        } else if (state.SteadyHand == 1 || state.Overdraw == 1 && OverdrawLevel == 3) {
+            TrackLevel(40);
+        } else if (state.EagleEye == 1 || state.CriticalShot == 1) {
+            TrackLevel(30);
+        } else if (state.Overdraw == 1) {
+            TrackLevel(25);
+        } else {
+            TrackLevel(0);
+        }
+    }, [state]);
+    const IncCriticalShotCounter = (numActiveCriticalShot) => {
+        if (CriticalShotLevel < 3) {
+            SetCriticalShotLevel(CriticalShotLevel + numActiveCriticalShot)
+        }
+        else {
+            SetCriticalShotLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
 
+    // function to control the Renew perk count (0/2)
+    const IncCriticalShotCountCall = (buttonColor, line) => {
+        if (CriticalShotLevel == 0) {
+            setState({ CriticalShot: buttonColor });  // Change the pressed button color back and forth
+            setState({ CriticalShotLine: line }); // Change the line color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncCriticalShotCounter(1); // increment basic smith by 1 on first click
+        } else if (CriticalShotLevel == 3) {
+            setState({ CriticalShot: buttonColor }); // Change the pressed button color back and forth
+            setState({ CriticalShotLine: line }) // Change the line color back and forth
+            IncCriticalShotCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(3); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncCriticalShotCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
+    const IncSteadyHandCounter = (numActiveSteadyHand) => {
+        if (SteadyHandLevel < 2) {
+            SetSteadyHandLevel(SteadyHandLevel + numActiveSteadyHand)
+        }
+        else {
+            SetSteadyHandLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    // function to control the SteadyHand perk count (0/5)
+    const IncSteadyHandCountCall = (buttonColor, line) => {
+        if (SteadyHandLevel == 0) {
+            setState({ SteadyHand: buttonColor }); // Change the pressed button color back and forth
+            setState({ SteadyHandLine: line }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncSteadyHandCounter(1); // increment basic smith by 1 on first click
+        } else if (SteadyHandLevel == 2) {
+            setState({ SteadyHand: buttonColor }); // Change the line color back and forth
+            setState({ SteadyHandLine: line }); // Change the line color back and forth
+            IncSteadyHandCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(2); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncSteadyHandCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
     const CheckIfOverdrawPressed = (button) => {
         if (
             state.HuntersDiscipline == 1 ||
@@ -105,41 +216,87 @@ const ArcheryTree = () => {
             state.CriticalShot == 1
         ) {
             // Do nothing....must un-select nodes above it first
+            if (OverdrawLevel == 5) {
+                DecrementCounter(4); // decrease active perks back down 4 because it is set back to 1
+                SetOverdrawLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncOverdrawCounter(1) // increment by 1 after it perk is active
+            }
         }
         else {
-            setState({ Overdraw: button }); // Change button color back and forth
-            state.Overdraw == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncOverdrawCountCall(button);
         }
     };
+    const IncOverdrawCounter = (numActiveOverdraw) => {
+        if (OverdrawLevel < 5) {
+            SetOverdrawLevel(OverdrawLevel + numActiveOverdraw)
+        }
+        else {
+            SetOverdrawLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
 
+    // function to control the Overdraw perk count (0/5)
+    const IncOverdrawCountCall = (buttonColor) => {
+        if (OverdrawLevel == 0) {
+            setState({ Overdraw: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncOverdrawCounter(1); // increment basic smith by 1 on first click
+        } else if (OverdrawLevel == 5) {
+            setState({ Overdraw: buttonColor }); // Change the pressed button color back and forth
+            IncOverdrawCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+
+        } else {
+            IncrementCounter(1);
+            IncOverdrawCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
     const CheckIfSteadyHandPressed = (button, line) => {
-        if (state.Overdraw == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
+        if (state.EagleEye == 0 && state.Overdraw == 0) {
             setState({ Overdraw: button });
-            setState({ OverdrawLine: line });
             setState({ SteadyHand: button });
             setState({ SteadyHandLine: line });
-            IncrementCounter(2);
-        } else {
+            setState({ EagleEye: button });
+            setState({ EagleEyeLine: line });
+            IncrementCounter(3);
+            SetSteadyHandLevel(1);
+            SetOverdrawLevel(1);
+        }
+        else if (state.EagleEye == 0 && state.Overdraw == 1) {
+            setState({ Overdraw: button });
+            setState({ SteadyHand: button });
             setState({ SteadyHandLine: line });
-            setState({ SteadyHand: button }); // Change the pressed button color back and forth
-            state.SteadyHand == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            setState({ EagleEye: button });
+            setState({ EagleEyeLine: line });
+            IncrementCounter(2);
+            SetSteadyHandLevel(1);
+        }
+        else {
+            IncSteadyHandCountCall(button, line);
         }
     };
 
     const CheckIfHuntersDisciplinePressed = (button, line) => {
-        if (state.Overdraw == 0) {
+        if (state.CriticalShot == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ Overdraw: button });
-            setState({ OverdrawLine: line });
             setState({ HuntersDiscipline: button });
             setState({ HuntersDisciplineLine: line });
-
-            IncrementCounter(2);
+            setState({ CriticalShot: button });
+            setState({ CriticalShotLine: line });
+            SetCriticalShotLevel(1);
+            if (state.Overdraw == 0) {
+                SetOverdrawLevel(1);
+            }
+            if (state.Overdraw == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
         } else if (state.Ranger == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
@@ -151,22 +308,43 @@ const ArcheryTree = () => {
 
         }
     };
-    const CheckIfRangerPressed = (button, line) => {
+    const CheckIfRangerPressed = (button, line, line2) => {
         if (state.HuntersDiscipline == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ Overdraw: button });
             setState({ Ranger: button });
-            setState({ HuntersDiscipline: button });
             setState({ RangerLine: line });
+            setState({ HuntersDiscipline: button });
             setState({ HuntersDisciplineLine: line });
-            if (state.Overdraw == 1) {
-                IncrementCounter(2);
-            } else {
-                IncrementCounter(3);
+            setState({ CriticalShot: button });
+            setState({ CriticalShotLine: line });
+            if (state.CriticalShot == 0) {
+                SetCriticalShotLevel(1);
             }
-        } else if (state.Bullseye == 1) {
+            if (state.Overdraw == 0) {
+                SetOverdrawLevel(1);
+            }
+            if (state.Bullseye == 1) {
+                setState({ BullseyeDevLine: line2 });
+            }
+            if (state.CriticalShot == 1) {
+                IncrementCounter(2);
+            } else if (state.Overdraw == 1) {
+                IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
+            }
+        } else if (state.Bullseye == 1 && state.QuickShot == 0) {
             // Do nothing....must un-select nodes above it first
-        } else {
+        } else if (state.Bullseye == 1 && state.QuickShot == 1) {
+            setState({ BullseyeDevLine: line2 });
+            setState({ RangerLine: line });
+            setState({ Ranger: button }); // Change the pressed button color back and forth
+            state.Ranger == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+        else {
             setState({ RangerLine: line });
             setState({ Ranger: button }); // Change the pressed button color back and forth
             state.Ranger == 0
@@ -176,20 +354,39 @@ const ArcheryTree = () => {
         }
     };
     const CheckIfQuickShotPressed = (button, line) => {
-        if (state.HuntersDiscipline == 0) {
+        if (state.PowerShot == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ Overdraw: button });
+            setState({ PowerShot: button });
+            setState({ PowerShotLine: line });
+            setState({ EagleEye: button });
+            setState({ EagleEyeLine: line });
             setState({ QuickShot: button });
-            setState({ HuntersDiscipline: button });
             setState({ QuickShotLine: line });
-            setState({ HuntersDisciplineLine: line });
+            setState({ Overdraw: button });
+            if (state.Overdraw == 0) {
+                SetOverdrawLevel(1);
+            }
+            if (state.Bullseye == 1) {
+                setState({ BullseyeLine: line });
+            }
             if (state.Overdraw == 1) {
                 IncrementCounter(2);
-            } else {
+            } else if (state.EagleEye == 1) {
                 IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
             }
-        } else if (state.Bullseye == 1) {
+        }
+        else if (state.Bullseye == 1 && state.Ranger == 0) {
             // Do nothing....must un-select nodes above it first
+        }
+        else if (state.Bullseye == 1 && state.Ranger == 1) {
+            setState({ BullseyeLine: line });
+            setState({ QuickShotLine: line });
+            setState({ QuickShot: button }); // Change the pressed button color back and forth
+            state.QuickShot == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else {
             setState({ QuickShotLine: line });
             setState({ QuickShot: button }); // Change the pressed button color back and forth
@@ -198,81 +395,106 @@ const ArcheryTree = () => {
                 : DecrementCounter(1);
 
         }
-    };    
+    };
     const CheckIfBullseyePressed = (button, line, line2) => {
-        if (state.PowerShot == 1 ) {
-            // Do nothing....must un-select nodes above it first
-        }        
-        else if (state.Ranger == 0 && state.QuickShot == 0) {
-            // Change the colors of the buttons below it if they have not been pressed
-            setState({ Bullseye: button });
-            setState({ Ranger: button });
-            setState({ HuntersDiscipline: button });
-            setState({ Overdraw: button });
-            setState({ BullseyeDevLine: line });
-            setState({ RangerLine: line });
-            setState({ HuntersDisciplineLine: line });
-            if (state.HuntersDiscipline == 1) {
-                IncrementCounter(2);
-            } else if (state.Overdraw == 1) {
-                IncrementCounter(3);
-            } else {
-                IncrementCounter(4);
-            }
-        }
-        else if (state.Ranger == 1 && state.QuickShot == 0) {
+        if (state.Ranger == 1 && state.QuickShot == 0) {
             setState({ Bullseye: button });
             setState({ BullseyeDevLine: line2 });
             state.Bullseye == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
         else if (state.Ranger == 0 && state.QuickShot == 1) {
             setState({ Bullseye: button });
             setState({ BullseyeLine: line });
             state.Bullseye == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
-        }      
-        else if (state.Ranger == 1 && state.QuickShot == 1){
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+        else if (state.Ranger == 1 && state.QuickShot == 1) {
             setState({ Bullseye: button });
             setState({ BullseyeLine: line });
             setState({ BullseyeDevLine: line2 });
             state.Bullseye == 0
-            ? IncrementCounter(1)
-            : DecrementCounter(1);
-        }    
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        }
+        else if (state.Overdraw == 0) {
+            setState({ Bullseye: button });
+            setState({ BullseyeDevLine: line });
+            setState({ Ranger: button });
+            setState({ RangerLine: line });
+            setState({ HuntersDiscipline: button });
+            setState({ HuntersDisciplineLine: line });
+            setState({ CriticalShot: button });
+            setState({ CriticalShotLine: line });
+            setState({ Overdraw: button });
+            IncrementCounter(5);
+            if (state.CriticalShot == 0) {
+                SetCriticalShotLevel(1);
+            }
+            if (state.Overdraw == 0) {
+                SetOverdrawLevel(1);
+            }
+        }
+        else if (state.EagleEye == 1 && state.HuntersDiscipline == 0) {
+            setState({ Bullseye: button });
+            setState({ BullseyeLine: line });
+            setState({ QuickShot: button });
+            setState({ QuickShotLine: line });
+            setState({ PowerShot: button });
+            setState({ PowerShotLine: line });
+            setState({ EagleEye: button });
+            setState({ EagleEyeLine: line });
+            setState({ Overdraw: button });
+            if (state.PowerShot == 1) {
+                IncrementCounter(2);
+            }
+            else {
+                IncrementCounter(3);
+            }
+        }
+        else {
+            setState({ Bullseye: button });
+            setState({ BullseyeDevLine: line });
+            setState({ Ranger: button });
+            setState({ RangerLine: line });
+            setState({ HuntersDiscipline: button });
+            setState({ HuntersDisciplineLine: line });
+            setState({ CriticalShot: button });
+            setState({ CriticalShotLine: line });
+            setState({ Overdraw: button });
+            if (state.CriticalShot == 0) {
+                SetCriticalShotLevel(1);
+            }
+            if (state.HuntersDiscipline == 1) {
+                IncrementCounter(2);
+            }
+            else {
+                IncrementCounter(4);
+            }
+        }
 
     };
     const CheckIfPowerShotPressed = (button, line) => {
-        if (state.Bullseye == 0 && state.QuickShot == 0) {
+        if (state.EagleEye == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ PowerShot: button });
-            setState({ Bullseye: button });
-            setState({ HuntersDiscipline: button });
-            setState({ Overdraw: button });  
-            setState({ PowerShotLine: line }); 
-            setState({ HuntersDisciplineLine: line });
-            setState({ Ranger: button });
-            setState({ RangerLine: line });
-            setState({ BullseyeDevLine: line});
-            if (state.Ranger == 1) {
-                IncrementCounter(2);
-            } else if (state.HuntersDiscipline == 1) {
-                IncrementCounter(3);
-            } else if (state.Overdraw == 1) {
-                IncrementCounter(4);
-            } else {
-                IncrementCounter(5);
-            }
-        }                                 
-        else if (state.Bullseye == 0 && state.QuickShot == 1){
-            setState({ Bullseye: button });    
-            setState({ BullseyeLine: line });
-            setState({ PowerShot: button });
             setState({ PowerShotLine: line });
-            IncrementCounter(2);         
-        } 
+            setState({ Overdraw: button });
+            setState({ EagleEye: button });
+            setState({ EagleEyeLine: line });
+            if (state.Overdraw == 0) {
+                SetOverdrawLevel(1);
+            }
+            if (state.Overdraw == 1) {
+                IncrementCounter(2);
+            } else {
+                IncrementCounter(3);
+            }
+        } else if (state.QuickShot == 1) {
+            // Do nothing....must un-select nodes above it first
+        }
         else {
             setState({ PowerShotLine: line });
             setState({ PowerShot: button }); // Change the pressed button color back and forth
@@ -286,11 +508,17 @@ const ArcheryTree = () => {
         if (state.Overdraw == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ Overdraw: button });
-            setState({ OverdrawLine: line });
             setState({ EagleEye: button });
             setState({ EagleEyeLine: line });
             IncrementCounter(2);
-        } else {
+            if (state.Overdraw == 0) {
+                SetOverdrawLevel(1);
+            }
+        }
+        else if (state.PowerShot == 1 || state.SteadyHand == 1) {
+            // Do nothing....must un-select nodes above it first
+        }
+        else {
             setState({ EagleEyeLine: line });
             setState({ EagleEye: button }); // Change the pressed button color back and forth
             state.EagleEye == 0
@@ -302,22 +530,36 @@ const ArcheryTree = () => {
         if (state.Overdraw == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ Overdraw: button });
-            setState({ OverdrawLine: line });
+            setState({ noviceRestorationLine: line });
             setState({ CriticalShot: button });
             setState({ CriticalShotLine: line });
             IncrementCounter(2);
-        } else {
-            setState({ CriticalShotLine: line });
-            setState({ CriticalShot: button }); // Change the pressed button color back and forth
-            state.CriticalShot == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            SetOverdrawLevel(1);
+            SetCriticalShotLevel(1);
+        }
+        else if (state.HuntersDiscipline == 1) {
+            if (CriticalShotLevel == 3) {
+                DecrementCounter(1); // decrease active perks back down 4 because it is set back to 1
+                SetCriticalShotLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncCriticalShotCounter(1) // increment by 1 after it perk is active
+            }
+        }
+        else {
+            IncCriticalShotCountCall(button, line);
         }
     };
 
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Archery Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -340,7 +582,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("BasicSmithingModal")}
+                    onLongPress={() => navigation.navigate("OverdrawModal")}
                     onPress={() => {
                         CheckIfOverdrawPressed(
                             state.Overdraw == 0 ? 1 : 0,
@@ -350,7 +592,7 @@ const ArcheryTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.OverdrawText}>
-                <Text style={styles.PerkText}>Overdraw</Text>
+                <Text style={styles.PerkText}>Overdraw({OverdrawLevel}/5)</Text>
             </View>
             <View title='SteadyHand Blue' style={{
                 position: 'absolute',
@@ -371,7 +613,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => navigation.navigate("ArcaneSmithingModal")}
+                    onLongPress={() => navigation.navigate("SteadyHandModal")}
                     onPress={() => {
                         CheckIfSteadyHandPressed(
                             state.SteadyHand == 0 ? 1 : 0,
@@ -382,11 +624,11 @@ const ArcheryTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.SteadyHandText}>
-                <Text style={styles.PerkText}>Steady Hand</Text>
+                <Text style={styles.PerkText}>Steady Hand({SteadyHandLevel}/2)</Text>
             </View>
             <View title='Hunters Discipline Blue' style={{
                 position: 'absolute',
-                left: "60%",
+                left: "60.5%",
                 top: "40%",
                 zIndex: 8,
 
@@ -402,9 +644,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("HuntersDisciplineModal")}
                     onPress={() => {
                         CheckIfHuntersDisciplinePressed(
                             state.HuntersDiscipline == 0 ? 1 : 0,
@@ -435,13 +675,12 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("RangerModal")}
                     onPress={() => {
                         CheckIfRangerPressed(
                             state.Ranger == 0 ? 1 : 0,
-                            state.RangerLine == 'white' ? 'gold' : 'white'
+                            state.RangerLine == 'white' ? 'gold' : 'white',
+                            state.BullseyeDevLine == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -468,9 +707,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("BullseyeModal")}
                     onPress={() => {
                         CheckIfBullseyePressed(
                             state.Bullseye == 0 ? 1 : 0,
@@ -502,9 +739,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("PowerShotModal")}
                     onPress={() => {
                         CheckIfPowerShotPressed(
                             state.PowerShot == 0 ? 1 : 0,
@@ -536,9 +771,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("EagleEyeModal")}
                     onPress={() => {
                         CheckIfEagleEyePressed(
                             state.EagleEye == 0 ? 1 : 0,
@@ -569,9 +802,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("CriticalShotModal")}
                     onPress={() => {
                         CheckIfCriticalShotPressed(
                             state.CriticalShot == 0 ? 1 : 0,
@@ -582,7 +813,7 @@ const ArcheryTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.CriticalShotText}>
-                <Text style={styles.PerkText}>Critical Shot</Text>
+                <Text style={styles.PerkText}>Critical Shot({CriticalShotLevel}/3)</Text>
             </View>
 
             <View title='Quick Shot Blue' style={{
@@ -603,9 +834,7 @@ const ArcheryTree = () => {
 
             }}>
                 <TouchableOpacity
-                    onLongPress={() => {
-                        setIsModalVisible(true);
-                    }}
+                    onLongPress={() => navigation.navigate("QuickShotModal")}
                     onPress={() => {
                         CheckIfQuickShotPressed(
                             state.QuickShot == 0 ? 1 : 0,
@@ -621,64 +850,64 @@ const ArcheryTree = () => {
             <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`} >
 
                 <Line
-                    x1="48.2%"
-                    y1="85%"
-                    x2="15%"
-                    y2="66.5%"
+                    x1="30%"
+                    y1="75%"
+                    x2="50%"
+                    y2="69%"
                     stroke={state.SteadyHandLine}
                     strokeWidth={lineStrokeWidth}
                 />
 
                 <Line
-                    x1="48.2%"
-                    y1="72%"
-                    x2="48.2%"
-                    y2="85%"
+                    x1="82.5%"
+                    y1="70%"
+                    x2="71%"
+                    y2="45%"
                     stroke={state.HuntersDisciplineLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="48.2%"
-                    y1="72.8%"
-                    x2="66%"
-                    y2="50%"
+                    x1="65%"
+                    y1="32%"
+                    x2="71%"
+                    y2="45%"
                     stroke={state.RangerLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="48.2%"
-                    y1="72.8%"
-                    x2="29.5%"
-                    y2="49%"
+                    x1="15.5%"
+                    y1="55%"
+                    x2="25%"
+                    y2="30%"
                     stroke={state.QuickShotLine}
                     strokeWidth={lineStrokeWidth}
 
-                />                
+                />
                 <Line
-                    x1="30%"
-                    y1="50%"
-                    x2="48.2%"
-                    y2="32%"
+                    x1="25%"
+                    y1="30%"
+                    x2="47%"
+                    y2="25%"
                     stroke={state.BullseyeLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="66%"
-                    y1="49.5%"
-                    x2="48.2%"
+                    x1="49%"
+                    y1="25%"
+                    x2="64%"
                     y2="32%"
                     stroke={state.BullseyeDevLine}
                     strokeWidth={lineStrokeWidth}
 
-                />                
+                />
                 <Line
-                    x1="48.2%"
-                    y1="32%"
-                    x2="48.2%"
-                    y2="20%"
+                    x1="15.5%"
+                    y1="55%"
+                    x2="30%"
+                    y2="75%"
                     stroke={state.PowerShotLine}
                     strokeWidth={lineStrokeWidth}
 
@@ -686,19 +915,19 @@ const ArcheryTree = () => {
 
 
                 <Line
-                    x1="68%"
-                    y1="65%"
-                    x2="48.2%"
-                    y2="85%"
+                    x1="75%"
+                    y1="85%"
+                    x2="30%"
+                    y2="75%"
                     stroke={state.EagleEyeLine}
                     strokeWidth={lineStrokeWidth}
 
                 />
                 <Line
-                    x1="90%"
-                    y1="63%"
-                    x2="48.2%"
-                    y2="85%"
+                    x1="75%"
+                    y1="85%"
+                    x2="82%"
+                    y2="70%"
                     stroke={state.CriticalShotLine}
                     strokeWidth={lineStrokeWidth}
 
@@ -751,7 +980,7 @@ const styles = StyleSheet.create({
         left: "18%",
         top: "32%",
         zIndex: 10,
-    },    
+    },
     RangerText: {
         position: 'absolute',
         left: "60.5%",
@@ -786,6 +1015,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '66.5%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

@@ -31,6 +31,10 @@ const useSetState = (initialState = {}) => {
 
 const LightArmorTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [AgileDefenderLevel, SetAgileDefenderLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [state, setState] = useSetState({
         agileDefender: 0,
         customeFit: 0,
@@ -47,11 +51,44 @@ const LightArmorTree = () => {
 
     });
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    let resetAllTrees;
+    const resetLightArmorPerks = () => {
+        setState({ agileDefender: 0 });
+        setState({ customeFit: 0 });
+        setState({ customeFitLine: 'white' });
+        setState({ unhindered: 0 });
+        setState({ unhinderedLine: 'white' });
+        setState({ windWalker: 0 });
+        setState({ windWalkerLine: 'white' });
+        setState({ matchingSet: 0 });
+        setState({ matchingSetLine: 'white' });
+        setState({ deftMovement: 0 });
+        setState({ deftMovementLine: 'white' });
+        setState({ deftMovementLine2: 'white' });
+        SetRequiredLevel(0);
+        SetAgileDefenderLevel(0);
+    }
 
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+    const resetActivePerks = () => {
+        resetLightArmorPerks();
+        DecrementCounter(ActivePerks);
+    };
+
+    // Use this to control Re-renders for resetting AllActivePerks with useEffect();
+    if (AllActivePerks == 0) {
+        resetAllTrees = 1;
+    } else {
+        resetAllTrees = 0;
+    }
+
+    // Each time AllActiverPerks hits 0, re-render and reset all the nodes....AllActivePerks is set to 0 in DrawerNav.js via a button
+    useEffect(() => {
+        if (resetAllTrees == 1) {
+            resetLightArmorPerks();
+            SetActivePerks(0);
+        }
+    }, [resetAllTrees]);
+
 
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
@@ -65,6 +102,32 @@ const LightArmorTree = () => {
         SetAllActivePerks(AllActivePerks - numActivePerks);
     };
 
+    const IncAgileDefenderCounter = (numActiveAgileDefender) => {
+        if (AgileDefenderLevel < 5) {
+            SetAgileDefenderLevel(AgileDefenderLevel + numActiveAgileDefender)
+        }
+        else {
+            SetAgileDefenderLevel(0) // return to 0 after the perk is maxed out
+        }
+    }
+
+    // function to control the AgileDefender perk count (0/5)
+    const IncAgileDefenderCall = (buttonColor) => {
+        if (AgileDefenderLevel == 0) {
+            setState({ agileDefender: buttonColor }); // Change the pressed button color back and forth
+            IncrementCounter(1); // increment active perks by 1 on first click
+            IncAgileDefenderCounter(1); // increment AgileDefender by 1 on first click
+        } else if (AgileDefenderLevel == 5) {
+            setState({ agileDefender: buttonColor }); // Change the pressed button color back and forth
+            IncAgileDefenderCounter(1); // Increment by one so that it goes back to 0 
+            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+        } else {
+            IncrementCounter(1);
+            IncAgileDefenderCounter(1) // increment by 1 after it perk is active
+        }
+
+    }
+
     const TrackLevel = useCallback((level) => {
         SetRequiredLevel(level);
     }, []);
@@ -72,24 +135,26 @@ const LightArmorTree = () => {
     const lineStrokeWidth = '2';
 
     const CheckLevel = useCallback(() => {
-        if (state.animage == 1) {
+        if (state.deftMovement == 1) {
             TrackLevel(100);
-        } else if (state.rage == 1) {
-            TrackLevel(90);
-        } else if (state.aspectOfTerror == 1) {
+        } else if (AgileDefenderLevel == 5) {
             TrackLevel(80);
         } else if (state.matchingSet == 1) {
             TrackLevel(70);
-        } else if (state.customeFit == 1) {
+        } else if (state.windWalker == 1 || AgileDefenderLevel == 4) {
             TrackLevel(60);
-        } else if (state.windWalker == 1) {
+        } else if (state.unhindered == 1) {
             TrackLevel(50);
-        } else if (state.animage == 1) {
+        } else if (AgileDefenderLevel == 3) {
+            TrackLevel(40);
+        } else if (state.customeFit == 1) {
+            TrackLevel(30);
+        } else if (AgileDefenderLevel == 2) {
             TrackLevel(20);
-        } else if (state.agileDefender == 1) {
+        } else if (AgileDefenderLevel == 1) {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state, AgileDefenderLevel]);
 
     useEffect(() => {
         CheckLevel();
@@ -100,12 +165,17 @@ const LightArmorTree = () => {
             state.customeFit == 1
         ) {
             // Do nothing....must un-select nodes above it first
+            if (AgileDefenderLevel == 5) {
+                DecrementCounter(4); // decrease active perks back down 4 because it is set back to 1
+                SetAgileDefenderLevel(1);
+
+            } else {
+                IncrementCounter(1);
+                IncAgileDefenderCounter(1) // increment by 1 after it perk is active
+            }
         }
         else {
-            setState({ agileDefender: buttonColor }); // Change button color back and forth
-            state.agileDefender == 0
-                ? IncrementCounter(1)
-                : DecrementCounter(1);
+            IncAgileDefenderCall(buttonColor);
         }
     };
 
@@ -115,6 +185,9 @@ const LightArmorTree = () => {
             setState({ agileDefender: buttonColor });
             setState({ customeFit: buttonColor });
             setState({ customeFitLine: lineColor });
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
             IncrementCounter(2);
         } else if (state.unhindered == 1 || state.matchingSet == 1) {
             // Do nothing....must un-select nodes above it first
@@ -135,6 +208,10 @@ const LightArmorTree = () => {
             setState({ unhindered: buttonColor });
             setState({ customeFitLine: lineColor });
             setState({ unhinderedLine: lineColor });
+
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
             if (state.agileDefender == 1) {
                 IncrementCounter(2);
             } else {
@@ -161,6 +238,12 @@ const LightArmorTree = () => {
             setState({ unhinderedLine: lineColor });
             setState({ windWalkerLine: lineColor });
 
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
+            if (state.deftMovement == 1) {
+                setState({ deftMovementLine: lineColor })
+            }
             if (state.customeFit == 1) {
                 IncrementCounter(2);
             } else if (state.agileDefender == 1) {
@@ -168,8 +251,15 @@ const LightArmorTree = () => {
             } else {
                 IncrementCounter(4);
             }
-        } else if (state.deftMovement == 1) {
+        } else if (state.deftMovement == 1 && state.matchingSet == 0) {
             // Do nothing....must un-select nodes above it first
+        } else if (state.deftMovement == 1 && state.matchingSet == 1) {
+            setState({ windWalkerLine: lineColor });
+            setState({ windWalker: buttonColor }); // Change the pressed button color back and forth
+            setState({ deftMovementLine: lineColor }); // Change the pressed button color back and forth
+            state.windWalker == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else {
             setState({ windWalkerLine: lineColor });
             setState({ windWalker: buttonColor }); // Change the pressed button color back and forth
@@ -178,8 +268,8 @@ const LightArmorTree = () => {
                 : DecrementCounter(1);
         }
     };
-    const CheckIfDeftMovementPressed = (buttonColor, lineColor) => {
-        if (state.windWalker == 0) {
+    const CheckIfDeftMovementPressed = (buttonColor, lineColor, lineColor2) => {
+        if (state.windWalker == 0 && state.matchingSet == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ agileDefender: buttonColor });
             setState({ customeFit: buttonColor });
@@ -191,6 +281,9 @@ const LightArmorTree = () => {
             setState({ windWalkerLine: lineColor });
             setState({ deftMovementLine: lineColor });
 
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
             if (state.unhindered == 1) {
                 IncrementCounter(2);
             } else if (state.customeFit == 1) {
@@ -200,16 +293,28 @@ const LightArmorTree = () => {
             } else {
                 IncrementCounter(5);
             }
-        } else {
+        } else if (state.windWalker == 1 && state.matchingSet == 0) {
+            setState({ deftMovement: buttonColor });
             setState({ deftMovementLine: lineColor });
-            setState({ deftMovement: buttonColor }); // Change the pressed button color back and forth
             state.deftMovement == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-
+        } else if (state.windWalker == 0 && state.matchingSet == 1) {
+            setState({ deftMovement: buttonColor });
+            setState({ deftMovementLine2: lineColor2 });
+            state.deftMovement == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
+        } else if (state.windWalker == 1 && state.matchingSet == 1) {
+            setState({ deftMovement: buttonColor });
+            setState({ deftMovementLine: lineColor });
+            setState({ deftMovementLine2: lineColor2 });
+            state.deftMovement == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         }
     };
-    const CheckIfMatchingSetPressed = (buttonColor, lineColor) => {
+    const CheckIfMatchingSetPressed = (buttonColor, lineColor, lineColor2) => {
         if (state.customeFit == 0) {
             // Change the colors of the buttons below it if they have not been pressed
             setState({ agileDefender: buttonColor });
@@ -217,11 +322,24 @@ const LightArmorTree = () => {
             setState({ matchingSet: buttonColor });
             setState({ customeFitLine: lineColor });
             setState({ matchingSetLine: lineColor });
+
+            if (state.agileDefender == 0) {
+                SetAgileDefenderLevel(1);
+            }
             if (state.agileDefender == 1) {
                 IncrementCounter(2);
             } else {
                 IncrementCounter(3);
             }
+        } else if (state.deftMovement == 1 && state.windWalker == 0) {
+            // Do nothing....must un-select nodes above it first
+        } else if (state.deftMovement == 1 && state.windWalker == 1) {
+            setState({ matchingSetLine: lineColor });
+            setState({ matchingSet: buttonColor }); // Change the pressed button color back and forth
+            setState({ deftMovementLine2: lineColor2 });
+            state.matchingSet == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else {
             setState({ matchingSetLine: lineColor });
             setState({ matchingSet: buttonColor }); // Change the pressed button color back and forth
@@ -233,6 +351,12 @@ const LightArmorTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "white", fontWeight: "bold", }}> Reset Light Armor Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
                 <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel} </Text>
@@ -265,7 +389,7 @@ const LightArmorTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.AgileDefenderText}>
-                <Text style={styles.PerkText}>Agile Defender ({ }/5)</Text>
+                <Text style={styles.PerkText}>Agile Defender ({AgileDefenderLevel}/5)</Text>
             </View>
             <View title='Custom Fit Blue' style={{
                 position: 'absolute',
@@ -383,7 +507,8 @@ const LightArmorTree = () => {
                     onPress={() => {
                         CheckIfMatchingSetPressed(
                             state.matchingSet == 0 ? 1 : 0,
-                            state.matchingSetLine == 'white' ? 'gold' : 'white'
+                            state.matchingSetLine == 'white' ? 'gold' : 'white',
+                            state.deftMovementLine2 == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -415,7 +540,8 @@ const LightArmorTree = () => {
                     onPress={() => {
                         CheckIfDeftMovementPressed(
                             state.deftMovement == 0 ? 1 : 0,
-                            state.deftMovementLine == 'white' ? 'gold' : 'white'
+                            state.deftMovementLine == 'white' ? 'gold' : 'white',
+                            state.deftMovementLine2 == 'white' ? 'gold' : 'white'
                         );
                     }}>
                     <StarIconGold />
@@ -482,22 +608,23 @@ const LightArmorTree = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "70%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
     },
     AgileDefenderText: {
         position: 'absolute',
-        left: "33%",
+        left: "30%",
         top: "83%",
         zIndex: 10,
     },
@@ -534,6 +661,22 @@ const styles = StyleSheet.create({
     PerkText: {
         color: 'white',
         fontSize: 12,
+    },
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '66.5%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
     }
 });
 

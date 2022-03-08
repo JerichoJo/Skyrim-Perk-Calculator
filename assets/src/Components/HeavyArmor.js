@@ -31,7 +31,6 @@ const useSetState = (initialState = {}) => {
 
 const HeavyArmor = () => {
     const navigation = useNavigation();
-    const [isModalVisible, setIsModalVisible] = useState(false);
 
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
@@ -55,7 +54,7 @@ const HeavyArmor = () => {
         matchingSetLine: 'white',
         reflectBlows: 0,
         reflectBlowsLine: 'white',
-        
+
     });
 
     let resetAllTrees;
@@ -76,6 +75,7 @@ const HeavyArmor = () => {
         setState({ reflectBlows: 0 });
         setState({ reflectBlowsLine: 'white' });
         SetRequiredLevel(0);
+        SetJuggernautLevel(0);
     }
 
     const resetActivePerks = () => {
@@ -161,7 +161,7 @@ const HeavyArmor = () => {
         } else {
             TrackLevel(0);
         }
-    }, [TrackLevel, state]);
+    }, [state]);
 
     useEffect(() => {
         CheckLevel();
@@ -754,15 +754,16 @@ const HeavyArmor = () => {
 const styles = StyleSheet.create({
     HomeScreenText: {
         color: 'white',
+        fontWeight: '600',
+        fontSize: 18,
     },
     topText: {
         position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: "75%",
+        top: '8.5%',
+        left: '32%',
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 10,
     },
     Icon: {
         position: 'absolute',
@@ -838,7 +839,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: '64%',
+        bottom: '66.5%',
         justifyContent: 'center',
         alignItems: 'center',
     },

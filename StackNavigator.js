@@ -90,6 +90,60 @@ function Modal() {
                 <ModalNav.Screen name="MasterAlterationModal" component={modals.MasterAlterationModal} />
             </ModalNav.Group>
 
+            {/* Archery Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="BullseyeModal" component={modals.BullseyeModal} />
+                <ModalNav.Screen name="CriticalShotModal" component={modals.CriticalShotModal} />
+                <ModalNav.Screen name="EagleEyeModal" component={modals.EagleEyeModal} />
+                <ModalNav.Screen name="HuntersDisciplineModal" component={modals.HuntersDisciplineModal} />
+                <ModalNav.Screen name="OverdrawModal" component={modals.OverdrawModal} />
+                <ModalNav.Screen name="PowerShotModal" component={modals.PowerShotModal} />
+                <ModalNav.Screen name="QuickShotModal" component={modals.QuickShotModal} />
+                <ModalNav.Screen name="RangerModal" component={modals.RangerModal} />
+                <ModalNav.Screen name="SteadyHandModal" component={modals.SteadyHandModal} />
+            </ModalNav.Group>
+
+            {/* Restoration Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="AdeptModal" component={modals.AdeptModal} />
+                <ModalNav.Screen name="ApprenticeModal" component={modals.ApprenticeModal} />
+                <ModalNav.Screen name="AvoidDeathModal" component={modals.AvoidDeathModal} />
+                <ModalNav.Screen name="DualCastingModal" component={modals.DualCastingModal} />
+                <ModalNav.Screen name="ExpertModal" component={modals.ExpertModal} />
+                <ModalNav.Screen name="MasterModal" component={modals.MasterModal} />
+                <ModalNav.Screen name="NecromageModal" component={modals.NecromageModal} />
+                <ModalNav.Screen name="NoviceModal" component={modals.NoviceModal} />
+                <ModalNav.Screen name="RecoveryModal" component={modals.RecoveryModal} />
+                <ModalNav.Screen name="RegenerationModal" component={modals.RegenerationModal} />
+                <ModalNav.Screen name="RespiteModal" component={modals.RespiteModal} />
+                <ModalNav.Screen name="WardAbsorbModal" component={modals.WardAbsorbModal} />
+            </ModalNav.Group>
+
+            {/* TwoHanded Tree Modals  -- <ModalNav.Screen name="CriticalChargeModal" component={modals.CriticalChargeModal} /> */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="BarbarianModal" component={modals.BarbarianModal} />
+                <ModalNav.Screen name="ChampionsStanceModal" component={modals.ChampionsStanceModal} />
+
+                <ModalNav.Screen name="DeepWoundsModal" component={modals.DeepWoundsModal} />
+                <ModalNav.Screen name="DevastatingBlowModal" component={modals.DevastatingBlowModal} />
+                <ModalNav.Screen name="LimbsplitterModal" component={modals.LimbsplitterModal} />
+                <ModalNav.Screen name="SkullCrusherModal" component={modals.SkullCrusherModal} />
+                <ModalNav.Screen name="SweepModal" component={modals.SweepModal} />
+                <ModalNav.Screen name="WarmasterModal" component={modals.WarmasterModal} />
+            </ModalNav.Group>
+
+            {/* Pickpocket Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="CutpurseModal" component={modals.CutpurseModal} />
+                <ModalNav.Screen name="ExtraPocketsModal" component={modals.ExtraPocketsModal} />
+                <ModalNav.Screen name="KeymasterModal" component={modals.KeymasterModal} />
+                <ModalNav.Screen name="LightFingersModal" component={modals.LightFingersModal} />
+                <ModalNav.Screen name="MisdirectionModal" component={modals.MisdirectionModal} />
+                <ModalNav.Screen name="NightThiefModal" component={modals.NightThiefModal} />
+                <ModalNav.Screen name="PerfectTouchModal" component={modals.PerfectTouchModal} />
+                <ModalNav.Screen name="PoisonedModal" component={modals.PoisonedModal} />
+            </ModalNav.Group>
+
             {/* Heavy Armor Tree Modals */}
             <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
                 <ModalNav.Screen name="JuggernautModal" component={modals.JuggernautModal} />
@@ -159,8 +213,66 @@ function Modal() {
                 <ModalNav.Screen name="SilentRollModal" component={modals.SilentRollModal} />
                 <ModalNav.Screen name="StealthModal" component={modals.StealthModal} />
             </ModalNav.Group>
-            
-            
+
+            {/* Block Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="BlockRunnerModal" component={modals.BlockRunnerModal} />
+                <ModalNav.Screen name="DeadlyBashModal" component={modals.DeadlyBashModal} />
+                <ModalNav.Screen name="DeflectArrowsModal" component={modals.DeflectArrowsModal} />
+                <ModalNav.Screen name="DisarmingBashModal" component={modals.DisarmingBashModal} />
+                <ModalNav.Screen name="ElementalProtectionModal" component={modals.ElementalProtectionModal} />
+                <ModalNav.Screen name="PowerBashModal" component={modals.PowerBashModal} />
+                <ModalNav.Screen name="QuickReflexesModal" component={modals.QuickReflexesModal} />
+                <ModalNav.Screen name="ShieldChargeModal" component={modals.ShieldChargeModal} />
+                <ModalNav.Screen name="ShieldWallModal" component={modals.ShieldWallModal} />
+            </ModalNav.Group>
+
+            {/* Destruction Tree Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="AdeptDestructionModal" component={modals.AdeptDestructionModal} />
+                <ModalNav.Screen name="ApprenticeDestructionModal" component={modals.ApprenticeDestructionModal} />
+                <ModalNav.Screen name="AugmentedFlamesModal" component={modals.AugmentedFlamesModal} />
+                <ModalNav.Screen name="AugmentedFrostModal" component={modals.AugmentedFrostModal} />
+                <ModalNav.Screen name="AugmentedShockModal" component={modals.AugmentedShockModal} />
+                <ModalNav.Screen name="DeepFreezeModal" component={modals.DeepFreezeModal} />
+                <ModalNav.Screen name="DestructionDualCastingModal" component={modals.DestructionDualCastingModal} />
+                <ModalNav.Screen name="DisintegrateModal" component={modals.DisintegrateModal} />
+                <ModalNav.Screen name="ExpertDestructionModal" component={modals.ExpertDestructionModal} />
+                <ModalNav.Screen name="ImpactModal" component={modals.ImpactModal} />
+                <ModalNav.Screen name="IntenseFlamesModal" component={modals.IntenseFlamesModal} />
+                <ModalNav.Screen name="MasterDestructionModal" component={modals.MasterDestructionModal} />
+                <ModalNav.Screen name="NoviceDestructionModal" component={modals.NoviceDestructionModal} />
+                <ModalNav.Screen name="RuneMasterModal" component={modals.RuneMasterModal} />
+            </ModalNav.Group>
+
+            {/* One Handed Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="ArmsmanModal" component={modals.ArmsmanModal} />
+                <ModalNav.Screen name="BladesmanModal" component={modals.BladesmanModal} />
+                <ModalNav.Screen name="BoneBreakerModal" component={modals.BoneBreakerModal} />
+                <ModalNav.Screen name="CriticalChargeModal" component={modals.CriticalChargeModal} />
+                <ModalNav.Screen name="DualFlurryModal" component={modals.DualFlurryModal} />
+                <ModalNav.Screen name="DualSavageryModal" component={modals.DualSavageryModal} />
+                <ModalNav.Screen name="FightingStanceModal" component={modals.FightingStanceModal} />
+                <ModalNav.Screen name="HackAndSlashModal" component={modals.HackAndSlashModal} />
+                <ModalNav.Screen name="ParalyzingStrikeModal" component={modals.ParalyzingStrikeModal} />
+                <ModalNav.Screen name="SavageStrikeModal" component={modals.SavageStrikeModal} />
+            </ModalNav.Group>
+
+            {/* Lockpicking Modals */}
+            <ModalNav.Group screenOptions={{ presentation: "transparentModal" }} >
+                <ModalNav.Screen name="AdeptLocksModal" component={modals.AdeptLocksModal} />
+                <ModalNav.Screen name="ApprenticeLocksModal" component={modals.ApprenticeLocksModal} />
+                <ModalNav.Screen name="ExpertLocksModal" component={modals.ExpertLocksModal} />
+                <ModalNav.Screen name="GoldenTouchModal" component={modals.GoldenTouchModal} />
+                <ModalNav.Screen name="LocksmithModal" component={modals.LocksmithModal} />
+                <ModalNav.Screen name="MasterLocksModal" component={modals.MasterLocksModal} />
+                <ModalNav.Screen name="NoviceLocksModal" component={modals.NoviceLocksModal} />
+                <ModalNav.Screen name="QuickHandsModal" component={modals.QuickHandsModal} />
+                <ModalNav.Screen name="TreasureHunterModal" component={modals.TreasureHunterModal} />
+                <ModalNav.Screen name="UnbreakableModal" component={modals.UnbreakableModal} />
+                <ModalNav.Screen name="WaxKeyModal" component={modals.WaxKeyModal} />
+            </ModalNav.Group>
         </ModalNav.Navigator>
     );
 }
@@ -190,7 +302,7 @@ function Drawers() {
                     drawerStyle: {
                         borderColor: 'white',
                         borderWidth: 1,
-                        backgroundColor: 'slateblue',
+                        backgroundColor: '#f4f6f5',
                         width: 225,
                         shadowColor: 'black',
                         borderRadius: 5,
@@ -203,7 +315,6 @@ function Drawers() {
 
             </Drawer.Navigator>
         </AllActivePerkss.Provider>
-
     );
 }
 
