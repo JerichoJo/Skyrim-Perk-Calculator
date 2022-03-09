@@ -415,7 +415,7 @@ const checkIfDualFlurryPressed = (buttonColor, lineColor) => {
 };
 // function to control the Dual Flurry Perk Counter
 const IncDualFlurryCounter = (numActiveDualFlurry) => {
-  if (dualFlurryLevel < 3) {
+  if (dualFlurryLevel < 2) {
       setDualFlurryLevel(dualFlurryLevel + numActiveDualFlurry)
   }
   else {
@@ -484,13 +484,15 @@ const IncDualFlurryCountCall = (buttonColor, lineColor) => {
       setState({ savageStrikeLine: lineColor });
       if (state.armsman == 1) {
         IncrementCounter(2);
+      } else {
+        IncrementCounter(3);
       }
     } else if (state.paralyzingStrike == 1) {
       // Do nothing....must un-select nodes above it first
     } else {
       setState({ savageStrike: buttonColor });
       setState({ savageStrikeLine: lineColor }); // Change the pressed button color back and forth
-      state.savageStrike = 0 ? IncrementCounter(1) : DecrementCounter(1);
+      state.fightingStance = 0 ? IncrementCounter(1) : DecrementCounter(1);
     }
   };
 
@@ -502,11 +504,10 @@ const IncDualFlurryCountCall = (buttonColor, lineColor) => {
       setState({ fightingStanceLine: lineColor });
       setState({ criticalCharge: buttonColor });
       setState({ criticalChargeLine: lineColor });
-      if (state.armsman == 0) {
-        IncrementCounter(3);
-
-      } else if (state.armsman == 1) {
+      if (state.armsman == 1) {
         IncrementCounter(2);
+      } else {
+        IncrementCounter(3);
       }
         // Set Armsman level
     } else if (state.paralyzingStrike == 1 && state.savageStrike == 0 ) {
@@ -550,7 +551,7 @@ const IncDualFlurryCountCall = (buttonColor, lineColor) => {
       setState({ paralyzingStrikeLineLeft: lineColor });
       setState({ paralyzingStrikeLineRight: lineColor2 });
       state.paralyzingStrike == 0 ? IncrementCounter(1) : DecrementCounter(1);
-    } else {
+    } else if (state.armsman == 1) {
       setState({ paralyzingStrike: buttonColor });
       setState({ paralyzingStrikeLineRight: lineColor2 });
       setState({ criticalCharge: buttonColor });
@@ -558,8 +559,8 @@ const IncDualFlurryCountCall = (buttonColor, lineColor) => {
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
       setState({ armsman: buttonColor });
-      IncrementCounter(4);
-    }
+      IncrementCounter(3);
+    } 
   }
 
   return (
