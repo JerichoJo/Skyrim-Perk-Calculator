@@ -538,12 +538,12 @@ const DestructionTree = () => {
       setState({ expertDestructionLine: lineColor });
       setState({ masterDestruction: buttonColor });
       setState({ masterDestructionLine: lineColor });
-      if (state.noviceDestruction == 1) {
-        IncrementCounter(4);
+      if (state.adeptDestruction == 1) {
+        IncrementCounter(2);
       } else if (state.apprenticeDestruction == 1) {
         IncrementCounter(3);
-      } else if (state.apprenticeDestruction == 1) {
-        IncrementCounter(2);
+      } else if (state.noviceDestruction == 1) {
+        IncrementCounter(4);
       } else {
         IncrementCounter(5);
       }
