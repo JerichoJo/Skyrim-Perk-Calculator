@@ -498,10 +498,11 @@ const OneHandedTree = () => {
       setState({ savageStrike: buttonColor });
       setState({ savageStrikeLine: lineColor });
       setState({ paralyzingStrikeLineLeft: lineColor2 });
+      state.savageStrike = 0 ? IncrementCounter(1) : DecrementCounter(1);
     } else {
       setState({ savageStrike: buttonColor });
       setState({ savageStrikeLine: lineColor }); // Change the pressed button color back and forth
-      state.fightingStance = 0 ? IncrementCounter(1) : DecrementCounter(1);
+      state.savageStrike = 0 ? IncrementCounter(1) : DecrementCounter(1);
     }
   };
 
