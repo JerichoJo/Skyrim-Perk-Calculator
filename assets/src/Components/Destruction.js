@@ -348,7 +348,7 @@ const DestructionTree = () => {
         SetAugmentedShockLevel(1);
       } else {
         IncrementCounter(1);
-        IncAugmentedShockCounter(1);
+        SetAugmentedShockLevel(1);
       }
     } else {
 
@@ -372,7 +372,7 @@ const DestructionTree = () => {
       setState({ augmentedShock: button });
       setState({ augmentedShockLine: line });
       IncAugmentedShockCounter(1);
-      DecrementCounter(1);
+      DecrementCounter(2);
     } else {
       IncrementCounter(1);
       IncAugmentedShockCounter(1);
