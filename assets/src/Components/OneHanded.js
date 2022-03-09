@@ -396,6 +396,7 @@ const OneHandedTree = () => {
       setState({ dualFlurry: buttonColor });
       IncrementCounter(2);
       IncDualFlurryCounter(1);
+      setArmsmanLevel(1);
       // Button handled in the perk function
     } else if (state.dualSavagery == 1) {
       // do nothing
