@@ -272,19 +272,8 @@ const DestructionTree = () => {
       setState({ noviceDestruction: button });
       setState({ augmentedFrostLine: line });
       setState({ augmentedFrost: button });
-      if (augmentedFrostLevel == 2) {
-        DecrementCounter(1);
-        SetAugmentedFrostLevel(1);
-      } else {
-        if (state.noviceDestruction == 0) {
-          IncrementCounter(2);
-          IncAugmentedFrostCounter(1);
-
-        } else {
-          IncrementCounter(1);
-          IncAugmentedFrostCounter(1);
-        }
-      }
+      IncrementCounter(2);
+      IncAugmentedFrostCounter(1);
       // Button handled in the perk function
     } else if (state.deepFreeze == 1) {
       // Nothing
@@ -293,10 +282,9 @@ const DestructionTree = () => {
         SetAugmentedFrostLevel(1);
       } else {
         IncrementCounter(1);
-        SetAugmentedFrostLevel(1);
+        IncAugmentedFrostCounter(1);
       }
     } else {
-
       IncAugmentedFrostCountCall(button, line);
     }
   };
@@ -325,7 +313,7 @@ const DestructionTree = () => {
     }
   }
   const checkIfDeepFreezePressed = (button, line) => {
-    if (state.augmentedFlames == 0) {
+    if (state.augmentedFrost == 0) {
       // Change the colors of the buttons below it if they have not been pressed
       setState({ noviceDestruction: button });
       setState({ augmentedFrostLine: line });
@@ -333,7 +321,7 @@ const DestructionTree = () => {
       setState({ deepFreezeLine: line });
       setState({ deepFreeze: button });
       SetAugmentedFrostLevel(1);
-      if (state.augmentedFrost == 1) {
+      if (state.noviceDestruction == 1) {
         IncrementCounter(2);
       } else {
         IncrementCounter(3);
