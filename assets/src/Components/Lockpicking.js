@@ -153,13 +153,13 @@ const LockpickingTree = () => {
 
     useEffect(() => {
         CheckLevel();
-      }, [CheckLevel]);
-    
+    }, [CheckLevel]);
+
     const checkIfNoviceLocksPressed = (button) => {
         if (state.apprenticeLocks == 1) {
             // do nothing
         } else {
-            setState({noviceLocks: button})
+            setState({ noviceLocks: button })
             state.noviceLocks == 0 ? IncrementCounter(1) : DecrementCounter(1);
         }
     }
@@ -170,7 +170,7 @@ const LockpickingTree = () => {
             setState({ apprenticeLocksLine: lineColor });
             setState({ apprenticeLocks: buttonColor });
             IncrementCounter(2);
-        } else if (state.quickHands == 1 || state.adeptLocks == 1 ) {
+        } else if (state.quickHands == 1 || state.adeptLocks == 1) {
             // Do nothing....must un-select nodes above it first
         } else {
             setState({ apprenticeLocksLine: lineColor });
@@ -267,7 +267,7 @@ const LockpickingTree = () => {
                 IncrementCounter(3);
             } else if (state.apprenticeLocks == 1) {
                 IncrementCounter(2);
-            } else if (state.noviceLocks == 0){
+            } else if (state.noviceLocks == 0) {
                 IncrementCounter(4);
             }
         } else if (state.treasureHunter == 1) {
@@ -294,15 +294,17 @@ const LockpickingTree = () => {
             setState({ goldenTouch: button });
             setState({ treasureHunterLine: line });
             setState({ treasureHunter: button });
-            if (state.noviceLocks == 1) {
-                IncrementCounter(4);
+
+            if (state.adeptLocks == 1) {
+                IncrementCounter(2)
             } else if (state.apprenticeLocks == 1) {
                 IncrementCounter(3);
-            } else if (state.adeptLocks == 1) {
-                IncrementCounter(2);
+            } else if (state.noviceLocks == 1) {
+                IncrementCounter(4);
             } else {
                 IncrementCounter(5);
             }
+
         } else {
             setState({ treasureHunterLine: line });
             setState({ treasureHunter: button }); // Change the pressed button color back and forth
@@ -321,12 +323,12 @@ const LockpickingTree = () => {
             setState({ apprenticeLocksLine: line });
             setState({ adeptLocksLine: line });
             setState({ expertLocksLine: line });
-            setState({expertLocks: button})
+            setState({ expertLocks: button })
             if (state.novice == 1) {
                 IncrementCounter(3);
             } else if (state.apprenticeLocks == 1) {
                 IncrementCounter(2);
-            } else { 
+            } else {
                 IncrementCounter(4);
             }
         } else if (state.locksmith == 1 || state.masterLocks == 1) {
@@ -341,7 +343,7 @@ const LockpickingTree = () => {
         }
     };
     const CheckIfLocksmithPressed = (button, line) => {
-        if(state.expertLocks == 0) {
+        if (state.expertLocks == 0) {
             setState({ noviceLocks: button });
             setState({ apprenticeLocks: button });
             setState({ apprenticeLocksLine: line });
@@ -351,13 +353,14 @@ const LockpickingTree = () => {
             setState({ expertLocksLine: line });
             setState({ locksmith: button });
             setState({ locksmithLine: line });
-            if (state.noviceLocks == 1) {
-                IncrementCounter(4);
+
+            if (state.adeptLocks == 1) {
+                IncrementCounter(2);
             } else if (state.apprenticeLocks == 1) {
                 IncrementCounter(3);
-            } else if (state.adeptLocks == 1) {
-                IncrementCounter(2);
-            } else { 
+            } else if (state.noviceLocks == 1) {
+                IncrementCounter(4);
+            } else {
                 IncrementCounter(5);
             }
         } else if (state.unbreakable == 1) {
@@ -365,7 +368,7 @@ const LockpickingTree = () => {
         } else {
             setState({ locksmith: button });
             setState({ locksmithLine: line });
-            state.locksmith == 0 ? IncrementCounter(1) : DecrementCounter (1)
+            state.locksmith == 0 ? IncrementCounter(1) : DecrementCounter(1)
         }
     }
     const CheckIfUnbreakablePressed = (button, line) => {
@@ -415,7 +418,7 @@ const LockpickingTree = () => {
                 IncrementCounter(3);
             } else if (state.adeptLocks == 1) {
                 IncrementCounter(2);
-            } else { 
+            } else {
                 IncrementCounter(5);
             }
         } else {
@@ -427,15 +430,15 @@ const LockpickingTree = () => {
 
     return (
         <View style={{ zIndex: 2 }}>
-        <View
-          style={styles.resetButtonContainer}>
-          <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
-          <Text style={{ color: "white", fontWeight: "bold", }}>Reset Lockpicking Perks</Text>
-          </TouchableOpacity>
-        </View>
+            <View
+                style={styles.resetButtonContainer}>
+                <TouchableOpacity style={styles.resetButton} onPress={() => resetActivePerks()}>
+                    <Text style={{ color: "white", fontWeight: "bold", }}>Reset Lockpicking Perks</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.topText}>
                 <Text style={styles.HomeScreenText}>Active Perks: {ActivePerks} </Text>
-                <Text style={styles.HomeScreenText}>Required Level: { RequiredLevel}</Text>
+                <Text style={styles.HomeScreenText}>Required Level: {RequiredLevel}</Text>
             </View>
             <View title='Novice Locks Blue' style={{
                 position: 'absolute',
@@ -482,7 +485,7 @@ const LockpickingTree = () => {
                 left: "48.5%",
                 top: "63%",
                 zIndex: 8,
-               opacity: state.apprenticeLocks
+                opacity: state.apprenticeLocks
 
             }}>
                 <TouchableOpacity
@@ -716,7 +719,7 @@ const LockpickingTree = () => {
             <View style={styles.LocksmithText}>
                 <Text style={styles.PerkText}>Locksmith</Text>
             </View>
-                      <View title='Unbreakable Blue' style={{
+            <View title='Unbreakable Blue' style={{
                 position: 'absolute',
                 left: "11%",
                 top: "37%",
@@ -747,7 +750,7 @@ const LockpickingTree = () => {
             <View style={styles.UnbreakableText}>
                 <Text style={styles.PerkText}>Unbreakable</Text>
             </View>
-          <View title='Master Locks Blue' style={{
+            <View title='Master Locks Blue' style={{
                 position: 'absolute',
                 left: "56.5%",
                 top: "27.5%",
@@ -778,92 +781,92 @@ const LockpickingTree = () => {
             <View style={styles.MasterLocksText}>
                 <Text style={styles.PerkText}>Master Locks</Text>
             </View>
-      <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
-        <Line // Novice Locks to Apprentice Locks
-          x1="61%"
-          y1="68%"
-          x2="52%"
-          y2="79%"
-          stroke={state.apprenticeLocksLine}
-          strokeWidth={lineStrokeWidth}
-        />
+            <Svg height={height} width={width} viewBox={`0 0 ${width} ${height}`}>
+                <Line // Novice Locks to Apprentice Locks
+                    x1="61%"
+                    y1="68%"
+                    x2="52%"
+                    y2="79%"
+                    stroke={state.apprenticeLocksLine}
+                    strokeWidth={lineStrokeWidth}
+                />
 
-        <Line // Apprentice Locks to Quick Hands
-          x1="38%"
-          y1="63.5%"
-          x2="60%"
-          y2="68.3%"
-          stroke={state.quickHandsLine}
-          strokeWidth={lineStrokeWidth}
-        />
+                <Line // Apprentice Locks to Quick Hands
+                    x1="38%"
+                    y1="63.5%"
+                    x2="60%"
+                    y2="68.3%"
+                    stroke={state.quickHandsLine}
+                    strokeWidth={lineStrokeWidth}
+                />
 
-        <Line // Quick Hands to Wax Key
-          x1="19%"
-          y1="59.5%"
-          x2="36%"
-          y2="63%"
-          stroke={state.waxKeyLine}
-          strokeWidth={lineStrokeWidth}
-        />
-        <Line // Apprentice Locks to Adept Locks
-          x1="70.5%"
-          y1="56%"
-          x2="61%"
-          y2="68.5%"
-          stroke={state.adeptLocksLine}
-          strokeWidth={lineStrokeWidth}
-        />
-        <Line // Adept Locks to Golden Touch
-          x1="44%"
-          y1="54.2%"
-          x2="69%"
-          y2="56%"
-          stroke={state.goldenTouchLine}
-          strokeWidth={lineStrokeWidth}
-        />
-        <Line // Golden Touch to Treasure Hunter
-          x1="20%"
-          y1="53%"
-          x2="43%"
-          y2="54%"
-          stroke={state.treasureHunterLine}
-          strokeWidth={lineStrokeWidth}
-        />
-        <Line // Adept Locks to Expert Locks
-          x1="68%"
-          y1="41%"
-          x2="70%"
-          y2="56%"
-          stroke={state.expertLocksLine}
-          strokeWidth={lineStrokeWidth}
-        />
-        <Line // Expert Locks to Locksmith
-          x1="44%"
-          y1="42.7%"
-          x2="67%"
-          y2="42%"
-          stroke={state.locksmithLine}
-          strokeWidth={lineStrokeWidth}
-        />
-        <Line // Locksmith to Unbreakable
-          x1="23%"
-          y1="41.9%"
-          x2="42%"
-          y2="42.5%"
-          stroke={state.unbreakableLine}
-          strokeWidth={lineStrokeWidth}
-        />
-        <Line // Expert Locks to Master Locks
-          x1="68%"
-          y1="32%"
-          x2="68%"
-          y2="41%"
-          stroke={state.masterLocksLine}
-          strokeWidth={lineStrokeWidth}
-        />
-      </Svg>
-   </View>
-  );
+                <Line // Quick Hands to Wax Key
+                    x1="19%"
+                    y1="59.5%"
+                    x2="36%"
+                    y2="63%"
+                    stroke={state.waxKeyLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line // Apprentice Locks to Adept Locks
+                    x1="70.5%"
+                    y1="56%"
+                    x2="61%"
+                    y2="68.5%"
+                    stroke={state.adeptLocksLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line // Adept Locks to Golden Touch
+                    x1="44%"
+                    y1="54.2%"
+                    x2="69%"
+                    y2="56%"
+                    stroke={state.goldenTouchLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line // Golden Touch to Treasure Hunter
+                    x1="20%"
+                    y1="53%"
+                    x2="43%"
+                    y2="54%"
+                    stroke={state.treasureHunterLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line // Adept Locks to Expert Locks
+                    x1="68%"
+                    y1="41%"
+                    x2="70%"
+                    y2="56%"
+                    stroke={state.expertLocksLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line // Expert Locks to Locksmith
+                    x1="44%"
+                    y1="42.7%"
+                    x2="67%"
+                    y2="42%"
+                    stroke={state.locksmithLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line // Locksmith to Unbreakable
+                    x1="23%"
+                    y1="41.9%"
+                    x2="42%"
+                    y2="42.5%"
+                    stroke={state.unbreakableLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+                <Line // Expert Locks to Master Locks
+                    x1="68%"
+                    y1="32%"
+                    x2="68%"
+                    y2="41%"
+                    stroke={state.masterLocksLine}
+                    strokeWidth={lineStrokeWidth}
+                />
+            </Svg>
+        </View>
+    );
 };
 const styles = StyleSheet.create({
     HomeScreenText: {
@@ -944,33 +947,33 @@ const styles = StyleSheet.create({
     },
 
     MasterLocksText: {
-      position: 'absolute',
-      left: "60%",
-      top: "28%",
-      zIndex: 10,
+        position: 'absolute',
+        left: "60%",
+        top: "28%",
+        zIndex: 10,
     },
 
     PerkText: {
-      color: 'white',
-      fontSize: 12,
-  },
+        color: 'white',
+        fontSize: 12,
+    },
 
-  resetButtonContainer: {
-    position: 'absolute',
-    zIndex: 8,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: '66.5%',
-    justifyContent: 'center',
-    alignItems: 'center',
-},
-resetButton: {
-    backgroundColor: "#565656",
-    borderRadius: 12,
-    paddingVertical: 8,
-    paddingHorizontal: 10
-}
+    resetButtonContainer: {
+        position: 'absolute',
+        zIndex: 8,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: '66.5%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    resetButton: {
+        backgroundColor: "#565656",
+        borderRadius: 12,
+        paddingVertical: 8,
+        paddingHorizontal: 10
+    }
 });
 
 export default LockpickingTree;
