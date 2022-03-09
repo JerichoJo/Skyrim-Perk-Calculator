@@ -153,13 +153,26 @@ const OneHandedTree = () => {
   const CheckLevel = useCallback(() => {
     if (state.paralyzingStrike == 1) {
       TrackLevel(100);
-    }
-    if (state.armsman == 1 && armsmanLevel == 1) {
-      TrackLevel(0);
-    } else if (state.fightingStance == 1) {
-      TrackLevel(20);
-    } else if (state.armsman == 1 && armsmanLevel == 2) {
-      TrackLevel(20);
+    } else if (state.hackAndSlash == 1 && hackAndSlashLevel == 3) {
+      TrackLevel(90);
+    } else if (state.bonebreaker == 1 && bonebreakerLevel == 3) {
+      TrackLevel(90);
+    } else if (state.bladesman == 1 && bladesmanLevel == 3) {
+      TrackLevel(90);
+    } else if (state.armsman == 1 && armsmanLevel == 5) {
+      TrackLevel(80);
+    } else if (state.dualSavagery == 1) {
+      TrackLevel(70);
+    } else if (state.armsman == 1 && armsmanLevel == 4) {
+      TrackLevel(60);
+    } else if (state.savageStrike == 1) {
+      TrackLevel(50);
+    } else if (state.dualFlurry == 1 && dualFlurryLevel == 2) {
+      TrackLevel(50);
+    } else if (state.criticalCharge == 1) {
+      TrackLevel(50);
+    } else if (state.armsman == 1 && armsmanLevel == 3) {
+      TrackLevel(40);
     } else if (state.hackAndSlash == 1 && hackAndSlashLevel == 1) {
       TrackLevel(30);
     } else if (state.dualFlurry == 1 && dualFlurryLevel == 1) {
@@ -168,26 +181,12 @@ const OneHandedTree = () => {
       TrackLevel(30);
     } else if (state.bladesman == 1 && bladesmanLevel == 1) {
       TrackLevel(30);
-    } else if (state.armsman == 1 && armsmanLevel == 3) {
-      TrackLevel(40);
-    } else if (state.savageStrike == 1) {
-      TrackLevel(50);
-    } else if (state.dualFlurry == 1 && dualFlurryLevel == 2) {
-      TrackLevel(50);
-    } else if (state.criticalCharge == 1) {
-      TrackLevel(50);
-    } else if (state.armsman == 1 && armsmanLevel == 4) {
-      TrackLevel(60);
-    } else if (state.dualSavagery == 1) {
-      TrackLevel(70);
-    } else if (state.armsman == 1 && armsmanLevel == 5) {
-      TrackLevel(80);
-    } else if (state.hackAndSlash == 1 && hackAndSlashLevel == 3) {
-      TrackLevel(90);
-    } else if (state.bonebreaker == 1 && bonebreakerLevel == 3) {
-      TrackLevel(90);
-    } else if (state.bladesman == 1 && bladesmanLevel == 3) {
-      TrackLevel(90);
+    } else if (state.fightingStance == 1) {
+      TrackLevel(20);
+    } else if (state.armsman == 1 && armsmanLevel == 2) {
+      TrackLevel(20);
+    } else if (state.armsman == 1 && armsmanLevel == 1) {
+      TrackLevel(0);
     }
 
   }, [state]);
@@ -240,6 +239,7 @@ const OneHandedTree = () => {
       setState({ armsman: buttonColor });
       setState({ hackAndSlashLine: lineColor });
       setState({ hackAndSlash: buttonColor });
+      setArmsmanLevel(1);
       if (hackAndSlashLevel == 2) {
         DecrementCounter(1);
         setHackAndSlashLevel(1);
@@ -289,6 +289,7 @@ const OneHandedTree = () => {
       setState({ armsman: buttonColor });
       setState({ bonebreakerLine: lineColor });
       setState({ bonebreaker: buttonColor });
+      setArmsmanLevel(1);
       if (bonebreakerLevel == 2) {
         DecrementCounter(1);
         setBoneBreakerLevel(1);
@@ -341,6 +342,7 @@ const OneHandedTree = () => {
       setState({ armsman: buttonColor });
       setState({ bladesmanLevel: lineColor });
       setState({ bladesman: buttonColor });
+      setArmsmanLevel(1);
       if (bladesmanLevel == 2) {
         DecrementCounter(1);
         setBladesmanLevel(1);
@@ -392,22 +394,18 @@ const OneHandedTree = () => {
       setState({ armsman: buttonColor });
       setState({ dualFlurryLine: lineColor });
       setState({ dualFlurry: buttonColor });
+      IncrementCounter(2);
+      IncDualFlurryCounter(1);
+      // Button handled in the perk function
+    } else if (state.dualSavagery == 1) {
+      // do nothing
       if (dualFlurryLevel == 2) {
         DecrementCounter(1);
         setDualFlurryLevel(1);
       } else {
-        if (state.armsman == 0) {
-          IncrementCounter(2);
-          IncDualFlurryCounter(1);
-
-        } else {
-          IncrementCounter(1);
-          IncDualFlurryCounter(1);
-        }
+        IncrementCounter(1);
+        IncDualFlurryCounter(1);
       }
-      // Button handled in the perk function
-    } else if (state.dualSavagery == 1) {
-      // do nothing
     }
     else {
       IncDualFlurryCountCall(buttonColor, lineColor);
@@ -437,7 +435,7 @@ const OneHandedTree = () => {
       setState({ dualFlurry: buttonColor });
       setState({ dualFlurryLine: lineColor });
       IncDualFlurryCounter(1);
-      DecrementCounter(1);
+      DecrementCounter(2);
     } else {
       IncrementCounter(1);
       IncDualFlurryCounter(1);
@@ -452,6 +450,9 @@ const OneHandedTree = () => {
       setState({ dualSavagery: buttonColor });
       setState({ dualSavageryLine: lineColor });
       setDualFlurryLevel(1);
+      if (state.armsman == 0) {
+        setArmsmanLevel(1);
+      }
       if (state.armsman == 1) {
         IncrementCounter(2);
       } else {
@@ -469,7 +470,13 @@ const OneHandedTree = () => {
       setState({ armsman: buttonColor });
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
+      if (state.armsman == 0) {
+        setArmsmanLevel(1);
+      }
       IncrementCounter(2);
+      if (state.armsman == 0) {
+        setArmsmanLevel(1);
+      }
     } else if (state.savageStrike == 1 || state.criticalCharge == 1) {
       // Do nothing....must un-select nodes above it first
     } else {
@@ -487,9 +494,13 @@ const OneHandedTree = () => {
       setState({ fightingStanceLine: lineColor });
       setState({ savageStrike: buttonColor });
       setState({ savageStrikeLine: lineColor });
+      if (state.armsman == 0) {
+        setArmsmanLevel(1);
+      }
       if (state.armsman == 1) {
         IncrementCounter(2);
-      } else {
+      }
+      else {
         IncrementCounter(3);
       }
     } else if (state.paralyzingStrike == 1 && state.criticalCharge == 0) {
@@ -498,10 +509,11 @@ const OneHandedTree = () => {
       setState({ savageStrike: buttonColor });
       setState({ savageStrikeLine: lineColor });
       setState({ paralyzingStrikeLineLeft: lineColor2 });
+      state.savageStrike == 0 ? IncrementCounter(1) : DecrementCounter(1);
     } else {
       setState({ savageStrike: buttonColor });
       setState({ savageStrikeLine: lineColor }); // Change the pressed button color back and forth
-      state.fightingStance = 0 ? IncrementCounter(1) : DecrementCounter(1);
+      state.savageStrike == 0 ? IncrementCounter(1) : DecrementCounter(1);
     }
   };
 
@@ -513,6 +525,9 @@ const OneHandedTree = () => {
       setState({ fightingStanceLine: lineColor });
       setState({ criticalCharge: buttonColor });
       setState({ criticalChargeLine: lineColor });
+      if (state.armsman == 0) {
+        setArmsmanLevel(1);
+      }
       if (state.armsman == 1) {
         IncrementCounter(2);
       } else {
@@ -524,7 +539,8 @@ const OneHandedTree = () => {
     } else if (state.paralyzingStrike == 1 && state.savageStrike == 1) {
       setState({ criticalChargeLine: lineColor });
       setState({ criticalCharge: buttonColor });
-      setState({ paralyzingStrikeLineRight: lineColor2 })
+      setState({ paralyzingStrikeLineRight: lineColor2 });
+      state.criticalCharge == 0 ? IncrementCounter(1) : DecrementCounter(1);
 
     } else {
       setState({ criticalCharge: buttonColor });
@@ -541,6 +557,9 @@ const OneHandedTree = () => {
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
       setState({ armsman: buttonColor });
+      if (state.armsman == 0) {
+        setArmsmanLevel(1);
+      }
       if (state.fightingStance == 1) {
         IncrementCounter(2);
       } else if (state.armsman == 1) {
