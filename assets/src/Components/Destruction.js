@@ -359,7 +359,7 @@ const DestructionTree = () => {
         SetAugmentedShockLevel(1);
       } else {
         IncrementCounter(1);
-        IncAugmentedFrostCounter(1);
+        IncAugmentedShockCounter(1);
       }
     } else {
 
