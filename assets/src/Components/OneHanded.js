@@ -418,12 +418,13 @@ const OneHandedTree = () => {
 
     if (dualFlurryLevel < 2) {
 
-    if (dualFlurryLevel < 3) {
+      if (dualFlurryLevel < 3) {
 
-      setDualFlurryLevel(dualFlurryLevel + numActiveDualFlurry)
-    }
-    else {
-      setDualFlurryLevel(0); // return to 0 after the perk is maxed out
+        setDualFlurryLevel(dualFlurryLevel + numActiveDualFlurry)
+      }
+      else {
+        setDualFlurryLevel(0); // return to 0 after the perk is maxed out
+      }
     }
   }
   // function to control the hack and slash 0/3
