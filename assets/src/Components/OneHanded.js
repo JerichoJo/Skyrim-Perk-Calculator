@@ -392,22 +392,18 @@ const OneHandedTree = () => {
       setState({ armsman: buttonColor });
       setState({ dualFlurryLine: lineColor });
       setState({ dualFlurry: buttonColor });
+      IncrementCounter(2);
+      IncDualFlurryCounter(1);
+      // Button handled in the perk function
+    } else if (state.dualSavagery == 1) {
+      // do nothing
       if (dualFlurryLevel == 2) {
         DecrementCounter(1);
         setDualFlurryLevel(1);
       } else {
-        if (state.armsman == 0) {
-          IncrementCounter(2);
-          IncDualFlurryCounter(1);
-
-        } else {
-          IncrementCounter(1);
-          IncDualFlurryCounter(1);
-        }
+        IncrementCounter(1);
+        IncDualFlurryCounter(1);
       }
-      // Button handled in the perk function
-    } else if (state.dualSavagery == 1) {
-      // do nothing
     }
     else {
       IncDualFlurryCountCall(buttonColor, lineColor);
@@ -437,7 +433,7 @@ const OneHandedTree = () => {
       setState({ dualFlurry: buttonColor });
       setState({ dualFlurryLine: lineColor });
       IncDualFlurryCounter(1);
-      DecrementCounter(1);
+      DecrementCounter(2);
     } else {
       IncrementCounter(1);
       IncDualFlurryCounter(1);
@@ -532,7 +528,8 @@ const OneHandedTree = () => {
     } else if (state.paralyzingStrike == 1 && state.savageStrike == 1) {
       setState({ criticalChargeLine: lineColor });
       setState({ criticalCharge: buttonColor });
-      setState({ paralyzingStrikeLineRight: lineColor2 })
+      setState({ paralyzingStrikeLineRight: lineColor2 });
+      state.criticalCharge == 0 ? IncrementCounter(1) : DecrementCounter(1);
 
     } else {
       setState({ criticalCharge: buttonColor });
