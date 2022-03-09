@@ -196,19 +196,9 @@ const DestructionTree = () => {
       setState({ noviceDestruction: button });
       setState({ augmentedFlamesLine: line });
       setState({ augmentedFlames: button });
-      if (augmentedFlamesLevel == 2) {
-        DecrementCounter(1);
-        SetAugmentedFlamesLevel(1);
-      } else {
-        if (state.noviceDestruction == 0) {
-          IncrementCounter(2);
-          IncAugmentedFlamesCounter(1);
+      IncrementCounter(2);
+      IncAugmentedFlamesCounter(1);
 
-        } else {
-          IncrementCounter(1);
-          IncAugmentedFlamesCounter(1);
-        }
-      }
       // Button handled in the perk function
     } else if (state.intenseFlames == 1) {
       // Nothing
@@ -220,7 +210,6 @@ const DestructionTree = () => {
         IncAugmentedFlamesCounter(1);
       }
     } else {
-
       IncAugmentedFlamesCountCall(button, line);
     }
   };
@@ -240,7 +229,7 @@ const DestructionTree = () => {
       setState({ augmentedFlames: button });
       setState({ augmentedFlamesLine: line });
       IncAugmentedFlamesCounter(1);
-      DecrementCounter(1);
+      DecrementCounter(2);
     } else {
       IncrementCounter(1);
       IncAugmentedFlamesCounter(1);
