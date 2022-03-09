@@ -845,7 +845,7 @@ const OneHandedTree = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.DualFlurryText}>
-        <Text style={styles.PerkText}>Dual Flurry ({dualFlurryLevel}/2</Text>
+        <Text style={styles.PerkText}>Dual Flurry ({dualFlurryLevel}/2)</Text>
       </View>
       <View title='Dual Savagery Blue' style={{
         position: 'absolute',
