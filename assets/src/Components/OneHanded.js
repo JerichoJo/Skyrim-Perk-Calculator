@@ -536,6 +536,13 @@ const OneHandedTree = () => {
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
       setState({ armsman: buttonColor });
+      if (state.fightingStance == 1) {
+        IncrementCounter(2);
+      } else if (state.armsman == 1) {
+        IncrementCounter(3);
+      } else {
+        IncrementCounter(4);
+      }
     }
     else if (state.savageStrike == 1 && state.criticalCharge == 0) {
       setState({ paralyzingStrike: buttonColor });
