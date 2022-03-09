@@ -415,7 +415,11 @@ const OneHandedTree = () => {
   };
   // function to control the Dual Flurry Perk Counter
   const IncDualFlurryCounter = (numActiveDualFlurry) => {
+
     if (dualFlurryLevel < 2) {
+
+    if (dualFlurryLevel < 3) {
+
       setDualFlurryLevel(dualFlurryLevel + numActiveDualFlurry)
     }
     else {
