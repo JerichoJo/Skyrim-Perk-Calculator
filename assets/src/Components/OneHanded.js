@@ -470,6 +470,9 @@ const OneHandedTree = () => {
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
       IncrementCounter(2);
+      if (state.armsman == 0) {
+        setArmsmanLevel(1);
+      }
     } else if (state.savageStrike == 1 || state.criticalCharge == 1) {
       // Do nothing....must un-select nodes above it first
     } else {
@@ -487,9 +490,13 @@ const OneHandedTree = () => {
       setState({ fightingStanceLine: lineColor });
       setState({ savageStrike: buttonColor });
       setState({ savageStrikeLine: lineColor });
+      if (state.armsman == 0) {
+        setArmsmanLevel(1);
+      }
       if (state.armsman == 1) {
         IncrementCounter(2);
-      } else {
+      }
+      else {
         IncrementCounter(3);
       }
     } else if (state.paralyzingStrike == 1 && state.criticalCharge == 0) {
@@ -498,11 +505,11 @@ const OneHandedTree = () => {
       setState({ savageStrike: buttonColor });
       setState({ savageStrikeLine: lineColor });
       setState({ paralyzingStrikeLineLeft: lineColor2 });
-      state.savageStrike = 0 ? IncrementCounter(1) : DecrementCounter(1);
+      state.savageStrike == 0 ? IncrementCounter(1) : DecrementCounter(1);
     } else {
       setState({ savageStrike: buttonColor });
       setState({ savageStrikeLine: lineColor }); // Change the pressed button color back and forth
-      state.savageStrike = 0 ? IncrementCounter(1) : DecrementCounter(1);
+      state.savageStrike == 0 ? IncrementCounter(1) : DecrementCounter(1);
     }
   };
 
@@ -542,6 +549,9 @@ const OneHandedTree = () => {
       setState({ fightingStance: buttonColor });
       setState({ fightingStanceLine: lineColor });
       setState({ armsman: buttonColor });
+      if (state.armsman == 0) {
+        setArmsmanLevel(1);
+      }
       if (state.fightingStance == 1) {
         IncrementCounter(2);
       } else if (state.armsman == 1) {
