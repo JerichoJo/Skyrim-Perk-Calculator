@@ -151,13 +151,15 @@ const ConjurationTree = () => {
         }
     }
 
-    const IncSummonerCountCall = (buttonColor) => {
+    const IncSummonerCountCall = (buttonColor, lineColor) => {
         if (SummonerLevel == 0) {
-            setState({ summoner: buttonColor }); // Change the pressed button color back and forth
+            setState({ summoner: buttonColor });
+            setState({ summonerLine: lineColor}) // Change the pressed button color back and forth
             IncrementCounter(1); // increment active perks by 1 on first click
             IncSummonerCounter(1); // increment basic smith by 1 on first click
         } else if (SummonerLevel == 2) {
-            setState({ summoner: buttonColor }); // Change the pressed button color back and forth
+            setState({ summoner: buttonColor });
+            setState({ summonerLine: lineColor }) // Change the pressed button color back and forth
             IncSummonerCounter(1); // Increment by one so that it goes back to 0 
             DecrementCounter(2); // decrease active perks back down 3 because it is set back to 0
 
@@ -362,19 +364,34 @@ const ConjurationTree = () => {
         } else if (state.darkSouls == 0 && state.elementalPotency == 1){
             setState({ twinSouls : buttonColor });
             setState({ twinSoulsLine2: lineColor2 });
-
+            state.twinSouls == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
         } else if (state.darkSouls == 1 && state.elementalPotency == 1){
             setState({ twinSouls : buttonColor });
             setState({ twinSoulsLine : lineColor });
             setState({ twinSoulsLine2 : lineColor2 });
+            state.twinSouls == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
 
-        }else if (state.necromancy == 1){
+        } else if (state.necromancy == 1){
             setState({ twinSouls: buttonColor });
             setState({ twinSoulsLine: lineColor });
             setState({ darkSouls: buttonColor });
             setState({ darkSoulsLine: lineColor });
+            IncrementCounter(2);
 
-        } else {
+        } else if (state.atromancy == 1){
+            setState({ twinSouls: buttonColor });
+            setState({ twinSoulsLine2: lineColor });
+            setState({ elementalPotency : buttonColor });
+            setState({ elementalPotencyLine : lineColor });
+            IncrementCounter(2);
+        } 
+        
+        
+        else {
             setState({ twinSouls : buttonColor });
             setState({ twinSoulsLine2 : lineColor2 });
             setState({ elementalPotency : buttonColor });
@@ -384,29 +401,31 @@ const ConjurationTree = () => {
             setState({ summoner : buttonColor });
             setState({ summonerLine : lineColor });
             setState({ noviceConjuration : buttonColor });
+            IncrementCounter(5);
         }
     };
 
-    const CheckIfSummonerPressed = (button ,buttonColor, lineColor) => {
+    const CheckIfSummonerPressed = (button , lineColor) => {
         if (state.noviceConjuration == 0) {
             // Change the colors of the buttons below it if they have not been pressed
-            setState({ noviceConjuration: buttonColor });
-            setState({ noviceConjurationLine: lineColor });
-            setState({ summoner: buttonColor });
+            setState({ noviceConjuration: button });
+            setState({ summoner: button });
             setState({ summonerLine: lineColor });
-
+            IncrementCounter(2);
+            IncSummonerCounter(1);
+               
+        } else if(state.atromancy == 1){
             if (SummonerLevel == 2){
-                DecrementCounter(2);
+                DecrementCounter(1);
                 SetSummonerLevel(1);
+                
             } else {
                 IncrementCounter(1);
                 IncSummonerCounter(1);
             }
-        } else if(state.atromancy == 1){
-            SetSummonerLevel(1);
         }       
         else {
-            IncSummonerCountCall(button);            
+            IncSummonerCountCall(button, lineColor);            
         }
     };
 
@@ -447,13 +466,17 @@ const ConjurationTree = () => {
             setState({ elementalPotencyLine: lineColor });
             setState({ atromancyLine: lineColor });
             setState({ summonerLine: lineColor });
-            if (summoner == 0){
+            IncrementCounter(4);
+            if (state.summoner == 0){
                 SetSummonerLevel(1);
             }
             if (state.noviceConjuration == 1) {
-                IncrementCounter(2);
-            } else {
                 IncrementCounter(3);
+            } else if(state.atromancy == 1){
+                IncrementCounter(1)
+            }
+             else if (state.summoner == 1){
+                IncrementCounter(2);
             }
             if (state.twinSouls == 1){
                 setState({twinSoulsLine2: lineColor2})
@@ -483,7 +506,7 @@ const ConjurationTree = () => {
             setState({ noviceConjuration: buttonColor });
             setState({ apprenticeConjurationLine: lineColor });
             IncrementCounter(2);
-            if (summoner == 0){
+            if (state.summoner == 0){
                 SetSummonerLevel(1);
             }
         } else if (state.adeptConjuration == 1) {
@@ -587,20 +610,19 @@ const ConjurationTree = () => {
             setState({ soulStealerLine: lineColor });
             setState({ mysticBindingLine: lineColor });
             setState({ noviceConjurationLine: lineColor });
+            IncrementCounter(4);
             if (state.soulStealer == 1) {
                 setState({ oblivionBindingLineLight: lineColor });
             }
-            if (state.expertConjuration == 1) {
+            if (state.soulStealer == 1) {
+                IncrementCounter(1);
+            } else if (state.mysticBinding == 1) {
                 IncrementCounter(2);
-            } else if (state.adeptConjuration == 1) {
-                IncrementCounter(3);
-            } else if (state.apprenticeConjuration == 1) {
-                IncrementCounter(4);
             } else if (state.noviceConjuration == 1) {
-                IncrementCounter(5);
-            } else {
-                IncrementCounter(6);
-            }
+                IncrementCounter(3);
+            } else{
+                IncrementCounter(4);
+            }                
         } else {
             setState({ oblivionBindingLine: lineColor });
             setState({ oblivionBinding: buttonColor });

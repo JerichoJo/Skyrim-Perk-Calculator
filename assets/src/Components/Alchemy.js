@@ -12,8 +12,7 @@ import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
-import StealthModal from './Modals/SneakModals.js/StealthModal';
-import { StackGestureContext } from 'react-navigation-stack';
+
 
 
 const width = Dimensions.get('window').width;
@@ -85,6 +84,7 @@ const AlchemyTree = () => {
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
     const [AlchemyLevel, SetAlchemyLevel] = useState(0);
     const [ExperimenterLevel, SetExperimenterLevel] = useState(0);
+
     const resetActivePerks = () => {
         resetAlchemyPerks();
         DecrementCounter(ActivePerks);
@@ -117,8 +117,8 @@ const AlchemyTree = () => {
         SetAllActivePerks(AllActivePerks - numActivePerks);
     };
 
-    const IncExperimenterCounter = (numExperimenterAlchemy, buttonColor) => {
-        if (ExperimenterLevel < 5) {
+    const IncExperimenterCounter = (numActiveExperimenter, buttonColor) => {
+        if (ExperimenterLevel < 3) {
             SetExperimenterLevel(ExperimenterLevel + numActiveExperimenter)
         }
         else {
@@ -138,11 +138,11 @@ const AlchemyTree = () => {
 
     const IncAlchemyCountCall = (buttonColor) => {
         if (AlchemyLevel == 0) {
-            setState({ alchemy: buttonColor }); // Change the pressed button color back and forth
+            setState({ alchemist: buttonColor }); // Change the pressed button color back and forth
             IncrementCounter(1); // increment active perks by 1 on first click
             IncAlchemyCounter(1); // increment basic smith by 1 on first click
         } else if (AlchemyLevel == 5) {
-            setState({ alchemy: buttonColor }); // Change the pressed button color back and forth
+            setState({ alchemist: buttonColor }); // Change the pressed button color back and forth
             IncAlchemyCounter(1); // Increment by one so that it goes back to 0 
             DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
 
@@ -152,21 +152,22 @@ const AlchemyTree = () => {
         }
 
     }
-    const IncExperimenterCountCall = (buttonColor) => {
+    const IncExperimenterCountCall = (buttonColor, lineColor) => {
         if (ExperimenterLevel == 0) {
-            setState({ experimenter: buttonColor }); // Change the pressed button color back and forth
+            setState({ experimenter: buttonColor });
+            setState({ experimenterLine: lineColor }); // Change the pressed button color back and forth
             IncrementCounter(1); // increment active perks by 1 on first click
             IncExperimenterCounter(1); // increment basic smith by 1 on first click
-        } else if (ExperimenterLevel == 5) {
-            setState({ experimenter: buttonColor }); // Change the pressed button color back and forth
+        } else if (ExperimenterLevel == 3) {
+            setState({ experimenter: buttonColor });
+            setState({ experimenterLine: lineColor }); // Change the pressed button color back and forth
             IncExperimenterCounter(1); // Increment by one so that it goes back to 0 
-            DecrementCounter(5); // decrease active perks back down 3 because it is set back to 0
+            DecrementCounter(3); // decrease active perks back down 3 because it is set back to 0
 
         } else {
             IncrementCounter(1);
             IncExperimenterCounter(1) // increment by 1 after it perk is active
         }
-
     }
 
     const TrackLevel = useCallback((level) => {
@@ -204,20 +205,18 @@ const AlchemyTree = () => {
     }, [CheckLevel]);
 
     const CheckIfAlchemistPressed = (button) => {
-        if (
-            state.physician == 1 ||
-            state.arcaneSmithing == 1 ||
-            state.benefactor == 1
-        ) {
+        if ( state.physician == 1 ) {
+            // do nothing 
+
             if (AlchemyLevel == 5){
                 DecrementCounter(4);
-                SetAlchemyLevel(1)
+                SetAlchemyLevel(1);
+
             } else {
                 IncrementCounter(1);
                 IncAlchemyCounter(1);
             }
-        }
-        else {
+        } else {
             IncAlchemyCountCall(button);
         }
     };
@@ -339,17 +338,19 @@ const AlchemyTree = () => {
             setState({ physician: buttonColor });
             setState({ benefactorLine: lineColor });
             setState({ physicianLine: lineColor });
-
-            IncrementCounter(2);
+            IncrementCounter(3);
             if (state.alchemist == 0) {
                 SetAlchemyLevel(1);
             }
-        } else if (state.experimenter == 1) {
+        } else if (state.experimenter == 1 && physician == 0) {
             // Do nothing....must un-select nodes above it first
-        } else if (state.physician == 0){
-             
+        } else if (state.alchemist == 1 && state.physician ==0){
+            setState({ benefactor: buttonColor });
+            setState({ physician: buttonColor });
+            setState({ benefactorLine: lineColor });
+            setState({ physicianLine: lineColor });
+            IncrementCounter(2);
         }
-        
         else {
             setState({ benefactorLine: lineColor });
             setState({ benefactor: buttonColor }); // Change the pressed button color back and forth
@@ -363,42 +364,47 @@ const AlchemyTree = () => {
     const CheckIfExperimenterPressed = (buttonColor, lineColor, lineColor2) => {
         if (state.benefactor == 0) {
             // Change the colors of the buttons below it if they have not been pressed
+            setState({ alchemist: buttonColor });
             setState({ experimenter: buttonColor });
-            setState({ benefactor: buttonColor });
-            setState({ physician: buttonColor });
             setState({ experimenterLine: lineColor });
+            setState({ benefactor: buttonColor });
             setState({ benefactorLine: lineColor });
-            setState({ physicianLine: lineColor});
-
+            setState({ physician: buttonColor });
+            setState({ physicianLine: lineColor });
+            if (state.benefactor == 0) {
+                
+            }
             if (state.alchemist == 0) {
-                SetAlchemyLevel(1);
+                
             }
-            if (state.alchemist == 1) {
+            if (state.snakeblood == 1) {
+                setState({ experimenterSnakeLine: lineColor2 });
+            }
+            if (state.physician == 1) {
                 IncrementCounter(2);
-            } else {
+            } else if (state.alchemist == 1) {
                 IncrementCounter(3);
+            } else {
+                IncrementCounter(4);
             }
-            if (state.snakeblood == 1){
-                setState({ experimenterSnakeLine: lineColor});
-            } 
         } else if (state.snakeblood == 1 && state.concentratedPoison == 0) {
             // Do nothing....must un-select nodes above it first
-        } else if (state.snakeblood == 1 && state.concentratedPoison == 1){
-            setState({ experimenterSnakeLine: lineColor });
+        } else if (state.snakeblood == 1 && state.concentratedPoison == 1) {
+            setState({ experimenterSnakeLine: lineColor2 });
             setState({ experimenterLine: lineColor });
             setState({ experimenter: buttonColor }); // Change the pressed button color back and forth
             state.experimenter == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-        } 
+        }
         else {
             setState({ experimenterLine: lineColor });
             setState({ experimenter: buttonColor }); // Change the pressed button color back and forth
             state.experimenter == 0
                 ? IncrementCounter(1)
                 : DecrementCounter(1);
-
         }
+                   
     };
     const CheckIfSnakebloodPressed = (buttonColor, lineColor, lineColor2) => {
         if (state.purity == 1){
@@ -408,27 +414,28 @@ const AlchemyTree = () => {
                 // Change the colors of the buttons below it if they have not been pressed
                 setState({ snakeblood: buttonColor });
                 setState({ experimenterSnakeLine: lineColor});
-                
+                state.snakeblood == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
                 if (state.alchemist == 0) {
                     SetAlchemyLevel(1);
                 }
-                if (state.frostEnchanter == 1) {
-                    IncrementCounter(2);
-                } else if (state.enchanter == 1) {
-                    IncrementCounter(3);
-                } else {
-                    IncrementCounter(4);
-                }
+                
 
             } else if (state.experimenter == 0 && state.concentratedPoison == 1){
                 setState({ snakeblood : buttonColor });
                 setState({ snakebloodLine: lineColor2 });
+                state.snakeblood == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
 
             } else if (state.experimenter == 1 && state.concentratedPoison == 1){
                 setState({ snakeblood : buttonColor });
                 setState({ snakebloodLine : lineColor });
                 setState({ experimenterSnakeLine : lineColor2 });
-
+                state.snakeblood == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
             } else if (state.benefactor == 1){
                 setState({ snakeblood: buttonColor });
                 setState({ experimenterSnakeLine: lineColor });
@@ -445,6 +452,7 @@ const AlchemyTree = () => {
                 setState({ physician : buttonColor });
                 setState({ physicianLine : lineColor });
                 setState({ alchemist: buttonColor})
+                IncrementCounter(5);
             }
     }
 };
@@ -462,8 +470,8 @@ const AlchemyTree = () => {
             setState({ experimenterLine: lineColor });
             setState({ benefactorLine: lineColor });
             setState({ physicianLine: lineColor });
-            
-            if (state.alchemist == 0) {
+            IncrementCounter(6);
+            if (AlchemyLevel == 0) {
                 SetAlchemyLevel(1);
             }
             if (state.experimenter == 1) {
@@ -476,15 +484,20 @@ const AlchemyTree = () => {
                 IncrementCounter(5);
             }
 
-        } else if(state.purity == 1){
+        } else if(state.snakeblood == 1){
             setState({ purity: buttonColor});
             setState({ purityLine: lineColor});
+            state.purity == 0
+                ? IncrementCounter(1)
+                : DecrementCounter(1);
 
-        } else if(state.experimenter == 1 && state.concentratedPoison == 0){
+        }
+        else if(state.experimenter == 1 && state.concentratedPoison == 0){
             setState({ snakeblood: buttonColor});
             setState({ purity: buttonColor});
             setState({ experimenterSnakeLine: lineColor});
             setState({ purityLine: lineColor});
+            IncrementCounter(2);
         }
          else if (state.concentratedPoison == 1 && state.experimenter == 1){
             setState({ purity: buttonColor});
@@ -493,6 +506,7 @@ const AlchemyTree = () => {
             setState({ experimenterSnakeLine: lineColor2})
             setState({ snakeblood: buttonColor});
             setState({ experimenterSnakeLine: lineColor});
+            IncrementCounter(2);
             
         } else if (state.benefactor == 1 && state.poisoner == 1){
             setState({ purity: buttonColor});
@@ -501,6 +515,15 @@ const AlchemyTree = () => {
             setState({ experimenterLine: lineColor});
             setState({ experimenterSnakeLine: lineColor});
             setState({ snakeblood: buttonColor});
+            IncrementCounter(3);
+
+        } else if (state.greenThumb == 1 && state.concentratedPoison == 1){
+            setState({ purity: buttonColor});
+            setState({ purityLine: lineColor});
+            setState({ snakebloodLine: lineColor});
+            setState({ snakeblood: buttonColor});
+            IncrementCounter(2);
+
         }
         
         else if (state.snakeblood == 0 && state.concentratedPoison == 0){
@@ -510,12 +533,14 @@ const AlchemyTree = () => {
             setState({ concentratedPoisonLine: lineColor});
             setState({ snakebloodLine: lineColor});
             setState({ snakeblood: buttonColor});
+            IncrementCounter(3);
 
         } else if (state.snakeblood == 0 && state.concentratedPoison == 1){
             setState({ snakebloodLine: lineColor});
             setState({ snakeblood: buttonColor});
             setState({ purity: buttonColor});
             setState({ purityLine: lineColor});
+            IncrementCounter(2);
 
         } else {
             setState({ purityLine: lineColor });
@@ -536,6 +561,7 @@ const AlchemyTree = () => {
             setState({ concentratedPoisonLine: lineColor });
             setState({ poisonerLine: lineColor });
             setState({ physicianLine: lineColor });
+            IncrementCounter(5);
             if (state.alchemist == 0) {
                 SetAlchemyLevel(1);
             }
@@ -550,8 +576,6 @@ const AlchemyTree = () => {
                 IncrementCounter(4);
             } else if (state.alchemist == 1) {
                 IncrementCounter(5);
-            } else {
-                IncrementCounter(6);
             }
         } else if(state.snakeblood == 1 && state.concentratedPoison == 0){
             setState({ snakebloodLine: lineColor});
@@ -833,7 +857,7 @@ const AlchemyTree = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.ExperimenterText}>
-                <Text style={styles.PerkText}>Experimenter ({ExperimenterLevel}/5)</Text>
+                <Text style={styles.PerkText}>Experimenter ({ExperimenterLevel}/3)</Text>
             </View>
             <View title='Benefactor Blue' style={{
                 position: 'absolute',
