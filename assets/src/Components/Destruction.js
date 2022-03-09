@@ -293,7 +293,7 @@ const DestructionTree = () => {
         SetAugmentedFrostLevel(1);
       } else {
         IncrementCounter(1);
-        IncAugmentedShockCounter(1);
+        SetAugmentedFrostLevel(1);
       }
     } else {
 
@@ -313,11 +313,12 @@ const DestructionTree = () => {
       setState({ augmentedFrost: button });
       setState({ augmentedFrostLine: line });
       IncAugmentedFrostCounter(1);
+      IncrementCounter(1);
     } else if (augmentedFrostLevel == 2) {
       setState({ augmentedFrost: button });
       setState({ augmentedFrostLine: line });
       IncAugmentedFrostCounter(1);
-      DecrementCounter(1);
+      DecrementCounter(2);
     } else {
       IncrementCounter(1);
       IncAugmentedFrostCounter(1);
@@ -442,7 +443,7 @@ const DestructionTree = () => {
       setState({ destructionDualCastingLine: lineColor });
       setState({ impact: buttonColor });
       setState({ impactLine: lineColor });
-      if (state.noviceDestruction == 1){
+      if (state.noviceDestruction == 1) {
         IncrementCounter(2);
       } else {
         IncrementCounter(3);
@@ -475,7 +476,7 @@ const DestructionTree = () => {
       setState({ apprenticeDestructionLine: lineColor });
       setState({ runeMaster: buttonColor });
       setState({ runeMasterLine: lineColor });
-      if(state.noviceDestruction == 1) {
+      if (state.noviceDestruction == 1) {
         IncrementCounter(2);
       } else {
         IncrementCounter(3);
