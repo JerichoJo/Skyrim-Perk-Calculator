@@ -110,8 +110,6 @@ const RestorationTree = () => {
         }
     }, [resetAllTrees]);
 
-
-
     const IncrementCounter = (numActivePerks = 0) => {
         SetActivePerks(ActivePerks + numActivePerks);
         SetAllActivePerks(AllActivePerks + numActivePerks);

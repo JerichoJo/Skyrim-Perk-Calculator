@@ -20,8 +20,8 @@ const AlchemistModal = ({ navigation }) => {
                 <Text style={styles.Title}>Alchemist{"\n"}</Text>
 
                 <Text style={styles.Text}>
-                    
-                    1: Potions and poisons made are 20% stronger {"\n"}
+
+                    1:  Potions and poisons made are 20% stronger {"\n"}
                     2:  Potions and poisons made are 40% stronger{"\n"}
                     3:  Potions and poisons made are 60% stronger{"\n"}
                     4:  Potions and poisons made are 80% stronger{"\n"}

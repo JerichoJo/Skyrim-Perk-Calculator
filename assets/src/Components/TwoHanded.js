@@ -31,7 +31,6 @@ const useSetState = (initialState = {}) => {
 
 const TwoHandedTree = () => {
     const navigation = useNavigation();
-    const [isModalVisible, setIsModalVisible] = useState(false);
     const [ActivePerks, SetActivePerks] = useState(0);
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [BarbarianLevel, SetBarbarianLevel] = useState(0);
@@ -39,6 +38,7 @@ const TwoHandedTree = () => {
     const [DeepWoundsLevel, SetDeepWoundsLevel] = useState(0);
     const [SkullCrusherLevel, SetSkullCrusherLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
     const [state, setState] = useSetState({
         Barbarian: 0,
         Limbsplitter: 0,

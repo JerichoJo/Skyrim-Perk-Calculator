@@ -19,7 +19,11 @@ const MageArmorModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Mage Armor{"\n"}</Text>
 
-                <Text style={styles.Text}>Stonefish protection spells are 2x, 2.5x, or 3x as strong when not wearing armor</Text>
+                <Text style={styles.Text}>
+                    1:  Stonefish protection spells are 2x as strong when not wearing armor {"\n"}
+                    2:  Stonefish protection spells are 2.5x as strong when not wearing armor {"\n"}
+                    3:  Stonefish protection spells are 3x as strong when not wearing armor {"\n"}
+                </Text>
 
             </View>
 

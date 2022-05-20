@@ -35,6 +35,7 @@ const SpeechTree = () => {
     const [RequiredLevel, SetRequiredLevel] = useState(0);
     const [HagglingLevel, SetHagglingLevel] = useState(0);
     const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
     const [state, setState] = useSetState({
         haggling: 0,
         allure: 0,

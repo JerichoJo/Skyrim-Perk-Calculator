@@ -19,7 +19,9 @@ const RecoveryModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Recovery{"\n"}</Text>
 
-                <Text style={styles.Text}>  1: Magicka regenerates 25% faster{"\n"} 2: Magicka regenerates 50% faster
+                <Text style={styles.Text}>
+                    1: Magicka regenerates 25% faster{"\n"}
+                    2: Magicka regenerates 50% faster
                 </Text>
 
             </View>

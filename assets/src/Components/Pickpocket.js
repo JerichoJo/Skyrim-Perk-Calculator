@@ -31,6 +31,11 @@ const useSetState = (initialState = {}) => {
 
 const PickpocketTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [LightFingersLevel, SetLightFingersLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
     const [state, setState] = useSetState({
         LightFingers: 0,
         NightThief: 0,
@@ -48,12 +53,6 @@ const PickpocketTree = () => {
         ExtraPockets: 0,
         ExtraPocketsLine: 'white',
     });
-
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [LightFingersLevel, SetLightFingersLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
-
 
     let resetAllTrees;
     const resetPickpocketPerks = () => {

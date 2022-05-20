@@ -32,6 +32,13 @@ const useSetState = (initialState = {}) => {
 
 const ArcheryTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [OverdrawLevel, SetOverdrawLevel] = useState(0);
+    const [SteadyHandLevel, SetSteadyHandLevel] = useState(0);
+    const [CriticalShotLevel, SetCriticalShotLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
     const [state, setState] = useSetState({
         Overdraw: 0,
         SteadyHand: 0,
@@ -52,17 +59,6 @@ const ArcheryTree = () => {
         CriticalShot: 0,
         CriticalShotLine: 'white',
     });
-
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [count, setCount] = useState(0);
-
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [OverdrawLevel, SetOverdrawLevel] = useState(0);
-    const [SteadyHandLevel, SetSteadyHandLevel] = useState(0);
-    const [CriticalShotLevel, SetCriticalShotLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
-
 
     let resetAllTrees;
     const resetArcheryPerks = () => {

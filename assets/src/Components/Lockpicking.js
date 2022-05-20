@@ -12,8 +12,6 @@ import StarIconBlue from './StarIconBlue';
 import StarIconGold from './StarIconGold';
 import { AllActivePerkss } from '../../../StackNavigator';
 import { useNavigation } from '@react-navigation/native';
-import { StackViewTransitionConfigs } from 'react-navigation-stack';
-import { keyboardProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -33,6 +31,11 @@ const useSetState = (initialState = {}) => {
 
 const LockpickingTree = () => {
     const navigation = useNavigation();
+    const [ActivePerks, SetActivePerks] = useState(0);
+    const [RequiredLevel, SetRequiredLevel] = useState(0);
+    const [LightFingersLevel, SetLightFingersLevel] = useState(0);
+    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
+
     const [state, setState] = useSetState({
         noviceLocks: 0,
         apprenticeLocks: 0,
@@ -56,12 +59,6 @@ const LockpickingTree = () => {
         masterLocks: 0,
         masterLocksLine: 'white'
     });
-
-    const [ActivePerks, SetActivePerks] = useState(0);
-    const [RequiredLevel, SetRequiredLevel] = useState(0);
-    const [LightFingersLevel, SetLightFingersLevel] = useState(0);
-    const [AllActivePerks, SetAllActivePerks] = useContext(AllActivePerkss);
-
 
     let resetAllTrees;
     const resetLockpickingPerks = () => {

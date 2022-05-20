@@ -19,7 +19,13 @@ const AgileDefenderModal = ({ navigation }) => {
                 onPress={navigation.goBack}>
                 <Text style={styles.Title}>Agile Defender{"\n"}</Text>
 
-                <Text style={styles.Text}>Increase armor rating for light armor by 20%, 40%, 60%, 80%, or 100%</Text>
+                <Text style={styles.Text}>
+                    1:   Increase armor rating for light armor by 20% {"\n"}
+                    2:   Increase armor rating for light armor by 40% {"\n"}
+                    3:   Increase armor rating for light armor by 60% {"\n"}
+                    4:   Increase armor rating for light armor by 80% {"\n"}
+                    5:   Increase armor rating for light armor by 100% {"\n"}
+                </Text>
 
             </View>
 
